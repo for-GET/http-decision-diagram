@@ -114,8 +114,8 @@ is_authorized(ReqData, Context) ->
 %% B07 - 403 Forbidden
 forbidden(ReqData, Context) ->
   %% Check if {Method, URI, Headers} is forbidden
-  %% Do NOT check against args
-  %% FIXME Where do you check if args are forbidden ?
+  %% Do NOT check against Context:args
+  %% FIXME Where do you check if Context:args are forbidden ?
   {false, ReqData, Context}.
 
 %% B06 - 501 Not Implemented
@@ -130,8 +130,9 @@ known_media_type(ReqData, Context) ->
 
 %% B04 - 413 Request Entity Too Large
 valid_entity_length(ReqData, Context) ->
-  %% Maybe check authorization
   %% Maybe check media type
+  %% [PLACEHOLDER]
+  %% Check if request entity is too large
   {true, ReqData, Context}.
 
 %% B03 - 200 OK
