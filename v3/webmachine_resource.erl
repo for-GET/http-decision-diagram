@@ -94,9 +94,14 @@ allowed_methods(ReqData, Context) ->
 
 %% B09 - 400 Bad Request
 malformed_request(ReqData, Context) ->
-  %% Check JSON
-  %% Do NOT check against args
-  %% FIXME Where do you check semantics? 422 - Unprocessable entity - will go away in favour of 400
+  %% Check known media type
+  %% [PLACEHOLDER]
+  %% Check JSON syntax
+  %% [PLACEHOLDER]
+  %% Check JSON Schema
+  %% [PLACEHOLDER]
+  %% Translate MT to Context:args
+  %% [PLACEHOLDER]
   {false, ReqData, Context}.
 
 %% B08 - 401 Unauthorized
@@ -121,11 +126,6 @@ valid_content_headers(ReqData, Context) ->
 %% B05 - 415 Unsupported Media Type
 known_media_type(ReqData, Context) ->
   %% Check known media type
-  %% [PLACEHOLDER]
-  %% Check JSON Schema
-  %% [PLACEHOLDER]
-  %% Maybe translate MT to args
-  %% [PLACEHOLDER]
   {true, ReqData, Context}.
 
 %% B04 - 413 Request Entity Too Large
