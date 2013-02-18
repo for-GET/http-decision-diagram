@@ -150,6 +150,7 @@ content_types_provided(ReqData, Context) ->
   % Or as [{{media-type,[{param, value}]}, handler}]
   [].
   % FIXME - should webmachine enforce 406 on no match?
+  % FIXME - why is the handler only called for GET & HEAD, or if PUT has_resp_body ? Why not POST ?
 
 %% D04
 %% D05 - 406 Not Acceptable
@@ -240,6 +241,7 @@ create_path(ReqData, Context) ->
   {undefined, ReqData, Context}.
 process_post(ReqData, Context) ->
   % Process POST
+  % FIXME content_types_provided:handler is not called automatically
   {false, ReqData, Context}.
 
 %% O16
@@ -247,7 +249,8 @@ process_post(ReqData, Context) ->
 is_conflict(ReqData, Context) ->
   % Check if PUT is conflict
   {false, ReqData, Context}.
-%% content_types_accepted, knownw_media_type, content_types_accepted:handler (accept_helper)
+%% content_types_accepted, content_types_accepted:handler (accept_helper)
+%% charsets_provided, charsets_provided:handler, encodings_provided, encodings_provided:handler (encode_body) only if has_resp_body
 
 %%% Webmachine Create Callbacks ------------------------------------------------
 
