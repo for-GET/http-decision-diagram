@@ -249,6 +249,11 @@ is_conflict(ReqData, Context) ->
   % Check if PUT is conflict
   {false, ReqData, Context}.
 %% content_types_accepted, content_types_accepted:handler (accept_helper)
+content_types_accepted(ReqData, Context) ->
+  % Specify content-type input handlers [{media-type, handler}]
+  % Or as [{{media-type,[{param, value}]}, handler}]
+  {[], ReqData, Context}.
+  % FIXME - why is the handler only called if PUT has_resp_body ? Why not GET & POST ?
 %% charsets_provided, charsets_provided:handler, encodings_provided, encodings_provided:handler (encode_body) only if has_resp_body
 
 %%% Webmachine Create Callbacks ------------------------------------------------
