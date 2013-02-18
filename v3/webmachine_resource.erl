@@ -138,17 +138,16 @@ valid_entity_length(ReqData, Context) ->
 %% B03 - 200 OK
 options(ReqData, Context) ->
   % Headers for OPTIONS, if request is OPTIONS
-  [].
+  {[], ReqData, Context}.
 
 %%% Webmachine Accept Callbacks ------------------------------------------------
 
 %% C03
 %% C04 - 406 Not Acceptable
 content_types_provided(ReqData, Context) ->
-  % Check if content-type is available
   % Specify content-type output handlers [{media-type, handler}]
   % Or as [{{media-type,[{param, value}]}, handler}]
-  [].
+  {[], ReqData, Context}.
   % FIXME - should webmachine enforce 406 on no match?
   % FIXME - why is the handler only called for GET & HEAD, or if PUT has_resp_body ? Why not POST ?
 
