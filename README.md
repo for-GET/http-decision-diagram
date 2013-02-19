@@ -27,7 +27,7 @@ Take it also as a process of gaining [context](https://twitter.com/slicknet/stat
 
 * `✔ 2013-02-17` project published
 * `✔ 2013-02-17` v3 wm - reasoning about [webmachine's implementation](v3/webmachine_resource.erl)
-* `✔ 2013-02-19` v4 draft - reasoning about [a cleaner decision diagram](v4/http-headers-status-v4.png)
+* `✔ 2013-02-19` v4 draft - reasoning about [a cleaner decision diagram](v4/http-headers-status-v4.png); [README](v4/README.md); [v3-v4 CHANGELOG](v4/CHANGELOG.v3-v4.md)
 
 
 * `_ 2013-03-xx` v3 wm - reasoning about wrapping the v4 flow around the v3 flow
@@ -44,6 +44,8 @@ Take it also as a process of gaining [context](https://twitter.com/slicknet/stat
 
 
 * [v4 draft decision diagram](v4/http-headers-status-v4.png)
+* [v4 draft README](v4/README.md)
+* [v3-v4 CHANGELOG](v4/CHANGELOG.v3-v4.md)
 
 
 # Kudos to
