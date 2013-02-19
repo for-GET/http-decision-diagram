@@ -2,6 +2,8 @@
 
 An activity diagram to describe the resolution of HTTP response status codes, given various headers.
 
+And it goes on Twitter as [#httpdd](https://twitter.com/search/realtime?q=httpdd) - HTTP Decision Diagram.
+
 
 # Why is this helpful?
 
