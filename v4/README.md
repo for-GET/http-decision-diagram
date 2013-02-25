@@ -11,6 +11,7 @@ The decision diagram is split into standalone color-coded blocks
     * Create (violet)
     * Update (red)
 1. Response (cyan)
+1. Error (black)
 1. Final (white)
 
 These blocks form a simple linear workflow, and each of these block follow their own decision flow with linear decisions, each with associated callbacks.
@@ -126,6 +127,12 @@ This block is in charge of creating the output:
 1. is the request done ?
 1. does the request generate a response representation ?
 1. does the request generate multiple response representations ?
+
+
+
+## Error
+
+FIXME
 
 
 
