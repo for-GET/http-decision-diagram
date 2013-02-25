@@ -46,10 +46,13 @@ This block is in charge of "system"-level (request agnostic) checks:
 
 ### B14
 * `method_override :var`
+
     > output: method(string) or FALSE(bool)  
     > default: _X-HTTP-Method-Override_ if requested, or FALSE
+
 * `method_in_known_methods :in` ?
     * `known_methods :var`
+
         > output: list of methods(array of strings)  
         > default: ['OPTIONS', 'HEAD', 'GET', 'POST', 'PATCH', 'PUT', 'DELETE', 'TRACE', 'CONNECT']
 
