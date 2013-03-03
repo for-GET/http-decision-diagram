@@ -172,16 +172,19 @@ B11 | [`allowed_methods :var`](#allowed_methods-var) | [ *Method* ] | [ OPTIONS<
  | [`is_method_allowed : in`](#is_method_allowed--in) | T / F |
 B10 | [`is_authorized :bin`](#is_authorized-bin) | T / F | TRUE
  | [`auth_challenge :var`](#auth_challenge-var) | [ *AuthChallenge* ] | [ ]
-B9 | [`is_method_trace : in`](#is_method_trace--in) | T / F |
+B9 | [`method :var`](#method-var) | *Method* | `Request.method`
+ | [`is_method_trace : in`](#is_method_trace--in) | T / F |
  | [`trace_sensitive_headers :var`](#trace_sensitive_headers-var) | [ *HeaderName* ] | [ Authentication<br>, Cookies<br>]
  | [`process_trace : in`](#process_trace--in) | |
-B8 | [`is_method_options : in`](#is_method_options--in) | T / F |
+B8 | [`method :var`](#method-var) | *Method* | `Request.method`
+ | [`is_method_options : in`](#is_method_options--in) | T / F |
  | [`options_headers :var`](#options_headers-var) | { *Header*<br>: *Value* } | { Allow<br>: `allowed_methods :var`<br>, Accept-Patch<br>: `patch_content_types_accepted :var`}
  | [`process_options : in`](#process_options--in) | |
 B7 | [`payload_exists : in`](#payload_exists--in) | T / F |
 B6 | [`is_payload_too_large :bin`](#is_payload_too_large-bin) | T / F | TRUE
-B5 | [`content_types_provided :var`](#content_types_provided-var) | { *CT*<br>: *Handler* } | { }
-B4 | [`content_types_provided:handler :bin`](#content_types_provided-handler-bin) | T / F |
+B5 | [`content_types_accepted :var`](#content_types_accepted-var) | { *CT*<br>: *Handler* } | { }
+ | [`is_content_type_accepted : in`](#is_content_type_accepted--in) | T / F |
+B4 | [`content_types_accepted:handler :bin`](#content_types_accepted-handler-bin) | T / F |
 B3 | [`is_forbidden :bin`](#is_forbidden-bin) | T / F | FALSE
 B2 | [`is_request_ok :bin`](#is_request_ok-bin) | T / F | TRUE
 
@@ -214,7 +217,7 @@ If `is_authorized :bin` returned FALSE, then you must return a list of at least 
 
 ## `is_method_trace : in`
 
-Return TRUE if the `Request.method` is TRACE; FALSE otherwise.
+Return TRUE if the `method :var` is TRACE; FALSE otherwise.
 
 ## `trace_sensitive_headers :var`
 
@@ -240,7 +243,7 @@ Reference: [HTTPbis](http://tools.ietf.org/html/draft-ietf-httpbis-p2-semantics-
 
 ## `is_method_options :in`
 
-Return TRUE if the `Request.method` is OPTIONS; FALSE otherwise.
+Return TRUE if the `method :var` is OPTIONS; FALSE otherwise.
 
 ## `options :var`
 
@@ -283,7 +286,7 @@ Reference: [HTTPbis](http://tools.ietf.org/html/draft-ietf-httpbis-p2-semantics-
 
 Return a list of key-value content-types and their handlers (i.e. deserializers to `Context.request_entity`).
 
-## `content_type_in_content_types_accepted :in`
+## `is_content_type_accepted :in`
 
 Return TRUE if `Request.headers.content-type` matches keys of `content_types_accepted :var`; return FALSE otherwise.
 
