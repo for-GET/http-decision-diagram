@@ -28,8 +28,7 @@ The decision diagram makes use of different types of callbacks to get request or
 
 `Request` MUST be a key-value structure, initialized when receiving the request, with the following keys:
 
-* `method` = HTTP method of the request. original_method might be overridden
-* `original_method` = Original HTTP method of the request
+* `method` = Original HTTP method
 * `uri` = Key-value of URI parts and their value. Keys outside [RFC3986](http://tools.ietf.org/html/rfc3986) can be defined inside this structure.
     * `source` = Full original URI e.g. 'http://user:pass@example.com:8080/p/a/t/h?query=string#fragment'
     * `scheme` = Lowercase scheme e.g. 'http'
@@ -82,7 +81,7 @@ This block is in charge of "system"-level (request agnostic) checks.
 :-- | ---: | :--- | :---
 B23 | [`is_service_available :bin`](#is_service_available-bin) | T / F | TRUE
 B22 | [`is_uri_too_long :bin`](#is_uri_too_long-bin) | T / F | FALSE
-B21 | [`override_method :bin`](#override_method-bin) | T / F | FALSE
+B21 | [`method :var`](#method-var) | *Method* | `Request.method`
  | [`implemented_methods :var`](#implemented_methods-var) | [ *Method* ] | [ OPTIONS<br>, HEAD<br>, GET<br>, POST<br>, PATCH<br>, PUT<br>, DELETE<br>, TRACE<br>]
  | [`is_method_implemented : in`](#is_method_implemented--in) | T / F |
 B20 | [`implemented_content_headers :var`](#implemented_content_headers-var) | [ *HeaderName* ] | [ content-encoding<br>, content-language<br>, content-length<br>, content-md5<br>, content-type<br>]
@@ -113,9 +112,9 @@ Reference: [HTTPbis](http://tools.ietf.org/html/draft-ietf-httpbis-p2-semantics-
 
 > A 414 response is cacheable unless otherwise indicated by the method definition or explicit cache controls (see Section 4.1.2 of [Part6]).
 
-## `override_method :bin`
+## `method :var`
 
-If you allow the HTTP method to be overridden (e.g. via the _X-HTTP-Method-Override_ header) then overwrite the method in `Request.method` and return TRUE; return FALSE otherwise.
+If you allow the HTTP method to be overridden (e.g. via the _X-HTTP-Method-Override_ header) then return the intended method; return `Request.method` otherwise.
 
 Reference: [Google Data APIs](https://developers.google.com/gdata/docs/2.0/basics#DeletingEntry)
 
