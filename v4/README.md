@@ -325,27 +325,61 @@ Return TRUE if the request looks ok; return FALSE otherwise.
 
 # Accept
 
-This block is in charge of acceptability checks:
+This block is in charge of request payload acceptance checks.
 
-1. can the resource provide an acceptable content-type ?
-1. can the resource provide an acceptable language ?
-1. can the resource provide an acceptable charset ?
-1. can the resource provide an acceptable encoding ?
-1. _anything else_ ?
+ | callback | output | default
+:-- | ---: | :--- | :---
+C1 | [`accept_filter : in`](#accept_filter--in) | T / F |
+C2 | [`content_types_provided :var`](#content_types_provided-var) | { *CT*<br>: *Handler* } | { }
+ | [`accept_matches : in`](#accept_matches--in) | T / F |
+D2 | [`accept_language_filter : in`](#accept_language_filter--in) | T / F |
+D3 | [`languages_provided :var`](#languages_provided-var) | { *Lang*<br>: *Handler*<br>} | { }
+ | [`accept_language_matches : in`](#accept_language_matches--in) | T / F |
+E3 | [`accept_charset_filter : in`](#accept_charset_filter--in) | T / F |
+E4 | [`charsets_provided :var`](#charsets_provided-var) | { *Charset*<br>: *Handler*<br>} | { }
+ | [`accept_charset_matches : in`](#accept_charset_matches--in) | T / F |
+F4 | [`accept_encoding_filter : in`](#accept_encoding_filter--in) | T / F |
+F5 | [`encodings_provided :var`](#encodings_provided-var) | { *Encoding*<br>: *Handler*<br>} | { }
+ | [`accept_encoding_matches : in`](#accept_encoding_matches--in) | T / F |
+E6 | [`is_accept_ok :bin`](#is_accept_ok-bin) | T / F | TRUE
+
+
+---
+
+# Retrieve
+
+This block is in charge of retrieving the resource.
+
+ | callback | output | default
+:-- | ---: | :--- | :---
+G6 | [`exists :bin`](#exists-bin) | T / F | TRUE
+
 
 
 ---
 
 # Precondition
 
-This block is in charge of precondition checks:
+This block is in charge of precondition checks.
 
-1. does the representation ETag match ?
-1. is the representation timestamp lower ?
-1. does the representation ETag mismatch ?
-1. is the representation timestamp higher ?
-1. is precondition required ?
-1. _anything else_ ?
+ | callback | output | default
+:-- | ---: | :--- | :---
+C9 | [`if_match_filter : in`](#if_match_filter--in) | T / F |
+C10 | [`etag :var`](#etag-var) | *ETag* | ''
+ | [`if_match_matches : in`](#if_match_matches--in) | T / F
+D10 | [`if_unmodified_since_filter : in`](#if_unmodified_since_filter--in) | T / F |
+D11 | [`last_modified :var`](#last_modified-var) | *Date* | Now
+ | [`if_unmodified_since_matches : in`](#if_umodified_since_matches--in) | T / F
+E11 | [`if_none_match_filter : in`](#if_none_match_filter--in) | T / F |
+E12 | [`etag :var`](#etag-var) | *ETag* | ''
+ | [`if_none_match_matches : in`](#if_none_match_matches--in) | T / F
+F12 | [`if_modified_since_filter : in`](#if_modified_since_filter--in) | T / F |
+F13 | [`last_modified :var`](#last_modified-var) | *Date* | Now
+ | [`if_modified_since_matches : in`](#if_modified_since_matches--in) | T / F
+F15 | [`method :var`](#method-var) | *Method* | `Request.method`
+ | [`is_method_get_head : in`](#is_method_get_head--in) | T / F |
+G13 | [`is_precondition_ok :bin`](#is_precondition_ok-bin) | T / F | TRUE
+I6 | [`if_match_filter : in`](#if_match_filter--in) | T / F |
 
 
 ---
