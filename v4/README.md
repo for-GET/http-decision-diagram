@@ -18,15 +18,17 @@ The decision diagram is split into standalone color-coded blocks
 
 # Callback Types
 
+**NOTE** All variables referenced below may have specific variances from the under_score notation - camelCase, PascalCase, etc.
+
 The decision diagram makes use of different types of callbacks to get request or resource specific information. Regardless of the type though, each callback MUST
 
-* accept 2 arguments: `Request` and `Context`
+* have read-write access to 2 variables: `Operation` and `Context`
 * refrain from doing more/less than what the decision block states
 * have pertinent *defaults*
 
-## Request structure
+## Operation structure
 
-`Request` MUST be a key-value structure, initialized when receiving the request, with the following keys:
+`Operation` MUST be a key-value structure, initialized when receiving the request, with the following keys:
 
 * `method` = Original HTTP method
 * `uri` = Key-value of URI parts and their value. Keys outside [RFC3986](http://tools.ietf.org/html/rfc3986) can be defined inside this structure.
@@ -46,10 +48,14 @@ The decision diagram makes use of different types of callbacks to get request or
     * `accept-encoding` =
     * `content-type` =
     * `content-length` =
-* `expect_extensions` = Extensions found in `Request.headers.expect`
-* `content_headers` = Content-* headers found in `Request.headers`
+* `expect_extensions` = Extensions found in `Operation.headers.expect`
+* `content_headers` = Content-* headers found in `Operation.headers`
 * `representation` =
 * `response` =
+    * `chosen_content_type` =
+    * `chosen_language` =
+    * `chosen_charset` =
+    * `chosen_encoding` =
     * `status_code` =
     * `headers` =
     * `representation` =
@@ -79,9 +85,10 @@ This block is in charge of "system"-level (request agnostic) checks.
 
  | callback | output | default
 :-- | ---: | :--- | :---
+H26 | [`start : in`](#start--in) | T / F | TRUE
 B23 | [`is_service_available :bin`](#is_service_available-bin) | T / F | TRUE
 B22 | [`is_uri_too_long :bin`](#is_uri_too_long-bin) | T / F | FALSE
-B21 | [`method :var`](#method-var) | *Method* | `Request.method`
+B21 | [`method :var`](#method-var) | *Method* | `Operation.method`
  | [`implemented_methods :var`](#implemented_methods-var) | [ *Method* ] | [ OPTIONS<br>, HEAD<br>, GET<br>, POST<br>, PATCH<br>, PUT<br>, DELETE<br>, TRACE<br>]
  | [`is_method_implemented : in`](#is_method_implemented--in) | T / F |
 B20 | [`implemented_content_headers :var`](#implemented_content_headers-var) | [ *HeaderName* ] | [ content-encoding<br>, content-language<br>, content-length<br>, content-md5<br>, content-type<br>]
@@ -91,6 +98,12 @@ B18 | [`implemented_expect_extensions :var`](#implemented_expect_extensions-var)
  | [`are_expect_extensions_implemented : in`](#are_expect_extensions_implemented--in) | T / F |
 
 
+
+## `start : in`
+
+Prepare *Operation* for the request.
+
+Return TRUE if succeeded; return FALSE otherwise.
 
 ## `is_service_available :bin`
 
@@ -114,7 +127,7 @@ Reference: [HTTPbis](http://tools.ietf.org/html/draft-ietf-httpbis-p2-semantics-
 
 ## `method :var`
 
-If you allow the HTTP method to be overridden (e.g. via the _X-HTTP-Method-Override_ header) then return the intended method; return `Request.method` otherwise.
+If you allow the HTTP method to be overridden (e.g. via the _X-HTTP-Method-Override_ header) then return the intended method; return `Operation.method` otherwise.
 
 Reference: [Google Data APIs](https://developers.google.com/gdata/docs/2.0/basics#DeletingEntry)
 
@@ -126,7 +139,7 @@ Return a list of HTTP methods that are implemented by the system.
 
 ## `is_method_implemented : in`
 
-Return TRUE if `Request.method` is in `implemented_methods :var`; return FALSE otherwise.
+Return TRUE if `Operation.method` is in `implemented_methods :var`; return FALSE otherwise.
 
 ## `implemented_content_headers :var`
 
@@ -134,7 +147,7 @@ Return a list of Content-* headers that are implemented by the system.
 
 ## `are_content_headers_implemented : in`
 
-Return TRUE if `Request.content_headers` is a subset of `implemented_content_headers :var`; return FALSE otherwise
+Return TRUE if `Operation.content_headers` is a subset of `implemented_content_headers :var`; return FALSE otherwise
 
 ## `is_functionality_implemented :bin`
 
@@ -152,7 +165,7 @@ Return a list of Expect extensions that are implemented by the system.
 
 ## `are_expect_extensions_implemented : in`
 
-Return True if extensions in `Request.expect_extensions` is a subset of `implemented_expect_extensions :var`
+Return True if extensions in `Operation.expect_extensions` is a subset of `implemented_expect_extensions :var`
 
 Reference: [HTTPbis](http://tools.ietf.org/html/draft-ietf-httpbis-p2-semantics-22#section-6.5.14), [RFC2616](http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.18)
 
@@ -171,18 +184,21 @@ This block is in charge of request-level checks.
 B11 | [`allowed_methods :var`](#allowed_methods-var) | [ *Method* ] | [ OPTIONS<br>, HEAD<br>, GET<br>, POST<br>, PATCH<br>, PUT<br>, DELETE<br>, TRACE<br>]
  | [`is_method_allowed : in`](#is_method_allowed--in) | T / F |
 B10 | [`is_authorized :bin`](#is_authorized-bin) | T / F | TRUE
- | [`auth_challenge :var`](#auth_challenge-var) | [ *AuthChallenge* ] | [ ]
-B9 | [`method :var`](#method-var) | *Method* | `Request.method`
+ | [`auth_challenges :var`](#auth_challenges-var) | [ *AuthChallenge* ] | [ ]
+B9 | [`method :var`](#method-var) | *Method* | `Operation.method`
  | [`is_method_trace : in`](#is_method_trace--in) | T / F |
  | [`trace_sensitive_headers :var`](#trace_sensitive_headers-var) | [ *HeaderName* ] | [ Authentication<br>, Cookies<br>]
  | [`process_trace : in`](#process_trace--in) | |
-B8 | [`method :var`](#method-var) | *Method* | `Request.method`
+B8 | [`method :var`](#method-var) | *Method* | `Operation.method`
  | [`is_method_options : in`](#is_method_options--in) | T / F |
  | [`options_headers :var`](#options_headers-var) | { *Header*<br>: *Value* } | { Allow<br>: `allowed_methods :var`<br>, Accept-Patch<br>: `patch_content_types_accepted :var`}
  | [`process_options : in`](#process_options--in) | |
 B7 | [`payload_exists : in`](#payload_exists--in) | T / F |
 B6 | [`is_payload_too_large :bin`](#is_payload_too_large-bin) | T / F | TRUE
-B5 | [`content_types_accepted :var`](#content_types_accepted-var) | { *CT*<br>: *Handler* } | { }
+B5 | [`post_content_types_accepted :var`](#content_types_accepted-var) | { *CT*<br>: *Handler* } | { }
+ | [`patch_content_types_accepted :var`](#content_types_accepted-var) | { *CT*<br>: *Handler* } | { }
+ | [`put_content_types_accepted :var`](#content_types_accepted-var) | { *CT*<br>: *Handler* } | { }
+ | [`content_types_accepted :var`](#content_types_accepted-var) | { *CT*<br>: *Handler* } | { }
  | [`is_content_type_accepted : in`](#is_content_type_accepted--in) | T / F |
 B4 | [`content_types_accepted:handler :bin`](#content_types_accepted-handler-bin) | T / F |
 B3 | [`is_forbidden :bin`](#is_forbidden-bin) | T / F | FALSE
@@ -195,7 +211,7 @@ Return a list of allowed methods for this resource.
 
 ## `is_method_allowed : in`
 
-Return TRUE if `Request.method` in `allowed_methods :var`; return FALSE otherwise.
+Return TRUE if `Operation.method` in `allowed_methods :var`; return FALSE otherwise.
 
 Reference: [HTTPbis](http://tools.ietf.org/html/draft-ietf-httpbis-p2-semantics-22#section-6.5.5), [RFC2616](http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.6)
 
@@ -211,7 +227,7 @@ Reference: [HTTPbis](http://tools.ietf.org/html/draft-ietf-httpbis-p7-auth-22#se
 
 > The 401 (Unauthorized) status code indicates that the request has not been applied because it lacks valid authentication credentials for the target resource.  The origin server MUST send a WWW-Authenticate header field (Section 4.4) containing at least one challenge applicable to the target resource.  If the request included authentication credentials, then the 401 response indicates that authorization has been refused for those credentials.  The client MAY repeat the request with a new or replaced Authorization header field (Section 4.1).  If the 401 response contains the same challenge as the prior response, and the user agent has already attempted authentication at least once, then the user agent SHOULD present the enclosed representation to the user, since it usually contains relevant diagnostic information.
 
-## `auth_challenge :var`
+## `auth_challenges :var`
 
 If `is_authorized :bin` returned FALSE, then you must return a list of at least one challenge to be used as the _WWW-Authenticate_ response header.
 
@@ -225,7 +241,7 @@ Return a list of headers that should be treated as sensitive, and thus hidden fr
 
 ## `process_trace : in`
 
-Set `Request.response.headers.content-type` to `message/http` and `Request.response.body` to `Request.headers` (except `trace_sensitive_headers :var`).
+Set `Operation.response.headers.content-type` to `message/http` and `Operation.response.body` to `Operation.headers` (except `trace_sensitive_headers :var`).
 
 Return TRUE if succeeded; return FALSE otherwise.
 
@@ -253,7 +269,7 @@ By default _Allow_ will point to `allowed_methods :var` and _Accept-Patch_ to `p
 
 ## `process_options : in`
 
-Set `options :var` as `Request.response.headers`.
+Set `options :var` as `Operation.response.headers`.
 
 Return TRUE if succeeded; return FALSE otherwise.
 
@@ -270,7 +286,7 @@ Reference: [HTTPbis](http://tools.ietf.org/html/draft-ietf-httpbis-p2-semantics-
 
 ## `payload_exists : in`
 
-Return TRUE if the request has a payload (`Request.headers.content-length` greater than 0); return FALSE otherwise.
+Return TRUE if the request has a payload (`Operation.headers.content-length` greater than 0); return FALSE otherwise.
 
 ## `is_payload_too_large :bin`
 
@@ -282,13 +298,29 @@ Reference: [HTTPbis](http://tools.ietf.org/html/draft-ietf-httpbis-p2-semantics-
 
 > If the condition is temporary, the server SHOULD generate a Retry-After header field to indicate that it is temporary and after what time the client MAY try again.
 
+## `post_content_types_accepted :var`
+
+Return a list of key-value POST content-types and their handlers (i.e. deserializers to `Context.request_entity`).
+
+By default, handle `application/x-www-form-urlencoded`.
+
+## `patch_content_types_accepted :var`
+
+Return a list of key-value PATCH content-types and their handlers (i.e. deserializers to `Context.request_entity`).
+
+## `put_content_types_accepted :var`
+
+Return a list of key-value PUT content-types and their handlers (i.e. deserializers to `Context.request_entity`).
+
 ## `content_types_accepted :var`
 
 Return a list of key-value content-types and their handlers (i.e. deserializers to `Context.request_entity`).
 
+By default it will call the callback specific to the request method.
+
 ## `is_content_type_accepted :in`
 
-Return TRUE if `Request.headers.content-type` matches keys of `content_types_accepted :var`; return FALSE otherwise.
+Return TRUE if `Operation.headers.content-type` matches keys of `content_types_accepted :var`; return FALSE otherwise.
 
 The matching must follow specific rules. FIXME
 
@@ -298,13 +330,13 @@ Reference: [HTTPbis](http://tools.ietf.org/html/draft-ietf-httpbis-p2-semantics-
 
 ## `content_types_accepted:handler :bin`
 
-Deserialize `Request.representation` into `Context.request_entity`.
+Deserialize `Operation.representation` into `Context.request_entity`.
 
 Return TRUE if succeeded; return FALSE otherwise.
 
 ## `is_forbidden :bin`
 
-Return TRUE if the semantics of the request (e.g. `Request.method`, `Context.request_entity`) trigger a forbidden operation; return FALSE otherwise.
+Return TRUE if the semantics of the request (e.g. `Operation.method`, `Context.request_entity`) trigger a forbidden operation; return FALSE otherwise.
 
 Reference: [HTTPbis](http://tools.ietf.org/html/draft-ietf-httpbis-p2-semantics-22#section-6.5.3), [RFC2616](http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.4)
 
@@ -330,16 +362,17 @@ This block is in charge of request payload acceptance checks.
  | callback | output | default
 :-- | ---: | :--- | :---
 C1 | [`accept_filter : in`](#accept_filter--in) | T / F |
-C2 | [`content_types_provided :var`](#content_types_provided-var) | { *CT*<br>: *Handler* } | { }
+ | [`default_content_type_provided :var`](#default_content_type_provided-var) | [ *CT*<br>, *Handler*<br>] |
+C2 | [`content_types_provided :var`](#content_types_provided-var) | { *CT*<br>: *Handler*<br>}\* | { }
  | [`accept_matches : in`](#accept_matches--in) | T / F |
 D2 | [`accept_language_filter : in`](#accept_language_filter--in) | T / F |
-D3 | [`languages_provided :var`](#languages_provided-var) | { *Lang*<br>: *Handler*<br>} | { }
+D3 | [`languages_provided :var`](#languages_provided-var) | { *Lang*<br>: *Handler*<br>}\* | { }
  | [`accept_language_matches : in`](#accept_language_matches--in) | T / F |
 E3 | [`accept_charset_filter : in`](#accept_charset_filter--in) | T / F |
-E4 | [`charsets_provided :var`](#charsets_provided-var) | { *Charset*<br>: *Handler*<br>} | { }
+E4 | [`charsets_provided :var`](#charsets_provided-var) | { *Charset*<br>: *Handler*<br>}\* | { }
  | [`accept_charset_matches : in`](#accept_charset_matches--in) | T / F |
 F4 | [`accept_encoding_filter : in`](#accept_encoding_filter--in) | T / F |
-F5 | [`encodings_provided :var`](#encodings_provided-var) | { *Encoding*<br>: *Handler*<br>} | { }
+F5 | [`encodings_provided :var`](#encodings_provided-var) | { *Encoding*<br>: *Handler*<br>}\* | { }
  | [`accept_encoding_matches : in`](#accept_encoding_matches--in) | T / F |
 E6 | [`is_accept_ok :bin`](#is_accept_ok-bin) | T / F | TRUE
 
@@ -376,7 +409,7 @@ E12 | [`etag :var`](#etag-var) | *ETag* | ''
 F12 | [`if_modified_since_filter : in`](#if_modified_since_filter--in) | T / F |
 F13 | [`last_modified :var`](#last_modified-var) | *Date* | Now
  | [`if_modified_since_matches : in`](#if_modified_since_matches--in) | T / F
-F15 | [`method :var`](#method-var) | *Method* | `Request.method`
+F15 | [`method :var`](#method-var) | *Method* | `Operation.method`
  | [`is_method_get_head : in`](#is_method_get_head--in) | T / F |
 G13 | [`is_precondition_ok :bin`](#is_precondition_ok-bin) | T / F | TRUE
 I6 | [`if_match_filter : in`](#if_match_filter--in) | T / F |
