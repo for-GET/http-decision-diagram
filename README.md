@@ -1,6 +1,6 @@
 # http-headers-status (fork of [http-headers-status](http://code.google.com/p/http-headers-status/))
 
-An activity diagram to describe the resolution of HTTP response status codes, given various headers.
+An activity diagram to describe the resolution of HTTP response status codes, given various headers, implemented via semantical callbacks.
 
 And it goes on Twitter as [#httpdd](https://twitter.com/search/realtime?q=httpdd) - HTTP Decision Diagram.
 
@@ -12,40 +12,33 @@ Watch [Webmachine: Focus on Resources - Sean Cribbs](http://vimeo.com/20784244) 
 
 # Goal
 
-This repository's goal is to build on previous work, and set a "standard" in terms of a HTTP decision diagram.
+This repository's goal is to build on previous work, and set a "standard" in terms of a HTTP decision diagram and necessary callbacks.
 
 In doing so, we take a snapshot of the current [Webmachine](https://github.com/basho/webmachine) callbacks that are linked to [Alan Dean](https://twitter.com/adean)'s [v3 decision diagram](https://raw.github.com/andreineculau/http-headers-status/master/v3/http-headers-status-v3.png), and trying to do constructive criticism and addressing the issues with
 
 * clearer definitions of the steps implied by the existing callbacks
-* possibly adding new callbacks
-* possibly a new v4 diagram
+* adding new callbacks
+* a new v4 diagram
 
 Take it also as a process of gaining [context](https://twitter.com/slicknet/status/300625746966241280), while the existing callbacks and the existing diagram may be spot on.
 
 
-# Possible roadmap
+# Desired roadmap
 
-* `✔ 2013-02-17` project published
-* `✔ 2013-02-17` v3 wm - reasoning about [webmachine's implementation](v3/webmachine_resource.erl)
-* `✔ 2013-02-19` v4 draft - reasoning about [a cleaner decision diagram](v4/http-headers-status-v4.png); [README](v4/README.md); [v3-v4 CHANGELOG](v4/CHANGELOG.v3-v4.md)
-
-
-* `_ 2013-03-xx` v3 wm - reasoning about wrapping the v4 flow around the v3 flow
-* `_ 2013-03-31` v4 draft - finalize
-
-
-* `_ 2013-05-xx` v4 wm - fork ?
+* [X] `2013-02-17` project published
+* [X] `2013-02-17` v3 wm - reasoning about [webmachine's implementation](v3/webmachine_resource.erl)
+* [X] ` 2013-02-19` v4 1st draft - reasoning about [a cleaner decision diagram](v4/http-headers-status-v4.png)
+* [ ] `2013-08-31` v4 - including a working implementation in node/elixir/erlang
 
 
 # Quicklinks
 
-* [v3 decision diagram](v3/http-headers-status-v3.png)
-* [webmachine_decision_core](https://github.com/basho/webmachine/blob/master/src/webmachine_decision_core.erl)
-
-
 * [v4 draft decision diagram](v4/http-headers-status-v4.png)
 * [v4 draft README](v4/README.md)
 * [v3-v4 CHANGELOG](v4/CHANGELOG.v3-v4.md)
+
+* [v3 decision diagram](v3/http-headers-status-v3.png)
+* [webmachine_decision_core](https://github.com/basho/webmachine/blob/master/src/webmachine_decision_core.erl)
 
 
 # Kudos to
