@@ -418,7 +418,7 @@ This block is in charge of retrieving the resource.
 
  | callback | output | default
 :-- | ---: | :--- | :---
-G6 | [`exists :bin`](#exists-bin) | T / F | TRUE
+G7 | [`exists :bin`](#exists-bin) | T / F | TRUE
 
 
 
@@ -431,13 +431,13 @@ This block is in charge of precondition checks.
  | callback | output | default
 :-- | ---: | :--- | :---
 C9 | [`if_match_filter : in`](#if_match_filter--in) | T / F |
-C10 | [`etag :var`](#etag-var) | *ETag* | ''
+C10 | [`etag :var`](#etag-var) | *ETag* |
  | [`if_match_matches : in`](#if_match_matches--in) | T / F
 D10 | [`if_unmodified_since_filter : in`](#if_unmodified_since_filter--in) | T / F |
 D11 | [`last_modified :var`](#last_modified-var) | *Date* | Now
  | [`if_unmodified_since_matches : in`](#if_umodified_since_matches--in) | T / F
 E11 | [`if_none_match_filter : in`](#if_none_match_filter--in) | T / F |
-E12 | [`etag :var`](#etag-var) | *ETag* | ''
+E12 | [`etag :var`](#etag-var) | *ETag* |
  | [`if_none_match_matches : in`](#if_none_match_matches--in) | T / F
 F12 | [`if_modified_since_filter : in`](#if_modified_since_filter--in) | T / F |
 F13 | [`last_modified :var`](#last_modified-var) | *Date* | Now
@@ -445,48 +445,84 @@ F13 | [`last_modified :var`](#last_modified-var) | *Date* | Now
 F15 | [`method :var`](#method-var) | *Method* | `Operation.method`
  | [`is_method_get_head : in`](#is_method_get_head--in) | T / F |
 G13 | [`is_precondition_ok :bin`](#is_precondition_ok-bin) | T / F | TRUE
-I6 | [`if_match_filter : in`](#if_match_filter--in) | T / F |
-
-
----
-
-## Retrieve
-
-FIXME
+H7 | [`if_match_filter : in`](#if_match_filter--in) | T / F |
 
 
 ---
 
 ## Create
 
-FIXME
+ | callback | output | default
+:-- | ---: | :--- | :---
+K1 | [`method :var`](#method-var) | *Method* | `Operation.method`
+ | [`is_method_put : in`](#is_method_put--in) | T / F |
+K2 | [`previously_existed :bin`](#previously_existed-bin) | T / F | FALSE
+K4 | [`method :var`](#method-var) | *Method* | `Operation.method`
+ | [`create_methods :var`](#create_methods-var) | [ *Method* ] | [ POST<br>]
+ | [`is_method_for_creation : in`](#is_method_for_creation--in) | T / F |
+L1 | [`moved_permanently :bin`](#moved_permanently-bin) | T / F | FALSE
+L2 | [`moved_permanently :bin`](#moved_permanently-bin) | T / F | FALSE
+L3 | [`moved_temporarily :bin`](#moved_temporarily-bin) | T / F | FALSE
+L4 | [`method :var`](#method-var) | *Method* | `Operation.method`
+ | [`create_methods :var`](#create_methods-var) | [ *Method* ] | [ POST<br>]
+ | [`is_method_for_creation : in`](#is_method_for_creation--in) | T / F |
+L5 | [`path :var`](#path-var) | *String* |
+ | [`create_path : in`](#create_path--in) | T / F |
+L6 | [`create :bin`](#create-bin) | T / F | FALSE
+O6 | [`create_put :bin`](#create_put-bin) | T / F | `process_put`
+N8 | [`is_location_set : in`](#is_location_set--in) | T / F |
 
 
 ---
 
 ## Process
 
-This block is in charge of processing the requested operation:
+ | callback | output | default
+:-- | ---: | :--- | :---
+I10 | [`method :var`](#method-var) | *Method* | `Operation.method`
+ | [`is_method_delete : in`](#is_method_delete--in) | T / F |
+J10 | [`process_delete :bin`](#process_delete-bin) | T / F | FALSE
+I12 | [`method :var`](#method-var) | *Method* | `Operation.method`
+ | [`is_method_put : in`](#is_method_put--in) | T / F |
+J12 | [`process_put :bin`](#process_put-bin) | T / F | FALSE
+I14 | [`method :var`](#method-var) | *Method* | `Operation.method`
+ | [`process_methods :var`](#process_methods-var) | [ *Method* ] | [ POST<br>, PATCH<br>]
+ | [`is_method_for_processing : in`](#is_method_for_processing--in) | T / F |
+J14 | [`process :bin`](#process-bin) | T / F | FALSE
+K14 | [`is_location_set : in`](#is_location_set--in) | T / F |
 
-1. is the request method DELETE ? then process it
-1. is the request method POST/PATCH ? then process it
-1. is the request method PUT ? then process it
+> FIXME Explanations needed
 
 
 ---
 
 ## Response
 
-This block is in charge of creating the output:
+ | callback | output | default
+:-- | ---: | :--- | :---
+N11 | [`is_process_done :bin`](#is_process_done-bin) | T / F | TRUE
+N12 | [`content_types_provded:handler :bin`](#content_types_provided-handler-var) | T / F |
+N13 | [`has_multiple_choices :bin`](#has_multiple_choices-bin) | T / F | FALSE
+[`cache :var`](#cache-var) | *String* |
+[`vary :var`](#vary-var) | [ *String* ] | [ 'Accept'<br>, 'Accept-Charset'<br>, 'Accept-Encoding'<br>, 'Accept-Language'<br>]
+[`expires :var`](#vary-var) | *Date* |
+[`last_modified :var`](#last_modified-var) | *Date* | Now
+[`etag :var`](#etag-var) | *ETag* |
 
-1. is the request done ?
-1. does the request generate a response representation ?
-1. does the request generate multiple response representations ?
+> FIXME Explanations needed
 
 
 ---
 
 ## Error
 
-FIXME
+ | callback | output | default
+:-- | ---: | :--- | :---
+O19 | [`is_error_response : in`](#is_error_response--in) | T / F |
+O20 | [`default_content_type_provided :var`](#default_content_type_provided-var) | [ *CT*<br>, *Handler*<br>] |
+ | [`accept_filter : in`](#accept_filter--in) | T / F |
+O21 | [`error_content_types_provided :var`](#error_content_types_provided-var) | { *CT*<br>: *Handler*<br>}\* | { }
+ | [`error_accept_matches : in`](#error_accept_matches--in) | T / F |
+O22 | [`error_content_types_provded:handler :bin`](#error_content_types_provided-handler-var) | T / F |
 
+> FIXME Explanations needed
