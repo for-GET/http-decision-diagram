@@ -1,4 +1,18 @@
-# Overview
+# http-headers-status
+
+An activity diagram to describe the resolution of HTTP response status codes, given various headers, implemented via semantical callbacks.
+
+And it goes on Twitter as [#httpdd](https://twitter.com/search/realtime?q=httpdd) - HTTP Decision Diagram.
+
+## Diagram
+
+* [PNG](http-headersstatus-v4.png) (export)
+* [Omnigraffle](http-headers-status-v4.graffle) (source)
+    * Size: A0 - 84.1 x 59.4 cm
+    * Grid size: 0.5
+    * Dot density: 96 dpi
+
+## Overview
 
 The decision diagram is split into standalone color-coded blocks
 
@@ -16,9 +30,9 @@ The decision diagram is split into standalone color-coded blocks
 
 ---
 
-# Callback Types
+## Callback Types
 
-**NOTE** All variables referenced below may have specific variances from the under_score notation - camelCase, PascalCase, etc.
+**NOTE** All variables referenced below may have specific variances from the under_score notation - camelCase, PascalCase, etc. - when implemented.
 
 The decision diagram makes use of different types of callbacks to get request or resource specific information. Regardless of the type though, each callback MUST
 
@@ -26,7 +40,7 @@ The decision diagram makes use of different types of callbacks to get request or
 * refrain from doing more/less than what the decision block states
 * have pertinent *defaults*
 
-## Operation structure
+### Operation structure
 
 `Operation` MUST be a key-value structure, initialized when receiving the request, with the following keys:
 
@@ -60,26 +74,26 @@ The decision diagram makes use of different types of callbacks to get request or
     * `headers` =
     * `representation` =
 
-## Context structure
+### Context structure
 
 *Context* MUST be whatever the resource developer desires. It MUST be irrelevant to the decision flow. For the sake of clarity though, in this document you will find these references:
 
 * `request_entity` =
 * `entity` =
 
-## Built-in callbacks `: in`
+### Built-in callbacks `: in`
 Some callbacks MUST be built-in by the system, and thus they are not explicitly marked on the diagram. They are not specific to the resource or the request and they are an implementation of HTTP-specific logic.
 
-## Resource decision callbacks `:bin`
+### Resource decision callbacks `:bin`
 Resource logic is coded in these callbacks as an answer to binary questions - TRUE or FALSE. These callbacks have the power to end the decision flow early.
 
-## Resource variable callbacks `:var`
+### Resource variable callbacks `:var`
 Resource logic is coded in these callbacks as variable values. Each callback defines the type that it handles, and returning an unexpected type or value will yield _500 Internal Server Error_. These callbacks do NOT have the power to end the decision flow early.
 
 
 ---
 
-# System
+## System
 
 This block is in charge of "system"-level (request agnostic) checks.
 
@@ -96,16 +110,18 @@ B20 | [`implemented_content_headers :var`](#implemented_content_headers-var) | [
 B19 | [`is_functionality_implemented :bin`](#is_functionality_implemented-bin) | T / F | TRUE
 B18 | [`implemented_expect_extensions :var`](#implemented_expect_extensions-var) | [ *ExtensionName* ] | []
  | [`are_expect_extensions_implemented : in`](#are_expect_extensions_implemented--in) | T / F |
+O26 | [`last : in`](#last--in) | T / F | TRUE
+I26 | [`finish : in`](#finish--in) | T / F | TRUE
 
 
 
-## `start : in`
+### `start : in`
 
 Prepare *Operation* for the request.
 
 Return TRUE if succeeded; return FALSE otherwise.
 
-## `is_service_available :bin`
+### `is_service_available :bin`
 
 Return TRUE if the resource is accepting requests; return FALSE otherwise.
 
@@ -115,7 +131,7 @@ Reference: [HTTPbis](http://tools.ietf.org/html/draft-ietf-httpbis-p2-semantics-
 
 > > Note: The existence of the 503 status code does not imply that a server has to use it when becoming overloaded.  Some servers might simply refuse the connection.
 
-## `is_uri_too_long :bin`
+### `is_uri_too_long :bin`
 
 Return TRUE if the URI is too long; return FALSE otherwise.
 
@@ -125,7 +141,7 @@ Reference: [HTTPbis](http://tools.ietf.org/html/draft-ietf-httpbis-p2-semantics-
 
 > A 414 response is cacheable unless otherwise indicated by the method definition or explicit cache controls (see Section 4.1.2 of [Part6]).
 
-## `method :var`
+### `method :var`
 
 If you allow the HTTP method to be overridden (e.g. via the _X-HTTP-Method-Override_ header) then return the intended method; return `Operation.method` otherwise.
 
@@ -133,23 +149,23 @@ Reference: [Google Data APIs](https://developers.google.com/gdata/docs/2.0/basic
 
 > If your firewall does not allow DELETE, then do an HTTP POST and set the method override header as follows: `X-HTTP-Method-Override: DELETE`.
 
-## `implemented_methods :var`
+### `implemented_methods :var`
 
 Return a list of HTTP methods that are implemented by the system.
 
-## `is_method_implemented : in`
+### `is_method_implemented : in`
 
 Return TRUE if `Operation.method` is in `implemented_methods :var`; return FALSE otherwise.
 
-## `implemented_content_headers :var`
+### `implemented_content_headers :var`
 
 Return a list of Content-* headers that are implemented by the system.
 
-## `are_content_headers_implemented : in`
+### `are_content_headers_implemented : in`
 
 Return TRUE if `Operation.content_headers` is a subset of `implemented_content_headers :var`; return FALSE otherwise
 
-## `is_functionality_implemented :bin`
+### `is_functionality_implemented :bin`
 
 Return TRUE if the requested functionality (other than methods and content headers) is implemented; return FALSE otherwise.
 
@@ -159,17 +175,30 @@ Reference: [HTTPbis](http://tools.ietf.org/html/draft-ietf-httpbis-p2-semantics-
 
 > A 501 response is cacheable unless otherwise indicated by the method definition or explicit cache controls (see Section 4.1.2 of [Part6]).
 
-## `implemented_expect_extensions :var`
+### `implemented_expect_extensions :var`
 
 Return a list of Expect extensions that are implemented by the system.
 
-## `are_expect_extensions_implemented : in`
+### `are_expect_extensions_implemented : in`
 
 Return True if extensions in `Operation.expect_extensions` is a subset of `implemented_expect_extensions :var`
 
 Reference: [HTTPbis](http://tools.ietf.org/html/draft-ietf-httpbis-p2-semantics-22#section-6.5.14), [RFC2616](http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.18)
 
 > The 417 (Expectation Failed) status code indicates that the expectation given in the request's Expect header field (Section 5.1.1) could not be met by at least one of the inbound servers.
+
+### `last : in`
+
+Last chance for forcefully ammending the response of the *Operation*.
+
+Return TRUE if succeeded; return FALSE otherwise.
+
+### `finish : in`
+
+Finalize *Operation*.
+
+Return TRUE if succeeded; return FALSE otherwise.
+
 
 
 
@@ -205,11 +234,11 @@ B3 | [`is_forbidden :bin`](#is_forbidden-bin) | T / F | FALSE
 B2 | [`is_request_ok :bin`](#is_request_ok-bin) | T / F | TRUE
 
 
-## `allowed_methods :var`
+### `allowed_methods :var`
 
 Return a list of allowed methods for this resource.
 
-## `is_method_allowed : in`
+### `is_method_allowed : in`
 
 Return TRUE if `Operation.method` in `allowed_methods :var`; return FALSE otherwise.
 
@@ -219,7 +248,7 @@ Reference: [HTTPbis](http://tools.ietf.org/html/draft-ietf-httpbis-p2-semantics-
 
 > A 405 response is cacheable unless otherwise indicated by the method definition or explicit cache controls (see Section 4.1.2 of [Part6]).
 
-## `is_authorized :bin`
+### `is_authorized :bin`
 
 Return TRUE if this request has valid authentication credentials; return FALSE otherwise.
 
@@ -227,19 +256,19 @@ Reference: [HTTPbis](http://tools.ietf.org/html/draft-ietf-httpbis-p7-auth-22#se
 
 > The 401 (Unauthorized) status code indicates that the request has not been applied because it lacks valid authentication credentials for the target resource.  The origin server MUST send a WWW-Authenticate header field (Section 4.4) containing at least one challenge applicable to the target resource.  If the request included authentication credentials, then the 401 response indicates that authorization has been refused for those credentials.  The client MAY repeat the request with a new or replaced Authorization header field (Section 4.1).  If the 401 response contains the same challenge as the prior response, and the user agent has already attempted authentication at least once, then the user agent SHOULD present the enclosed representation to the user, since it usually contains relevant diagnostic information.
 
-## `auth_challenges :var`
+### `auth_challenges :var`
 
 If `is_authorized :bin` returned FALSE, then you must return a list of at least one challenge to be used as the _WWW-Authenticate_ response header.
 
-## `is_method_trace : in`
+### `is_method_trace : in`
 
 Return TRUE if the `method :var` is TRACE; FALSE otherwise.
 
-## `trace_sensitive_headers :var`
+### `trace_sensitive_headers :var`
 
 Return a list of headers that should be treated as sensitive, and thus hidden from the TRACE response.
 
-## `process_trace : in`
+### `process_trace : in`
 
 Set `Operation.response.headers.content-type` to `message/http` and `Operation.response.body` to `Operation.headers` (except `trace_sensitive_headers :var`).
 
@@ -257,17 +286,17 @@ Reference: [HTTPbis](http://tools.ietf.org/html/draft-ietf-httpbis-p2-semantics-
 
 > Responses to the TRACE method are not cacheable.
 
-## `is_method_options :in`
+### `is_method_options :in`
 
 Return TRUE if the `method :var` is OPTIONS; FALSE otherwise.
 
-## `options :var`
+### `options :var`
 
 Return a key-value headers and their values.
 
 By default _Allow_ will point to `allowed_methods :var` and _Accept-Patch_ to `patch_content_types_accepted :var`.
 
-## `process_options : in`
+### `process_options : in`
 
 Set `options :var` as `Operation.response.headers`.
 
@@ -284,11 +313,11 @@ Reference: [HTTPbis](http://tools.ietf.org/html/draft-ietf-httpbis-p2-semantics-
 > [...]
 -->
 
-## `payload_exists : in`
+### `payload_exists : in`
 
 Return TRUE if the request has a payload (`Operation.headers.content-length` greater than 0); return FALSE otherwise.
 
-## `is_payload_too_large :bin`
+### `is_payload_too_large :bin`
 
 Return TRUE if the request payload is too large; return FALSE otherwise.
 
@@ -298,27 +327,27 @@ Reference: [HTTPbis](http://tools.ietf.org/html/draft-ietf-httpbis-p2-semantics-
 
 > If the condition is temporary, the server SHOULD generate a Retry-After header field to indicate that it is temporary and after what time the client MAY try again.
 
-## `post_content_types_accepted :var`
+### `post_content_types_accepted :var`
 
 Return a list of key-value POST content-types and their handlers (i.e. deserializers to `Context.request_entity`).
 
 By default, handle `application/x-www-form-urlencoded`.
 
-## `patch_content_types_accepted :var`
+### `patch_content_types_accepted :var`
 
 Return a list of key-value PATCH content-types and their handlers (i.e. deserializers to `Context.request_entity`).
 
-## `put_content_types_accepted :var`
+### `put_content_types_accepted :var`
 
 Return a list of key-value PUT content-types and their handlers (i.e. deserializers to `Context.request_entity`).
 
-## `content_types_accepted :var`
+### `content_types_accepted :var`
 
 Return a list of key-value content-types and their handlers (i.e. deserializers to `Context.request_entity`).
 
 By default it will call the callback specific to the request method.
 
-## `is_content_type_accepted :in`
+### `is_content_type_accepted :in`
 
 Return TRUE if `Operation.headers.content-type` matches keys of `content_types_accepted :var`; return FALSE otherwise.
 
@@ -328,13 +357,13 @@ Reference: [HTTPbis](http://tools.ietf.org/html/draft-ietf-httpbis-p2-semantics-
 
 > The 415 (Unsupported Media Type) status code indicates that the origin server is refusing to service the request because the payload is in a format not supported by the target resource for this method.  The format problem might be due to the request's indicated Content-Type or Content-Encoding, or as a result of inspecting the data directly.
 
-## `content_types_accepted:handler :bin`
+### `content_types_accepted:handler :bin`
 
 Deserialize `Operation.representation` into `Context.request_entity`.
 
 Return TRUE if succeeded; return FALSE otherwise.
 
-## `is_forbidden :bin`
+### `is_forbidden :bin`
 
 Return TRUE if the semantics of the request (e.g. `Operation.method`, `Context.request_entity`) trigger a forbidden operation; return FALSE otherwise.
 
@@ -346,7 +375,7 @@ Reference: [HTTPbis](http://tools.ietf.org/html/draft-ietf-httpbis-p2-semantics-
 
 > An origin server that wishes to "hide" the current existence of a forbidden target resource MAY instead respond with a status code of 404 (Not Found).
 
-## `is_request_ok :bin`
+### `is_request_ok :bin`
 
 If you want to validate the request beyond the implemented decisions, this is the place to do it.
 
@@ -355,7 +384,7 @@ Return TRUE if the request looks ok; return FALSE otherwise.
 
 ---
 
-# Accept
+## Accept
 
 This block is in charge of request payload acceptance checks.
 
@@ -379,7 +408,7 @@ E6 | [`is_accept_ok :bin`](#is_accept_ok-bin) | T / F | TRUE
 
 ---
 
-# Retrieve
+## Retrieve
 
 This block is in charge of retrieving the resource.
 
@@ -391,7 +420,7 @@ G6 | [`exists :bin`](#exists-bin) | T / F | TRUE
 
 ---
 
-# Precondition
+## Precondition
 
 This block is in charge of precondition checks.
 
@@ -417,21 +446,21 @@ I6 | [`if_match_filter : in`](#if_match_filter--in) | T / F |
 
 ---
 
-# Retrieve
+## Retrieve
 
 FIXME
 
 
 ---
 
-# Create
+## Create
 
 FIXME
 
 
 ---
 
-# Process
+## Process
 
 This block is in charge of processing the requested operation:
 
@@ -442,7 +471,7 @@ This block is in charge of processing the requested operation:
 
 ---
 
-# Response
+## Response
 
 This block is in charge of creating the output:
 
@@ -453,7 +482,7 @@ This block is in charge of creating the output:
 
 ---
 
-# Error
+## Error
 
 FIXME
 

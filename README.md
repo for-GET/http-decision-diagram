@@ -1,16 +1,32 @@
-# http-headers-status (fork of [http-headers-status](http://code.google.com/p/http-headers-status/))
+# http-headers-status
 
 An activity diagram to describe the resolution of HTTP response status codes, given various headers, implemented via semantical callbacks.
 
 And it goes on Twitter as [#httpdd](https://twitter.com/search/realtime?q=httpdd) - HTTP Decision Diagram.
 
+This is a fork of Alan Dean's [http-headers-status](http://code.google.com/p/http-headers-status/).
 
-# Why is this helpful?
+
+## Roadmap
+
+* v3
+    * [X] `2013-02-17` [diagram](v3/http-headers-status-v3.png) - analyze
+    * [X] `2013-02-17` webmachine's implementation - analyze [webmachine_resource](https://github.com/basho/webmachine/blob/master/src/webmachine_resource.erl) and [webmachine_decision_core](https://github.com/basho/webmachine/blob/master/src/webmachine_decision_core.erl)
+* **v4**
+    * [X] `2013-02-19` 1st draft
+    * [~] `2013-08-31` [DIAGRAM](v4/http-headers-status-v4.png)
+    * [~] `2013-08-31` [EXPLANATION](v4/README.md)
+    * [_] `2013-08-31` implementation in node/elixir/erlang
+
+
+## Why, why, why
+
+### Why is this helpful?
 
 Watch [Webmachine: Focus on Resources - Sean Cribbs](http://vimeo.com/20784244) from [&Oslash;redev Conference](http://vimeo.com/user4280938) on [Vimeo](http://vimeo.com).
 
 
-# Goal
+### Goal
 
 This repository's goal is to build on previous work, and set a "standard" in terms of a HTTP decision diagram and necessary callbacks.
 
@@ -23,27 +39,9 @@ In doing so, we take a snapshot of the current [Webmachine](https://github.com/b
 Take it also as a process of gaining [context](https://twitter.com/slicknet/status/300625746966241280), while the existing callbacks and the existing diagram may be spot on.
 
 
-# Desired roadmap
+## Kudos to
 
-* [X] `2013-02-17` project published
-* [X] `2013-02-17` v3 wm - reasoning about [webmachine's implementation](v3/webmachine_resource.erl)
-* [X] ` 2013-02-19` v4 1st draft - reasoning about [a cleaner decision diagram](v4/http-headers-status-v4.png)
-* [ ] `2013-08-31` v4 - including a working implementation in node/elixir/erlang
-
-
-# Quicklinks
-
-* [v4 draft decision diagram](v4/http-headers-status-v4.png)
-* [v4 draft README](v4/README.md)
-* [v3-v4 CHANGELOG](v4/CHANGELOG.v3-v4.md)
-
-* [v3 decision diagram](v3/http-headers-status-v3.png)
-* [webmachine_decision_core](https://github.com/basho/webmachine/blob/master/src/webmachine_decision_core.erl)
-
-
-# Kudos to
-
-* [Alan Dean](https://twitter.com/adean) (author of http-headers-status) for thinking straight way before many of us, and sharing his thoughts http://code.google.com/p/http-headers-status/ .
+* [Alan Dean](https://twitter.com/adean) (author of http-headers-status) for thinking straight, way before many of us, and sharing his thoughts http://code.google.com/p/http-headers-status/ .
 
 * [Basho](https://twitter.com/basho) and their [Webmachine](https://github.com/basho/webmachine/wiki) for incorporating Alan's work. Same goes for [Sean Cribbs](https://twitter.com/seancribbs), not only behind Basho's Webmachine, but also behind [Webmachine-Ruby](https://github.com/seancribbs/webmachine-ruby).
 
@@ -51,11 +49,11 @@ Take it also as a process of gaining [context](https://twitter.com/slicknet/stat
 
 * [Philipp Meier](https://twitter.com/ordnungswprog) and his [clojure-liberator](http://clojure-liberator.github.com/) for working in the same direction, but with [a less sexy outcome](http://philipp.meier.name/t/liberator-flow-color.png) :)
 
-## Others
+### Others
 
 * [Cyril Rohr](https://twitter.com/crohr) - http://crohr.me/journal/2011/http-status-codes-flowchart.html
 
 
-# License
+## License
 
 MIT
