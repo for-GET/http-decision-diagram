@@ -12,8 +12,6 @@ And it goes on Twitter as [#httpdd](https://twitter.com/search/realtime?q=httpdd
     * Grid size: 0.5
     * Dot density: 96 dpi
 
-![HTTP headers status](http-headers-status-v4.png)
-
 ## Overview
 
 The decision diagram is split into standalone color-coded blocks
@@ -28,6 +26,8 @@ The decision diagram is split into standalone color-coded blocks
     * [Process](README_process.md) (red)
 1. [Response](README_response.md) (cyan)
 1. [Error](README_error.md) (gray)
+
+![HTTP headers status](http-headers-status-v4.png)
 
 
 ---
