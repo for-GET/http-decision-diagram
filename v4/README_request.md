@@ -17,19 +17,20 @@ This block is in charge of request-level checks.
 
  | callback | output | default
 :-- | ---: | :--- | :---
-B11 | [`method :var`](#method-var) | *Method* | `Operation.method`
+B12 | [`method :var`](#method-var) | *Method* | `Operation.method`
  | [`allowed_methods :var`](#allowed_methods-var) | [ *Method* ] | `implemented_methods :var`
  | [`is_method_allowed : in`](#is_method_allowed--in) | T / F |
  | [`allow_header : in`](#allow_header--in) | *AllowHeader* |
-B10 | [`is_authorized :bin`](#is_authorized-bin) | T / F | TRUE
+B11 | [`is_authorized :bin`](#is_authorized-bin) | T / F | TRUE
  | [`auth_challenges :var`](#auth_challenges-var) | [ *AuthChallenge* ] | [ ]
-B9 | [`method :var`](#method-var) | *Method* | `Operation.method`
+B10 | [`method :var`](#method-var) | *Method* | `Operation.method`
  | [`is_method_trace : in`](#is_method_trace--in) | T / F |
  | [`trace_sensitive_headers :var`](#trace_sensitive_headers-var) | [ *HeaderName* ] | [ Authentication<br>, Cookies<br>]
  | [`process_trace : in`](#process_trace--in) | |
-B8 | [`method :var`](#method-var) | *Method* | `Operation.method`
+B9 | [`method :var`](#method-var) | *Method* | `Operation.method`
  | [`is_method_options : in`](#is_method_options--in) | T / F |
  | [`process_options : in`](#process_options--in) | |
+B8 | [`expects_continue : in`](#expects_continue--in) | T / F |
 B7 | [`content_exists : in`](#content_exists--in) | T / F |
 B6 | [`is_content_too_large :bin`](#is_content_too_large-bin) | T / F | TRUE
 B5 | [`post_content_types_accepted :var`](#content_types_accepted-var) | { *CT*<br>: *Handler* } | { }
@@ -125,6 +126,10 @@ Reference: [HTTPbis](http://tools.ietf.org/html/draft-ietf-httpbis-p2-semantics-
 
 > [...]
 -->
+
+### `expects_continue : in`
+
+FIXME
 
 ### `content_exists : in`
 

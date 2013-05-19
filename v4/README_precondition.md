@@ -17,7 +17,7 @@ This block is in charge of precondition checks.
 
  | callback | output | default
 :-- | ---: | :--- | :---
-H7 | [`has_if_match : in`](#has_if_match--in) | T / F |
+H6 | [`has_if_match : in`](#has_if_match--in) | T / F |
  | [`create_has_if_match : in`](#create_has_if_match--in) | T / F |
 C9 | [`has_if_match : in`](#has_if_match--in) | T / F |
 C10 | [`etag :var`](#etag-var) | *ETag* |
@@ -34,6 +34,6 @@ F13 | [`last_modified :var`](#last_modified-var) | *Date* | Now
 F14 | [`method :var`](#method-var) | *Method* | `Operation.method`
  | [`safe_methods :var`](#safe_methods-var) | [ *Method* ] | [ HEAD<br>, GET<br> OPTIONS<br>, TRACE<br>]
  | [`is_method_safe : in`](#is_method_safe--in) | T / F |
-G13 | [`is_precondition_ok :bin`](#is_precondition_ok-bin) | T / F | TRUE
+H10 | [`is_precondition_ok :bin`](#is_precondition_ok-bin) | T / F | TRUE
 
 > FIXME Explanations needed

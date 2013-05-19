@@ -28,11 +28,11 @@ J5 | [`method :var`](#method-var) | *Method* | `Operation.method`
 K5 | [`method :var`](#method-var) | *Method* | `Operation.method`
  | [`is_method_put : in`](#is_method_put--in) | T / F |
  | [`create_is_method_put : in`](#create_is_method_put--in) | T / F | `is_method_put : in`
-N6 | [`create_put :bin`](#create_put-bin) | T / F | `process_put`
+N5 | [`create_put :bin`](#create_put-bin) | T / F | `process_put`
 K6 | [`path :var`](#path-var) | *String* |
  | [`create_path : in`](#create_path--in) | T / F |
-L6 | [`create :bin`](#create-bin) | T / F | FALSE
-N7 | [`is_location_set : in`](#is_location_set--in) | T / F |
+M6 | [`create :bin`](#create-bin) | T / F | FALSE
+N6 | [`is_location_set : in`](#is_location_set--in) | T / F |
  | [`create_is_location_set : in`](#create_is_location_set--in) | T / F | `is_location_set : in`
 
 > FIXME Explanations needed
