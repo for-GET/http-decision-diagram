@@ -18,8 +18,9 @@ This block is in charge of request-level checks.
  | callback | output | default
 :-- | ---: | :--- | :---
 B11 | [`method :var`](#method-var) | *Method* | `Operation.method`
- | [`allowed_methods :var`](#allowed_methods-var) | [ *Method* ] | [ OPTIONS<br>, HEAD<br>, GET<br>, POST<br>, PATCH<br>, PUT<br>, DELETE<br>, TRACE<br>]
+ | [`allowed_methods :var`](#allowed_methods-var) | [ *Method* ] | `implemented_methods :var`
  | [`is_method_allowed : in`](#is_method_allowed--in) | T / F |
+ | [`allow_header : in`](#allow_header--in) | *AllowHeader* |
 B10 | [`is_authorized :bin`](#is_authorized-bin) | T / F | TRUE
  | [`auth_challenges :var`](#auth_challenges-var) | [ *AuthChallenge* ] | [ ]
 B9 | [`method :var`](#method-var) | *Method* | `Operation.method`
@@ -28,16 +29,16 @@ B9 | [`method :var`](#method-var) | *Method* | `Operation.method`
  | [`process_trace : in`](#process_trace--in) | |
 B8 | [`method :var`](#method-var) | *Method* | `Operation.method`
  | [`is_method_options : in`](#is_method_options--in) | T / F |
- | [`options_headers :var`](#options_headers-var) | { *Header*<br>: *Value* } | { Allow<br>: `allowed_methods :var`<br>, Accept-Patch<br>: `patch_content_types_accepted :var`}
  | [`process_options : in`](#process_options--in) | |
-B7 | [`payload_exists : in`](#payload_exists--in) | T / F |
-B6 | [`is_payload_too_large :bin`](#is_payload_too_large-bin) | T / F | TRUE
+B7 | [`content_exists : in`](#content_exists--in) | T / F |
+B6 | [`is_content_too_large :bin`](#is_content_too_large-bin) | T / F | TRUE
 B5 | [`post_content_types_accepted :var`](#content_types_accepted-var) | { *CT*<br>: *Handler* } | { }
  | [`patch_content_types_accepted :var`](#content_types_accepted-var) | { *CT*<br>: *Handler* } | { }
  | [`put_content_types_accepted :var`](#content_types_accepted-var) | { *CT*<br>: *Handler* } | { }
  | [`content_types_accepted :var`](#content_types_accepted-var) | { *CT*<br>: *Handler* } | { }
  | [`is_content_type_accepted : in`](#is_content_type_accepted--in) | T / F |
 B4 | [`content_types_accepted:handler :bin`](#content_types_accepted-handler-bin) | T / F |
+ | [`from_content: in`](#from_content--in) | T / F |
 B3 | [`is_forbidden :bin`](#is_forbidden-bin) | T / F | FALSE
 B2 | [`is_request_ok :bin`](#is_request_ok-bin) | T / F | TRUE
 
@@ -56,6 +57,10 @@ Reference: [HTTPbis](http://tools.ietf.org/html/draft-ietf-httpbis-p2-semantics-
 
 > A 405 response is cacheable unless otherwise indicated by the method definition or explicit cache controls (see Section 4.1.2 of [Part6]).
 
+### `allow_header :var`
+
+FIXME
+
 ### `is_authorized :bin`
 
 Return TRUE if this request has valid authentication credentials; return FALSE otherwise.
@@ -67,6 +72,10 @@ Reference: [HTTPbis](http://tools.ietf.org/html/draft-ietf-httpbis-p7-auth-22#se
 ### `auth_challenges :var`
 
 If `is_authorized :bin` returned FALSE, then you must return a list of at least one challenge to be used as the _WWW-Authenticate_ response header.
+
+### `www_authenticate_header :var`
+
+FIXME
 
 ### `is_method_trace : in`
 
@@ -98,15 +107,11 @@ Reference: [HTTPbis](http://tools.ietf.org/html/draft-ietf-httpbis-p2-semantics-
 
 Return TRUE if the `method :var` is OPTIONS; FALSE otherwise.
 
-### `options :var`
-
-Return a key-value headers and their values.
-
-By default _Allow_ will point to `allowed_methods :var` and _Accept-Patch_ to `patch_content_types_accepted :var`.
-
 ### `process_options : in`
 
-Set `options :var` as `Operation.response.headers`.
+Set OPTIONS response headers.
+
+By default _Allow_ will point to `allowed_methods :var` and _Accept-Patch_ to `patch_content_types_accepted :var`.
 
 Return TRUE if succeeded; return FALSE otherwise.
 
@@ -121,13 +126,13 @@ Reference: [HTTPbis](http://tools.ietf.org/html/draft-ietf-httpbis-p2-semantics-
 > [...]
 -->
 
-### `payload_exists : in`
+### `content_exists : in`
 
-Return TRUE if the request has a payload (`Operation.headers.content-length` greater than 0); return FALSE otherwise.
+Return TRUE if the request has content (`Operation.headers.content-length` greater than 0 or `Operation.representation` exists); return FALSE otherwise.
 
-### `is_payload_too_large :bin`
+### `is_content_too_large :bin`
 
-Return TRUE if the request payload is too large; return FALSE otherwise.
+Return TRUE if the request content is too large; return FALSE otherwise.
 
 Reference: [HTTPbis](http://tools.ietf.org/html/draft-ietf-httpbis-p2-semantics-22#section-6.5.11), [RFC2616](http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.14)
 
@@ -137,21 +142,21 @@ Reference: [HTTPbis](http://tools.ietf.org/html/draft-ietf-httpbis-p2-semantics-
 
 ### `post_content_types_accepted :var`
 
-Return a list of key-value POST content-types and their handlers (i.e. deserializers to `Context.request_entity`).
+Return a list of key-value POST content-types and their handlers (i.e. deserializers to `Context.request.entity`).
 
 By default, handle `application/x-www-form-urlencoded`.
 
 ### `patch_content_types_accepted :var`
 
-Return a list of key-value PATCH content-types and their handlers (i.e. deserializers to `Context.request_entity`).
+Return a list of key-value PATCH content-types and their handlers (i.e. deserializers to `Context.request.entity`).
 
 ### `put_content_types_accepted :var`
 
-Return a list of key-value PUT content-types and their handlers (i.e. deserializers to `Context.request_entity`).
+Return a list of key-value PUT content-types and their handlers (i.e. deserializers to `Context.request.entity`).
 
 ### `content_types_accepted :var`
 
-Return a list of key-value content-types and their handlers (i.e. deserializers to `Context.request_entity`).
+Return a list of key-value content-types and their handlers (i.e. deserializers to `Context.request.entity`).
 
 By default it will call the callback specific to the request method.
 
@@ -167,13 +172,17 @@ Reference: [HTTPbis](http://tools.ietf.org/html/draft-ietf-httpbis-p2-semantics-
 
 ### `content_types_accepted:handler :bin`
 
-Deserialize `Operation.representation` into `Context.request_entity`.
+Deserialize `Operation.representation` into `Context.request.entity`.
 
 Return TRUE if succeeded; return FALSE otherwise.
 
+### `from_content :in`
+
+FIXME
+
 ### `is_forbidden :bin`
 
-Return TRUE if the semantics of the request (e.g. `Operation.method`, `Context.request_entity`) trigger a forbidden operation; return FALSE otherwise.
+Return TRUE if the semantics of the request (e.g. `Operation.method`, `Context.request.entity`) trigger a forbidden operation; return FALSE otherwise.
 
 Reference: [HTTPbis](http://tools.ietf.org/html/draft-ietf-httpbis-p2-semantics-22#section-6.5.3), [RFC2616](http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.4)
 

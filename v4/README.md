@@ -68,7 +68,7 @@ The decision diagram makes use of different types of callbacks to get request or
 * `content_headers` = Content-* headers found in `Operation.headers`
 * `representation` =
 * `response` =
-    * `chosen_content_type` =
+    * `chosen_content-type` =
     * `chosen_language` =
     * `chosen_charset` =
     * `chosen_encoding` =
@@ -78,10 +78,14 @@ The decision diagram makes use of different types of callbacks to get request or
 
 ### Context structure
 
-*Context* MUST be whatever the resource developer desires. It MUST be irrelevant to the decision flow. For the sake of clarity though, in this document you will find these references:
+*Context* MUST be whatever the resource developer desires. It MUST be irrelevant to the decision flow. For the sake of clarity though, in this documentation you may find these references:
 
-* `request_entity` =
 * `entity` =
+* `response` =
+    * `entity` =
+* `error` =
+    * `entity` =
+
 
 ### Built-in callbacks `: in`
 Some callbacks MUST be built-in by the system, and thus they are not explicitly marked on the diagram. They are not specific to the resource or the request and they are an implementation of HTTP-specific logic.

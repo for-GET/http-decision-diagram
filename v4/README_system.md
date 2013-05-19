@@ -17,27 +17,27 @@ This block is in charge of "system"-level (request agnostic) checks.
 
  | callback | output | default
 :-- | ---: | :--- | :---
-H26 | [`start : in`](#start--in) | |
+B26 | [`start : in`](#start--in) | |
 B23 | [`is_service_available :bin`](#is_service_available-bin) | T / F | TRUE
 B22 | [`is_uri_too_long :bin`](#is_uri_too_long-bin) | T / F | FALSE
 B21 | [`method :var`](#method-var) | *Method* | `Operation.method`
- | [`implemented_methods :var`](#implemented_methods-var) | [ *Method* ] | [ OPTIONS<br>, HEAD<br>, GET<br>, POST<br>, PATCH<br>, PUT<br>, DELETE<br>, TRACE<br>]
+ | [`create_methods :var`](#create_methods-var) | [ *Method* ] | [ POST<br>]
+ | [`process_methods :var`](#process_methods-var) | [ *Method* ] | [ POST<br>, PATCH<br>]
+ | [`implemented_methods :var`](#implemented_methods-var) | [ *Method* ] | [ OPTIONS<br>, HEAD<br>, GET<br>, DELETE<br>, TRACE<br>, `create_methods :var`<br>, `process_methods :var`<br>]
  | [`is_method_implemented : in`](#is_method_implemented--in) | T / F |
 B20 | [`implemented_content_headers :var`](#implemented_content_headers-var) | [ *HeaderName* ] | [ content-encoding<br>, content-language<br>, content-length<br>, content-md5<br>, content-type<br>]
  | [`are_content_headers_implemented : in`](#are_content_headers_implemented--in) | T / F |
 B19 | [`is_functionality_implemented :bin`](#is_functionality_implemented-bin) | T / F | TRUE
 B18 | [`implemented_expect_extensions :var`](#implemented_expect_extensions-var) | [ *ExtensionName* ] | []
  | [`are_expect_extensions_implemented : in`](#are_expect_extensions_implemented--in) | T / F |
-O26 | [`last :bin`](#last-bin) | T | TRUE
-I26 | [`finish : in`](#finish--in) | |
+P25 | [`last :bin`](#last-bin) | |
+P26 | [`finish : in`](#finish--in) | |
 
 
 
 ### `start : in`
 
 Prepare *Operation* for the request.
-
-Return TRUE if succeeded; return FALSE otherwise.
 
 ### `is_service_available :bin`
 
@@ -66,6 +66,18 @@ If you allow the HTTP method to be overridden (e.g. via the _X-HTTP-Method-Overr
 Reference: [Google Data APIs](https://developers.google.com/gdata/docs/2.0/basics#DeletingEntry)
 
 > If your firewall does not allow DELETE, then do an HTTP POST and set the method override header as follows: `X-HTTP-Method-Override: DELETE`.
+
+### `safe_methods :var`
+
+FIXME
+
+### `create_methods :var`
+
+FIXME
+
+### `process_methods :var`
+
+FIXME
 
 ### `implemented_methods :var`
 
@@ -99,13 +111,13 @@ Return a list of Expect extensions that are implemented by the system.
 
 ### `are_expect_extensions_implemented : in`
 
-Return True if extensions in `Operation.expect_extensions` is a subset of `implemented_expect_extensions :var`
+Return True if extensions in `Operation.expectExtensions` is a subset of `implemented_expect_extensions :var`
 
 Reference: [HTTPbis](http://tools.ietf.org/html/draft-ietf-httpbis-p2-semantics-22#section-6.5.14), [RFC2616](http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.18)
 
 > The 417 (Expectation Failed) status code indicates that the expectation given in the request's Expect header field (Section 5.1.1) could not be met by at least one of the inbound servers.
 
-### `last : in`
+### `last :bin`
 
 Last chance for forcefully ammending the response of the *Operation*.
 
@@ -114,5 +126,3 @@ Return TRUE if succeeded; return FALSE otherwise.
 ### `finish : in`
 
 Finalize *Operation*.
-
-Return TRUE if succeeded; return FALSE otherwise.
