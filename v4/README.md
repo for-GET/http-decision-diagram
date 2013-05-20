@@ -64,25 +64,28 @@ The decision diagram makes use of different types of callbacks to get request or
     * `accept-encoding` =
     * `content-type` =
     * `content-length` =
-* `accept` = *AcceptHeader*
-* `expect` = *ExpectHeader*
-* `if-match` = *IfMatchHeader*
-* `if-modified-since` = *IfUnmodifiedSinceHeader*
-* `if-none-match` = *IfNoneMatchHeader*
-* `if-unmodified-since` = *IfModifiedSinceHeader*
 * `representation` =
+* `h` =
+    * `accept` = *AcceptHeader*
+    * `expect` = *ExpectHeader*
+    * `if-match` = *IfMatchHeader*
+    * `if-modified-since` = *IfUnmodifiedSinceHeader*
+    * `if-none-match` = *IfNoneMatchHeader*
+    * `if-unmodified-since` = *IfModifiedSinceHeader*
 * `response` =
-    * `allow` = *AllowHeader*
-    * `chosen_content-type` =
-    * `chosen_language` =
-    * `chosen_charset` =
-    * `chosen_encoding` =
-    * `content-encoding` = *ContentEncodingHeader*
-    * `content-type` = *ContentTypeHeader*
-    * `content-language` = *ContentLanguageHeader*
     * `status_code` =
     * `headers` =
     * `representation` =
+    * `h` =
+        * `allow` = *AllowHeader*
+        * `content-encoding` = *ContentEncodingHeader*
+        * `content-type` = *ContentTypeHeader*
+        * `content-language` = *ContentLanguageHeader*
+    * `chosen` =
+        * `content-type` =
+        * `language` =
+        * `charset` =
+        * `encoding` =
 
 ### Context structure
 
