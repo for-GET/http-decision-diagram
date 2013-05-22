@@ -34,6 +34,7 @@ F13 | [`last_modified :var`](#last_modified-var) | *Date* | Now
 F14 | [`method :var`](#method-var) | *Method* | `Operation.method`
  | [`safe_methods :var`](#safe_methods-var) | [ *Method* ] | [ HEAD<br>, GET<br> OPTIONS<br>, TRACE<br>]
  | [`is_method_safe : in`](#is_method_safe--in) | T / F |
+ | [`is_precondition_safe : in`](#is_precondition_safe--in) | T / F |
 H10 | [`is_precondition_ok :bin`](#is_precondition_ok-bin) | T / F | TRUE
 
 > FIXME Explanations needed

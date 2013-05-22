@@ -30,7 +30,8 @@ B20 | [`implemented_content_headers :var`](#implemented_content_headers-var) | [
 B19 | [`is_functionality_implemented :bin`](#is_functionality_implemented-bin) | T / F | TRUE
 B18 | [`implemented_expect_extensions :var`](#implemented_expect_extensions-var) | [ *ExtensionName* ] | []
  | [`are_expect_extensions_implemented : in`](#are_expect_extensions_implemented--in) | T / F |
-P25 | [`last :bin`](#last-bin) | |
+P25 | [`last : in`](#last--in) | |
+ | [`override :bin`](#override-bin) | |
 P26 | [`finish : in`](#finish--in) | |
 
 

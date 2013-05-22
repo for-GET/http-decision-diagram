@@ -30,7 +30,8 @@ B10 | [`method :var`](#method-var) | *Method* | `Operation.method`
 B9 | [`method :var`](#method-var) | *Method* | `Operation.method`
  | [`is_method_options : in`](#is_method_options--in) | T / F |
  | [`process_options : in`](#process_options--in) | |
-B8 | [`expects_continue : in`](#expects_continue--in) | T / F |
+B8 | [`has_expects : in`](#has_expects--in) | T / F |
+ | [`expects_continue : in`](#expects_continue--in) | T / F |
 B7 | [`content_exists : in`](#content_exists--in) | T / F |
 B6 | [`is_content_too_large :bin`](#is_content_too_large-bin) | T / F | TRUE
 B5 | [`post_content_types_accepted :var`](#content_types_accepted-var) | { *CT*<br>: *Handler* } | { }
@@ -159,7 +160,7 @@ Return a list of key-value PATCH content-types and their handlers (i.e. deserial
 
 Return a list of key-value PUT content-types and their handlers (i.e. deserializers to `Context.request.entity`).
 
-### `content_types_accepted :var`
+### `content_types_accepted : in`
 
 Return a list of key-value content-types and their handlers (i.e. deserializers to `Context.request.entity`).
 
