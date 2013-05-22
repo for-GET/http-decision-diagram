@@ -1,4 +1,4 @@
-# http-headers-status
+# http-decision-diagram
 
 An activity diagram to describe the resolution of HTTP response status codes, given various headers, implemented via semantical callbacks.
 
@@ -6,8 +6,8 @@ And it goes on Twitter as [#httpdd](https://twitter.com/search/realtime?q=httpdd
 
 ## Diagram
 
-* [PNG](http-headers-status-v4.png) (export)
-* [Omnigraffle](http-headers-status-v4.graffle) (source)
+* [PNG](http-decision-diagram-v4.png) (export)
+* [Omnigraffle](http-decision-diagram-v4.graffle) (source)
     * Size: A0 - 84.1 x 59.4 cm
     * Grid size: 0.5
     * Dot density: 96 dpi
@@ -27,7 +27,7 @@ The decision diagram is split into standalone color-coded blocks
 1. [Response](README_response.md) (cyan)
 1. [Error](README_error.md) (gray)
 
-![HTTP headers status](https://rawgithub.com/andreineculau/http-headers-status/master/v4/http-headers-status-v4.png)
+![HTTP headers status](https://rawgithub.com/andreineculau/http-decision-diagram/master/v4/http-decision-diagram-v4.png)
 
 
 ---

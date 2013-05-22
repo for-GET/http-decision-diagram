@@ -1,4 +1,4 @@
-# http-headers-status
+# http-decision-diagram
 
 An activity diagram to describe the resolution of HTTP response status codes, given various headers, implemented via semantical callbacks.
 
@@ -10,11 +10,11 @@ This is a fork of Alan Dean's [http-headers-status](http://code.google.com/p/htt
 ## Roadmap
 
 * v3
-    * [X] `2013-02-17` [diagram](v3/http-headers-status-v3.png) - analyze
+    * [X] `2013-02-17` [diagram](https://rawgithub.com/andreineculau/http-decision-diagram/master/v3/http-headers-status-v3.png) - analyze
     * [X] `2013-02-17` webmachine's implementation - analyze [webmachine_resource](https://github.com/basho/webmachine/blob/master/src/webmachine_resource.erl) and [webmachine_decision_core](https://github.com/basho/webmachine/blob/master/src/webmachine_decision_core.erl)
 * **v4**
     * [X] `2013-02-19` 1st draft
-    * [~] `2013-08-31` [DIAGRAM](v4/http-headers-status-v4.png)
+    * [~] `2013-08-31` [DIAGRAM](https://rawgithub.com/andreineculau/http-decision-diagram/master/v4/http-decision-diagram-v4.png)
     * [~] `2013-08-31` [EXPLANATION](v4/README.md)
     * [_] `2013-08-31` implementation in node/elixir/erlang
 
@@ -30,7 +30,7 @@ Watch [Webmachine: Focus on Resources - Sean Cribbs](http://vimeo.com/20784244) 
 
 This repository's goal is to build on previous work, and set a "standard" in terms of a HTTP decision diagram and necessary callbacks.
 
-In doing so, we take a snapshot of the current [Webmachine](https://github.com/basho/webmachine) callbacks that are linked to [Alan Dean](https://twitter.com/adean)'s [v3 decision diagram](https://raw.github.com/andreineculau/http-headers-status/master/v3/http-headers-status-v3.png), and trying to do constructive criticism and addressing the issues with
+In doing so, we take a snapshot of the current [Webmachine](https://github.com/basho/webmachine) callbacks that are linked to [Alan Dean](https://twitter.com/adean)'s [v3 decision diagram](https://rawgithub.com/andreineculau/http-decision-diagram/master/v3/http-headers-status-v3.png), and trying to do constructive criticism and addressing the issues with
 
 * clearer definitions of the steps implied by the existing callbacks
 * adding new callbacks

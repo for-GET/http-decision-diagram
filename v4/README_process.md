@@ -9,7 +9,7 @@
 1. [Response](README_response.md) (cyan)
 1. [Error](README_error.md) (gray)
 
-![HTTP headers status](https://rawgithub.com/andreineculau/http-headers-status/master/v4/http-headers-status-v4.png)
+![HTTP headers status](https://rawgithub.com/andreineculau/http-decision-diagram/master/v4/http-decision-diagram-v4.png)
 
 ## Process
 
