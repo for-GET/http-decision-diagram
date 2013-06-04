@@ -25,6 +25,8 @@ This is a fork of Alan Dean's [http-headers-status](http://code.google.com/p/htt
 
 Watch [Webmachine: Focus on Resources - Sean Cribbs](http://vimeo.com/20784244) from [&Oslash;redev Conference](http://vimeo.com/user4280938) on [Vimeo](http://vimeo.com).
 
+Sean also has a good rundown of [why an FSM is a good match for a protocol specification/implementation](http://seancribbs.com/tech/2012/01/16/webmachine-vs-grape/).
+
 
 ### Goal
 
