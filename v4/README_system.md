@@ -30,7 +30,10 @@ B20 | [`implemented_content_headers :var`](#implemented_content_headers-var) | [
 B19 | [`is_functionality_implemented :bin`](#is_functionality_implemented-bin) | T / F | TRUE
 B18 | [`implemented_expect_extensions :var`](#implemented_expect_extensions-var) | [ *ExtensionName* ] | []
  | [`are_expect_extensions_implemented : in`](#are_expect_extensions_implemented--in) | T / F |
-P25 | [`last : in`](#last--in) | |
+P25 | [`beautify_headers :bin`](#beatify_headers-bin) | |
+ | [`last : in`](#last--in) | |
+ | [`camelcase_response_headers : in`](#camelcase_response_headers--in) | |
+ | [`need_camelcased_response_headers :bin`](#need_camelcased_response_headers-bin) | |
  | [`override :bin`](#override-bin) | |
 P26 | [`finish : in`](#finish--in) | |
 
@@ -118,7 +121,19 @@ Reference: [HTTPbis](http://tools.ietf.org/html/draft-ietf-httpbis-p2-semantics-
 
 > The 417 (Expectation Failed) status code indicates that the expectation given in the request's Expect header field (Section 5.1.1) could not be met by at least one of the inbound servers.
 
-### `last :bin`
+### `last : in`
+
+FIXME
+
+### `camelcase_response_headers :var`
+
+FIXME
+
+### `need_camelcased_response_headers :bin`
+
+FIXME
+
+### `override :bin`
 
 Last chance for forcefully ammending the response of the *Operation*.
 
