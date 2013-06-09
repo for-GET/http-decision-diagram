@@ -15,10 +15,10 @@
 
  | callback | output | default
 :-- | ---: | :--- | :---
-N11 | [`is_process_done :bin`](#is_process_done-bin) | T / F | TRUE
-N12 | [`content_types_provided:handler :bin`](#content_types_provided-handler-var) | T / F |
+N10 | [`is_process_done :bin`](#is_process_done-bin) | T / F | TRUE
+N11 | [`content_types_provided:handler :bin`](#content_types_provided-handler-var) | T / F |
  | [`to_content : in`](#to_content--in) | T / F | FALSE
-N13 | [`has_multiple_choices :bin`](#has_multiple_choices-bin) | T / F | FALSE
+N12 | [`has_multiple_choices :bin`](#has_multiple_choices-bin) | T / F | FALSE
 [`cache :var`](#cache-var) | *String* |
 [`vary :var`](#vary-var) | [ *String* ] |
 [`expires :var`](#vary-var) | *Date* |
