@@ -16,7 +16,8 @@ This is a fork of Alan Dean's [http-headers-status](http://code.google.com/p/htt
     * [X] `2013-02-19` 1st draft
     * [~] `2013-08-31` [DIAGRAM](https://rawgithub.com/andreineculau/http-decision-diagram/master/v4/http-decision-diagram-v4.png)
     * [~] `2013-08-31` [EXPLANATION](v4/README.md)
-    * [_] `2013-08-31` implementation in node/elixir/erlang
+    * [~] `2013-08-31` implementation in node - [HyperREST Machine](https://github.com/andreineculau/hyperrest-machine), [HyperREST Server](https://github.com/andreineculau/hyperrest-server)
+    * [ ] `2013-08-31` implementation in elixir/erlang (most probably a fork of webmachine)
 
 
 ## Why, why, why
