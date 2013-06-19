@@ -37,6 +37,6 @@ F4 | [`encodings_provided :var`](#encodings_provided-var) | { *Encoding*<br>: *H
  | [`has_accept_encoding : in`](#has_accept_encoding--in) | T / F |
 F5 | [`encodings_provided :var`](#encodings_provided-var) | { *Encoding*<br>: *Handler*<br>}\* | { }
  | [`accept_encoding_matches : in`](#accept_encoding_matches--in) | T / F |
-E6 | [`is_accept_ok :bin`](#is_accept_ok-bin) | T / F | FALSE
+E6 | [`ignore_accept_block_mismatches :bin`](#ignore_accept_block_mismatches-bin) | T / F | FALSE
 
 > FIXME Explanations needed

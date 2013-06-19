@@ -30,6 +30,7 @@ B20 | [`implemented_content_headers :var`](#implemented_content_headers-var) | [
 B19 | [`is_functionality_implemented :bin`](#is_functionality_implemented-bin) | T / F | TRUE
 B18 | [`implemented_expect_extensions :var`](#implemented_expect_extensions-var) | [ *ExtensionName* ] | []
  | [`are_expect_extensions_implemented : in`](#are_expect_extensions_implemented--in) | T / F |
+B17 | [`is_system_block_ok :bin`](#is_system_block_ok-bin) | T / F | TRUE
 P25 | [`beautify_headers :bin`](#beatify_headers-bin) | |
  | [`last : in`](#last--in) | |
  | [`camelcase_response_headers : in`](#camelcase_response_headers--in) | |
@@ -120,6 +121,10 @@ Return True if extensions in `Operation.expectExtensions` is a subset of `implem
 Reference: [HTTPbis](http://tools.ietf.org/html/draft-ietf-httpbis-p2-semantics-22#section-6.5.14), [RFC2616](http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.18)
 
 > The 417 (Expectation Failed) status code indicates that the expectation given in the request's Expect header field (Section 5.1.1) could not be met by at least one of the inbound servers.
+
+### `is_system_block_ok :bin`
+
+FIXME
 
 ### `last : in`
 

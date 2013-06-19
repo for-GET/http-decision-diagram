@@ -42,7 +42,7 @@ B5 | [`post_content_types_accepted :var`](#content_types_accepted-var) | { *CT*<
 B4 | [`content_types_accepted:handler :bin`](#content_types_accepted-handler-bin) | T / F |
  | [`from_content: in`](#from_content--in) | T / F |
 B3 | [`is_forbidden :bin`](#is_forbidden-bin) | T / F | FALSE
-B2 | [`is_request_ok :bin`](#is_request_ok-bin) | T / F | TRUE
+B2 | [`is_request_block_ok :bin`](#is_request_block_ok-bin) | T / F | TRUE
 
 
 ### `allowed_methods :var`
@@ -198,7 +198,7 @@ Reference: [HTTPbis](http://tools.ietf.org/html/draft-ietf-httpbis-p2-semantics-
 
 > An origin server that wishes to "hide" the current existence of a forbidden target resource MAY instead respond with a status code of 404 (Not Found).
 
-### `is_request_ok :bin`
+### `is_request_block_ok :bin`
 
 If you want to validate the request beyond the implemented decisions, this is the place to do it.
 
