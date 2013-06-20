@@ -29,6 +29,9 @@ B10 | [`method :var`](#method-var) | *Method* | `Operation.method`
  | [`process_trace : in`](#process_trace--in) | |
 B9 | [`method :var`](#method-var) | *Method* | `Operation.method`
  | [`is_method_options : in`](#is_method_options--in) | T / F |
+ | [`accept_patch_header : in`](#accept_patch_header--in) | *AcceptPatchHeader* |
+ | [`accept_post_header : in`](#accept_post_header--in) | *AcceptPostHeader* |
+ | [`accept_put_header : in`](#accept_put_header--in) | *AcceptPutHeader* |
  | [`process_options : in`](#process_options--in) | |
 B8 | [`has_expects : in`](#has_expects--in) | T / F |
  | [`expects_continue : in`](#expects_continue--in) | T / F |
@@ -115,10 +118,10 @@ Set OPTIONS response headers.
 
 By default, these headers will be set
 
-* _Allow_ = `allowed_methods :var`
-* _Accept-Patch_ = `patch_content_types_accepted :var`
-* _Accept-Post_ = `post_content_types_accepted :var`
-* _Accept-Put_ = `put_content_types_accepted :var`
+* _Allow_ = `allow_header: in` ~ `allowed_methods :var`
+* _Accept-Patch_ = `accept_patch_header: in` ~ `patch_content_types_accepted :var`
+* _Accept-Post_ = `accept_post_header: in` ~ `post_content_types_accepted :var`
+* _Accept-Put_ = `accept_put_header: in` ~ `put_content_types_accepted :var`
 
 Return TRUE if succeeded; return FALSE otherwise.
 
