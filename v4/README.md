@@ -4,6 +4,8 @@ An activity diagram to describe the resolution of HTTP response status codes, gi
 
 And it goes on Twitter as [#httpdd](https://twitter.com/search/realtime?q=httpdd) - HTTP Decision Diagram.
 
+The diagram follows the indications in [httpbis](http://tools.ietf.org/wg/httpbis/), and fills in the void where necessary. Under no circumstances does this diagram override the HTTP specifications. If it does, please file an issue as soon as possible.
+
 ## Diagram
 
 * [PNG](http-decision-diagram-v4.png) (export)
