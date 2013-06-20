@@ -113,7 +113,12 @@ Return TRUE if the `method :var` is OPTIONS; FALSE otherwise.
 
 Set OPTIONS response headers.
 
-By default _Allow_ will point to `allowed_methods :var` and _Accept-Patch_ to `patch_content_types_accepted :var`.
+By default, these headers will be set
+
+* _Allow_ = `allowed_methods :var`
+* _Accept-Patch_ = `patch_content_types_accepted :var`
+* _Accept-Post_ = `post_content_types_accepted :var`
+* _Accept-Put_ = `put_content_types_accepted :var`
 
 Return TRUE if succeeded; return FALSE otherwise.
 
