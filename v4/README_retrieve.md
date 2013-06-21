@@ -18,10 +18,10 @@ This block is in charge of retrieving the resource.
  | callback | output | default
 :-- | ---: | :--- | :---
 G8 | [`missing :bin`](#missing-bin) | T / F | FALSE
-H6 | [`moved :bin`](#moved-bin) | T / F | FALSE
-I6 | [`moved_permanently :bin`](#moved_permanently-bin) | T / F | FALSE
-J6 | [`moved_temporarily :bin`](#moved_temporarily-bin) | T / F | FALSE
-K6 | [`method :var`](#method-var) | *Method* | `Operation.method`
+H7 | [`moved :bin`](#moved-bin) | T / F | FALSE
+H6 | [`moved_permanently :bin`](#moved_permanently-bin) | T / F | FALSE
+H5 | [`moved_temporarily :bin`](#moved_temporarily-bin) | T / F | FALSE
+H4 | [`method :var`](#method-var) | *Method* | `Operation.method`
  | [`create_methods :var`](#create_methods-var) | [ *Method* ] | [ POST<br>]
  | [`is_method_create : in`](#is_method_create--in) | T / F |
  | [`moved_is_method_create : in`](#moved_is_method_create--in) | T / F | `is_method_create`
