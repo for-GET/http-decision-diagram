@@ -112,6 +112,18 @@ Reference: [HTTPbis](http://tools.ietf.org/html/draft-ietf-httpbis-p2-semantics-
 
 Return TRUE if the `method :var` is OPTIONS; FALSE otherwise.
 
+### `accept_patch_header : in`
+
+FIXME
+
+### `accept_post_header : in`
+
+FIXME
+
+### `accept_put_header : in`
+
+FIXME
+
 ### `process_options : in`
 
 Set OPTIONS response headers.

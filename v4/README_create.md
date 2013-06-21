@@ -15,24 +15,15 @@
 
  | callback | output | default
 :-- | ---: | :--- | :---
-J2 | [`existed :bin`](#existed-bin) | T / F | FALSE
-K2 | [`moved_permanently :bin`](#moved_permanently-bin) | T / F | FALSE
-K3 | [`moved_temporarily :bin`](#moved_temporarily-bin) | T / F | FALSE
-K4 | [`method :var`](#method-var) | *Method* | `Operation.method`
- | [`create_methods :var`](#create_methods-var) | [ *Method* ] | [ POST<br>]
- | [`is_method_create : in`](#is_method_create--in) | T / F |
- | [`existed_is_method_create : in`](#existed_is_method_create--in) | T / F | `is_method_create`
-J5 | [`method :var`](#method-var) | *Method* | `Operation.method`
- | [`create_methods :var`](#create_methods-var) | [ *Method* ] | [ POST<br>, PUT<br>]
- | [`is_method_create : in`](#is_method_create--in) | T / F |
-K5 | [`method :var`](#method-var) | *Method* | `Operation.method`
+K3 | [`method :var`](#method-var) | *Method* | `Operation.method`
  | [`is_method_put : in`](#is_method_put--in) | T / F |
  | [`create_is_method_put : in`](#create_is_method_put--in) | T / F | `is_method_put : in`
-N5 | [`create_put :bin`](#create_put-bin) | T / F | `process_put`
-K6 | [`path :var`](#path-var) | *String* |
+L3 | [`create_put :bin`](#create_put-bin) | T / F | `process_put`
+K2 | [`method :var`](#method-var) | *Method* | `Operation.method`
+ | [`create_methods :var`](#create_methods-var) | [ *Method* ] | [ POST<br>, PUT<br>]
+ | [`is_method_create : in`](#is_method_create--in) | T / F |
+L2 | [`path :var`](#path-var) | *URI* |
  | [`create_path : in`](#create_path--in) | T / F |
-M6 | [`create :bin`](#create-bin) | T / F | FALSE
-N6 | [`is_location_set : in`](#is_location_set--in) | T / F |
- | [`create_is_location_set : in`](#create_is_location_set--in) | T / F | `is_location_set : in`
+M2 | [`create :bin`](#create-bin) | T / F | FALSE
 
 > FIXME Explanations needed
