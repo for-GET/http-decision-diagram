@@ -88,6 +88,14 @@ The decision diagram makes use of different types of callbacks to get request or
         * `language` =
         * `charset` =
         * `encoding` =
+* `log` =
+    * `transitions` = *Array*
+        * `from` =
+        * `to` =
+    * `callbacks` = *Array*
+        * `state` =
+        * `callback` =
+        * `result` =
 
 ### Context structure
 
