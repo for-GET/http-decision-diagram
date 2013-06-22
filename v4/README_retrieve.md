@@ -17,7 +17,8 @@ This block is in charge of retrieving the resource.
 
  | callback | output | default
 :-- | ---: | :--- | :---
-G8 | [`missing :bin`](#missing-bin) | T / F | FALSE
+G6 | [`missing :bin`](#missing-bin) | T / F | FALSE
+F7 | [`found :bin`](#found-bin) | T / F | FALSE
 H7 | [`moved :bin`](#moved-bin) | T / F | FALSE
 H6 | [`moved_permanently :bin`](#moved_permanently-bin) | T / F | FALSE
 H5 | [`moved_temporarily :bin`](#moved_temporarily-bin) | T / F | FALSE
