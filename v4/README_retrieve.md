@@ -24,6 +24,6 @@ H5 | [`moved_temporarily :bin`](#moved_temporarily-bin) | T / F | FALSE
 H4 | [`method :var`](#method-var) | *Method* | `Operation.method`
  | [`create_methods :var`](#create_methods-var) | [ *Method* ] | [ POST<br>]
  | [`is_method_create : in`](#is_method_create--in) | T / F |
- | [`moved_is_method_create : in`](#moved_is_method_create--in) | T / F | `is_method_create`
+ | [`moved_is_method_create : in`](#moved_is_method_create--in) | T / F | `is_method_create :bin`
 
 > FIXME Explanations needed

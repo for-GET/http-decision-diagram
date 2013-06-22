@@ -15,7 +15,8 @@
 
  | callback | output | default
 :-- | ---: | :--- | :---
-N3 | [`is_create_done :bin`](#is_create_done-bin) | T / F | `is_process_done:bin`
+N3 | [`is_create_done :bin`](#is_create_done-bin) | T / F | `is_process_done :bin`
+N6 | [`create_see_other :bin`](#create_see_other-bin) | T / F | `see_other :bin`
  | [`content_types_provided:handler :bin`](#content_types_provided-handler-var) | T / F |
  | [`to_content : in`](#to_content--in) | T / F | FALSE
  - | [`vary :var`](#vary-var) | [ *String* ] |
@@ -23,9 +24,8 @@ N3 | [`is_create_done :bin`](#is_create_done-bin) | T / F | `is_process_done:bin
  - | [`last_modified :var`](#last_modified-var) | *Date* | Now
  - | [`etag :var`](#etag-var) | *ETag* |
 N14 | [`is_process_done :bin`](#is_process_done-bin) | T / F | TRUE
-N10 | [`redirect_to_canonical :var`](#redirect_to_canonical-var) | T / F | FALSE
- | [`canonical_path :var`](#canonical_path-var) | *URI* |
- | [`see_other :bin`](#see_other-bin) | T / F | FALSE
+N10 | [`see_other :bin`](#see_other-bin) | T / F | FALSE
+ | [`path :var`](#path-var) | *URI* |
 N9 | [`has_multiple_choices :bin`](#has_multiple_choices-bin) | T / F | FALSE
 N8 | [`content_types_provided:handler :bin`](#content_types_provided-handler-var) | T / F |
  | [`to_content : in`](#to_content--in) | T / F | FALSE
