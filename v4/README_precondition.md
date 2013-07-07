@@ -7,7 +7,7 @@
     * [Create](README_create.md) (violet)
     * [Process](README_process.md) (red)
 1. [Response](README_response.md) (cyan)
-1. [Error](README_error.md) (gray)
+1. [Alternative](README_alternative.md) (gray)
 
 ![HTTP headers status](https://rawgithub.com/andreineculau/http-decision-diagram/master/v4/http-decision-diagram-v4.png)
 
