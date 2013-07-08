@@ -59,4 +59,4 @@ Take it also as a process of gaining [context](https://twitter.com/slicknet/stat
 
 ## License
 
-MIT
+[Apache 2.0](LICENSE)
