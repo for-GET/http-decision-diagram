@@ -15,11 +15,11 @@
 
  | callback | output | default
 :-- | ---: | :--- | :---
-K3 | [`method :var`](#method-var) | *Method* | `Operation.method`
+K3 | [`method :var`](#method-var) | *Method* | `Transaction.request.method`
  | [`is_method_put : in`](#is_method_put--in) | T / F |
  | [`create_is_method_put : in`](#create_is_method_put--in) | T / F | `is_method_put : in`
 L3 | [`create_put :bin`](#create_put-bin) | T / F | `process_put`
-K2 | [`method :var`](#method-var) | *Method* | `Operation.method`
+K2 | [`method :var`](#method-var) | *Method* | `Transaction.request.method`
  | [`create_methods :var`](#create_methods-var) | [ *Method* ] | [ POST<br>, PUT<br>]
  | [`is_method_create : in`](#is_method_create--in) | T / F |
 L2 | [`path :var`](#path-var) | *URI* |

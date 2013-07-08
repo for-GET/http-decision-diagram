@@ -15,15 +15,15 @@
 
  | callback | output | default
 :-- | ---: | :--- | :---
-J10 | [`method :var`](#method-var) | *Method* | `Operation.method`
+J10 | [`method :var`](#method-var) | *Method* | `Transaction.request.method`
  | [`is_method_head_get : in`](#is_method_head_get--in) | T / F |
-J11 | [`method :var`](#method-var) | *Method* | `Operation.method`
+J11 | [`method :var`](#method-var) | *Method* | `Transaction.request.method`
  | [`is_method_delete : in`](#is_method_delete--in) | T / F |
 K11 | [`process_delete :bin`](#process_delete-bin) | T / F | FALSE
-J14 | [`method :var`](#method-var) | *Method* | `Operation.method`
+J14 | [`method :var`](#method-var) | *Method* | `Transaction.request.method`
  | [`is_method_put : in`](#is_method_put--in) | T / F |
 K14 | [`process_put :bin`](#process_put-bin) | T / F | FALSE
-J15 | [`method :var`](#method-var) | *Method* | `Operation.method`
+J15 | [`method :var`](#method-var) | *Method* | `Transaction.request.method`
  | [`process_methods :var`](#process_methods-var) | [ *Method* ] | [ POST<br>, PATCH<br>]
  | [`is_method_process : in`](#is_method_process--in) | T / F |
 K15 | [`process :bin`](#process-bin) | T / F | FALSE

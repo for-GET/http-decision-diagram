@@ -31,7 +31,7 @@ E12 | [`etag :var`](#etag-var) | *ETag* |
 F12 | [`has_if_modified_since : in`](#has_if_modified_since--in) | T / F |
 F13 | [`last_modified :var`](#last_modified-var) | *Date* | Now
  | [`if_modified_since_matches : in`](#if_modified_since_matches--in) | T / F
-F14 | [`method :var`](#method-var) | *Method* | `Operation.method`
+F14 | [`method :var`](#method-var) | *Method* | `Transaction.request.method`
  | [`safe_methods :var`](#safe_methods-var) | [ *Method* ] | [ HEAD<br>, GET<br> OPTIONS<br>, TRACE<br>]
  | [`is_method_safe : in`](#is_method_safe--in) | T / F |
  | [`is_precondition_safe : in`](#is_precondition_safe--in) | T / F |

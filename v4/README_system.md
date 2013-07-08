@@ -20,7 +20,7 @@ This block is in charge of "system"-level (request agnostic) checks.
 B26 | [`start : in`](#start--in) | |
 B23 | [`is_service_available :bin`](#is_service_available-bin) | T / F | TRUE
 B22 | [`is_uri_too_long :bin`](#is_uri_too_long-bin) | T / F | FALSE
-B21 | [`method :var`](#method-var) | *Method* | `Operation.method`
+B21 | [`method :var`](#method-var) | *Method* | `Transaction.request.method`
  | [`create_methods :var`](#create_methods-var) | [ *Method* ] | [ POST<br>]
  | [`process_methods :var`](#process_methods-var) | [ *Method* ] | [ POST<br>, PATCH<br>]
  | [`implemented_methods :var`](#implemented_methods-var) | [ *Method* ] | [ OPTIONS<br>, HEAD<br>, GET<br>, DELETE<br>, TRACE<br>, `create_methods :var`<br>, `process_methods :var`<br>]
@@ -42,7 +42,7 @@ P26 | [`finish : in`](#finish--in) | |
 
 ### `start : in`
 
-Prepare *Operation* for the request.
+Prepare *Transaction* for the request.
 
 ### `is_service_available :bin`
 
@@ -66,7 +66,7 @@ Reference: [HTTPbis](http://tools.ietf.org/html/draft-ietf-httpbis-p2-semantics-
 
 ### `method :var`
 
-If you allow the HTTP method to be overridden (e.g. via the _X-HTTP-Method-Override_ header) then return the intended method; return `Operation.method` otherwise.
+If you allow the HTTP method to be overridden (e.g. via the _X-HTTP-Method-Override_ header) then return the intended method; return `Transaction.request.method` otherwise.
 
 Reference: [Google Data APIs](https://developers.google.com/gdata/docs/2.0/basics#DeletingEntry)
 
@@ -90,7 +90,7 @@ Return a list of HTTP methods that are implemented by the system.
 
 ### `is_method_implemented : in`
 
-Return TRUE if `Operation.method` is in `implemented_methods :var`; return FALSE otherwise.
+Return TRUE if `Transaction.request.method` is in `implemented_methods :var`; return FALSE otherwise.
 
 ### `implemented_content_headers :var`
 
@@ -98,7 +98,7 @@ Return a list of Content-* headers that are implemented by the system.
 
 ### `are_content_headers_implemented : in`
 
-Return TRUE if `Operation.content_headers` is a subset of `implemented_content_headers :var`; return FALSE otherwise
+Return TRUE if Content-* headers match `implemented_content_headers :var`; return FALSE otherwise
 
 ### `is_functionality_implemented :bin`
 
@@ -116,7 +116,7 @@ Return a list of Expect extensions that are implemented by the system.
 
 ### `are_expect_extensions_implemented : in`
 
-Return True if extensions in `Operation.expectExtensions` is a subset of `implemented_expect_extensions :var`
+Return True if expect extensions match `implemented_expect_extensions :var`; return FALSE otherwise
 
 Reference: [HTTPbis](http://tools.ietf.org/html/draft-ietf-httpbis-p2-semantics-22#section-6.5.14), [RFC2616](http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.18)
 
@@ -140,10 +140,10 @@ FIXME
 
 ### `override :bin`
 
-Last chance for forcefully ammending the response of the *Operation*.
+Last chance for forcefully ammending the response of the *Transaction*.
 
 Return TRUE if succeeded; return FALSE otherwise.
 
 ### `finish : in`
 
-Finalize *Operation*.
+Finalize *Transaction*.

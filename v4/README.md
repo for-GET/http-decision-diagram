@@ -40,42 +40,44 @@ The decision diagram is split into standalone color-coded blocks
 
 The decision diagram makes use of different types of callbacks to get request or resource specific information. Regardless of the type though, each callback MUST
 
-* have read-write access to 2 variables: `Operation` and `Context`
+* have read-write access to 2 variables: `Transaction` and `Context`
 * refrain from doing more/less than what the decision block states
 * have pertinent *defaults*
 
-### Operation structure
+### Transaction structure
 
-`Operation` MUST be a key-value structure, initialized when receiving the request, with the following keys:
+`Transaction` MUST be a key-value structure, initialized when receiving the request, with the following keys:
 
-* `method` = Original HTTP method
-* `uri` = Key-value of URI parts and their value. Keys outside [RFC3986](http://tools.ietf.org/html/rfc3986) can be defined inside this structure.
-    * `source` = Full original URI e.g. 'http://user:pass@example.com:8080/p/a/t/h?query=string#fragment'
-    * `scheme` = Lowercase scheme e.g. 'http'
-    * `userinfo` = e.g. 'user:pass'
-    * `host` = Lowercase host e.g. 'example.com'
+* `request` =
+  * `method` = Uppercase HTTP method
+  * `scheme` = Lowercase scheme e.g. 'http'
+  * `host` =
+    * `source` = Original host e.g. 'example.com:8080'
+    * `hostname` = Lowercase hostname e.g. 'example.com'
     * `port` = e.g. '8080'
-    * `authority` = Concatenated userinfo, lowercased host and port e.g. 'user:pass@example.com:8080'
-    * `path` = e.g. '/p/a/t/h'
-    * `query` = e.g. '?query=string'
-    * `fragment` = e.g. '#fragment'
-* `headers` = Key-value of lowercase header names and their values
-    * `accept` =
-    * `accept-language` =
-    * `accept-charset` =
-    * `accept-encoding` =
-    * `content-type` =
-    * `content-length` =
-* `representation` =
-* `h` =
-    * `accept` = *AcceptHeader*
-    * `expect` = *ExpectHeader*
-    * `if-match` = *IfMatchHeader*
-    * `if-modified-since` = *IfUnmodifiedSinceHeader*
-    * `if-none-match` = *IfNoneMatchHeader*
-    * `if-unmodified-since` = *IfModifiedSinceHeader*
+  * `target` = Key-value of request URI parts
+      * `path` = e.g. '/p/a/t/h'
+      * `query` = e.g. '?query=string'
+  * `headers` = Key-value of lowercase header names and their values
+      * `accept` =
+      * `accept-language` =
+      * `accept-charset` =
+      * `accept-encoding` =
+      * `content-type` =
+      * `content-length` =
+  * `representation` =
+  * `h` = Key-value of lowercase header names and their classes/modules/helpers
+      * `accept` = *AcceptHeader*
+      * `content-encoding` = *ContentEncodingHeader*
+      * `content-type` = *ContentTypeHeader*
+      * `content-language` = *ContentLanguageHeader*
+      * `expect` = *ExpectHeader*
+      * `if-match` = *IfMatchHeader*
+      * `if-modified-since` = *IfUnmodifiedSinceHeader*
+      * `if-none-match` = *IfNoneMatchHeader*
+      * `if-unmodified-since` = *IfModifiedSinceHeader*
 * `response` =
-    * `status_code` =
+    * `status` =
     * `headers` =
     * `representation` =
     * `h` =
@@ -101,12 +103,14 @@ The decision diagram makes use of different types of callbacks to get request or
 
 *Context* MUST be whatever the resource developer desires. It MUST be irrelevant to the decision flow. For the sake of clarity though, in this documentation you may find these references:
 
-* `entity` =
+* `request` =
+  * `entity` =
 * `response` =
-    * `entity` =
+  * `entity` =
 * `error` =
-    * `entity` =
-
+  * `entity` =
+    * `type` =
+    * `detail` =
 
 ### Built-in callbacks `: in`
 Some callbacks MUST be built-in by the system, and thus they are not explicitly marked on the diagram. They are not specific to the resource or the request and they are an implementation of HTTP-specific logic.

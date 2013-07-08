@@ -17,17 +17,17 @@ This block is in charge of request-level checks.
 
  | callback | output | default
 :-- | ---: | :--- | :---
-B12 | [`method :var`](#method-var) | *Method* | `Operation.method`
+B12 | [`method :var`](#method-var) | *Method* | `Transaction.request.method`
  | [`allowed_methods :var`](#allowed_methods-var) | [ *Method* ] | `implemented_methods :var`
  | [`is_method_allowed : in`](#is_method_allowed--in) | T / F |
  | [`allow_header : in`](#allow_header--in) | *AllowHeader* |
 B11 | [`is_authorized :bin`](#is_authorized-bin) | T / F | TRUE
  | [`auth_challenges :var`](#auth_challenges-var) | [ *AuthChallenge* ] | [ ]
-B10 | [`method :var`](#method-var) | *Method* | `Operation.method`
+B10 | [`method :var`](#method-var) | *Method* | `Transaction.request.method`
  | [`is_method_trace : in`](#is_method_trace--in) | T / F |
  | [`trace_sensitive_headers :var`](#trace_sensitive_headers-var) | [ *HeaderName* ] | [ Authentication<br>, Cookies<br>]
  | [`process_trace : in`](#process_trace--in) | |
-B9 | [`method :var`](#method-var) | *Method* | `Operation.method`
+B9 | [`method :var`](#method-var) | *Method* | `Transaction.request.method`
  | [`is_method_options : in`](#is_method_options--in) | T / F |
  | [`accept_patch_header : in`](#accept_patch_header--in) | *AcceptPatchHeader* |
  | [`accept_post_header : in`](#accept_post_header--in) | *AcceptPostHeader* |
@@ -54,7 +54,7 @@ Return a list of allowed methods for this resource.
 
 ### `is_method_allowed : in`
 
-Return TRUE if `Operation.method` in `allowed_methods :var`; return FALSE otherwise.
+Return TRUE if `Transaction.request.method` in `allowed_methods :var`; return FALSE otherwise.
 
 Reference: [HTTPbis](http://tools.ietf.org/html/draft-ietf-httpbis-p2-semantics-22#section-6.5.5), [RFC2616](http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.6)
 
@@ -92,7 +92,7 @@ Return a list of headers that should be treated as sensitive, and thus hidden fr
 
 ### `process_trace : in`
 
-Set `Operation.response.headers.content-type` to `message/http` and `Operation.response.body` to `Operation.headers` (except `trace_sensitive_headers :var`).
+Set `Transaction.response.headers.content-type` to `message/http` and `Transaction.response.body` to `Transaction.request.headers` (except `trace_sensitive_headers :var`).
 
 Return TRUE if succeeded; return FALSE otherwise.
 
@@ -154,7 +154,7 @@ FIXME
 
 ### `content_exists : in`
 
-Return TRUE if the request has content (`Operation.headers.content-length` greater than 0 or `Operation.representation` exists); return FALSE otherwise.
+Return TRUE if the request has content (`Transaction.request.headers.content-length` greater than 0 or `Transaction.request.representation` exists); return FALSE otherwise.
 
 ### `is_content_too_large :bin`
 
@@ -188,7 +188,7 @@ By default it will call the callback specific to the request method.
 
 ### `is_content_type_accepted :in`
 
-Return TRUE if `Operation.headers.content-type` matches keys of `content_types_accepted :var`; return FALSE otherwise.
+Return TRUE if `Transaction.request.headers.content-type` matches keys of `content_types_accepted :var`; return FALSE otherwise.
 
 The matching must follow specific rules. FIXME
 
@@ -198,7 +198,7 @@ Reference: [HTTPbis](http://tools.ietf.org/html/draft-ietf-httpbis-p2-semantics-
 
 ### `content_types_accepted:handler :bin`
 
-Deserialize `Operation.representation` into `Context.request.entity`.
+Deserialize `Transaction.request.representation` into `Context.request.entity`.
 
 Return TRUE if succeeded; return FALSE otherwise.
 
@@ -208,7 +208,7 @@ FIXME
 
 ### `is_forbidden :bin`
 
-Return TRUE if the semantics of the request (e.g. `Operation.method`, `Context.request.entity`) trigger a forbidden operation; return FALSE otherwise.
+Return TRUE if the semantics of the request (e.g. `Transaction.request.method`, `Context.request.entity`) trigger a forbidden operation; return FALSE otherwise.
 
 Reference: [HTTPbis](http://tools.ietf.org/html/draft-ietf-httpbis-p2-semantics-22#section-6.5.3), [RFC2616](http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.4)
 
