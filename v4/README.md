@@ -90,6 +90,11 @@ The decision diagram makes use of different types of callbacks to get request or
         * `language` =
         * `charset` =
         * `encoding` =
+* `error` =
+  * `described-by` =
+  * `support-id` =
+  * `title` =
+  * `detail` =
 * `log` =
     * `transitions` = *Array*
         * `from` =
@@ -109,8 +114,6 @@ The decision diagram makes use of different types of callbacks to get request or
   * `entity` =
 * `error` =
   * `entity` =
-    * `type` =
-    * `detail` =
 
 ### Built-in callbacks `: in`
 Some callbacks MUST be built-in by the system, and thus they are not explicitly marked on the diagram. They are not specific to the resource or the request and they are an implementation of HTTP-specific logic.
