@@ -1,0 +1,24 @@
+[{
+    "version": "4.0",
+    "id": "block_system",
+    "isBlock": true,
+    "pos": "B26",
+    "via": "start"
+}, {
+    "id": "start",
+    "pos": "B26",
+    "via": "is_service_available"
+}, {
+    "id": "is_service_available",
+    "pos": "B23",
+    "via": {
+        "false": {
+            "to": "block_response_alternative",
+            "status": 503,
+            "pos": "A23"
+        },
+        "true": {
+            "to": "is_uri_too_long"
+        }
+    }
+}]
