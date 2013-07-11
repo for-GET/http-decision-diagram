@@ -4,118 +4,97 @@
 
     "type": "array",
     "additionalItems": {
-        "$ref": "#/schemata/state"
+        "$ref": "#/state"
     },
 
-    "states": [
-        "block_accept",
-        "has_accept",
-        "accept_matches",
-        "has_accept_matches",
-        "accept_language_matches",
-        "has_accept_charset",
-        "accept_charset_matches",
-        "has_accept_encoding",
-        "accept_encoding_matches",
-        "ignore_accept_block_mismatches"
-    ],
+    "position": {
+        "title": "Column and row position on the HTTP decision diagram",
+        "type": "string",
+        "pattern": "[A-Z][0-9]+",
+        "required": true
+    },
 
-    "callbacks": [
-        "accept_charset_matches",
-        "accept_encoding_matches",
-        "accept_language_matches",
-        "accept_matches",
-        "has_accept",
-        "has_accept_charset",
-        "has_accept_encoding",
-        "has_accept_matches",
-        "ignore_accept_block_mismatches"
-    ],
+    "status": {
+        "title": "HTTP status",
+        "type": "number",
+        "minimum": 100,
+        "maximum": 599,
+        "multipleOf": 1
+    },
 
-    "schemata": {
-        "position": {
-            "title": "Column and row position on the HTTP decision diagram",
-            "type": "string",
-            "pattern": "[A-Z][0-9]+",
-            "required": true
-        },
+    "stateID": {
+        "title": "State ID",
+        "type": "string",
+        "minLength": 1,
+        "enum": [
+            "block_accept",
+            "has_accept",
+            "accept_matches",
+            "has_accept_matches",
+            "accept_language_matches",
+            "has_accept_charset",
+            "accept_charset_matches",
+            "has_accept_encoding",
+            "accept_encoding_matches",
+            "ignore_accept_block_mismatches"
+        ],
+        "required": true
+    },
 
-        "status": {
-            "title": "HTTP status",
-            "type": "number",
-            "minimum": 100,
-            "maximum": 599,
-            "multipleOf": 1
-        },
-
-        "stateName": {
-            "title": "State name",
-            "type": "string",
-            "minLength": 1,
-            "required": true
-        },
-
-        "state": {
-            "title": "State",
-            "type": "object",
-            "properties": {
-                "id": {
-                    "title": "ID",
-                    "type": "string",
-                    "enum": {
-                        "$ref": "#/states"
-                    },
-                    "required": true
-                },
-                "isBlock": {
-                    "title": "Is block?",
-                    "type": "boolean",
-                    "default": "false"
-                },
-                "pos": {
-                    "$ref": "#/schemata/position"
-                },
-                "callbackAlias": {
-                    "title": "Callback alias",
-                    "description": "On enter run a callback named differently than the state",
-                    "type": "string",
-                    "enum": {
-                        "$ref": "#/callbacks"
+    "state": {
+        "title": "State",
+        "type": "object",
+        "properties": {
+            "id": {
+                "$ref": "#/stateID"
+            },
+            "isBlock": {
+                "title": "Is block?",
+                "type": "boolean",
+                "default": "false"
+            },
+            "pos": {
+                "$ref": "#/position"
+            },
+            "callbackAlias": {
+                "title": "Callback alias",
+                "description": "On enter run a callback named differently than the state",
+                "type": "string",
+                "enum": [
+                ]
+            },
+            "via": {
+                "title": "Transitions",
+                "type": [{
+                    "$ref": "#/transition"
+                }, {
+                    "type": "array",
+                    "additionalProperties": {
+                        "$ref": "#/transition"
                     }
-                },
-                "via": {
-                    "title": "Transitions",
-                    "type": [{
-                        "$ref": "#/schemata/transition"
-                    }, {
-                        "type": "array",
-                        "additionalProperties": {
-                            "$ref": "#/schemata/transition"
-                        }
-                    }]
-                },
-                "version": {
-                    "title": "HTTPDD version",
-                    "description": "Relevant only for the initial state",
-                    "type": "string",
-                    "pattern": "[0-9]+\\.[0-9]+"
-                }
+                }]
+            },
+            "version": {
+                "title": "HTTPDD version",
+                "description": "Relevant only for the initial state",
+                "type": "string",
+                "pattern": "[0-9]+\\.[0-9]+"
             }
-        },
+        }
+    },
 
-        "transition": {
-            "title": "Transition",
-            "type": "object",
-            "properties": {
-                "to": {
-                    "$ref": "#/stateName"
-                },
-                "status": {
-                    "$ref": "#/status"
-                },
-                "pos": {
-                    "$ref": "#/schemata/position"
-                }
+    "transition": {
+        "title": "Transition",
+        "type": "object",
+        "properties": {
+            "to": {
+                "$ref": "#/stateID"
+            },
+            "status": {
+                "$ref": "#/status"
+            },
+            "pos": {
+                "$ref": "#/position"
             }
         }
     }
