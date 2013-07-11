@@ -49,6 +49,7 @@ The decision diagram makes use of different types of callbacks to get request or
 `Transaction` MUST be a key-value structure, initialized when receiving the request, with the following keys:
 
 * `request` =
+  * `version` = HTTP version e.g. '1.1'
   * `method` = Uppercase HTTP method
   * `scheme` = Lowercase scheme e.g. 'http'
   * `host` =
