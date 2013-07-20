@@ -1,0 +1,314 @@
+Title = "HTTP Decision Diagram"
+Version = "4.0B01"
+Initial = start
+Final = finish
+
+
+start:anything -> block_system
+last:anything -> finish
+
+
+block_system:anything -> is_service_available
+is_service_available:false -> 503_SERVICE_UNAVAILABLE
+is_service_available:true -> is_uri_too_long
+is_uri_too_long:true -> 414_URI_TOO_LONG
+is_uri_too_long:false -> is_method_implemented
+is_method_implemented:false -> 501_NOT_IMPLEMENTED
+is_method_implemented:true -> are_content_headers_implemented
+are_content_headers_implemented:false -> 501_NOT_IMPLEMENTED
+are_content_headers_implemented:true -> is_functionality_implemented
+is_functionality_implemented:false -> 501_NOT_IMPLEMENTED
+is_functionality_implemented:true -> are_expect_extensions_implemented
+are_expect_extensions_implemented:false -> 417_EXPECTATION_FAILED
+are_expect_extensions_implemented:true -> is_system_block_ok
+is_system_block_ok:false -> 500_INTERNAL_SERVER_ERROR
+is_system_block_ok:true -> block_request
+
+
+block_request:anything -> is_method_allowed
+is_method_allowed:false -> 405_METHOD_NOT_ALLOWED
+is_method_allowed:true -> is_authorized
+is_authorized:false -> 401_UNAUTHORIZED
+is_authorized:true -> is_method_trace
+is_method_trace:true -> 200_OK
+is_method_trace:false -> is_method_options
+is_method_options:true -> 200_OK_options
+is_method_options:false -> expects_continue
+expects_continue:true -> 100_CONTINUE
+expects_continue:false -> has_content
+has_content:false -> is_forbidden
+has_content:true -> is_content_too_large
+is_content_too_large:true -> 413_PAYLOAD_TOO_LARGE
+is_content_too_large:false -> is_content_type_accepted
+is_content_type_accepted:false -> 415_UNSUPPORTED_MEDIA_TYPE
+is_content_type_accepted:true -> from_content
+from_content:false -> 400_BAD_REQUEST
+from_content:true -> is_forbidden
+is_forbidden:true -> 403_FORBIDDEN
+is_forbidden:false -> is_request_block_ok
+is_request_block_ok:false -> 400_BAD_REQUEST
+is_request_block_ok:true -> block_accept
+
+
+block_accept:anything -> has_accept
+has_accept:false -> has_accept_language
+has_accept:true -> accept_matches
+accept_matches:false -> ignore_accept_block_mismatches
+accept_matches:true -> has_accept_language
+has_accept_language:false -> has_accept_charset
+has_accept_language:true -> accept_language_matches
+accept_language_matches:false -> ignore_accept_block_mismatches
+accept_language_matches:true -> has_accept_charset
+has_accept_charset:false -> has_accept_encoding
+has_accept_charset:true -> accept_charset_matches
+accept_charset_matches:false -> ignore_accept_block_mistmatches
+accept_charset_matches:true -> has_accept_encoding
+has_accept_encoding:false -> block_retrieve
+has_accept_encoding:true -> accept_encoding_matches
+accept_encoding_matches:false -> ignore_accept_block_mistmatches
+accept_encoding_matches:true -> block_retrieve
+ignore_accept_block_mistmatches:false -> 406_NOT_ACCEPTABLE
+ignore_accept_block_mistmatches:true -> block_retrieve
+
+
+block_retrieve:anything -> missing
+missing:true -> block_precondition_missing
+missing:false -> found
+found:true -> 302_FOUND
+found:false -> block_precondition
+
+
+block_retrieve_missing:anything -> moved
+moved:false -> block_create
+moved:true -> moved_permanently
+moved_permanently:true -> 301_MOVED_PERMANENTLY
+moved_permanently:false -> moved_temporarily
+moved_temporarily:true -> 307_TEMPORARY_REDIRECT
+moved_temporarily:false -> moved_is_method_create
+moved_is_method_create:false -> 410_GONE
+moved_is_method_create:true -> block_create
+
+
+block_precondition_missing:anything -> missing_has_precondition
+missing_has_precondition:true -> 412_PRECONDITION_FAILED
+missing_has_precondition:false -> block_retrieve_missing
+
+block_precondition:anything -> has_if_match
+has_if_match:false -> has_if_unmodified_since
+has_if_match:true -> if_match_matches
+if_match_matches:false -> 412_PRECONDITION_FAILED
+if_match_matches:true -> has_if_unmodified_since
+has_if_unmodified_since:false -> has_if_none_match
+has_if_unmodified_since:true -> if_unmodified_since_matches
+if_unmodified_since_matches:true -> 412_PRECONDITION_FAILED
+if_unmodified_since_matches:false -> has_if_none_match
+has_if_none_match:false -> has_if_modified_since
+has_if_none_match:true -> if_none_match_matches
+if_none_match_matches:true -> is_precondition_safe
+if_none_match_matches:false -> has_if_modified_since
+has_if_modified_since:false -> block_process
+has_if_modified_since:true -> if_modified_since_matches
+if_modified_since_matches:false -> is_precondition_safe
+if_modified_since_matches:true -> block_process
+is_precondition_safe:true -> 304_NOT_MODIFIED
+is_precondition_safe:false -> 412_PRECONDITION_FAILED
+
+
+block_create:anything -> create_is_method_put
+create_is_method_put:true -> create_put
+create_is_method_put:false -> is_method_create
+create_put:false -> 409_CONFLICT
+create_put:true -> is_create_done
+is_method_create:false -> 404_NOT_FOUND
+is_method_create:true -> create_path
+create_path:false -> 500_INTERNAL_SERVER_ERROR
+create_path:true -> create
+create:false -> 500_INTERNAL_SERVER_ERROR
+create:true -> is_create_done
+is_create_done:false -> 202_ACCEPTED
+is_create_done:true -> create_see_other
+create_see_other:true -> 303_SEE_OTHER
+create_see_other:false -> 201_CREATED
+
+
+block_process:anything -> is_method_head_get
+is_method_head_get:true -> block_response
+is_method_head_get:false -> is_method_delete
+is_method_delete:true -> process_delete
+is_method_delete:false -> is_method_put
+process_delete:false -> 500_INTERNAL_SERVER_ERROR
+process_delete:true -> block_response_process
+is_method_put:true -> process_put
+is_method_put:false -> is_method_process
+process_put:false -> 409_CONFLICT
+process_put:true -> block_response_process
+is_method_process:true -> process
+is_method_process:false -> 500_INTERNAL_SERVER_ERROR
+process:false -> 500_INTERNAL_SERVER_ERROR
+process:true -> block_response_process
+
+
+block_response_process:anything -> is_process_done
+is_process_done:false -> 202_ACCEPTED
+is_process_done:true -> see_other
+block_response:anything -> see_other
+see_other:true -> 303_SEE_OTHER
+see_other:false -> has_multiple_choices
+has_multiple_choices:true -> 300_MULTIPLE_CHOICES
+has_multiple_choices:false -> to_content
+to_content:false -> 204_NO_CONTENT
+to_content:true -> 200_OK
+
+
+100_CONTINUE:anything -> has_content
+200_OK:anything -> last
+200_OK_options:anything -> block_response_alternative
+201_CREATED:anything -> last
+202_ACCEPTED:anything -> block_response_alternative
+204_NO_CONTENT:anything -> last
+300_MULTIPLE_CHOICES:anything -> block_response_alternative
+301_MOVED_PERMANENTLY:anything -> last
+302_FOUND:anything -> last
+303_SEE_OTHER:anything -> last
+304_NOT_MODIFIED:anything -> last
+307_TEMPORARY_REDIRECT:anything -> last
+400_BAD_REQUEST:anything -> block_response_alternative
+401_UNAUTHORIZED:anything -> block_response_alternative
+403_FORBIDDEN:anything -> block_response_alternative
+404_NOT_FOUND:anything -> block_response_alternative
+405_METHOD_NOT_ALLOWED:anything -> block_response_alternative
+406_NOT_ACCEPTABLE:anything -> block_response_alternative
+409_CONFLICT:anything -> block_response_alternative
+410_GONE:anything -> block_response_alternative
+410_GONE:anything -> block_response_alternative
+412_PRECONDITION_FAILED:anything -> block_response_alternative
+414_URI_TOO_LONG:anything -> block_response_alternative
+417_EXPECTATION_FAILED:anything -> block_response_alternative
+500_INTERNAL_SERVER_ERROR:anything -> block_response_alternative
+501_NOT_IMPLEMENTED:anything -> block_response_alternative
+503_SERVICE_UNAVAILABLE:anything -> block_response_alternative
+
+
+block_response_alternative:anything -> is_response_alternative
+is_response_alternative:false -> last
+is_response_alternative:true -> alternative_has_accept
+alternative_has_accept:false -> last
+alternative_has_accept:true -> alternative_accept_matches
+alternative_accept_matches:false -> last
+alternative_accept_matches:true -> alternative_to_content
+alternative_to_content:anything -> last
+
+
+anything,
+true,
+false
+: message;
+
+
+100_CONTINUE,
+200_OK,
+200_OK_options,
+201_CREATED,
+202_ACCEPTED,
+204_NO_CONTENT,
+300_MULTIPLE_CHOICES,
+301_MOVED_PERMANENTLY,
+302_FOUND,
+303_SEE_OTHER,
+304_NOT_MODIFIED,
+307_TEMPORARY_REDIRECT,
+400_BAD_REQUEST,
+401_UNAUTHORIZED,
+403_FORBIDDEN,
+404_NOT_FOUND,
+405_METHOD_NOT_ALLOWED,
+406_NOT_ACCEPTABLE,
+409_CONFLICT,
+410_GONE,
+412_PRECONDITION_FAILED,
+414_URI_TOO_LONG,
+417_EXPECTATION_FAILED,
+500_INTERNAL_SERVER_ERROR,
+501_NOT_IMPLEMENTED,
+503_SERVICE_UNAVAILABLE,
+accept_charset_matches,
+accept_encoding_matches,
+accept_language_matches,
+accept_matches,
+alternative_accept_matches,
+alternative_has_accept,
+alternative_to_content,
+are_content_headers_implemented,
+are_expect_extensions_implemented,
+block_accept,
+block_create,
+block_precondition,
+block_precondition_missing,
+block_process,
+block_request,
+block_response,
+block_response_alternative,
+block_response_process,
+block_retrieve,
+block_retrieve_missing,
+block_system,
+create,
+create_is_method_put,
+create_path,
+create_put,
+create_see_other,
+expects_continue,
+found,
+from_content,
+has_accept,
+has_accept_charset,
+has_accept_encoding,
+has_accept_language,
+has_content,
+has_if_match,
+has_if_modified_since,
+has_if_none_match,
+has_if_unmodified_since,
+has_multiple_choices,
+if_match_matches,
+if_modified_since_matches,
+if_none_match_matches,
+if_unmodified_since_matches,
+ignore_accept_block_mistmatches,
+is_authorized,
+is_content_too_large,
+is_content_type_accepted,
+is_create_done,
+is_forbidden,
+is_functionality_implemented,
+is_method_allowed,
+is_method_create,
+is_method_delete,
+is_method_head_get,
+is_method_implemented,
+is_method_options,
+is_method_process,
+is_method_put,
+is_method_trace,
+is_precondition_safe,
+is_process_done,
+is_request_block_ok,
+is_response_alternative,
+is_service_available,
+is_system_block_ok,
+is_uri_too_long,
+last,
+missing,
+missing_has_precondition,
+moved,
+moved_is_method_create,
+moved_permanently,
+moved_temporarily,
+process,
+process_delete,
+process_put,
+see_other,
+start,
+to_content
+: state;
+
