@@ -14,6 +14,13 @@ The diagram follows the indications in [httpbis](http://tools.ietf.org/wg/httpbi
     * Grid size: 0.5
     * Dot density: 96 dpi
 
+## FSM
+
+* [JSON](httpdd.fsm.json) (export)
+* [Cosmogol](httpdd.fsm) (source)
+    * Internet Draft - [Cosmogol: a language to describe finite state machines](http://tools.ietf.org/html/draft-bortzmeyer-language-state-machines-01)
+    * TODO add diagram LinCol positions; useful information for creating a debugger
+
 ## Overview
 
 The decision diagram is split into standalone color-coded blocks
