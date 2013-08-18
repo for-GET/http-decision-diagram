@@ -1,0 +1,1843 @@
+{
+  "__type": "state_machine",
+  "statements": [
+    {
+      "__type": "assignment",
+      "name": "Title"
+    },
+    {
+      "__type": "assignment",
+      "name": "Version"
+    },
+    {
+      "__type": "assignment",
+      "name": "Initial",
+      "value": "start"
+    },
+    {
+      "__type": "assignment",
+      "name": "Final",
+      "value": "finish"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "start"
+      ],
+      "messages": [
+        "anything"
+      ],
+      "next_state": "block_system"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "last"
+      ],
+      "messages": [
+        "anything"
+      ],
+      "next_state": "finish"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "block_system"
+      ],
+      "messages": [
+        "anything"
+      ],
+      "next_state": "is_service_available"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "is_service_available"
+      ],
+      "messages": [
+        "false"
+      ],
+      "next_state": "503_SERVICE_UNAVAILABLE"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "is_service_available"
+      ],
+      "messages": [
+        "true"
+      ],
+      "next_state": "is_uri_too_long"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "is_uri_too_long"
+      ],
+      "messages": [
+        "true"
+      ],
+      "next_state": "414_URI_TOO_LONG"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "is_uri_too_long"
+      ],
+      "messages": [
+        "false"
+      ],
+      "next_state": "is_method_implemented"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "is_method_implemented"
+      ],
+      "messages": [
+        "false"
+      ],
+      "next_state": "501_NOT_IMPLEMENTED"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "is_method_implemented"
+      ],
+      "messages": [
+        "true"
+      ],
+      "next_state": "are_content_headers_implemented"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "are_content_headers_implemented"
+      ],
+      "messages": [
+        "false"
+      ],
+      "next_state": "501_NOT_IMPLEMENTED"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "are_content_headers_implemented"
+      ],
+      "messages": [
+        "true"
+      ],
+      "next_state": "is_functionality_implemented"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "is_functionality_implemented"
+      ],
+      "messages": [
+        "false"
+      ],
+      "next_state": "501_NOT_IMPLEMENTED"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "is_functionality_implemented"
+      ],
+      "messages": [
+        "true"
+      ],
+      "next_state": "are_expect_extensions_implemented"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "are_expect_extensions_implemented"
+      ],
+      "messages": [
+        "false"
+      ],
+      "next_state": "417_EXPECTATION_FAILED"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "are_expect_extensions_implemented"
+      ],
+      "messages": [
+        "true"
+      ],
+      "next_state": "is_system_block_ok"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "is_system_block_ok"
+      ],
+      "messages": [
+        "false"
+      ],
+      "next_state": "500_INTERNAL_SERVER_ERROR"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "is_system_block_ok"
+      ],
+      "messages": [
+        "true"
+      ],
+      "next_state": "block_request"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "block_request"
+      ],
+      "messages": [
+        "anything"
+      ],
+      "next_state": "is_method_allowed"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "is_method_allowed"
+      ],
+      "messages": [
+        "false"
+      ],
+      "next_state": "405_METHOD_NOT_ALLOWED"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "is_method_allowed"
+      ],
+      "messages": [
+        "true"
+      ],
+      "next_state": "is_authorized"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "is_authorized"
+      ],
+      "messages": [
+        "false"
+      ],
+      "next_state": "401_UNAUTHORIZED"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "is_authorized"
+      ],
+      "messages": [
+        "true"
+      ],
+      "next_state": "is_method_trace"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "is_method_trace"
+      ],
+      "messages": [
+        "true"
+      ],
+      "next_state": "200_OK"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "is_method_trace"
+      ],
+      "messages": [
+        "false"
+      ],
+      "next_state": "is_method_options"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "is_method_options"
+      ],
+      "messages": [
+        "true"
+      ],
+      "next_state": "200_OK_options"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "is_method_options"
+      ],
+      "messages": [
+        "false"
+      ],
+      "next_state": "expects_continue"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "expects_continue"
+      ],
+      "messages": [
+        "true"
+      ],
+      "next_state": "100_CONTINUE"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "expects_continue"
+      ],
+      "messages": [
+        "false"
+      ],
+      "next_state": "has_content"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "has_content"
+      ],
+      "messages": [
+        "false"
+      ],
+      "next_state": "is_forbidden"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "has_content"
+      ],
+      "messages": [
+        "true"
+      ],
+      "next_state": "is_content_too_large"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "is_content_too_large"
+      ],
+      "messages": [
+        "true"
+      ],
+      "next_state": "413_PAYLOAD_TOO_LARGE"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "is_content_too_large"
+      ],
+      "messages": [
+        "false"
+      ],
+      "next_state": "is_content_type_accepted"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "is_content_type_accepted"
+      ],
+      "messages": [
+        "false"
+      ],
+      "next_state": "415_UNSUPPORTED_MEDIA_TYPE"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "is_content_type_accepted"
+      ],
+      "messages": [
+        "true"
+      ],
+      "next_state": "from_content"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "from_content"
+      ],
+      "messages": [
+        "false"
+      ],
+      "next_state": "400_BAD_REQUEST"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "from_content"
+      ],
+      "messages": [
+        "true"
+      ],
+      "next_state": "is_forbidden"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "is_forbidden"
+      ],
+      "messages": [
+        "true"
+      ],
+      "next_state": "403_FORBIDDEN"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "is_forbidden"
+      ],
+      "messages": [
+        "false"
+      ],
+      "next_state": "is_request_block_ok"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "is_request_block_ok"
+      ],
+      "messages": [
+        "false"
+      ],
+      "next_state": "400_BAD_REQUEST"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "is_request_block_ok"
+      ],
+      "messages": [
+        "true"
+      ],
+      "next_state": "block_accept"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "block_accept"
+      ],
+      "messages": [
+        "anything"
+      ],
+      "next_state": "has_accept"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "has_accept"
+      ],
+      "messages": [
+        "false"
+      ],
+      "next_state": "has_accept_language"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "has_accept"
+      ],
+      "messages": [
+        "true"
+      ],
+      "next_state": "accept_matches"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "accept_matches"
+      ],
+      "messages": [
+        "false"
+      ],
+      "next_state": "ignore_accept_block_mismatches"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "accept_matches"
+      ],
+      "messages": [
+        "true"
+      ],
+      "next_state": "has_accept_language"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "has_accept_language"
+      ],
+      "messages": [
+        "false"
+      ],
+      "next_state": "has_accept_charset"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "has_accept_language"
+      ],
+      "messages": [
+        "true"
+      ],
+      "next_state": "accept_language_matches"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "accept_language_matches"
+      ],
+      "messages": [
+        "false"
+      ],
+      "next_state": "ignore_accept_block_mismatches"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "accept_language_matches"
+      ],
+      "messages": [
+        "true"
+      ],
+      "next_state": "has_accept_charset"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "has_accept_charset"
+      ],
+      "messages": [
+        "false"
+      ],
+      "next_state": "has_accept_encoding"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "has_accept_charset"
+      ],
+      "messages": [
+        "true"
+      ],
+      "next_state": "accept_charset_matches"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "accept_charset_matches"
+      ],
+      "messages": [
+        "false"
+      ],
+      "next_state": "ignore_accept_block_mistmatches"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "accept_charset_matches"
+      ],
+      "messages": [
+        "true"
+      ],
+      "next_state": "has_accept_encoding"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "has_accept_encoding"
+      ],
+      "messages": [
+        "false"
+      ],
+      "next_state": "block_retrieve"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "has_accept_encoding"
+      ],
+      "messages": [
+        "true"
+      ],
+      "next_state": "accept_encoding_matches"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "accept_encoding_matches"
+      ],
+      "messages": [
+        "false"
+      ],
+      "next_state": "ignore_accept_block_mistmatches"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "accept_encoding_matches"
+      ],
+      "messages": [
+        "true"
+      ],
+      "next_state": "block_retrieve"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "ignore_accept_block_mistmatches"
+      ],
+      "messages": [
+        "false"
+      ],
+      "next_state": "406_NOT_ACCEPTABLE"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "ignore_accept_block_mistmatches"
+      ],
+      "messages": [
+        "true"
+      ],
+      "next_state": "block_retrieve"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "block_retrieve"
+      ],
+      "messages": [
+        "anything"
+      ],
+      "next_state": "missing"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "missing"
+      ],
+      "messages": [
+        "true"
+      ],
+      "next_state": "block_precondition_missing"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "missing"
+      ],
+      "messages": [
+        "false"
+      ],
+      "next_state": "found"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "found"
+      ],
+      "messages": [
+        "true"
+      ],
+      "next_state": "302_FOUND"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "found"
+      ],
+      "messages": [
+        "false"
+      ],
+      "next_state": "block_precondition"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "block_retrieve_missing"
+      ],
+      "messages": [
+        "anything"
+      ],
+      "next_state": "moved"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "moved"
+      ],
+      "messages": [
+        "false"
+      ],
+      "next_state": "block_create"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "moved"
+      ],
+      "messages": [
+        "true"
+      ],
+      "next_state": "moved_permanently"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "moved_permanently"
+      ],
+      "messages": [
+        "true"
+      ],
+      "next_state": "301_MOVED_PERMANENTLY"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "moved_permanently"
+      ],
+      "messages": [
+        "false"
+      ],
+      "next_state": "moved_temporarily"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "moved_temporarily"
+      ],
+      "messages": [
+        "true"
+      ],
+      "next_state": "307_TEMPORARY_REDIRECT"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "moved_temporarily"
+      ],
+      "messages": [
+        "false"
+      ],
+      "next_state": "moved_is_method_create"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "moved_is_method_create"
+      ],
+      "messages": [
+        "false"
+      ],
+      "next_state": "410_GONE"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "moved_is_method_create"
+      ],
+      "messages": [
+        "true"
+      ],
+      "next_state": "block_create"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "block_precondition_missing"
+      ],
+      "messages": [
+        "anything"
+      ],
+      "next_state": "missing_has_precondition"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "missing_has_precondition"
+      ],
+      "messages": [
+        "true"
+      ],
+      "next_state": "412_PRECONDITION_FAILED"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "missing_has_precondition"
+      ],
+      "messages": [
+        "false"
+      ],
+      "next_state": "block_retrieve_missing"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "block_precondition"
+      ],
+      "messages": [
+        "anything"
+      ],
+      "next_state": "has_if_match"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "has_if_match"
+      ],
+      "messages": [
+        "false"
+      ],
+      "next_state": "has_if_unmodified_since"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "has_if_match"
+      ],
+      "messages": [
+        "true"
+      ],
+      "next_state": "if_match_matches"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "if_match_matches"
+      ],
+      "messages": [
+        "false"
+      ],
+      "next_state": "412_PRECONDITION_FAILED"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "if_match_matches"
+      ],
+      "messages": [
+        "true"
+      ],
+      "next_state": "has_if_unmodified_since"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "has_if_unmodified_since"
+      ],
+      "messages": [
+        "false"
+      ],
+      "next_state": "has_if_none_match"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "has_if_unmodified_since"
+      ],
+      "messages": [
+        "true"
+      ],
+      "next_state": "if_unmodified_since_matches"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "if_unmodified_since_matches"
+      ],
+      "messages": [
+        "true"
+      ],
+      "next_state": "412_PRECONDITION_FAILED"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "if_unmodified_since_matches"
+      ],
+      "messages": [
+        "false"
+      ],
+      "next_state": "has_if_none_match"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "has_if_none_match"
+      ],
+      "messages": [
+        "false"
+      ],
+      "next_state": "has_if_modified_since"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "has_if_none_match"
+      ],
+      "messages": [
+        "true"
+      ],
+      "next_state": "if_none_match_matches"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "if_none_match_matches"
+      ],
+      "messages": [
+        "true"
+      ],
+      "next_state": "is_precondition_safe"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "if_none_match_matches"
+      ],
+      "messages": [
+        "false"
+      ],
+      "next_state": "has_if_modified_since"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "has_if_modified_since"
+      ],
+      "messages": [
+        "false"
+      ],
+      "next_state": "block_process"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "has_if_modified_since"
+      ],
+      "messages": [
+        "true"
+      ],
+      "next_state": "if_modified_since_matches"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "if_modified_since_matches"
+      ],
+      "messages": [
+        "false"
+      ],
+      "next_state": "is_precondition_safe"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "if_modified_since_matches"
+      ],
+      "messages": [
+        "true"
+      ],
+      "next_state": "block_process"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "is_precondition_safe"
+      ],
+      "messages": [
+        "true"
+      ],
+      "next_state": "304_NOT_MODIFIED"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "is_precondition_safe"
+      ],
+      "messages": [
+        "false"
+      ],
+      "next_state": "412_PRECONDITION_FAILED"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "block_create"
+      ],
+      "messages": [
+        "anything"
+      ],
+      "next_state": "create_is_method_put"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "create_is_method_put"
+      ],
+      "messages": [
+        "true"
+      ],
+      "next_state": "create_put"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "create_is_method_put"
+      ],
+      "messages": [
+        "false"
+      ],
+      "next_state": "is_method_create"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "create_put"
+      ],
+      "messages": [
+        "false"
+      ],
+      "next_state": "409_CONFLICT"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "create_put"
+      ],
+      "messages": [
+        "true"
+      ],
+      "next_state": "is_create_done"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "is_method_create"
+      ],
+      "messages": [
+        "false"
+      ],
+      "next_state": "404_NOT_FOUND"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "is_method_create"
+      ],
+      "messages": [
+        "true"
+      ],
+      "next_state": "create_path"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "create_path"
+      ],
+      "messages": [
+        "false"
+      ],
+      "next_state": "500_INTERNAL_SERVER_ERROR"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "create_path"
+      ],
+      "messages": [
+        "true"
+      ],
+      "next_state": "create"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "create"
+      ],
+      "messages": [
+        "false"
+      ],
+      "next_state": "500_INTERNAL_SERVER_ERROR"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "create"
+      ],
+      "messages": [
+        "true"
+      ],
+      "next_state": "is_create_done"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "is_create_done"
+      ],
+      "messages": [
+        "false"
+      ],
+      "next_state": "202_ACCEPTED"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "is_create_done"
+      ],
+      "messages": [
+        "true"
+      ],
+      "next_state": "create_see_other"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "create_see_other"
+      ],
+      "messages": [
+        "true"
+      ],
+      "next_state": "303_SEE_OTHER"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "create_see_other"
+      ],
+      "messages": [
+        "false"
+      ],
+      "next_state": "201_CREATED"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "block_process"
+      ],
+      "messages": [
+        "anything"
+      ],
+      "next_state": "is_method_head_get"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "is_method_head_get"
+      ],
+      "messages": [
+        "true"
+      ],
+      "next_state": "block_response"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "is_method_head_get"
+      ],
+      "messages": [
+        "false"
+      ],
+      "next_state": "is_method_delete"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "is_method_delete"
+      ],
+      "messages": [
+        "true"
+      ],
+      "next_state": "process_delete"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "is_method_delete"
+      ],
+      "messages": [
+        "false"
+      ],
+      "next_state": "is_method_put"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "process_delete"
+      ],
+      "messages": [
+        "false"
+      ],
+      "next_state": "500_INTERNAL_SERVER_ERROR"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "process_delete"
+      ],
+      "messages": [
+        "true"
+      ],
+      "next_state": "block_response_process"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "is_method_put"
+      ],
+      "messages": [
+        "true"
+      ],
+      "next_state": "process_put"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "is_method_put"
+      ],
+      "messages": [
+        "false"
+      ],
+      "next_state": "is_method_process"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "process_put"
+      ],
+      "messages": [
+        "false"
+      ],
+      "next_state": "409_CONFLICT"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "process_put"
+      ],
+      "messages": [
+        "true"
+      ],
+      "next_state": "block_response_process"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "is_method_process"
+      ],
+      "messages": [
+        "true"
+      ],
+      "next_state": "process"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "is_method_process"
+      ],
+      "messages": [
+        "false"
+      ],
+      "next_state": "500_INTERNAL_SERVER_ERROR"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "process"
+      ],
+      "messages": [
+        "false"
+      ],
+      "next_state": "500_INTERNAL_SERVER_ERROR"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "process"
+      ],
+      "messages": [
+        "true"
+      ],
+      "next_state": "block_response_process"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "block_response_process"
+      ],
+      "messages": [
+        "anything"
+      ],
+      "next_state": "is_process_done"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "is_process_done"
+      ],
+      "messages": [
+        "false"
+      ],
+      "next_state": "202_ACCEPTED"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "is_process_done"
+      ],
+      "messages": [
+        "true"
+      ],
+      "next_state": "see_other"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "block_response"
+      ],
+      "messages": [
+        "anything"
+      ],
+      "next_state": "see_other"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "see_other"
+      ],
+      "messages": [
+        "true"
+      ],
+      "next_state": "303_SEE_OTHER"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "see_other"
+      ],
+      "messages": [
+        "false"
+      ],
+      "next_state": "has_multiple_choices"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "has_multiple_choices"
+      ],
+      "messages": [
+        "true"
+      ],
+      "next_state": "300_MULTIPLE_CHOICES"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "has_multiple_choices"
+      ],
+      "messages": [
+        "false"
+      ],
+      "next_state": "to_content"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "to_content"
+      ],
+      "messages": [
+        "false"
+      ],
+      "next_state": "204_NO_CONTENT"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "to_content"
+      ],
+      "messages": [
+        "true"
+      ],
+      "next_state": "200_OK"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "100_CONTINUE"
+      ],
+      "messages": [
+        "anything"
+      ],
+      "next_state": "has_content"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "200_OK"
+      ],
+      "messages": [
+        "anything"
+      ],
+      "next_state": "last"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "200_OK_options"
+      ],
+      "messages": [
+        "anything"
+      ],
+      "next_state": "block_response_alternative"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "201_CREATED"
+      ],
+      "messages": [
+        "anything"
+      ],
+      "next_state": "last"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "202_ACCEPTED"
+      ],
+      "messages": [
+        "anything"
+      ],
+      "next_state": "block_response_alternative"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "204_NO_CONTENT"
+      ],
+      "messages": [
+        "anything"
+      ],
+      "next_state": "last"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "300_MULTIPLE_CHOICES"
+      ],
+      "messages": [
+        "anything"
+      ],
+      "next_state": "block_response_alternative"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "301_MOVED_PERMANENTLY"
+      ],
+      "messages": [
+        "anything"
+      ],
+      "next_state": "last"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "302_FOUND"
+      ],
+      "messages": [
+        "anything"
+      ],
+      "next_state": "last"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "303_SEE_OTHER"
+      ],
+      "messages": [
+        "anything"
+      ],
+      "next_state": "last"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "304_NOT_MODIFIED"
+      ],
+      "messages": [
+        "anything"
+      ],
+      "next_state": "last"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "307_TEMPORARY_REDIRECT"
+      ],
+      "messages": [
+        "anything"
+      ],
+      "next_state": "last"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "400_BAD_REQUEST"
+      ],
+      "messages": [
+        "anything"
+      ],
+      "next_state": "block_response_alternative"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "401_UNAUTHORIZED"
+      ],
+      "messages": [
+        "anything"
+      ],
+      "next_state": "block_response_alternative"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "403_FORBIDDEN"
+      ],
+      "messages": [
+        "anything"
+      ],
+      "next_state": "block_response_alternative"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "404_NOT_FOUND"
+      ],
+      "messages": [
+        "anything"
+      ],
+      "next_state": "block_response_alternative"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "405_METHOD_NOT_ALLOWED"
+      ],
+      "messages": [
+        "anything"
+      ],
+      "next_state": "block_response_alternative"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "406_NOT_ACCEPTABLE"
+      ],
+      "messages": [
+        "anything"
+      ],
+      "next_state": "block_response_alternative"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "409_CONFLICT"
+      ],
+      "messages": [
+        "anything"
+      ],
+      "next_state": "block_response_alternative"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "410_GONE"
+      ],
+      "messages": [
+        "anything"
+      ],
+      "next_state": "block_response_alternative"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "410_GONE"
+      ],
+      "messages": [
+        "anything"
+      ],
+      "next_state": "block_response_alternative"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "412_PRECONDITION_FAILED"
+      ],
+      "messages": [
+        "anything"
+      ],
+      "next_state": "block_response_alternative"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "414_URI_TOO_LONG"
+      ],
+      "messages": [
+        "anything"
+      ],
+      "next_state": "block_response_alternative"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "417_EXPECTATION_FAILED"
+      ],
+      "messages": [
+        "anything"
+      ],
+      "next_state": "block_response_alternative"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "500_INTERNAL_SERVER_ERROR"
+      ],
+      "messages": [
+        "anything"
+      ],
+      "next_state": "block_response_alternative"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "501_NOT_IMPLEMENTED"
+      ],
+      "messages": [
+        "anything"
+      ],
+      "next_state": "block_response_alternative"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "503_SERVICE_UNAVAILABLE"
+      ],
+      "messages": [
+        "anything"
+      ],
+      "next_state": "block_response_alternative"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "block_response_alternative"
+      ],
+      "messages": [
+        "anything"
+      ],
+      "next_state": "is_response_alternative"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "is_response_alternative"
+      ],
+      "messages": [
+        "false"
+      ],
+      "next_state": "last"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "is_response_alternative"
+      ],
+      "messages": [
+        "true"
+      ],
+      "next_state": "alternative_has_accept"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "alternative_has_accept"
+      ],
+      "messages": [
+        "false"
+      ],
+      "next_state": "last"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "alternative_has_accept"
+      ],
+      "messages": [
+        "true"
+      ],
+      "next_state": "alternative_accept_matches"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "alternative_accept_matches"
+      ],
+      "messages": [
+        "false"
+      ],
+      "next_state": "last"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "alternative_accept_matches"
+      ],
+      "messages": [
+        "true"
+      ],
+      "next_state": "alternative_to_content"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "alternative_to_content"
+      ],
+      "messages": [
+        "anything"
+      ],
+      "next_state": "last"
+    },
+    {
+      "__type": "declaration",
+      "names": [
+        "anything",
+        "true",
+        "false"
+      ],
+      "value": "message"
+    },
+    {
+      "__type": "declaration",
+      "names": [
+        "100_CONTINUE",
+        "200_OK",
+        "200_OK_options",
+        "201_CREATED",
+        "202_ACCEPTED",
+        "204_NO_CONTENT",
+        "300_MULTIPLE_CHOICES",
+        "301_MOVED_PERMANENTLY",
+        "302_FOUND",
+        "303_SEE_OTHER",
+        "304_NOT_MODIFIED",
+        "307_TEMPORARY_REDIRECT",
+        "400_BAD_REQUEST",
+        "401_UNAUTHORIZED",
+        "403_FORBIDDEN",
+        "404_NOT_FOUND",
+        "405_METHOD_NOT_ALLOWED",
+        "406_NOT_ACCEPTABLE",
+        "409_CONFLICT",
+        "410_GONE",
+        "412_PRECONDITION_FAILED",
+        "414_URI_TOO_LONG",
+        "417_EXPECTATION_FAILED",
+        "500_INTERNAL_SERVER_ERROR",
+        "501_NOT_IMPLEMENTED",
+        "503_SERVICE_UNAVAILABLE",
+        "accept_charset_matches",
+        "accept_encoding_matches",
+        "accept_language_matches",
+        "accept_matches",
+        "alternative_accept_matches",
+        "alternative_has_accept",
+        "alternative_to_content",
+        "are_content_headers_implemented",
+        "are_expect_extensions_implemented",
+        "block_accept",
+        "block_create",
+        "block_precondition",
+        "block_precondition_missing",
+        "block_process",
+        "block_request",
+        "block_response",
+        "block_response_alternative",
+        "block_response_process",
+        "block_retrieve",
+        "block_retrieve_missing",
+        "block_system",
+        "create",
+        "create_is_method_put",
+        "create_path",
+        "create_put",
+        "create_see_other",
+        "expects_continue",
+        "found",
+        "from_content",
+        "has_accept",
+        "has_accept_charset",
+        "has_accept_encoding",
+        "has_accept_language",
+        "has_content",
+        "has_if_match",
+        "has_if_modified_since",
+        "has_if_none_match",
+        "has_if_unmodified_since",
+        "has_multiple_choices",
+        "if_match_matches",
+        "if_modified_since_matches",
+        "if_none_match_matches",
+        "if_unmodified_since_matches",
+        "ignore_accept_block_mistmatches",
+        "is_authorized",
+        "is_content_too_large",
+        "is_content_type_accepted",
+        "is_create_done",
+        "is_forbidden",
+        "is_functionality_implemented",
+        "is_method_allowed",
+        "is_method_create",
+        "is_method_delete",
+        "is_method_head_get",
+        "is_method_implemented",
+        "is_method_options",
+        "is_method_process",
+        "is_method_put",
+        "is_method_trace",
+        "is_precondition_safe",
+        "is_process_done",
+        "is_request_block_ok",
+        "is_response_alternative",
+        "is_service_available",
+        "is_system_block_ok",
+        "is_uri_too_long",
+        "last",
+        "missing",
+        "missing_has_precondition",
+        "moved",
+        "moved_is_method_create",
+        "moved_permanently",
+        "moved_temporarily",
+        "process",
+        "process_delete",
+        "process_put",
+        "see_other",
+        "start",
+        "to_content"
+      ],
+      "value": "state"
+    }
+  ]
+}
