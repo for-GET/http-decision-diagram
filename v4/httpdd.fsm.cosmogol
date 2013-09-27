@@ -73,15 +73,13 @@ ignore_accept_block_mistmatches:true -> block_retrieve;
 
 block_retrieve:anything -> missing;
 missing:true -> block_precondition_missing;
-missing:false -> found;
-found:true -> 302_FOUND;
-found:false -> block_precondition;
+missing:false -> block_precondition;
 
 
 block_retrieve_missing:anything -> moved;
 moved:false -> block_create;
 moved:true -> moved_permanently;
-moved_permanently:true -> 301_MOVED_PERMANENTLY;
+moved_permanently:true -> 308_PERMANENT_REDIRECT;
 moved_permanently:false -> moved_temporarily;
 moved_temporarily:true -> 307_TEMPORARY_REDIRECT;
 moved_temporarily:false -> moved_is_method_create;
@@ -167,11 +165,10 @@ to_content:true -> 200_OK;
 202_ACCEPTED:anything -> block_response_alternative;
 204_NO_CONTENT:anything -> last;
 300_MULTIPLE_CHOICES:anything -> block_response_alternative;
-301_MOVED_PERMANENTLY:anything -> last;
-302_FOUND:anything -> last;
 303_SEE_OTHER:anything -> last;
 304_NOT_MODIFIED:anything -> last;
 307_TEMPORARY_REDIRECT:anything -> last;
+308_PERMANENT_REDIRECT:anything -> last;
 400_BAD_REQUEST:anything -> block_response_alternative;
 401_UNAUTHORIZED:anything -> block_response_alternative;
 403_FORBIDDEN:anything -> block_response_alternative;
@@ -212,11 +209,10 @@ false
 202_ACCEPTED,
 204_NO_CONTENT,
 300_MULTIPLE_CHOICES,
-301_MOVED_PERMANENTLY,
-302_FOUND,
 303_SEE_OTHER,
 304_NOT_MODIFIED,
 307_TEMPORARY_REDIRECT,
+308_PERMANENT_REDIRECT,
 400_BAD_REQUEST,
 401_UNAUTHORIZED,
 403_FORBIDDEN,

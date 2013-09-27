@@ -637,26 +637,6 @@
       "messages": [
         "false"
       ],
-      "next_state": "found"
-    },
-    {
-      "__type": "transition",
-      "states": [
-        "found"
-      ],
-      "messages": [
-        "true"
-      ],
-      "next_state": "302_FOUND"
-    },
-    {
-      "__type": "transition",
-      "states": [
-        "found"
-      ],
-      "messages": [
-        "false"
-      ],
       "next_state": "block_precondition"
     },
     {
@@ -697,7 +677,7 @@
       "messages": [
         "true"
       ],
-      "next_state": "301_MOVED_PERMANENTLY"
+      "next_state": "308_PERMANENT_REDIRECT"
     },
     {
       "__type": "transition",
@@ -1442,26 +1422,6 @@
     {
       "__type": "transition",
       "states": [
-        "301_MOVED_PERMANENTLY"
-      ],
-      "messages": [
-        "anything"
-      ],
-      "next_state": "last"
-    },
-    {
-      "__type": "transition",
-      "states": [
-        "302_FOUND"
-      ],
-      "messages": [
-        "anything"
-      ],
-      "next_state": "last"
-    },
-    {
-      "__type": "transition",
-      "states": [
         "303_SEE_OTHER"
       ],
       "messages": [
@@ -1483,6 +1443,16 @@
       "__type": "transition",
       "states": [
         "307_TEMPORARY_REDIRECT"
+      ],
+      "messages": [
+        "anything"
+      ],
+      "next_state": "last"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "308_PERMANENT_REDIRECT"
       ],
       "messages": [
         "anything"
@@ -1738,11 +1708,10 @@
         "202_ACCEPTED",
         "204_NO_CONTENT",
         "300_MULTIPLE_CHOICES",
-        "301_MOVED_PERMANENTLY",
-        "302_FOUND",
         "303_SEE_OTHER",
         "304_NOT_MODIFIED",
         "307_TEMPORARY_REDIRECT",
+        "308_PERMANENT_REDIRECT",
         "400_BAD_REQUEST",
         "401_UNAUTHORIZED",
         "403_FORBIDDEN",
