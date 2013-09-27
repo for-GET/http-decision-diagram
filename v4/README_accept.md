@@ -9,7 +9,7 @@
 1. [Response](README_response.md) (cyan)
 1. [Alternative](README_alternative.md) (gray)
 
-![HTTP headers status](https://rawgithub.com/andreineculau/http-decision-diagram/master/v4/http-decision-diagram-v4.png)
+![HTTP headers status](https://rawgithub.com/andreineculau/http-decision-diagram/master/v4/httpdd.png)
 
 ## Accept
 

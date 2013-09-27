@@ -14,7 +14,7 @@ This is a fork of Alan Dean's [http-headers-status](http://code.google.com/p/htt
     * [X] `2013-02-17` webmachine's implementation - analyze [webmachine_resource](https://github.com/basho/webmachine/blob/master/src/webmachine_resource.erl) and [webmachine_decision_core](https://github.com/basho/webmachine/blob/master/src/webmachine_decision_core.erl)
 * **v4**
     * [X] `2013-02-19` 1st draft
-    * [~] `2013-08-31` [DIAGRAM](https://rawgithub.com/andreineculau/http-decision-diagram/master/v4/http-decision-diagram-v4.png)
+    * [~] `2013-08-31` [DIAGRAM](https://rawgithub.com/andreineculau/http-decision-diagram/master/v4/httpdd.png)
     * [~] `2013-08-31` [EXPLANATION](v4/README.md)
     * [~] `2013-08-31` implementation in node - [HyperREST Machine](https://github.com/andreineculau/hyperrest-machine), [HyperREST Server](https://github.com/andreineculau/hyperrest-server)
     * [ ] `2013-08-31` implementation in elixir/erlang (most probably a fork of webmachine)

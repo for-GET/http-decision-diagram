@@ -8,8 +8,8 @@ The diagram follows the indications in [httpbis](http://tools.ietf.org/wg/httpbi
 
 ## Diagram
 
-* [PNG](http-decision-diagram-v4.png) (export)
-* [Omnigraffle](http-decision-diagram-v4.graffle) (source)
+* [PNG](httpdd.png) (export)
+* [Omnigraffle](httpdd.graffle) (source)
     * Size: A0 - 84.1 x 59.4 cm
     * Grid size: 0.5
     * Dot density: 96 dpi
@@ -37,7 +37,7 @@ The decision diagram is split into standalone color-coded blocks
 1. [Response](README_response.md) (cyan)
 1. [Alternative](README_alternative.md) (gray)
 
-![HTTP headers status](https://rawgithub.com/andreineculau/http-decision-diagram/master/v4/http-decision-diagram-v4.png)
+![HTTP headers status](https://rawgithub.com/andreineculau/http-decision-diagram/master/v4/httpdd.png)
 
 
 ---
