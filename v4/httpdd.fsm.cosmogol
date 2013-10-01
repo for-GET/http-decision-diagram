@@ -82,9 +82,9 @@ moved:true -> moved_permanently;
 moved_permanently:true -> 308_PERMANENT_REDIRECT;
 moved_permanently:false -> moved_temporarily;
 moved_temporarily:true -> 307_TEMPORARY_REDIRECT;
-moved_temporarily:false -> moved_is_method_create;
-moved_is_method_create:false -> 410_GONE;
-moved_is_method_create:true -> block_create;
+moved_temporarily:false -> gone_permanently;
+gone_permanently:true -> 410_GONE;
+gone_permanently:false -> block_create;
 
 
 block_precondition_missing:anything -> missing_has_precondition;

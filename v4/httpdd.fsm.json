@@ -707,25 +707,25 @@
       "messages": [
         "false"
       ],
-      "next_state": "moved_is_method_create"
+      "next_state": "gone_permanently"
     },
     {
       "__type": "transition",
       "states": [
-        "moved_is_method_create"
+        "gone_permanently"
       ],
       "messages": [
-        "false"
+        "true"
       ],
       "next_state": "410_GONE"
     },
     {
       "__type": "transition",
       "states": [
-        "moved_is_method_create"
+        "gone_permanently"
       ],
       "messages": [
-        "true"
+        "false"
       ],
       "next_state": "block_create"
     },
