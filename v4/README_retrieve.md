@@ -27,3 +27,13 @@ H4 | [`method :var`](#method-var) | *Method* | `Transaction.request.method`
  | [`gone_permanently : in`](#gone_permanently--in) | T / F | FALSE
 
 > FIXME Explanations needed
+
+### `missing :bin`
+
+Return TRUE if the entire resource or the specific requested representation is missing; return FALSE otherwise.
+
+The return value is in the spirit of the `404 NOT FOUND` status code.
+
+Reference: [HTTPbis](http://tools.ietf.org/html/draft-ietf-httpbis-p2-semantics#section-6.5.4), [RFC2616](http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10)
+
+> The 404 (Not Found) status code indicates that the origin server did not find a current representation for the target resource or is not willing to disclose that one exists.
