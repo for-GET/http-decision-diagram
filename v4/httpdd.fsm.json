@@ -237,46 +237,6 @@
       "messages": [
         "true"
       ],
-      "next_state": "is_method_trace"
-    },
-    {
-      "__type": "transition",
-      "states": [
-        "is_method_trace"
-      ],
-      "messages": [
-        "true"
-      ],
-      "next_state": "200_OK"
-    },
-    {
-      "__type": "transition",
-      "states": [
-        "is_method_trace"
-      ],
-      "messages": [
-        "false"
-      ],
-      "next_state": "is_method_options"
-    },
-    {
-      "__type": "transition",
-      "states": [
-        "is_method_options"
-      ],
-      "messages": [
-        "true"
-      ],
-      "next_state": "200_OK_options"
-    },
-    {
-      "__type": "transition",
-      "states": [
-        "is_method_options"
-      ],
-      "messages": [
-        "false"
-      ],
       "next_state": "expects_continue"
     },
     {
@@ -393,6 +353,46 @@
       "__type": "transition",
       "states": [
         "is_forbidden"
+      ],
+      "messages": [
+        "false"
+      ],
+      "next_state": "is_method_trace"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "is_method_trace"
+      ],
+      "messages": [
+        "true"
+      ],
+      "next_state": "200_OK"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "is_method_trace"
+      ],
+      "messages": [
+        "false"
+      ],
+      "next_state": "is_method_options"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "is_method_options"
+      ],
+      "messages": [
+        "true"
+      ],
+      "next_state": "200_OK_options"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "is_method_options"
       ],
       "messages": [
         "false"

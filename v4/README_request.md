@@ -23,28 +23,28 @@ B12 | [`method :var`](#method-var) | *Method* | `Transaction.request.method`
  | [`allow_header : in`](#allow_header--in) | *AllowHeader* |
 B11 | [`is_authorized :bin`](#is_authorized-bin) | T / F | TRUE
  | [`auth_challenges :var`](#auth_challenges-var) | [ *AuthChallenge* ] | [ ]
-B10 | [`method :var`](#method-var) | *Method* | `Transaction.request.method`
+B10 | [`has_expects : in`](#has_expects--in) | T / F |
+ | [`expects_continue : in`](#expects_continue--in) | T / F |
+B9 | [`has_content : in`](#has_content--in) | T / F |
+B8 | [`is_content_too_large :bin`](#is_content_too_large-bin) | T / F | TRUE
+B7 | [`post_content_types_accepted :var`](#content_types_accepted-var) | { *CT*<br>: *Handler* } | { }
+ | [`patch_content_types_accepted :var`](#content_types_accepted-var) | { *CT*<br>: *Handler* } | { }
+ | [`put_content_types_accepted :var`](#content_types_accepted-var) | { *CT*<br>: *Handler* } | { }
+ | [`content_types_accepted :var`](#content_types_accepted-var) | { *CT*<br>: *Handler* } | { }
+ | [`is_content_type_accepted : in`](#is_content_type_accepted--in) | T / F |
+B6 | [`content_types_accepted:handler :bin`](#content_types_accepted-handler-bin) | T / F |
+ | [`from_content: in`](#from_content--in) | T / F |
+B5 | [`is_forbidden :bin`](#is_forbidden-bin) | T / F | FALSE
+B4 | [`method :var`](#method-var) | *Method* | `Transaction.request.method`
  | [`is_method_trace : in`](#is_method_trace--in) | T / F |
  | [`trace_sensitive_headers :var`](#trace_sensitive_headers-var) | [ *HeaderName* ] | [ Authentication<br>, Cookies<br>]
  | [`process_trace : in`](#process_trace--in) | |
-B9 | [`method :var`](#method-var) | *Method* | `Transaction.request.method`
+B3 | [`method :var`](#method-var) | *Method* | `Transaction.request.method`
  | [`is_method_options : in`](#is_method_options--in) | T / F |
  | [`accept_patch_header : in`](#accept_patch_header--in) | *AcceptPatchHeader* |
  | [`accept_post_header : in`](#accept_post_header--in) | *AcceptPostHeader* |
  | [`accept_put_header : in`](#accept_put_header--in) | *AcceptPutHeader* |
  | [`process_options : in`](#process_options--in) | |
-B8 | [`has_expects : in`](#has_expects--in) | T / F |
- | [`expects_continue : in`](#expects_continue--in) | T / F |
-B7 | [`has_content : in`](#has_content--in) | T / F |
-B6 | [`is_content_too_large :bin`](#is_content_too_large-bin) | T / F | TRUE
-B5 | [`post_content_types_accepted :var`](#content_types_accepted-var) | { *CT*<br>: *Handler* } | { }
- | [`patch_content_types_accepted :var`](#content_types_accepted-var) | { *CT*<br>: *Handler* } | { }
- | [`put_content_types_accepted :var`](#content_types_accepted-var) | { *CT*<br>: *Handler* } | { }
- | [`content_types_accepted :var`](#content_types_accepted-var) | { *CT*<br>: *Handler* } | { }
- | [`is_content_type_accepted : in`](#is_content_type_accepted--in) | T / F |
-B4 | [`content_types_accepted:handler :bin`](#content_types_accepted-handler-bin) | T / F |
- | [`from_content: in`](#from_content--in) | T / F |
-B3 | [`is_forbidden :bin`](#is_forbidden-bin) | T / F | FALSE
 B2 | [`is_request_block_ok :bin`](#is_request_block_ok-bin) | T / F | TRUE
 
 

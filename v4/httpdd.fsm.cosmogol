@@ -29,11 +29,7 @@ block_request:anything -> is_method_allowed;
 is_method_allowed:false -> 405_METHOD_NOT_ALLOWED;
 is_method_allowed:true -> is_authorized;
 is_authorized:false -> 401_UNAUTHORIZED;
-is_authorized:true -> is_method_trace;
-is_method_trace:true -> 200_OK;
-is_method_trace:false -> is_method_options;
-is_method_options:true -> 200_OK_options;
-is_method_options:false -> expects_continue;
+is_authorized:true -> expects_continue;
 expects_continue:true -> 100_CONTINUE;
 expects_continue:false -> has_content;
 has_content:false -> is_forbidden;
@@ -45,7 +41,11 @@ is_content_type_accepted:true -> from_content;
 from_content:false -> 400_BAD_REQUEST;
 from_content:true -> is_forbidden;
 is_forbidden:true -> 403_FORBIDDEN;
-is_forbidden:false -> is_request_block_ok;
+is_forbidden:false -> is_method_trace;
+is_method_trace:true -> 200_OK;
+is_method_trace:false -> is_method_options;
+is_method_options:true -> 200_OK_options;
+is_method_options:false -> is_request_block_ok;
 is_request_block_ok:false -> 400_BAD_REQUEST;
 is_request_block_ok:true -> block_accept;
 
@@ -307,4 +307,3 @@ see_other,
 start,
 to_content
 : state;
-
