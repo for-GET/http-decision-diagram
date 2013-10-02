@@ -44,7 +44,7 @@ is_forbidden:true -> 403_FORBIDDEN;
 is_forbidden:false -> is_method_trace;
 is_method_trace:true -> 200_OK;
 is_method_trace:false -> is_method_options;
-is_method_options:true -> 200_OK_options;
+is_method_options:true -> 200_OK_alternative;
 is_method_options:false -> is_request_block_ok;
 is_request_block_ok:false -> 400_BAD_REQUEST;
 is_request_block_ok:true -> block_accept;
@@ -160,7 +160,7 @@ to_content:true -> 200_OK;
 
 100_CONTINUE:anything -> has_content;
 200_OK:anything -> last;
-200_OK_options:anything -> block_response_alternative;
+200_OK_alternative:anything -> block_response_alternative;
 201_CREATED:anything -> last;
 202_ACCEPTED:anything -> block_response_alternative;
 204_NO_CONTENT:anything -> last;
@@ -204,7 +204,7 @@ false
 
 100_CONTINUE,
 200_OK,
-200_OK_options,
+200_OK_alternative,
 201_CREATED,
 202_ACCEPTED,
 204_NO_CONTENT,

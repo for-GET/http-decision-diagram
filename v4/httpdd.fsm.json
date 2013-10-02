@@ -387,7 +387,7 @@
       "messages": [
         "true"
       ],
-      "next_state": "200_OK_options"
+      "next_state": "200_OK_alternative"
     },
     {
       "__type": "transition",
@@ -1372,7 +1372,7 @@
     {
       "__type": "transition",
       "states": [
-        "200_OK_options"
+        "200_OK_alternative"
       ],
       "messages": [
         "anything"
@@ -1703,7 +1703,7 @@
       "names": [
         "100_CONTINUE",
         "200_OK",
-        "200_OK_options",
+        "200_OK_alternative",
         "201_CREATED",
         "202_ACCEPTED",
         "204_NO_CONTENT",
