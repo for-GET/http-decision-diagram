@@ -1,5 +1,5 @@
 Title = "HTTP Decision Diagram";
-Version = "4.0B01";
+Version = "4.0.2013.09";
 Initial = start;
 Final = finish;
 
