@@ -334,3 +334,17 @@ to_content
 501_NOT_IMPLEMENTED,
 503_SERVICE_UNAVAILABLE
 : status_code;
+
+block_accept,
+block_create,
+block_precondition,
+block_precondition_missing,
+block_process,
+block_request,
+block_response,
+block_response_alternative,
+block_response_process,
+block_retrieve,
+block_retrieve_missing,
+block_system
+: block;
