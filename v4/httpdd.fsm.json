@@ -3,11 +3,13 @@
   "statements": [
     {
       "__type": "assignment",
-      "name": "Title"
+      "name": "Title",
+      "value": "HTTP Decision Diagram"
     },
     {
       "__type": "assignment",
-      "name": "Version"
+      "name": "Version",
+      "value": "4.0B01"
     },
     {
       "__type": "assignment",
