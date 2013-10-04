@@ -61,14 +61,14 @@ accept_language_matches:false -> ignore_accept_block_mismatches;
 accept_language_matches:true -> has_accept_charset;
 has_accept_charset:false -> has_accept_encoding;
 has_accept_charset:true -> accept_charset_matches;
-accept_charset_matches:false -> ignore_accept_block_mistmatches;
+accept_charset_matches:false -> ignore_accept_block_mismatches;
 accept_charset_matches:true -> has_accept_encoding;
 has_accept_encoding:false -> block_retrieve;
 has_accept_encoding:true -> accept_encoding_matches;
-accept_encoding_matches:false -> ignore_accept_block_mistmatches;
+accept_encoding_matches:false -> ignore_accept_block_mismatches;
 accept_encoding_matches:true -> block_retrieve;
-ignore_accept_block_mistmatches:false -> 406_NOT_ACCEPTABLE;
-ignore_accept_block_mistmatches:true -> block_retrieve;
+ignore_accept_block_mismatches:false -> 406_NOT_ACCEPTABLE;
+ignore_accept_block_mismatches:true -> block_retrieve;
 
 
 block_retrieve:anything -> missing;
@@ -270,7 +270,7 @@ if_match_matches,
 if_modified_since_matches,
 if_none_match_matches,
 if_unmodified_since_matches,
-ignore_accept_block_mistmatches,
+ignore_accept_block_mismatches,
 is_authorized,
 is_content_too_large,
 is_content_type_accepted,

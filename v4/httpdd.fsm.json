@@ -539,7 +539,7 @@
       "messages": [
         "false"
       ],
-      "next_state": "ignore_accept_block_mistmatches"
+      "next_state": "ignore_accept_block_mismatches"
     },
     {
       "__type": "transition",
@@ -579,7 +579,7 @@
       "messages": [
         "false"
       ],
-      "next_state": "ignore_accept_block_mistmatches"
+      "next_state": "ignore_accept_block_mismatches"
     },
     {
       "__type": "transition",
@@ -594,7 +594,7 @@
     {
       "__type": "transition",
       "states": [
-        "ignore_accept_block_mistmatches"
+        "ignore_accept_block_mismatches"
       ],
       "messages": [
         "false"
@@ -604,7 +604,7 @@
     {
       "__type": "transition",
       "states": [
-        "ignore_accept_block_mistmatches"
+        "ignore_accept_block_mismatches"
       ],
       "messages": [
         "true"
@@ -1771,7 +1771,7 @@
         "if_modified_since_matches",
         "if_none_match_matches",
         "if_unmodified_since_matches",
-        "ignore_accept_block_mistmatches",
+        "ignore_accept_block_mismatches",
         "is_authorized",
         "is_content_too_large",
         "is_content_type_accepted",
