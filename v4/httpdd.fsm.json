@@ -9,7 +9,12 @@
     {
       "__type": "assignment",
       "name": "Version",
-      "value": "4.0.201309"
+      "value": "v4.0.201309"
+    },
+    {
+      "__type": "assignment",
+      "name": "Description",
+      "value": "An activity diagram to describe the resolution of HTTP response status codes, given various methods and headers, implemented via semantical callbacks."
     },
     {
       "__type": "assignment",
