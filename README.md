@@ -2,7 +2,7 @@
 
 An activity diagram to describe the resolution of HTTP response status codes, given various headers, implemented via semantical callbacks.
 
-**This is part of a bigger effort [Forget HTTP](https://github.com/for-GET/README).**
+**This is part of a bigger effort: [for-GET HTTP](https://github.com/for-GET/README).**
 
 And it goes on Twitter as [#httpdd](https://twitter.com/search/realtime?q=httpdd) - HTTP Decision Diagram.
 
