@@ -18,8 +18,9 @@ This block is in charge of "system"-level (request agnostic) checks.
  | callback | output | default
 :-- | ---: | :--- | :---
 B26 | [`start : in`](#start--in) | |
-B23 | [`is_service_available :bin`](#is_service_available-bin) | T / F | TRUE
-B22 | [`is_uri_too_long :bin`](#is_uri_too_long-bin) | T / F | FALSE
+B24 | [`is_service_available :bin`](#is_service_available-bin) | T / F | TRUE
+B23 | [`is_uri_too_long :bin`](#is_uri_too_long-bin) | T / F | FALSE
+B22 | [`are_headers_too_large :bin`](#are_headers_too_large-bin) | T / F | FALSE
 B21 | [`method :var`](#method-var) | *Method* | `Transaction.request.method`
  | [`create_methods :var`](#create_methods-var) | [ *Method* ] | [ POST<br>]
  | [`process_methods :var`](#process_methods-var) | [ *Method* ] | [ POST<br>, PATCH<br>]

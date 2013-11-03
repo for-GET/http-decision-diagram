@@ -1,5 +1,5 @@
 Title = "HTTP Decision Diagram";
-Version = "v4.0.201309";
+Version = "v4.0.201311";
 Description = "An activity diagram to describe the resolution of HTTP response status codes, given various methods and headers, implemented via semantical callbacks.";
 Initial = start;
 Final = finish;
@@ -13,7 +13,9 @@ block_system:anything -> is_service_available;
 is_service_available:false -> 503_SERVICE_UNAVAILABLE;
 is_service_available:true -> is_uri_too_long;
 is_uri_too_long:true -> 414_URI_TOO_LONG;
-is_uri_too_long:false -> is_method_implemented;
+is_uri_too_long:false -> are_headers_too_large;
+are_headers_too_large:true -> 431_REQUEST_HEADER_FIELDS_TOO_LARGE;
+are_headers_too_large:false -> is_method_implemented;
 is_method_implemented:false -> 501_NOT_IMPLEMENTED;
 is_method_implemented:true -> are_content_headers_implemented;
 are_content_headers_implemented:false -> 501_NOT_IMPLEMENTED;
@@ -237,6 +239,7 @@ alternative_has_accept,
 alternative_to_content,
 are_content_headers_implemented,
 are_expect_extensions_implemented,
+are_headers_too_large,
 block_accept,
 block_create,
 block_precondition,
@@ -331,6 +334,7 @@ to_content
 412_PRECONDITION_FAILED,
 414_URI_TOO_LONG,
 417_EXPECTATION_FAILED,
+431_REQUEST_HEADER_FIELDS_TOO_LARGE,
 500_INTERNAL_SERVER_ERROR,
 501_NOT_IMPLEMENTED,
 503_SERVICE_UNAVAILABLE

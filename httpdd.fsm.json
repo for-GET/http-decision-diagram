@@ -9,7 +9,7 @@
     {
       "__type": "assignment",
       "name": "Version",
-      "value": "v4.0.201309"
+      "value": "v4.0.201311"
     },
     {
       "__type": "assignment",
@@ -90,6 +90,26 @@
       "__type": "transition",
       "states": [
         "is_uri_too_long"
+      ],
+      "messages": [
+        "false"
+      ],
+      "next_state": "are_headers_too_large"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "are_headers_too_large"
+      ],
+      "messages": [
+        "true"
+      ],
+      "next_state": "431_REQUEST_HEADER_FIELDS_TOO_LARGE"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "are_headers_too_large"
       ],
       "messages": [
         "false"
@@ -1742,6 +1762,7 @@
         "alternative_to_content",
         "are_content_headers_implemented",
         "are_expect_extensions_implemented",
+        "are_headers_too_large",
         "block_accept",
         "block_create",
         "block_precondition",
@@ -1839,6 +1860,7 @@
         "412_PRECONDITION_FAILED",
         "414_URI_TOO_LONG",
         "417_EXPECTATION_FAILED",
+        "431_REQUEST_HEADER_FIELDS_TOO_LARGE",
         "500_INTERNAL_SERVER_ERROR",
         "501_NOT_IMPLEMENTED",
         "503_SERVICE_UNAVAILABLE"
