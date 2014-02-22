@@ -37,7 +37,7 @@ The decision diagram is split into standalone color-coded blocks
 1. [Response](README_response.md) (cyan)
 1. [Alternative](README_alternative.md) (gray)
 
-![HTTP headers status](https://rawgithub.com/andreineculau/http-decision-diagram/master/v4/httpdd.png)
+![HTTP headers status](https://rawgithub.com/for-GET/http-decision-diagram/master/httpdd.png)
 
 
 ---
