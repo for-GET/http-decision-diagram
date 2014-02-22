@@ -1,0 +1,60 @@
+Title = "HTTP Decision Diagram - Cache Retrieve";
+Version = "v1.0.201402";
+Description = "An activity diagram to describe the resolution of cache retrieval, given various methods and headers, implemented via semantical callbacks.";
+Initial = start;
+Final = finish;
+
+
+start:anything -> block_cache_retrieve;
+last:anything -> finish;
+
+
+block_cache_retrieve:anything -> storage_has_uri_match;
+storage_has_uri_match:false -> 0_PASS;
+storage_has_uri_match:true -> is_method_cacheable;
+is_method_cacheable:false -> 0_PASS;
+is_method_cacheable:true -> storage_has_headers_match;
+storage_has_headers_match:false -> 0_PASS;
+storage_has_headers_match:true -> cache_control_has_no_cache_directive;
+cache_control_has_no_cache_directive:true -> 1_REVALIDATE;
+cache_control_has_no_cache_directive:false -> storage_has_no_cache_directive;
+storage_has_no_cache_directive:true -> 1_REVALIDATE;
+storage_has_no_cache_directive:false -> storage_is_fresh;
+storage_is_fresh:false -> 0_PASS;
+storage_is_fresh:true -> 2_RETRIEVE;
+
+
+0_PASS:anything -> last;
+1_REVALIDATE:anything -> storage_is_fresh;
+2_RETRIEVE:anything -> last;
+
+
+anything,
+true,
+false
+: message;
+
+
+0_PASS,
+1_REVALIDATE,
+2_RETRIEVE,
+block_cache_retrieve,
+cache_control_has_no_cache_directive,
+is_method_cacheable,
+last,
+start,
+storage_has_headers_match,
+storage_has_no_cache_directive,
+storage_has_uri_match,
+storage_is_fresh
+: state;
+
+
+0_PASS,
+1_REVALIDATE,
+2_RETRIEVE
+: outcomes;
+
+
+block_cache_retrieve
+: block;
