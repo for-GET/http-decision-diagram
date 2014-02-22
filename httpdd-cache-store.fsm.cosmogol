@@ -1,0 +1,62 @@
+Title = "HTTP Decision Diagram - Cache Store";
+Version = "v1.0.201402";
+Description = "An activity diagram to describe the resolution of cache storage, given various methods and headers, implemented via semantical callbacks.";
+Initial = start;
+Final = finish;
+
+
+start:anything -> block_cache_store;
+last:anything -> finish;
+
+
+block_cache_store:anything -> is_method_cacheable;
+is_method_cacheable:false -> 0_DONT_STORE;
+is_method_cacheable:true -> is_status_code_cacheable;
+is_status_code_cacheable:false -> 0_DONT_STORE;
+is_status_code_cacheable:true -> cache_control_has_no_store_directive;
+cache_control_has_no_store_directive:true -> 0_DONT_STORE;
+cache_control_has_no_store_diective:false -> is_shared_cache;
+is_shared_cache:false -> cache_control_has_cacheable_directive;
+is_shared_cache:true -> cache_control_has_private_directive;
+cache_control_has_cacheable_directive:false -> 0_DONT_STORE;
+cache_control_has_cacheable_directive:true -> 1_STORE;
+cache_control_has_private_directive:true -> 0_DONT_STORE;
+cache_control_has_private_directive:false -> request_has_authorization;
+request_has_authorization:false -> cache_control_has_cacheable_directive;
+request_has_authorization:true -> cache_control_has_revalidate_directive;
+cache_control_has_revalidate_directive:false -> 0_DONT_STORE;
+cache_control_has_revalidate_directive:true -> 1_STORE;
+
+
+0_DONT_STORE:anything -> last;
+1_STORE:anything -> last;
+
+
+anything,
+true,
+false
+: message;
+
+
+0_DONT_STORE,
+1_STORE,
+block_cache_store,
+cache_control_has_no_store_directive,
+cache_control_has_private_directive,
+cache_control_has_revalidate_directive,
+is_method_cacheable,
+is_shared_cache,
+is_status_code_cacheable,
+last,
+request_has_authorization,
+start
+: state;
+
+
+0_DONT_STORE,
+1_STORE
+: outcomes;
+
+
+block_cache_store
+: block;
