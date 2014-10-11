@@ -92,7 +92,7 @@ Return a list of headers that should be treated as sensitive, and thus hidden fr
 
 ### `process_trace : in`
 
-Set `Transaction.response.headers.content-type` to `message/http` and `Transaction.response.body` to `Transaction.request.headers` (except `trace_sensitive_headers :var`).
+Set `Transaction.response.headers.content-type` to `message/http` and `Transaction.response.representation` to `Transaction.request.headers` (except `trace_sensitive_headers :var`).
 
 Return TRUE if succeeded; return FALSE otherwise.
 

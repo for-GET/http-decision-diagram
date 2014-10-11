@@ -19,7 +19,9 @@ N3 | [`is_create_done :bin`](#is_create_done-bin) | T / F | `is_process_done :bi
 N6 | [`create_see_other :bin`](#create_see_other-bin) | T / F | `see_other :bin`
  | [`content_types_provided:handler :bin`](#content_types_provided-handler-var) | T / F |
  | [`to_content : in`](#to_content--in) | T / F | FALSE
- - | [`vary :var`](#vary-var) | [ *String* ] |
+ - | [`to_resource_content :bin`](#is_resource_content-bin) | T / F |
+ - | [`content_location :var`](#content_location-var) | *URI* |
+ - | [`vary :var`](#vary-var) | [ [ *HeaderName* ] ] |
  - | [`expires :var`](#vary-var) | *Date* |
  - | [`last_modified :var`](#last_modified-var) | *Date* | Now
  - | [`etag :var`](#etag-var) | *ETag* |
@@ -29,10 +31,24 @@ N10 | [`see_other :bin`](#see_other-bin) | T / F | FALSE
 N9 | [`has_multiple_choices :bin`](#has_multiple_choices-bin) | T / F | FALSE
 N8 | [`content_types_provided:handler :bin`](#content_types_provided-handler-var) | T / F |
  | [`to_content : in`](#to_content--in) | T / F | FALSE
-- | [`cache :var`](#cache-var) | *String* |
-- | [`vary :var`](#vary-var) | [ *String* ] |
-- | [`expires :var`](#vary-var) | *Date* |
-- | [`last_modified :var`](#last_modified-var) | *Date* | Now
-- | [`etag :var`](#etag-var) | *ETag* |
+ - | [`to_resource_content :bin`](#is_resource_content-bin) | T / F |
+ - | [`content_location :var`](#content_location-var) | *URI* |
+ - | [`cache :var`](#cache-var) | *String* |
+ - | [`vary :var`](#vary-var) | [ [ *HeaderName* ] ] |
+ - | [`expires :var`](#vary-var) | *Date* |
+ - | [`last_modified :var`](#last_modified-var) | *Date* | Now
+ - | [`etag :var`](#etag-var) | *ETag* |
 
 > FIXME Explanations needed
+
+### `to_resource_content :bin`
+
+Return TRUE if the content is resource content, as in this content would be the response to a GET/HEAD request to the resource identified by the _Content-Location_ header.
+
+By default, this returns TRUE if a _Content_Location_ header has been set (e.g. during the `create` or `process` callback).
+
+### `content_location :var`
+
+Return a _Content-Location_ header.
+
+By default, this returns an already set _Content-Location_ response header or the location of the request target i.e. the resource would reply with its own content.

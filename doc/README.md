@@ -94,6 +94,7 @@ The decision diagram makes use of different types of callbacks to get request or
         * `content-encoding` = *ContentEncodingHeader*
         * `content-type` = *ContentTypeHeader*
         * `content-language` = *ContentLanguageHeader*
+        * `content-location` = *ContentLocationHeader*
     * `chosen` =
         * `content-type` =
         * `language` =
