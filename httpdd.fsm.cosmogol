@@ -147,7 +147,7 @@ process_partial_put:true -> 400_BAD_REQUEST;
 process_partial_put:false -> process_has_conflict;
 process_has_conflict:true -> 409_CONFLICT;
 process_has_conflict:false -> process;
-is_method_process:true -> process_conflict;
+is_method_process:true -> process_has_conflict;
 is_method_process:false -> 500_INTERNAL_SERVER_ERROR;
 process:false -> 500_INTERNAL_SERVER_ERROR;
 process:true -> block_response_process;
