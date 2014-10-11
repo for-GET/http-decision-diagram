@@ -8,16 +8,16 @@ The diagram follows the indications in [httpbis](http://tools.ietf.org/wg/httpbi
 
 ## Diagram
 
-* [PNG](httpdd.png) (export)
-* [Omnigraffle](httpdd.graffle) (source)
+* [PNG](../httpdd.png) (export)
+* [Omnigraffle](../httpdd.graffle) (source)
     * Size: A0 - 84.1 x 59.4 cm
     * Grid size: 0.5
     * Dot density: 96 dpi
 
 ## FSM
 
-* [JSON](httpdd.fsm.json) (export)
-* [Cosmogol](httpdd.fsm.cosmogol) (source)
+* [JSON](../httpdd.fsm.json) (export)
+* [Cosmogol](../httpdd.fsm.cosmogol) (source)
     * Internet Draft - [Cosmogol: a language to describe finite state machines](http://tools.ietf.org/html/draft-bortzmeyer-language-state-machines-01)
     * TODO add diagram LinCol positions; useful information for creating a debugger
     * TODO one day the PNG diagram should be generated strictly from the Cosmogol source
