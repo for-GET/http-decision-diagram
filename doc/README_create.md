@@ -18,7 +18,7 @@
 K3 | [`method :var`](#method-var) | *Method* | `Transaction.request.method`
  | [`is_method_put : in`](#is_method_put--in) | T / F |
  | [`create_is_method_put : in`](#create_is_method_put--in) | T / F | `is_method_put : in`
-L3 | [`create_put :bin`](#create_put-bin) | T / F | `process_put`
+L3 | [`has_create_conflict :bin`](#has_create_conflict-bin) | T / F | `has_process_conflict`
 K2 | [`method :var`](#method-var) | *Method* | `Transaction.request.method`
  | [`create_methods :var`](#create_methods-var) | [ *Method* ] | [ POST<br>, PUT<br>]
  | [`is_method_create : in`](#is_method_create--in) | T / F |

@@ -994,7 +994,7 @@
       "messages": [
         "true"
       ],
-      "next_state": "create_put"
+      "next_state": "has_create_conflict"
     },
     {
       "__type": "transition",
@@ -1009,20 +1009,20 @@
     {
       "__type": "transition",
       "states": [
-        "create_put"
+        "has_create_conflict"
       ],
       "messages": [
-        "false"
+        "true"
       ],
       "next_state": "409_CONFLICT"
     },
     {
       "__type": "transition",
       "states": [
-        "create_put"
+        "has_create_conflict"
       ],
       "messages": [
-        "true"
+        "false"
       ],
       "next_state": "is_create_done"
     },
@@ -1204,7 +1204,7 @@
       "messages": [
         "true"
       ],
-      "next_state": "process_put"
+      "next_state": "has_process_conflict"
     },
     {
       "__type": "transition",
@@ -1219,22 +1219,22 @@
     {
       "__type": "transition",
       "states": [
-        "process_put"
+        "has_process_conflict"
       ],
       "messages": [
-        "false"
+        "true"
       ],
       "next_state": "409_CONFLICT"
     },
     {
       "__type": "transition",
       "states": [
-        "process_put"
+        "has_process_conflict"
       ],
       "messages": [
-        "true"
+        "false"
       ],
-      "next_state": "block_response_process"
+      "next_state": "process"
     },
     {
       "__type": "transition",
@@ -1244,7 +1244,7 @@
       "messages": [
         "true"
       ],
-      "next_state": "process"
+      "next_state": "has_process_conflict"
     },
     {
       "__type": "transition",

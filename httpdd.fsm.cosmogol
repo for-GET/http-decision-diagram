@@ -116,10 +116,10 @@ is_precondition_safe:false -> 412_PRECONDITION_FAILED;
 
 
 block_create:anything -> create_is_method_put;
-create_is_method_put:true -> create_put;
+create_is_method_put:true -> has_create_conflict;
 create_is_method_put:false -> is_method_create;
-create_put:false -> 409_CONFLICT;
-create_put:true -> is_create_done;
+has_create_conflict:true -> 409_CONFLICT;
+has_create_conflict:false -> is_create_done;
 is_method_create:false -> 404_NOT_FOUND;
 is_method_create:true -> create_path;
 create_path:false -> 500_INTERNAL_SERVER_ERROR;
@@ -139,11 +139,11 @@ is_method_delete:true -> process_delete;
 is_method_delete:false -> is_method_put;
 process_delete:false -> 500_INTERNAL_SERVER_ERROR;
 process_delete:true -> block_response_process;
-is_method_put:true -> process_put;
+is_method_put:true -> has_process_conflict;
 is_method_put:false -> is_method_process;
-process_put:false -> 409_CONFLICT;
-process_put:true -> block_response_process;
-is_method_process:true -> process;
+has_process_conflict:true -> 409_CONFLICT;
+has_process_conflict:false -> process;
+is_method_process:true -> process_conflict;
 is_method_process:false -> 500_INTERNAL_SERVER_ERROR;
 process:false -> 500_INTERNAL_SERVER_ERROR;
 process:true -> block_response_process;
@@ -270,6 +270,7 @@ has_if_modified_since,
 has_if_none_match,
 has_if_unmodified_since,
 has_multiple_choices,
+has_process_conflict,
 if_match_matches,
 if_modified_since_matches,
 if_none_match_matches,
@@ -306,7 +307,6 @@ moved_permanently,
 moved_temporarily,
 process,
 process_delete,
-process_put,
 see_other,
 start,
 to_content

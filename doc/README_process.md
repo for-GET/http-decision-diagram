@@ -20,12 +20,12 @@ J10 | [`method :var`](#method-var) | *Method* | `Transaction.request.method`
 J11 | [`method :var`](#method-var) | *Method* | `Transaction.request.method`
  | [`is_method_delete : in`](#is_method_delete--in) | T / F |
 K11 | [`process_delete :bin`](#process_delete-bin) | T / F | FALSE
-J14 | [`method :var`](#method-var) | *Method* | `Transaction.request.method`
+J13 | [`method :var`](#method-var) | *Method* | `Transaction.request.method`
  | [`is_method_put : in`](#is_method_put--in) | T / F |
-K14 | [`process_put :bin`](#process_put-bin) | T / F | FALSE
-J15 | [`method :var`](#method-var) | *Method* | `Transaction.request.method`
+K14 | [`has_process_conflict :bin`](#has_process_conflict-bin) | T / F | FALSE
+J14 | [`method :var`](#method-var) | *Method* | `Transaction.request.method`
  | [`process_methods :var`](#process_methods-var) | [ *Method* ] | [ POST<br>, PATCH<br>]
  | [`is_method_process : in`](#is_method_process--in) | T / F |
-K15 | [`process :bin`](#process-bin) | T / F | FALSE
+L14 | [`process :bin`](#process-bin) | T / F | FALSE
 
 > FIXME Explanations needed
