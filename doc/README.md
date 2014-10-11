@@ -75,7 +75,7 @@ The decision diagram makes use of different types of callbacks to get request or
       * `content-type` =
       * `content-length` =
   * `representation` =
-  * `h` = Key-value of lowercase header names and their classes/modules/helpers
+  * `h` = Key-value of lowercase header names and their data structures/classes/modules/helpers
       * `accept` = *AcceptHeader*
       * `content-encoding` = *ContentEncodingHeader*
       * `content-type` = *ContentTypeHeader*
