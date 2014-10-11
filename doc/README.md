@@ -95,8 +95,8 @@ The decision diagram makes use of different types of callbacks to get request or
         * `content-type` = *ContentTypeHeader*
         * `content-language` = *ContentLanguageHeader*
         * `content-location` = *ContentLocationHeader*
-    * `chosen` =
-        * `content-type` =
+    * `content` = Key-value pairs of content headers and their chosen values (initially during the accept phase, and optionally modified afterwards)
+        * `type` =
         * `language` =
         * `charset` =
         * `encoding` =
