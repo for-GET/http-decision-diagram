@@ -116,10 +116,12 @@ is_precondition_safe:false -> 412_PRECONDITION_FAILED;
 
 
 block_create:anything -> create_is_method_put;
-create_is_method_put:true -> has_create_conflict;
+create_is_method_put:true -> create_partial_put;
 create_is_method_put:false -> is_method_create;
-has_create_conflict:true -> 409_CONFLICT;
-has_create_conflict:false -> is_create_done;
+create_partial_put:true -> 400_BAD_REQUEST;
+create_partial_put:false -> create_has_conflict;
+create_has_conflict:true -> 409_CONFLICT;
+create_has_conflict:false -> is_create_done;
 is_method_create:false -> 404_NOT_FOUND;
 is_method_create:true -> create_path;
 create_path:false -> 500_INTERNAL_SERVER_ERROR;
@@ -139,12 +141,12 @@ is_method_delete:true -> process_delete;
 is_method_delete:false -> is_method_put;
 process_delete:false -> 500_INTERNAL_SERVER_ERROR;
 process_delete:true -> block_response_process;
-is_method_put:true -> is_partial_put;
+is_method_put:true -> process_partial_put;
 is_method_put:false -> is_method_process;
-is_partial_put:true -> 400_BAD_REQUEST;
-is_partial_put:false -> has_process_conflict;
-has_process_conflict:true -> 409_CONFLICT;
-has_process_conflict:false -> process;
+process_partial_put:true -> 400_BAD_REQUEST;
+process_partial_put:false -> process_has_conflict;
+process_has_conflict:true -> 409_CONFLICT;
+process_has_conflict:false -> process;
 is_method_process:true -> process_conflict;
 is_method_process:false -> 500_INTERNAL_SERVER_ERROR;
 process:false -> 500_INTERNAL_SERVER_ERROR;
@@ -256,6 +258,8 @@ block_retrieve_missing,
 block_system,
 create,
 create_is_method_put,
+create_has_conflict,
+create_partial_put,
 create_path,
 create_put,
 create_see_other,
@@ -272,7 +276,6 @@ has_if_modified_since,
 has_if_none_match,
 has_if_unmodified_since,
 has_multiple_choices,
-has_process_conflict,
 if_match_matches,
 if_modified_since_matches,
 if_none_match_matches,
@@ -309,6 +312,8 @@ moved_permanently,
 moved_temporarily,
 process,
 process_delete,
+process_has_conflict,
+process_partial_put,
 see_other,
 start,
 to_content

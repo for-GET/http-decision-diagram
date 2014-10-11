@@ -994,7 +994,7 @@
       "messages": [
         "true"
       ],
-      "next_state": "has_create_conflict"
+      "next_state": "create_partial_put"
     },
     {
       "__type": "transition",
@@ -1009,7 +1009,27 @@
     {
       "__type": "transition",
       "states": [
-        "has_create_conflict"
+        "create_partial_put"
+      ],
+      "messages": [
+        "true"
+      ],
+      "next_state": "400_BAD_REQUEST"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "create_partial_put"
+      ],
+      "messages": [
+        "false"
+      ],
+      "next_state": "create_has_conflict"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "create_has_conflict"
       ],
       "messages": [
         "true"
@@ -1019,7 +1039,7 @@
     {
       "__type": "transition",
       "states": [
-        "has_create_conflict"
+        "create_has_conflict"
       ],
       "messages": [
         "false"
@@ -1204,7 +1224,7 @@
       "messages": [
         "true"
       ],
-      "next_state": "is_partial_put"
+      "next_state": "process_partial_put"
     },
     {
       "__type": "transition",
@@ -1219,7 +1239,7 @@
     {
       "__type": "transition",
       "states": [
-        "is_partial_put"
+        "process_partial_put"
       ],
       "messages": [
         "true"
@@ -1229,17 +1249,17 @@
     {
       "__type": "transition",
       "states": [
-        "is_partial_put"
+        "process_partial_put"
       ],
       "messages": [
         "false"
       ],
-      "next_state": "has_process_conflict"
+      "next_state": "process_has_conflict"
     },
     {
       "__type": "transition",
       "states": [
-        "has_process_conflict"
+        "process_has_conflict"
       ],
       "messages": [
         "true"
@@ -1249,7 +1269,7 @@
     {
       "__type": "transition",
       "states": [
-        "has_process_conflict"
+        "process_has_conflict"
       ],
       "messages": [
         "false"
@@ -1264,7 +1284,7 @@
       "messages": [
         "true"
       ],
-      "next_state": "has_process_conflict"
+      "next_state": "process_has_conflict"
     },
     {
       "__type": "transition",
@@ -1797,6 +1817,8 @@
         "block_system",
         "create",
         "create_is_method_put",
+        "create_has_conflict",
+        "create_partial_put",
         "create_path",
         "create_put",
         "create_see_other",
@@ -1849,6 +1871,8 @@
         "moved_temporarily",
         "process",
         "process_delete",
+        "process_has_conflict",
+        "process_partial_put",
         "process_put",
         "see_other",
         "start",

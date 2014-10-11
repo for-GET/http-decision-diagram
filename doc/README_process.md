@@ -22,8 +22,8 @@ J11 | [`method :var`](#method-var) | *Method* | `Transaction.request.method`
 K11 | [`process_delete :bin`](#process_delete-bin) | T / F | FALSE
 J13 | [`method :var`](#method-var) | *Method* | `Transaction.request.method`
  | [`is_method_put : in`](#is_method_put--in) | T / F |
-K13 | [`is_partial_put :bin`](#is_partial_put-var) | T / F | FALSE
-K14 | [`has_process_conflict :bin`](#has_process_conflict-bin) | T / F | FALSE
+K13 | [`process_partial_put :bin`](#process_partial_put-var) | T / F | FALSE
+K14 | [`process_has_conflict :bin`](#process_has_conflict-bin) | T / F | FALSE
 J14 | [`method :var`](#method-var) | *Method* | `Transaction.request.method`
  | [`process_methods :var`](#process_methods-var) | [ *Method* ] | [ POST<br>, PATCH<br>]
  | [`is_method_process : in`](#is_method_process--in) | T / F |
@@ -31,7 +31,7 @@ L14 | [`process :bin`](#process-bin) | T / F | FALSE
 
 > FIXME Explanations needed
 
-### `is_partial_put :bin`
+### `process_partial_put :bin`
 
 Return TRUE if the request doesn't have a "full" representation of the resource, where "full" is defined by each resource.
 
