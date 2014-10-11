@@ -22,6 +22,7 @@ J11 | [`method :var`](#method-var) | *Method* | `Transaction.request.method`
 K11 | [`process_delete :bin`](#process_delete-bin) | T / F | FALSE
 J13 | [`method :var`](#method-var) | *Method* | `Transaction.request.method`
  | [`is_method_put : in`](#is_method_put--in) | T / F |
+K13 | [`is_partial_put :bin`](#is_partial_put-var) | T / F | FALSE
 K14 | [`has_process_conflict :bin`](#has_process_conflict-bin) | T / F | FALSE
 J14 | [`method :var`](#method-var) | *Method* | `Transaction.request.method`
  | [`process_methods :var`](#process_methods-var) | [ *Method* ] | [ POST<br>, PATCH<br>]
@@ -29,3 +30,11 @@ J14 | [`method :var`](#method-var) | *Method* | `Transaction.request.method`
 L14 | [`process :bin`](#process-bin) | T / F | FALSE
 
 > FIXME Explanations needed
+
+### `is_partial_put :bin`
+
+Return TRUE if the request doesn't have a "full" representation of the resource, where "full" is defined by each resource.
+
+By default, this callback could check for the presence of a _Content-Range_ request header, but that header is not "implemented" by this diagram, so the default for now is to return FALSE.
+
+Reference: [RFC7231](http://tools.ietf.org/html/rfc7231#section-4.3.4)

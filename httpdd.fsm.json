@@ -1204,7 +1204,7 @@
       "messages": [
         "true"
       ],
-      "next_state": "has_process_conflict"
+      "next_state": "is_partial_put"
     },
     {
       "__type": "transition",
@@ -1215,6 +1215,26 @@
         "false"
       ],
       "next_state": "is_method_process"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "is_partial_put"
+      ],
+      "messages": [
+        "true"
+      ],
+      "next_state": "400_BAD_REQUEST"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "is_partial_put"
+      ],
+      "messages": [
+        "false"
+      ],
+      "next_state": "has_process_conflict"
     },
     {
       "__type": "transition",
