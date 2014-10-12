@@ -64,6 +64,12 @@
       "messages": [
         "false"
       ],
+      "coords": [
+        {
+          "x": "A",
+          "y": "24"
+        }
+      ],
       "next_state": "503_SERVICE_UNAVAILABLE"
     },
     {
@@ -83,6 +89,12 @@
       ],
       "messages": [
         "true"
+      ],
+      "coords": [
+        {
+          "x": "A",
+          "y": "23"
+        }
       ],
       "next_state": "414_URI_TOO_LONG"
     },
@@ -104,6 +116,12 @@
       "messages": [
         "true"
       ],
+      "coords": [
+        {
+          "x": "A",
+          "y": "22"
+        }
+      ],
       "next_state": "431_REQUEST_HEADER_FIELDS_TOO_LARGE"
     },
     {
@@ -123,6 +141,16 @@
       ],
       "messages": [
         "false"
+      ],
+      "coords": [
+        {
+          "x": "A",
+          "y": "21"
+        },
+        {
+          "x": "A",
+          "y": "19"
+        }
       ],
       "next_state": "501_NOT_IMPLEMENTED"
     },
@@ -144,6 +172,16 @@
       "messages": [
         "false"
       ],
+      "coords": [
+        {
+          "x": "A",
+          "y": "20"
+        },
+        {
+          "x": "A",
+          "y": "19"
+        }
+      ],
       "next_state": "501_NOT_IMPLEMENTED"
     },
     {
@@ -163,6 +201,12 @@
       ],
       "messages": [
         "false"
+      ],
+      "coords": [
+        {
+          "x": "A",
+          "y": "19"
+        }
       ],
       "next_state": "501_NOT_IMPLEMENTED"
     },
@@ -184,6 +228,12 @@
       "messages": [
         "false"
       ],
+      "coords": [
+        {
+          "x": "A",
+          "y": "18"
+        }
+      ],
       "next_state": "417_EXPECTATION_FAILED"
     },
     {
@@ -203,6 +253,12 @@
       ],
       "messages": [
         "false"
+      ],
+      "coords": [
+        {
+          "x": "A",
+          "y": "17"
+        }
       ],
       "next_state": "500_INTERNAL_SERVER_ERROR"
     },
@@ -234,6 +290,12 @@
       "messages": [
         "false"
       ],
+      "coords": [
+        {
+          "x": "A",
+          "y": "12"
+        }
+      ],
       "next_state": "405_METHOD_NOT_ALLOWED"
     },
     {
@@ -253,6 +315,12 @@
       ],
       "messages": [
         "false"
+      ],
+      "coords": [
+        {
+          "x": "A",
+          "y": "11"
+        }
       ],
       "next_state": "401_UNAUTHORIZED"
     },
@@ -274,6 +342,12 @@
       "messages": [
         "true"
       ],
+      "coords": [
+        {
+          "x": "A",
+          "y": "10"
+        }
+      ],
       "next_state": "100_CONTINUE"
     },
     {
@@ -293,6 +367,16 @@
       ],
       "messages": [
         "false"
+      ],
+      "coords": [
+        {
+          "x": "BC",
+          "y": "9"
+        },
+        {
+          "x": "BC",
+          "y": "5"
+        }
       ],
       "next_state": "is_forbidden"
     },
@@ -314,6 +398,12 @@
       "messages": [
         "true"
       ],
+      "coords": [
+        {
+          "x": "A",
+          "y": "8"
+        }
+      ],
       "next_state": "413_PAYLOAD_TOO_LARGE"
     },
     {
@@ -333,6 +423,12 @@
       ],
       "messages": [
         "false"
+      ],
+      "coords": [
+        {
+          "x": "A",
+          "y": "7"
+        }
       ],
       "next_state": "415_UNSUPPORTED_MEDIA_TYPE"
     },
@@ -354,6 +450,12 @@
       "messages": [
         "false"
       ],
+      "coords": [
+        {
+          "x": "A",
+          "y": "6"
+        }
+      ],
       "next_state": "400_BAD_REQUEST"
     },
     {
@@ -373,6 +475,12 @@
       ],
       "messages": [
         "true"
+      ],
+      "coords": [
+        {
+          "x": "A",
+          "y": "5"
+        }
       ],
       "next_state": "403_FORBIDDEN"
     },
@@ -394,6 +502,12 @@
       "messages": [
         "true"
       ],
+      "coords": [
+        {
+          "x": "A",
+          "y": "4"
+        }
+      ],
       "next_state": "200_OK"
     },
     {
@@ -413,6 +527,12 @@
       ],
       "messages": [
         "true"
+      ],
+      "coords": [
+        {
+          "x": "A",
+          "y": "3"
+        }
       ],
       "next_state": "200_OK_alternative"
     },
@@ -434,6 +554,12 @@
       "messages": [
         "false"
       ],
+      "coords": [
+        {
+          "x": "A",
+          "y": "2"
+        }
+      ],
       "next_state": "400_BAD_REQUEST"
     },
     {
@@ -443,6 +569,12 @@
       ],
       "messages": [
         "true"
+      ],
+      "coords": [
+        {
+          "x": "B",
+          "y": "1"
+        }
       ],
       "next_state": "block_accept"
     },
@@ -464,6 +596,12 @@
       "messages": [
         "false"
       ],
+      "coords": [
+        {
+          "x": "D",
+          "y": "1"
+        }
+      ],
       "next_state": "has_accept_language"
     },
     {
@@ -484,6 +622,16 @@
       "messages": [
         "false"
       ],
+      "coords": [
+        {
+          "x": "C",
+          "y": "5"
+        },
+        {
+          "x": "E",
+          "y": "5"
+        }
+      ],
       "next_state": "ignore_accept_block_mismatches"
     },
     {
@@ -503,6 +651,12 @@
       ],
       "messages": [
         "false"
+      ],
+      "coords": [
+        {
+          "x": "E",
+          "y": "2"
+        }
       ],
       "next_state": "has_accept_charset"
     },
@@ -524,6 +678,16 @@
       "messages": [
         "false"
       ],
+      "coords": [
+        {
+          "x": "D",
+          "y": "5"
+        },
+        {
+          "x": "E",
+          "y": "5"
+        }
+      ],
       "next_state": "ignore_accept_block_mismatches"
     },
     {
@@ -543,6 +707,12 @@
       ],
       "messages": [
         "false"
+      ],
+      "coords": [
+        {
+          "x": "F",
+          "y": "3"
+        }
       ],
       "next_state": "has_accept_encoding"
     },
@@ -584,6 +754,12 @@
       "messages": [
         "false"
       ],
+      "coords": [
+        {
+          "x": "G",
+          "y": "4"
+        }
+      ],
       "next_state": "block_retrieve"
     },
     {
@@ -604,6 +780,12 @@
       "messages": [
         "false"
       ],
+      "coords": [
+        {
+          "x": "E",
+          "y": "5"
+        }
+      ],
       "next_state": "ignore_accept_block_mismatches"
     },
     {
@@ -613,6 +795,12 @@
       ],
       "messages": [
         "true"
+      ],
+      "coords": [
+        {
+          "x": "G",
+          "y": "5"
+        }
       ],
       "next_state": "block_retrieve"
     },
@@ -624,6 +812,12 @@
       "messages": [
         "false"
       ],
+      "coords": [
+        {
+          "x": "D",
+          "y": "6"
+        }
+      ],
       "next_state": "406_NOT_ACCEPTABLE"
     },
     {
@@ -633,6 +827,12 @@
       ],
       "messages": [
         "true"
+      ],
+      "coords": [
+        {
+          "x": "G",
+          "y": "6"
+        }
       ],
       "next_state": "block_retrieve"
     },
@@ -664,6 +864,12 @@
       "messages": [
         "false"
       ],
+      "coords": [
+        {
+          "x": "C",
+          "y": "7"
+        }
+      ],
       "next_state": "block_precondition"
     },
     {
@@ -683,6 +889,12 @@
       ],
       "messages": [
         "false"
+      ],
+      "coords": [
+        {
+          "x": "K",
+          "y": "7"
+        }
       ],
       "next_state": "block_create"
     },
@@ -704,6 +916,12 @@
       "messages": [
         "true"
       ],
+      "coords": [
+        {
+          "x": "H",
+          "y": "6"
+        }
+      ],
       "next_state": "308_PERMANENT_REDIRECT"
     },
     {
@@ -723,6 +941,12 @@
       ],
       "messages": [
         "true"
+      ],
+      "coords": [
+        {
+          "x": "H",
+          "y": "5"
+        }
       ],
       "next_state": "307_TEMPORARY_REDIRECT"
     },
@@ -744,6 +968,12 @@
       "messages": [
         "true"
       ],
+      "coords": [
+        {
+          "x": "H",
+          "y": "4"
+        }
+      ],
       "next_state": "410_GONE"
     },
     {
@@ -753,6 +983,12 @@
       ],
       "messages": [
         "false"
+      ],
+      "coords": [
+        {
+          "x": "I",
+          "y": "3"
+        }
       ],
       "next_state": "block_create"
     },
@@ -774,6 +1010,12 @@
       "messages": [
         "true"
       ],
+      "coords": [
+        {
+          "x": "G",
+          "y": "10"
+        }
+      ],
       "next_state": "412_PRECONDITION_FAILED"
     },
     {
@@ -783,6 +1025,12 @@
       ],
       "messages": [
         "false"
+      ],
+      "coords": [
+        {
+          "x": "I",
+          "y": "9"
+        }
       ],
       "next_state": "block_retrieve_missing"
     },
@@ -804,6 +1052,12 @@
       "messages": [
         "false"
       ],
+      "coords": [
+        {
+          "x": "D",
+          "y": "9"
+        }
+      ],
       "next_state": "has_if_unmodified_since"
     },
     {
@@ -824,6 +1078,16 @@
       "messages": [
         "false"
       ],
+      "coords": [
+        {
+          "x": "C",
+          "y": "15"
+        },
+        {
+          "x": "F",
+          "y": "15"
+        }
+      ],
       "next_state": "412_PRECONDITION_FAILED"
     },
     {
@@ -843,6 +1107,12 @@
       ],
       "messages": [
         "false"
+      ],
+      "coords": [
+        {
+          "x": "E",
+          "y": "10"
+        }
       ],
       "next_state": "has_if_none_match"
     },
@@ -864,6 +1134,16 @@
       "messages": [
         "true"
       ],
+      "coords": [
+        {
+          "x": "D",
+          "y": "15"
+        },
+        {
+          "x": "F",
+          "y": "15"
+        }
+      ],
       "next_state": "412_PRECONDITION_FAILED"
     },
     {
@@ -883,6 +1163,12 @@
       ],
       "messages": [
         "false"
+      ],
+      "coords": [
+        {
+          "x": "F",
+          "y": "11"
+        }
       ],
       "next_state": "has_if_modified_since"
     },
@@ -904,6 +1190,12 @@
       "messages": [
         "true"
       ],
+      "coords": [
+        {
+          "x": "E",
+          "y": "14"
+        }
+      ],
       "next_state": "is_precondition_safe"
     },
     {
@@ -923,6 +1215,16 @@
       ],
       "messages": [
         "false"
+      ],
+      "coords": [
+        {
+          "x": "I",
+          "y": "12"
+        },
+        {
+          "x": "I",
+          "y": "10"
+        }
       ],
       "next_state": "block_process"
     },
@@ -954,6 +1256,16 @@
       "messages": [
         "true"
       ],
+      "coords": [
+        {
+          "x": "I",
+          "y": "13"
+        },
+        {
+          "x": "I",
+          "y": "10"
+        }
+      ],
       "next_state": "block_process"
     },
     {
@@ -964,6 +1276,12 @@
       "messages": [
         "true"
       ],
+      "coords": [
+        {
+          "x": "I",
+          "y": "14"
+        }
+      ],
       "next_state": "304_NOT_MODIFIED"
     },
     {
@@ -973,6 +1291,12 @@
       ],
       "messages": [
         "false"
+      ],
+      "coords": [
+        {
+          "x": "F",
+          "y": "15"
+        }
       ],
       "next_state": "412_PRECONDITION_FAILED"
     },
@@ -1014,6 +1338,12 @@
       "messages": [
         "true"
       ],
+      "coords": [
+        {
+          "x": "L",
+          "y": "5"
+        }
+      ],
       "next_state": "400_BAD_REQUEST"
     },
     {
@@ -1034,6 +1364,12 @@
       "messages": [
         "true"
       ],
+      "coords": [
+        {
+          "x": "M",
+          "y": "4"
+        }
+      ],
       "next_state": "409_CONFLICT"
     },
     {
@@ -1044,7 +1380,7 @@
       "messages": [
         "false"
       ],
-      "next_state": "is_create_done"
+      "next_state": "block_response_create"
     },
     {
       "__type": "transition",
@@ -1053,6 +1389,12 @@
       ],
       "messages": [
         "false"
+      ],
+      "coords": [
+        {
+          "x": "K",
+          "y": "1"
+        }
       ],
       "next_state": "404_NOT_FOUND"
     },
@@ -1074,6 +1416,16 @@
       "messages": [
         "false"
       ],
+      "coords": [
+        {
+          "x": "L",
+          "y": "1"
+        },
+        {
+          "x": "M",
+          "y": "1"
+        }
+      ],
       "next_state": "500_INTERNAL_SERVER_ERROR"
     },
     {
@@ -1094,6 +1446,12 @@
       "messages": [
         "false"
       ],
+      "coords": [
+        {
+          "x": "M",
+          "y": "1"
+        }
+      ],
       "next_state": "500_INTERNAL_SERVER_ERROR"
     },
     {
@@ -1104,47 +1462,13 @@
       "messages": [
         "true"
       ],
-      "next_state": "is_create_done"
-    },
-    {
-      "__type": "transition",
-      "states": [
-        "is_create_done"
+      "coords": [
+        {
+          "x": "N",
+          "y": "2"
+        }
       ],
-      "messages": [
-        "false"
-      ],
-      "next_state": "202_ACCEPTED"
-    },
-    {
-      "__type": "transition",
-      "states": [
-        "is_create_done"
-      ],
-      "messages": [
-        "true"
-      ],
-      "next_state": "create_see_other"
-    },
-    {
-      "__type": "transition",
-      "states": [
-        "create_see_other"
-      ],
-      "messages": [
-        "true"
-      ],
-      "next_state": "303_SEE_OTHER"
-    },
-    {
-      "__type": "transition",
-      "states": [
-        "create_see_other"
-      ],
-      "messages": [
-        "false"
-      ],
-      "next_state": "201_CREATED"
+      "next_state": "block_response_create"
     },
     {
       "__type": "transition",
@@ -1204,6 +1528,12 @@
       "messages": [
         "false"
       ],
+      "coords": [
+        {
+          "x": "K",
+          "y": "12"
+        }
+      ],
       "next_state": "500_INTERNAL_SERVER_ERROR"
     },
     {
@@ -1213,6 +1543,16 @@
       ],
       "messages": [
         "true"
+      ],
+      "coords": [
+        {
+          "x": "M",
+          "y": "11"
+        },
+        {
+          "x": "M",
+          "y": "14"
+        }
       ],
       "next_state": "block_response_process"
     },
@@ -1244,6 +1584,12 @@
       "messages": [
         "true"
       ],
+      "coords": [
+        {
+          "x": "L",
+          "y": "13"
+        }
+      ],
       "next_state": "400_BAD_REQUEST"
     },
     {
@@ -1263,6 +1609,12 @@
       ],
       "messages": [
         "true"
+      ],
+      "coords": [
+        {
+          "x": "K",
+          "y": "15"
+        }
       ],
       "next_state": "409_CONFLICT"
     },
@@ -1294,6 +1646,12 @@
       "messages": [
         "false"
       ],
+      "coords": [
+        {
+          "x": "J",
+          "y": "16"
+        }
+      ],
       "next_state": "500_INTERNAL_SERVER_ERROR"
     },
     {
@@ -1303,6 +1661,12 @@
       ],
       "messages": [
         "false"
+      ],
+      "coords": [
+        {
+          "x": "L",
+          "y": "16"
+        }
       ],
       "next_state": "500_INTERNAL_SERVER_ERROR"
     },
@@ -1315,6 +1679,74 @@
         "true"
       ],
       "next_state": "block_response_process"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "block_response_create"
+      ],
+      "messages": [
+        "anything"
+      ],
+      "next_state": "is_create_done"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "is_create_done"
+      ],
+      "messages": [
+        "false"
+      ],
+      "coords": [
+        {
+          "x": "P",
+          "y": "3"
+        }
+      ],
+      "next_state": "202_ACCEPTED"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "is_create_done"
+      ],
+      "messages": [
+        "true"
+      ],
+      "next_state": "create_see_other"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "create_see_other"
+      ],
+      "messages": [
+        "true"
+      ],
+      "coords": [
+        {
+          "x": "P",
+          "y": "4"
+        }
+      ],
+      "next_state": "303_SEE_OTHER"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "create_see_other"
+      ],
+      "messages": [
+        "false"
+      ],
+      "coords": [
+        {
+          "x": "N",
+          "y": "5"
+        }
+      ],
+      "next_state": "201_CREATED"
     },
     {
       "__type": "transition",
@@ -1333,6 +1765,12 @@
       ],
       "messages": [
         "false"
+      ],
+      "coords": [
+        {
+          "x": "P",
+          "y": "14"
+        }
       ],
       "next_state": "202_ACCEPTED"
     },
@@ -1364,6 +1802,12 @@
       "messages": [
         "true"
       ],
+      "coords": [
+        {
+          "x": "P",
+          "y": "10"
+        }
+      ],
       "next_state": "303_SEE_OTHER"
     },
     {
@@ -1383,6 +1827,12 @@
       ],
       "messages": [
         "true"
+      ],
+      "coords": [
+        {
+          "x": "P",
+          "y": "9"
+        }
       ],
       "next_state": "300_MULTIPLE_CHOICES"
     },
@@ -1404,6 +1854,12 @@
       "messages": [
         "false"
       ],
+      "coords": [
+        {
+          "x": "P",
+          "y": "8"
+        }
+      ],
       "next_state": "204_NO_CONTENT"
     },
     {
@@ -1414,6 +1870,12 @@
       "messages": [
         "true"
       ],
+      "coords": [
+        {
+          "x": "N",
+          "y": "7"
+        }
+      ],
       "next_state": "200_OK"
     },
     {
@@ -1423,6 +1885,16 @@
       ],
       "messages": [
         "anything"
+      ],
+      "coords": [
+        {
+          "x": "A",
+          "y": "10"
+        },
+        {
+          "x": "A",
+          "y": "9"
+        }
       ],
       "next_state": "has_content"
     },
@@ -1629,6 +2101,16 @@
     {
       "__type": "transition",
       "states": [
+        "413_PAYLOAD_TOO_LARGE"
+      ],
+      "messages": [
+        "anything"
+      ],
+      "next_state": "block_response_alternative"
+    },
+    {
+      "__type": "transition",
+      "states": [
         "414_URI_TOO_LONG"
       ],
       "messages": [
@@ -1639,7 +2121,27 @@
     {
       "__type": "transition",
       "states": [
+        "415_UNSUPPORTED_MEDIA_TYPE"
+      ],
+      "messages": [
+        "anything"
+      ],
+      "next_state": "block_response_alternative"
+    },
+    {
+      "__type": "transition",
+      "states": [
         "417_EXPECTATION_FAILED"
+      ],
+      "messages": [
+        "anything"
+      ],
+      "next_state": "block_response_alternative"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "431_REQUEST_HEADER_FIELDS_TOO_LARGE"
       ],
       "messages": [
         "anything"
@@ -1694,6 +2196,12 @@
       "messages": [
         "false"
       ],
+      "coords": [
+        {
+          "x": "P",
+          "y": "21"
+        }
+      ],
       "next_state": "last"
     },
     {
@@ -1704,6 +2212,12 @@
       "messages": [
         "true"
       ],
+      "coords": [
+        {
+          "x": "N",
+          "y": "21"
+        }
+      ],
       "next_state": "alternative_has_accept"
     },
     {
@@ -1713,6 +2227,12 @@
       ],
       "messages": [
         "false"
+      ],
+      "coords": [
+        {
+          "x": "P",
+          "y": "22"
+        }
       ],
       "next_state": "last"
     },
@@ -1734,6 +2254,12 @@
       "messages": [
         "false"
       ],
+      "coords": [
+        {
+          "x": "P",
+          "y": "23"
+        }
+      ],
       "next_state": "last"
     },
     {
@@ -1753,6 +2279,12 @@
       ],
       "messages": [
         "anything"
+      ],
+      "coords": [
+        {
+          "x": "P",
+          "y": "24"
+        }
       ],
       "next_state": "last"
     },
@@ -1788,11 +2320,114 @@
         "409_CONFLICT",
         "410_GONE",
         "412_PRECONDITION_FAILED",
+        "413_PAYLOAD_TOO_LARGE",
         "414_URI_TOO_LONG",
+        "415_UNSUPPORTED_MEDIA_TYPE",
         "417_EXPECTATION_FAILED",
+        "431_REQUEST_HEADER_FIELDS_TOO_LARGE",
         "500_INTERNAL_SERVER_ERROR",
         "501_NOT_IMPLEMENTED",
         "503_SERVICE_UNAVAILABLE",
+        "accept_charset_matches",
+        "accept_encoding_matches",
+        "accept_language_matches",
+        "accept_matches",
+        "alternative_accept_matches",
+        "alternative_has_accept",
+        "alternative_to_content",
+        "are_content_headers_implemented",
+        "are_expect_extensions_implemented",
+        "are_headers_too_large",
+        "block_accept",
+        "block_create",
+        "block_precondition",
+        "block_precondition_missing",
+        "block_process",
+        "block_request",
+        "block_response",
+        "block_response_alternative",
+        "block_response_process",
+        "block_retrieve",
+        "block_retrieve_missing",
+        "block_system",
+        "create",
+        "create_is_method_put",
+        "create_has_conflict",
+        "create_partial_put",
+        "create_path",
+        "create_see_other",
+        "expects_continue",
+        {
+          "name": "finish",
+          "center": {
+            "x": "P",
+            "y": "26"
+          }
+        },
+        "from_content",
+        "gone_permanently",
+        "has_accept",
+        "has_accept_charset",
+        "has_accept_encoding",
+        "has_accept_language",
+        "has_content",
+        "has_if_match",
+        "has_if_modified_since",
+        "has_if_none_match",
+        "has_if_unmodified_since",
+        "has_multiple_choices",
+        "if_match_matches",
+        "if_modified_since_matches",
+        "if_none_match_matches",
+        "if_unmodified_since_matches",
+        "ignore_accept_block_mismatches",
+        "is_authorized",
+        "is_content_too_large",
+        "is_content_type_accepted",
+        "is_create_done",
+        "is_forbidden",
+        "is_functionality_implemented",
+        "is_method_allowed",
+        "is_method_create",
+        "is_method_delete",
+        "is_method_head_get",
+        "is_method_implemented",
+        "is_method_options",
+        "is_method_process",
+        "is_method_put",
+        "is_method_trace",
+        "is_precondition_safe",
+        "is_process_done",
+        "is_request_block_ok",
+        "is_response_alternative",
+        "is_service_available",
+        "is_system_block_ok",
+        "is_uri_too_long",
+        "last",
+        "missing",
+        "missing_has_precondition",
+        "moved",
+        "moved_permanently",
+        "moved_temporarily",
+        "process",
+        "process_delete",
+        "process_has_conflict",
+        "process_partial_put",
+        "see_other",
+        {
+          "name": "start",
+          "center": {
+            "x": "B",
+            "y": "26"
+          }
+        },
+        "to_content"
+      ],
+      "value": "state"
+    },
+    {
+      "__type": "declaration",
+      "names": [
         {
           "name": "accept_charset_matches",
           "center": {
@@ -1863,18 +2498,6 @@
             "y": "22"
           }
         },
-        "block_accept",
-        "block_create",
-        "block_precondition",
-        "block_precondition_missing",
-        "block_process",
-        "block_request",
-        "block_response",
-        "block_response_alternative",
-        "block_response_process",
-        "block_retrieve",
-        "block_retrieve_missing",
-        "block_system",
         {
           "name": "create",
           "center": {
@@ -1922,13 +2545,6 @@
           "center": {
             "x": "B",
             "y": "10"
-          }
-        },
-        {
-          "name": "finish",
-          "center": {
-            "x": "P",
-            "y": "26"
           }
         },
         {
@@ -2176,7 +2792,13 @@
             "y": "2"
           }
         },
-        "is_response_alternative",
+        {
+          "name": "is_response_alternative",
+          "center": {
+            "x": "O",
+            "y": "21"
+          }
+        },
         {
           "name": "is_service_available",
           "center": {
@@ -2276,13 +2898,6 @@
           }
         },
         {
-          "name": "start",
-          "center": {
-            "x": "B",
-            "y": "26"
-          }
-        },
-        {
           "name": "to_content",
           "center": {
             "x": "N",
@@ -2290,13 +2905,14 @@
           }
         }
       ],
-      "value": "state"
+      "value": "decision"
     },
     {
       "__type": "declaration",
       "names": [
         "100_CONTINUE",
         "200_OK",
+        "200_OK_alternative",
         "201_CREATED",
         "202_ACCEPTED",
         "204_NO_CONTENT",
@@ -2314,7 +2930,9 @@
         "409_CONFLICT",
         "410_GONE",
         "412_PRECONDITION_FAILED",
+        "413_PAYLOAD_TOO_LARGE",
         "414_URI_TOO_LONG",
+        "415_UNSUPPORTED_MEDIA_TYPE",
         "417_EXPECTATION_FAILED",
         "431_REQUEST_HEADER_FIELDS_TOO_LARGE",
         "500_INTERNAL_SERVER_ERROR",
@@ -2322,6 +2940,103 @@
         "503_SERVICE_UNAVAILABLE"
       ],
       "value": "status_code"
+    },
+    {
+      "__type": "declaration",
+      "names": [
+        {
+          "name": "block_accept",
+          "center": {
+            "x": "C",
+            "y": "1"
+          }
+        },
+        {
+          "name": "block_create",
+          "center": {
+            "x": "K",
+            "y": "3"
+          }
+        },
+        {
+          "name": "block_precondition",
+          "center": {
+            "x": "C",
+            "y": "9"
+          }
+        },
+        {
+          "name": "block_precondition_missing",
+          "center": {
+            "x": "G",
+            "y": "9"
+          }
+        },
+        {
+          "name": "block_process",
+          "center": {
+            "x": "J",
+            "y": "10"
+          }
+        },
+        {
+          "name": "block_request",
+          "center": {
+            "x": "B",
+            "y": "12"
+          }
+        },
+        {
+          "name": "block_response",
+          "center": {
+            "x": "N",
+            "y": "10"
+          }
+        },
+        {
+          "name": "block_response_alternative",
+          "center": {
+            "x": "O",
+            "y": "21"
+          }
+        },
+        {
+          "name": "block_response_create",
+          "center": {
+            "x": "N",
+            "y": "3"
+          }
+        },
+        {
+          "name": "block_response_process",
+          "center": {
+            "x": "N",
+            "y": "14"
+          }
+        },
+        {
+          "name": "block_retrieve",
+          "center": {
+            "x": "G",
+            "y": "7"
+          }
+        },
+        {
+          "name": "block_retrieve_missing",
+          "center": {
+            "x": "I",
+            "y": "7"
+          }
+        },
+        {
+          "name": "block_system",
+          "center": {
+            "x": "B",
+            "y": "24"
+          }
+        }
+      ],
+      "value": "block_entry"
     },
     {
       "__type": "declaration",
@@ -2359,7 +3074,6 @@
             "y": "17"
           }
         },
-        "block_precondition_missing",
         {
           "name": "block_process",
           "top_left": {
@@ -2396,15 +3110,14 @@
         {
           "name": "block_response_alternative",
           "top_left": {
-            "x": "M",
-            "y": "22"
+            "x": "O",
+            "y": "21"
           },
           "bottom_right": {
             "x": "P",
             "y": "24"
           }
         },
-        "block_response_process",
         {
           "name": "block_retrieve",
           "top_left": {
@@ -2416,7 +3129,6 @@
             "y": "8"
           }
         },
-        "block_retrieve_missing",
         {
           "name": "block_system",
           "top_left": {
