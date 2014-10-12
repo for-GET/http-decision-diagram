@@ -1,0 +1,3147 @@
+{
+  "__type": "state_machine",
+  "statements": [
+    {
+      "__type": "assignment",
+      "name": "Title",
+      "value": "HTTP Decision Diagram"
+    },
+    {
+      "__type": "assignment",
+      "name": "Version",
+      "value": "v4.0.201410"
+    },
+    {
+      "__type": "assignment",
+      "name": "Description",
+      "value": "An activity diagram to describe the resolution of HTTP response status codes, given various methods and headers, implemented via semantical callbacks."
+    },
+    {
+      "__type": "assignment",
+      "name": "Initial",
+      "value": "start"
+    },
+    {
+      "__type": "assignment",
+      "name": "Final",
+      "value": "finish"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "start"
+      ],
+      "messages": [
+        "anything"
+      ],
+      "next_state": "block_system"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "last"
+      ],
+      "messages": [
+        "anything"
+      ],
+      "next_state": "finish"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "block_system"
+      ],
+      "messages": [
+        "anything"
+      ],
+      "next_state": "is_service_available"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "is_service_available"
+      ],
+      "messages": [
+        "false"
+      ],
+      "coords": [
+        {
+          "x": "A",
+          "y": "24"
+        }
+      ],
+      "next_state": "503_SERVICE_UNAVAILABLE"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "is_service_available"
+      ],
+      "messages": [
+        "true"
+      ],
+      "next_state": "is_uri_too_long"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "is_uri_too_long"
+      ],
+      "messages": [
+        "true"
+      ],
+      "coords": [
+        {
+          "x": "A",
+          "y": "23"
+        }
+      ],
+      "next_state": "414_URI_TOO_LONG"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "is_uri_too_long"
+      ],
+      "messages": [
+        "false"
+      ],
+      "next_state": "are_headers_too_large"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "are_headers_too_large"
+      ],
+      "messages": [
+        "true"
+      ],
+      "coords": [
+        {
+          "x": "A",
+          "y": "22"
+        }
+      ],
+      "next_state": "431_REQUEST_HEADER_FIELDS_TOO_LARGE"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "are_headers_too_large"
+      ],
+      "messages": [
+        "false"
+      ],
+      "next_state": "is_method_implemented"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "is_method_implemented"
+      ],
+      "messages": [
+        "false"
+      ],
+      "coords": [
+        {
+          "x": "A",
+          "y": "21"
+        },
+        {
+          "x": "A",
+          "y": "19"
+        }
+      ],
+      "next_state": "501_NOT_IMPLEMENTED"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "is_method_implemented"
+      ],
+      "messages": [
+        "true"
+      ],
+      "next_state": "are_content_headers_implemented"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "are_content_headers_implemented"
+      ],
+      "messages": [
+        "false"
+      ],
+      "coords": [
+        {
+          "x": "A",
+          "y": "20"
+        },
+        {
+          "x": "A",
+          "y": "19"
+        }
+      ],
+      "next_state": "501_NOT_IMPLEMENTED"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "are_content_headers_implemented"
+      ],
+      "messages": [
+        "true"
+      ],
+      "next_state": "is_functionality_implemented"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "is_functionality_implemented"
+      ],
+      "messages": [
+        "false"
+      ],
+      "coords": [
+        {
+          "x": "A",
+          "y": "19"
+        }
+      ],
+      "next_state": "501_NOT_IMPLEMENTED"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "is_functionality_implemented"
+      ],
+      "messages": [
+        "true"
+      ],
+      "next_state": "are_expect_extensions_implemented"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "are_expect_extensions_implemented"
+      ],
+      "messages": [
+        "false"
+      ],
+      "coords": [
+        {
+          "x": "A",
+          "y": "18"
+        }
+      ],
+      "next_state": "417_EXPECTATION_FAILED"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "are_expect_extensions_implemented"
+      ],
+      "messages": [
+        "true"
+      ],
+      "next_state": "is_system_block_ok"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "is_system_block_ok"
+      ],
+      "messages": [
+        "false"
+      ],
+      "coords": [
+        {
+          "x": "A",
+          "y": "17"
+        }
+      ],
+      "next_state": "500_INTERNAL_SERVER_ERROR"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "is_system_block_ok"
+      ],
+      "messages": [
+        "true"
+      ],
+      "next_state": "block_request"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "block_request"
+      ],
+      "messages": [
+        "anything"
+      ],
+      "next_state": "is_method_allowed"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "is_method_allowed"
+      ],
+      "messages": [
+        "false"
+      ],
+      "coords": [
+        {
+          "x": "A",
+          "y": "12"
+        }
+      ],
+      "next_state": "405_METHOD_NOT_ALLOWED"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "is_method_allowed"
+      ],
+      "messages": [
+        "true"
+      ],
+      "next_state": "is_authorized"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "is_authorized"
+      ],
+      "messages": [
+        "false"
+      ],
+      "coords": [
+        {
+          "x": "A",
+          "y": "11"
+        }
+      ],
+      "next_state": "401_UNAUTHORIZED"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "is_authorized"
+      ],
+      "messages": [
+        "true"
+      ],
+      "next_state": "expects_continue"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "expects_continue"
+      ],
+      "messages": [
+        "true"
+      ],
+      "coords": [
+        {
+          "x": "A",
+          "y": "10"
+        }
+      ],
+      "next_state": "100_CONTINUE"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "expects_continue"
+      ],
+      "messages": [
+        "false"
+      ],
+      "next_state": "has_content"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "has_content"
+      ],
+      "messages": [
+        "false"
+      ],
+      "coords": [
+        {
+          "x": "BC",
+          "y": "9"
+        },
+        {
+          "x": "BC",
+          "y": "5"
+        }
+      ],
+      "next_state": "is_forbidden"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "has_content"
+      ],
+      "messages": [
+        "true"
+      ],
+      "next_state": "is_content_too_large"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "is_content_too_large"
+      ],
+      "messages": [
+        "true"
+      ],
+      "coords": [
+        {
+          "x": "A",
+          "y": "8"
+        }
+      ],
+      "next_state": "413_PAYLOAD_TOO_LARGE"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "is_content_too_large"
+      ],
+      "messages": [
+        "false"
+      ],
+      "next_state": "is_content_type_accepted"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "is_content_type_accepted"
+      ],
+      "messages": [
+        "false"
+      ],
+      "coords": [
+        {
+          "x": "A",
+          "y": "7"
+        }
+      ],
+      "next_state": "415_UNSUPPORTED_MEDIA_TYPE"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "is_content_type_accepted"
+      ],
+      "messages": [
+        "true"
+      ],
+      "next_state": "from_content"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "from_content"
+      ],
+      "messages": [
+        "false"
+      ],
+      "coords": [
+        {
+          "x": "A",
+          "y": "6"
+        }
+      ],
+      "next_state": "400_BAD_REQUEST"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "from_content"
+      ],
+      "messages": [
+        "true"
+      ],
+      "next_state": "is_forbidden"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "is_forbidden"
+      ],
+      "messages": [
+        "true"
+      ],
+      "coords": [
+        {
+          "x": "A",
+          "y": "5"
+        }
+      ],
+      "next_state": "403_FORBIDDEN"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "is_forbidden"
+      ],
+      "messages": [
+        "false"
+      ],
+      "next_state": "is_method_trace"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "is_method_trace"
+      ],
+      "messages": [
+        "true"
+      ],
+      "coords": [
+        {
+          "x": "A",
+          "y": "4"
+        }
+      ],
+      "next_state": "200_OK"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "is_method_trace"
+      ],
+      "messages": [
+        "false"
+      ],
+      "next_state": "is_method_options"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "is_method_options"
+      ],
+      "messages": [
+        "true"
+      ],
+      "coords": [
+        {
+          "x": "A",
+          "y": "3"
+        }
+      ],
+      "next_state": "200_OK_alternative"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "is_method_options"
+      ],
+      "messages": [
+        "false"
+      ],
+      "next_state": "is_request_block_ok"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "is_request_block_ok"
+      ],
+      "messages": [
+        "false"
+      ],
+      "coords": [
+        {
+          "x": "A",
+          "y": "2"
+        }
+      ],
+      "next_state": "400_BAD_REQUEST"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "is_request_block_ok"
+      ],
+      "messages": [
+        "true"
+      ],
+      "coords": [
+        {
+          "x": "B",
+          "y": "1"
+        }
+      ],
+      "next_state": "block_accept"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "block_accept"
+      ],
+      "messages": [
+        "anything"
+      ],
+      "next_state": "has_accept"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "has_accept"
+      ],
+      "messages": [
+        "false"
+      ],
+      "coords": [
+        {
+          "x": "D",
+          "y": "1"
+        }
+      ],
+      "next_state": "has_accept_language"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "has_accept"
+      ],
+      "messages": [
+        "true"
+      ],
+      "next_state": "accept_matches"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "accept_matches"
+      ],
+      "messages": [
+        "false"
+      ],
+      "coords": [
+        {
+          "x": "C",
+          "y": "5"
+        },
+        {
+          "x": "E",
+          "y": "5"
+        }
+      ],
+      "next_state": "ignore_accept_block_mismatches"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "accept_matches"
+      ],
+      "messages": [
+        "true"
+      ],
+      "next_state": "has_accept_language"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "has_accept_language"
+      ],
+      "messages": [
+        "false"
+      ],
+      "coords": [
+        {
+          "x": "E",
+          "y": "2"
+        }
+      ],
+      "next_state": "has_accept_charset"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "has_accept_language"
+      ],
+      "messages": [
+        "true"
+      ],
+      "next_state": "accept_language_matches"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "accept_language_matches"
+      ],
+      "messages": [
+        "false"
+      ],
+      "coords": [
+        {
+          "x": "D",
+          "y": "5"
+        },
+        {
+          "x": "E",
+          "y": "5"
+        }
+      ],
+      "next_state": "ignore_accept_block_mismatches"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "accept_language_matches"
+      ],
+      "messages": [
+        "true"
+      ],
+      "next_state": "has_accept_charset"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "has_accept_charset"
+      ],
+      "messages": [
+        "false"
+      ],
+      "coords": [
+        {
+          "x": "F",
+          "y": "3"
+        }
+      ],
+      "next_state": "has_accept_encoding"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "has_accept_charset"
+      ],
+      "messages": [
+        "true"
+      ],
+      "next_state": "accept_charset_matches"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "accept_charset_matches"
+      ],
+      "messages": [
+        "false"
+      ],
+      "next_state": "ignore_accept_block_mismatches"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "accept_charset_matches"
+      ],
+      "messages": [
+        "true"
+      ],
+      "next_state": "has_accept_encoding"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "has_accept_encoding"
+      ],
+      "messages": [
+        "false"
+      ],
+      "coords": [
+        {
+          "x": "G",
+          "y": "4"
+        }
+      ],
+      "next_state": "block_retrieve"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "has_accept_encoding"
+      ],
+      "messages": [
+        "true"
+      ],
+      "next_state": "accept_encoding_matches"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "accept_encoding_matches"
+      ],
+      "messages": [
+        "false"
+      ],
+      "coords": [
+        {
+          "x": "E",
+          "y": "5"
+        }
+      ],
+      "next_state": "ignore_accept_block_mismatches"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "accept_encoding_matches"
+      ],
+      "messages": [
+        "true"
+      ],
+      "coords": [
+        {
+          "x": "G",
+          "y": "5"
+        }
+      ],
+      "next_state": "block_retrieve"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "ignore_accept_block_mismatches"
+      ],
+      "messages": [
+        "false"
+      ],
+      "coords": [
+        {
+          "x": "D",
+          "y": "6"
+        }
+      ],
+      "next_state": "406_NOT_ACCEPTABLE"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "ignore_accept_block_mismatches"
+      ],
+      "messages": [
+        "true"
+      ],
+      "coords": [
+        {
+          "x": "G",
+          "y": "6"
+        }
+      ],
+      "next_state": "block_retrieve"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "block_retrieve"
+      ],
+      "messages": [
+        "anything"
+      ],
+      "next_state": "missing"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "missing"
+      ],
+      "messages": [
+        "true"
+      ],
+      "next_state": "block_precondition_missing"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "missing"
+      ],
+      "messages": [
+        "false"
+      ],
+      "coords": [
+        {
+          "x": "C",
+          "y": "7"
+        }
+      ],
+      "next_state": "block_precondition"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "block_retrieve_missing"
+      ],
+      "messages": [
+        "anything"
+      ],
+      "next_state": "moved"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "moved"
+      ],
+      "messages": [
+        "false"
+      ],
+      "coords": [
+        {
+          "x": "K",
+          "y": "7"
+        }
+      ],
+      "next_state": "block_create"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "moved"
+      ],
+      "messages": [
+        "true"
+      ],
+      "next_state": "moved_permanently"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "moved_permanently"
+      ],
+      "messages": [
+        "true"
+      ],
+      "coords": [
+        {
+          "x": "H",
+          "y": "6"
+        }
+      ],
+      "next_state": "308_PERMANENT_REDIRECT"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "moved_permanently"
+      ],
+      "messages": [
+        "false"
+      ],
+      "next_state": "moved_temporarily"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "moved_temporarily"
+      ],
+      "messages": [
+        "true"
+      ],
+      "coords": [
+        {
+          "x": "H",
+          "y": "5"
+        }
+      ],
+      "next_state": "307_TEMPORARY_REDIRECT"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "moved_temporarily"
+      ],
+      "messages": [
+        "false"
+      ],
+      "next_state": "gone_permanently"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "gone_permanently"
+      ],
+      "messages": [
+        "true"
+      ],
+      "coords": [
+        {
+          "x": "H",
+          "y": "4"
+        }
+      ],
+      "next_state": "410_GONE"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "gone_permanently"
+      ],
+      "messages": [
+        "false"
+      ],
+      "coords": [
+        {
+          "x": "I",
+          "y": "3"
+        }
+      ],
+      "next_state": "block_create"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "block_precondition_missing"
+      ],
+      "messages": [
+        "anything"
+      ],
+      "next_state": "missing_has_precondition"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "missing_has_precondition"
+      ],
+      "messages": [
+        "true"
+      ],
+      "coords": [
+        {
+          "x": "G",
+          "y": "10"
+        }
+      ],
+      "next_state": "412_PRECONDITION_FAILED"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "missing_has_precondition"
+      ],
+      "messages": [
+        "false"
+      ],
+      "coords": [
+        {
+          "x": "I",
+          "y": "9"
+        }
+      ],
+      "next_state": "block_retrieve_missing"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "block_precondition"
+      ],
+      "messages": [
+        "anything"
+      ],
+      "next_state": "has_if_match"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "has_if_match"
+      ],
+      "messages": [
+        "false"
+      ],
+      "coords": [
+        {
+          "x": "D",
+          "y": "9"
+        }
+      ],
+      "next_state": "has_if_unmodified_since"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "has_if_match"
+      ],
+      "messages": [
+        "true"
+      ],
+      "next_state": "if_match_matches"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "if_match_matches"
+      ],
+      "messages": [
+        "false"
+      ],
+      "coords": [
+        {
+          "x": "C",
+          "y": "15"
+        },
+        {
+          "x": "F",
+          "y": "15"
+        }
+      ],
+      "next_state": "412_PRECONDITION_FAILED"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "if_match_matches"
+      ],
+      "messages": [
+        "true"
+      ],
+      "next_state": "has_if_unmodified_since"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "has_if_unmodified_since"
+      ],
+      "messages": [
+        "false"
+      ],
+      "coords": [
+        {
+          "x": "E",
+          "y": "10"
+        }
+      ],
+      "next_state": "has_if_none_match"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "has_if_unmodified_since"
+      ],
+      "messages": [
+        "true"
+      ],
+      "next_state": "if_unmodified_since_matches"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "if_unmodified_since_matches"
+      ],
+      "messages": [
+        "true"
+      ],
+      "coords": [
+        {
+          "x": "D",
+          "y": "15"
+        },
+        {
+          "x": "F",
+          "y": "15"
+        }
+      ],
+      "next_state": "412_PRECONDITION_FAILED"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "if_unmodified_since_matches"
+      ],
+      "messages": [
+        "false"
+      ],
+      "next_state": "has_if_none_match"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "has_if_none_match"
+      ],
+      "messages": [
+        "false"
+      ],
+      "coords": [
+        {
+          "x": "F",
+          "y": "11"
+        }
+      ],
+      "next_state": "has_if_modified_since"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "has_if_none_match"
+      ],
+      "messages": [
+        "true"
+      ],
+      "next_state": "if_none_match_matches"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "if_none_match_matches"
+      ],
+      "messages": [
+        "true"
+      ],
+      "coords": [
+        {
+          "x": "E",
+          "y": "14"
+        }
+      ],
+      "next_state": "is_precondition_safe"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "if_none_match_matches"
+      ],
+      "messages": [
+        "false"
+      ],
+      "next_state": "has_if_modified_since"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "has_if_modified_since"
+      ],
+      "messages": [
+        "false"
+      ],
+      "coords": [
+        {
+          "x": "I",
+          "y": "12"
+        },
+        {
+          "x": "I",
+          "y": "10"
+        }
+      ],
+      "next_state": "block_process"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "has_if_modified_since"
+      ],
+      "messages": [
+        "true"
+      ],
+      "next_state": "if_modified_since_matches"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "if_modified_since_matches"
+      ],
+      "messages": [
+        "false"
+      ],
+      "next_state": "is_precondition_safe"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "if_modified_since_matches"
+      ],
+      "messages": [
+        "true"
+      ],
+      "coords": [
+        {
+          "x": "I",
+          "y": "13"
+        },
+        {
+          "x": "I",
+          "y": "10"
+        }
+      ],
+      "next_state": "block_process"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "is_precondition_safe"
+      ],
+      "messages": [
+        "true"
+      ],
+      "coords": [
+        {
+          "x": "I",
+          "y": "14"
+        }
+      ],
+      "next_state": "304_NOT_MODIFIED"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "is_precondition_safe"
+      ],
+      "messages": [
+        "false"
+      ],
+      "coords": [
+        {
+          "x": "F",
+          "y": "15"
+        }
+      ],
+      "next_state": "412_PRECONDITION_FAILED"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "block_create"
+      ],
+      "messages": [
+        "anything"
+      ],
+      "next_state": "create_is_method_put"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "create_is_method_put"
+      ],
+      "messages": [
+        "true"
+      ],
+      "next_state": "create_partial_put"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "create_is_method_put"
+      ],
+      "messages": [
+        "false"
+      ],
+      "next_state": "is_method_create"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "create_partial_put"
+      ],
+      "messages": [
+        "true"
+      ],
+      "coords": [
+        {
+          "x": "L",
+          "y": "5"
+        }
+      ],
+      "next_state": "400_BAD_REQUEST"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "create_partial_put"
+      ],
+      "messages": [
+        "false"
+      ],
+      "next_state": "create_has_conflict"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "create_has_conflict"
+      ],
+      "messages": [
+        "true"
+      ],
+      "coords": [
+        {
+          "x": "M",
+          "y": "4"
+        }
+      ],
+      "next_state": "409_CONFLICT"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "create_has_conflict"
+      ],
+      "messages": [
+        "false"
+      ],
+      "next_state": "block_response_create"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "is_method_create"
+      ],
+      "messages": [
+        "false"
+      ],
+      "coords": [
+        {
+          "x": "K",
+          "y": "1"
+        }
+      ],
+      "next_state": "404_NOT_FOUND"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "is_method_create"
+      ],
+      "messages": [
+        "true"
+      ],
+      "next_state": "create_path"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "create_path"
+      ],
+      "messages": [
+        "false"
+      ],
+      "coords": [
+        {
+          "x": "L",
+          "y": "1"
+        },
+        {
+          "x": "M",
+          "y": "1"
+        }
+      ],
+      "next_state": "500_INTERNAL_SERVER_ERROR"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "create_path"
+      ],
+      "messages": [
+        "true"
+      ],
+      "next_state": "create"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "create"
+      ],
+      "messages": [
+        "false"
+      ],
+      "coords": [
+        {
+          "x": "M",
+          "y": "1"
+        }
+      ],
+      "next_state": "500_INTERNAL_SERVER_ERROR"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "create"
+      ],
+      "messages": [
+        "true"
+      ],
+      "coords": [
+        {
+          "x": "N",
+          "y": "2"
+        }
+      ],
+      "next_state": "block_response_create"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "block_process"
+      ],
+      "messages": [
+        "anything"
+      ],
+      "next_state": "is_method_head_get"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "is_method_head_get"
+      ],
+      "messages": [
+        "true"
+      ],
+      "next_state": "block_response"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "is_method_head_get"
+      ],
+      "messages": [
+        "false"
+      ],
+      "next_state": "is_method_delete"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "is_method_delete"
+      ],
+      "messages": [
+        "true"
+      ],
+      "next_state": "process_delete"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "is_method_delete"
+      ],
+      "messages": [
+        "false"
+      ],
+      "next_state": "is_method_put"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "process_delete"
+      ],
+      "messages": [
+        "false"
+      ],
+      "coords": [
+        {
+          "x": "K",
+          "y": "12"
+        }
+      ],
+      "next_state": "500_INTERNAL_SERVER_ERROR"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "process_delete"
+      ],
+      "messages": [
+        "true"
+      ],
+      "coords": [
+        {
+          "x": "M",
+          "y": "11"
+        },
+        {
+          "x": "M",
+          "y": "14"
+        }
+      ],
+      "next_state": "block_response_process"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "is_method_put"
+      ],
+      "messages": [
+        "true"
+      ],
+      "next_state": "process_partial_put"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "is_method_put"
+      ],
+      "messages": [
+        "false"
+      ],
+      "next_state": "is_method_process"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "process_partial_put"
+      ],
+      "messages": [
+        "true"
+      ],
+      "coords": [
+        {
+          "x": "L",
+          "y": "13"
+        }
+      ],
+      "next_state": "400_BAD_REQUEST"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "process_partial_put"
+      ],
+      "messages": [
+        "false"
+      ],
+      "next_state": "process_has_conflict"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "process_has_conflict"
+      ],
+      "messages": [
+        "true"
+      ],
+      "coords": [
+        {
+          "x": "K",
+          "y": "15"
+        }
+      ],
+      "next_state": "409_CONFLICT"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "process_has_conflict"
+      ],
+      "messages": [
+        "false"
+      ],
+      "next_state": "process"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "is_method_process"
+      ],
+      "messages": [
+        "true"
+      ],
+      "next_state": "process_has_conflict"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "is_method_process"
+      ],
+      "messages": [
+        "false"
+      ],
+      "coords": [
+        {
+          "x": "J",
+          "y": "16"
+        }
+      ],
+      "next_state": "500_INTERNAL_SERVER_ERROR"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "process"
+      ],
+      "messages": [
+        "false"
+      ],
+      "coords": [
+        {
+          "x": "L",
+          "y": "16"
+        }
+      ],
+      "next_state": "500_INTERNAL_SERVER_ERROR"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "process"
+      ],
+      "messages": [
+        "true"
+      ],
+      "next_state": "block_response_process"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "block_response_create"
+      ],
+      "messages": [
+        "anything"
+      ],
+      "next_state": "is_create_done"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "is_create_done"
+      ],
+      "messages": [
+        "false"
+      ],
+      "coords": [
+        {
+          "x": "P",
+          "y": "3"
+        }
+      ],
+      "next_state": "202_ACCEPTED"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "is_create_done"
+      ],
+      "messages": [
+        "true"
+      ],
+      "next_state": "create_see_other"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "create_see_other"
+      ],
+      "messages": [
+        "true"
+      ],
+      "coords": [
+        {
+          "x": "P",
+          "y": "4"
+        }
+      ],
+      "next_state": "303_SEE_OTHER"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "create_see_other"
+      ],
+      "messages": [
+        "false"
+      ],
+      "coords": [
+        {
+          "x": "N",
+          "y": "5"
+        }
+      ],
+      "next_state": "201_CREATED"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "block_response_process"
+      ],
+      "messages": [
+        "anything"
+      ],
+      "next_state": "is_process_done"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "is_process_done"
+      ],
+      "messages": [
+        "false"
+      ],
+      "coords": [
+        {
+          "x": "P",
+          "y": "14"
+        }
+      ],
+      "next_state": "202_ACCEPTED"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "is_process_done"
+      ],
+      "messages": [
+        "true"
+      ],
+      "next_state": "see_other"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "block_response"
+      ],
+      "messages": [
+        "anything"
+      ],
+      "next_state": "see_other"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "see_other"
+      ],
+      "messages": [
+        "true"
+      ],
+      "coords": [
+        {
+          "x": "P",
+          "y": "10"
+        }
+      ],
+      "next_state": "303_SEE_OTHER"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "see_other"
+      ],
+      "messages": [
+        "false"
+      ],
+      "next_state": "has_multiple_choices"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "has_multiple_choices"
+      ],
+      "messages": [
+        "true"
+      ],
+      "coords": [
+        {
+          "x": "P",
+          "y": "9"
+        }
+      ],
+      "next_state": "300_MULTIPLE_CHOICES"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "has_multiple_choices"
+      ],
+      "messages": [
+        "false"
+      ],
+      "next_state": "to_content"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "to_content"
+      ],
+      "messages": [
+        "false"
+      ],
+      "coords": [
+        {
+          "x": "P",
+          "y": "8"
+        }
+      ],
+      "next_state": "204_NO_CONTENT"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "to_content"
+      ],
+      "messages": [
+        "true"
+      ],
+      "coords": [
+        {
+          "x": "N",
+          "y": "7"
+        }
+      ],
+      "next_state": "200_OK"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "100_CONTINUE"
+      ],
+      "messages": [
+        "anything"
+      ],
+      "coords": [
+        {
+          "x": "A",
+          "y": "10"
+        },
+        {
+          "x": "A",
+          "y": "9"
+        }
+      ],
+      "next_state": "has_content"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "200_OK"
+      ],
+      "messages": [
+        "anything"
+      ],
+      "next_state": "last"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "200_OK_alternative"
+      ],
+      "messages": [
+        "anything"
+      ],
+      "next_state": "block_response_alternative"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "201_CREATED"
+      ],
+      "messages": [
+        "anything"
+      ],
+      "next_state": "last"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "202_ACCEPTED"
+      ],
+      "messages": [
+        "anything"
+      ],
+      "next_state": "block_response_alternative"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "204_NO_CONTENT"
+      ],
+      "messages": [
+        "anything"
+      ],
+      "next_state": "last"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "300_MULTIPLE_CHOICES"
+      ],
+      "messages": [
+        "anything"
+      ],
+      "next_state": "block_response_alternative"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "303_SEE_OTHER"
+      ],
+      "messages": [
+        "anything"
+      ],
+      "next_state": "last"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "304_NOT_MODIFIED"
+      ],
+      "messages": [
+        "anything"
+      ],
+      "next_state": "last"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "307_TEMPORARY_REDIRECT"
+      ],
+      "messages": [
+        "anything"
+      ],
+      "next_state": "last"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "308_PERMANENT_REDIRECT"
+      ],
+      "messages": [
+        "anything"
+      ],
+      "next_state": "last"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "400_BAD_REQUEST"
+      ],
+      "messages": [
+        "anything"
+      ],
+      "next_state": "block_response_alternative"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "401_UNAUTHORIZED"
+      ],
+      "messages": [
+        "anything"
+      ],
+      "next_state": "block_response_alternative"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "403_FORBIDDEN"
+      ],
+      "messages": [
+        "anything"
+      ],
+      "next_state": "block_response_alternative"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "404_NOT_FOUND"
+      ],
+      "messages": [
+        "anything"
+      ],
+      "next_state": "block_response_alternative"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "405_METHOD_NOT_ALLOWED"
+      ],
+      "messages": [
+        "anything"
+      ],
+      "next_state": "block_response_alternative"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "406_NOT_ACCEPTABLE"
+      ],
+      "messages": [
+        "anything"
+      ],
+      "next_state": "block_response_alternative"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "409_CONFLICT"
+      ],
+      "messages": [
+        "anything"
+      ],
+      "next_state": "block_response_alternative"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "410_GONE"
+      ],
+      "messages": [
+        "anything"
+      ],
+      "next_state": "block_response_alternative"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "410_GONE"
+      ],
+      "messages": [
+        "anything"
+      ],
+      "next_state": "block_response_alternative"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "412_PRECONDITION_FAILED"
+      ],
+      "messages": [
+        "anything"
+      ],
+      "next_state": "block_response_alternative"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "413_PAYLOAD_TOO_LARGE"
+      ],
+      "messages": [
+        "anything"
+      ],
+      "next_state": "block_response_alternative"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "414_URI_TOO_LONG"
+      ],
+      "messages": [
+        "anything"
+      ],
+      "next_state": "block_response_alternative"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "415_UNSUPPORTED_MEDIA_TYPE"
+      ],
+      "messages": [
+        "anything"
+      ],
+      "next_state": "block_response_alternative"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "417_EXPECTATION_FAILED"
+      ],
+      "messages": [
+        "anything"
+      ],
+      "next_state": "block_response_alternative"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "431_REQUEST_HEADER_FIELDS_TOO_LARGE"
+      ],
+      "messages": [
+        "anything"
+      ],
+      "next_state": "block_response_alternative"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "500_INTERNAL_SERVER_ERROR"
+      ],
+      "messages": [
+        "anything"
+      ],
+      "next_state": "block_response_alternative"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "501_NOT_IMPLEMENTED"
+      ],
+      "messages": [
+        "anything"
+      ],
+      "next_state": "block_response_alternative"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "503_SERVICE_UNAVAILABLE"
+      ],
+      "messages": [
+        "anything"
+      ],
+      "next_state": "block_response_alternative"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "block_response_alternative"
+      ],
+      "messages": [
+        "anything"
+      ],
+      "next_state": "is_response_alternative"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "is_response_alternative"
+      ],
+      "messages": [
+        "false"
+      ],
+      "coords": [
+        {
+          "x": "P",
+          "y": "21"
+        }
+      ],
+      "next_state": "last"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "is_response_alternative"
+      ],
+      "messages": [
+        "true"
+      ],
+      "coords": [
+        {
+          "x": "N",
+          "y": "21"
+        }
+      ],
+      "next_state": "alternative_has_accept"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "alternative_has_accept"
+      ],
+      "messages": [
+        "false"
+      ],
+      "coords": [
+        {
+          "x": "P",
+          "y": "22"
+        }
+      ],
+      "next_state": "last"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "alternative_has_accept"
+      ],
+      "messages": [
+        "true"
+      ],
+      "next_state": "alternative_accept_matches"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "alternative_accept_matches"
+      ],
+      "messages": [
+        "false"
+      ],
+      "coords": [
+        {
+          "x": "P",
+          "y": "23"
+        }
+      ],
+      "next_state": "last"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "alternative_accept_matches"
+      ],
+      "messages": [
+        "true"
+      ],
+      "next_state": "alternative_to_content"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "alternative_to_content"
+      ],
+      "messages": [
+        "anything"
+      ],
+      "coords": [
+        {
+          "x": "P",
+          "y": "24"
+        }
+      ],
+      "next_state": "last"
+    },
+    {
+      "__type": "declaration",
+      "names": [
+        "anything",
+        "true",
+        "false"
+      ],
+      "value": "message"
+    },
+    {
+      "__type": "declaration",
+      "names": [
+        "100_CONTINUE",
+        "200_OK",
+        "200_OK_alternative",
+        "201_CREATED",
+        "202_ACCEPTED",
+        "204_NO_CONTENT",
+        "300_MULTIPLE_CHOICES",
+        "303_SEE_OTHER",
+        "304_NOT_MODIFIED",
+        "307_TEMPORARY_REDIRECT",
+        "308_PERMANENT_REDIRECT",
+        "400_BAD_REQUEST",
+        "401_UNAUTHORIZED",
+        "403_FORBIDDEN",
+        "404_NOT_FOUND",
+        "405_METHOD_NOT_ALLOWED",
+        "406_NOT_ACCEPTABLE",
+        "409_CONFLICT",
+        "410_GONE",
+        "412_PRECONDITION_FAILED",
+        "413_PAYLOAD_TOO_LARGE",
+        "414_URI_TOO_LONG",
+        "415_UNSUPPORTED_MEDIA_TYPE",
+        "417_EXPECTATION_FAILED",
+        "431_REQUEST_HEADER_FIELDS_TOO_LARGE",
+        "500_INTERNAL_SERVER_ERROR",
+        "501_NOT_IMPLEMENTED",
+        "503_SERVICE_UNAVAILABLE",
+        "accept_charset_matches",
+        "accept_encoding_matches",
+        "accept_language_matches",
+        "accept_matches",
+        "alternative_accept_matches",
+        "alternative_has_accept",
+        "alternative_to_content",
+        "are_content_headers_implemented",
+        "are_expect_extensions_implemented",
+        "are_headers_too_large",
+        "block_accept",
+        "block_create",
+        "block_precondition",
+        "block_precondition_missing",
+        "block_process",
+        "block_request",
+        "block_response",
+        "block_response_alternative",
+        "block_response_process",
+        "block_retrieve",
+        "block_retrieve_missing",
+        "block_system",
+        "create",
+        "create_is_method_put",
+        "create_has_conflict",
+        "create_partial_put",
+        "create_path",
+        "create_see_other",
+        "expects_continue",
+        {
+          "name": "finish",
+          "center": {
+            "x": "P",
+            "y": "26"
+          }
+        },
+        "from_content",
+        "gone_permanently",
+        "has_accept",
+        "has_accept_charset",
+        "has_accept_encoding",
+        "has_accept_language",
+        "has_content",
+        "has_if_match",
+        "has_if_modified_since",
+        "has_if_none_match",
+        "has_if_unmodified_since",
+        "has_multiple_choices",
+        "if_match_matches",
+        "if_modified_since_matches",
+        "if_none_match_matches",
+        "if_unmodified_since_matches",
+        "ignore_accept_block_mismatches",
+        "is_authorized",
+        "is_content_too_large",
+        "is_content_type_accepted",
+        "is_create_done",
+        "is_forbidden",
+        "is_functionality_implemented",
+        "is_method_allowed",
+        "is_method_create",
+        "is_method_delete",
+        "is_method_head_get",
+        "is_method_implemented",
+        "is_method_options",
+        "is_method_process",
+        "is_method_put",
+        "is_method_trace",
+        "is_precondition_safe",
+        "is_process_done",
+        "is_request_block_ok",
+        "is_response_alternative",
+        "is_service_available",
+        "is_system_block_ok",
+        "is_uri_too_long",
+        "last",
+        "missing",
+        "missing_has_precondition",
+        "moved",
+        "moved_permanently",
+        "moved_temporarily",
+        "process",
+        "process_delete",
+        "process_has_conflict",
+        "process_partial_put",
+        "see_other",
+        {
+          "name": "start",
+          "center": {
+            "x": "B",
+            "y": "26"
+          }
+        },
+        "to_content"
+      ],
+      "value": "state"
+    },
+    {
+      "__type": "declaration",
+      "names": [
+        {
+          "name": "accept_charset_matches",
+          "center": {
+            "x": "E",
+            "y": "4"
+          }
+        },
+        {
+          "name": "accept_encoding_matches",
+          "center": {
+            "x": "F",
+            "y": "5"
+          }
+        },
+        {
+          "name": "accept_language_matches",
+          "center": {
+            "x": "D",
+            "y": "3"
+          }
+        },
+        {
+          "name": "accept_matches",
+          "center": {
+            "x": "C",
+            "y": "2"
+          }
+        },
+        {
+          "name": "alternative_accept_matches",
+          "center": {
+            "x": "N",
+            "y": "23"
+          }
+        },
+        {
+          "name": "alternative_has_accept",
+          "center": {
+            "x": "N",
+            "y": "22"
+          }
+        },
+        {
+          "name": "alternative_to_content",
+          "center": {
+            "x": "N",
+            "y": "24"
+          }
+        },
+        {
+          "name": "are_content_headers_implemented",
+          "center": {
+            "x": "B",
+            "y": "20"
+          }
+        },
+        {
+          "name": "are_expect_extensions_implemented",
+          "center": {
+            "x": "B",
+            "y": "18"
+          }
+        },
+        {
+          "name": "are_headers_too_large",
+          "center": {
+            "x": "B",
+            "y": "22"
+          }
+        },
+        {
+          "name": "create",
+          "center": {
+            "x": "M",
+            "y": "2"
+          }
+        },
+        {
+          "name": "create_is_method_put",
+          "center": {
+            "x": "K",
+            "y": "3"
+          }
+        },
+        {
+          "name": "create_has_conflict",
+          "center": {
+            "x": "M",
+            "y": "3"
+          }
+        },
+        {
+          "name": "create_partial_put",
+          "center": {
+            "x": "L",
+            "y": "3"
+          }
+        },
+        {
+          "name": "create_path",
+          "center": {
+            "x": "L",
+            "y": "2"
+          }
+        },
+        {
+          "name": "create_see_other",
+          "center": {
+            "x": "N",
+            "y": "4"
+          }
+        },
+        {
+          "name": "expects_continue",
+          "center": {
+            "x": "B",
+            "y": "10"
+          }
+        },
+        {
+          "name": "from_content",
+          "center": {
+            "x": "B",
+            "y": "6"
+          }
+        },
+        {
+          "name": "gone_permanently",
+          "center": {
+            "x": "I",
+            "y": "4"
+          }
+        },
+        {
+          "name": "has_accept",
+          "center": {
+            "x": "C",
+            "y": "1"
+          }
+        },
+        {
+          "name": "has_accept_charset",
+          "center": {
+            "x": "E",
+            "y": "3"
+          }
+        },
+        {
+          "name": "has_accept_encoding",
+          "center": {
+            "x": "F",
+            "y": "4"
+          }
+        },
+        {
+          "name": "has_accept_language",
+          "center": {
+            "x": "D",
+            "y": "2"
+          }
+        },
+        {
+          "name": "has_content",
+          "center": {
+            "x": "B",
+            "y": "9"
+          }
+        },
+        {
+          "name": "has_if_match",
+          "center": {
+            "x": "C",
+            "y": "9"
+          }
+        },
+        {
+          "name": "has_if_modified_since",
+          "center": {
+            "x": "F",
+            "y": "12"
+          }
+        },
+        {
+          "name": "has_if_none_match",
+          "center": {
+            "x": "E",
+            "y": "11"
+          }
+        },
+        {
+          "name": "has_if_unmodified_since",
+          "center": {
+            "x": "D",
+            "y": "10"
+          }
+        },
+        {
+          "name": "has_multiple_choices",
+          "center": {
+            "x": "N",
+            "y": "9"
+          }
+        },
+        {
+          "name": "if_match_matches",
+          "center": {
+            "x": "C",
+            "y": "10"
+          }
+        },
+        {
+          "name": "if_modified_since_matches",
+          "center": {
+            "x": "F",
+            "y": "13"
+          }
+        },
+        {
+          "name": "if_none_match_matches",
+          "center": {
+            "x": "E",
+            "y": "12"
+          }
+        },
+        {
+          "name": "if_unmodified_since_matches",
+          "center": {
+            "x": "D",
+            "y": "11"
+          }
+        },
+        {
+          "name": "ignore_accept_block_mismatches",
+          "center": {
+            "x": "E",
+            "y": "6"
+          }
+        },
+        {
+          "name": "is_authorized",
+          "center": {
+            "x": "B",
+            "y": "11"
+          }
+        },
+        {
+          "name": "is_content_too_large",
+          "center": {
+            "x": "B",
+            "y": "8"
+          }
+        },
+        {
+          "name": "is_content_type_accepted",
+          "center": {
+            "x": "B",
+            "y": "7"
+          }
+        },
+        {
+          "name": "is_create_done",
+          "center": {
+            "x": "N",
+            "y": "3"
+          }
+        },
+        {
+          "name": "is_forbidden",
+          "center": {
+            "x": "B",
+            "y": "5"
+          }
+        },
+        {
+          "name": "is_functionality_implemented",
+          "center": {
+            "x": "B",
+            "y": "19"
+          }
+        },
+        {
+          "name": "is_method_allowed",
+          "center": {
+            "x": "B",
+            "y": "12"
+          }
+        },
+        {
+          "name": "is_method_create",
+          "center": {
+            "x": "K",
+            "y": "2"
+          }
+        },
+        {
+          "name": "is_method_delete",
+          "center": {
+            "x": "J",
+            "y": "11"
+          }
+        },
+        {
+          "name": "is_method_head_get",
+          "center": {
+            "x": "J",
+            "y": "10"
+          }
+        },
+        {
+          "name": "is_method_implemented",
+          "center": {
+            "x": "B",
+            "y": "21"
+          }
+        },
+        {
+          "name": "is_method_options",
+          "center": {
+            "x": "B",
+            "y": "3"
+          }
+        },
+        {
+          "name": "is_method_process",
+          "center": {
+            "x": "J",
+            "y": "14"
+          }
+        },
+        {
+          "name": "is_method_put",
+          "center": {
+            "x": "J",
+            "y": "13"
+          }
+        },
+        {
+          "name": "is_method_trace",
+          "center": {
+            "x": "B",
+            "y": "4"
+          }
+        },
+        {
+          "name": "is_precondition_safe",
+          "center": {
+            "x": "F",
+            "y": "14"
+          }
+        },
+        {
+          "name": "is_process_done",
+          "center": {
+            "x": "N",
+            "y": "14"
+          }
+        },
+        {
+          "name": "is_request_block_ok",
+          "center": {
+            "x": "B",
+            "y": "2"
+          }
+        },
+        {
+          "name": "is_response_alternative",
+          "center": {
+            "x": "O",
+            "y": "21"
+          }
+        },
+        {
+          "name": "is_service_available",
+          "center": {
+            "x": "B",
+            "y": "24"
+          }
+        },
+        {
+          "name": "is_system_block_ok",
+          "center": {
+            "x": "B",
+            "y": "17"
+          }
+        },
+        {
+          "name": "is_uri_too_long",
+          "center": {
+            "x": "B",
+            "y": "23"
+          }
+        },
+        {
+          "name": "last",
+          "center": {
+            "x": "P",
+            "y": "25"
+          }
+        },
+        {
+          "name": "missing",
+          "center": {
+            "x": "G",
+            "y": "7"
+          }
+        },
+        {
+          "name": "missing_has_precondition",
+          "center": {
+            "x": "G",
+            "y": "9"
+          }
+        },
+        {
+          "name": "moved",
+          "center": {
+            "x": "I",
+            "y": "7"
+          }
+        },
+        {
+          "name": "moved_permanently",
+          "center": {
+            "x": "I",
+            "y": "6"
+          }
+        },
+        {
+          "name": "moved_temporarily",
+          "center": {
+            "x": "I",
+            "y": "5"
+          }
+        },
+        {
+          "name": "process",
+          "center": {
+            "x": "L",
+            "y": "14"
+          }
+        },
+        {
+          "name": "process_delete",
+          "center": {
+            "x": "K",
+            "y": "11"
+          }
+        },
+        {
+          "name": "process_has_conflict",
+          "center": {
+            "x": "K",
+            "y": "14"
+          }
+        },
+        {
+          "name": "process_partial_put",
+          "center": {
+            "x": "K",
+            "y": "13"
+          }
+        },
+        {
+          "name": "see_other",
+          "center": {
+            "x": "N",
+            "y": "10"
+          }
+        },
+        {
+          "name": "to_content",
+          "center": {
+            "x": "N",
+            "y": "8"
+          }
+        }
+      ],
+      "value": "decision"
+    },
+    {
+      "__type": "declaration",
+      "names": [
+        "100_CONTINUE",
+        "200_OK",
+        "200_OK_alternative",
+        "201_CREATED",
+        "202_ACCEPTED",
+        "204_NO_CONTENT",
+        "300_MULTIPLE_CHOICES",
+        "303_SEE_OTHER",
+        "304_NOT_MODIFIED",
+        "307_TEMPORARY_REDIRECT",
+        "308_PERMANENT_REDIRECT",
+        "400_BAD_REQUEST",
+        "401_UNAUTHORIZED",
+        "403_FORBIDDEN",
+        "404_NOT_FOUND",
+        "405_METHOD_NOT_ALLOWED",
+        "406_NOT_ACCEPTABLE",
+        "409_CONFLICT",
+        "410_GONE",
+        "412_PRECONDITION_FAILED",
+        "413_PAYLOAD_TOO_LARGE",
+        "414_URI_TOO_LONG",
+        "415_UNSUPPORTED_MEDIA_TYPE",
+        "417_EXPECTATION_FAILED",
+        "431_REQUEST_HEADER_FIELDS_TOO_LARGE",
+        "500_INTERNAL_SERVER_ERROR",
+        "501_NOT_IMPLEMENTED",
+        "503_SERVICE_UNAVAILABLE"
+      ],
+      "value": "status_code"
+    },
+    {
+      "__type": "declaration",
+      "names": [
+        {
+          "name": "block_accept",
+          "center": {
+            "x": "C",
+            "y": "1"
+          }
+        },
+        {
+          "name": "block_create",
+          "center": {
+            "x": "K",
+            "y": "3"
+          }
+        },
+        {
+          "name": "block_precondition",
+          "center": {
+            "x": "C",
+            "y": "9"
+          }
+        },
+        {
+          "name": "block_precondition_missing",
+          "center": {
+            "x": "G",
+            "y": "9"
+          }
+        },
+        {
+          "name": "block_process",
+          "center": {
+            "x": "J",
+            "y": "10"
+          }
+        },
+        {
+          "name": "block_request",
+          "center": {
+            "x": "B",
+            "y": "12"
+          }
+        },
+        {
+          "name": "block_response",
+          "center": {
+            "x": "N",
+            "y": "10"
+          }
+        },
+        {
+          "name": "block_response_alternative",
+          "center": {
+            "x": "O",
+            "y": "21"
+          }
+        },
+        {
+          "name": "block_response_create",
+          "center": {
+            "x": "N",
+            "y": "3"
+          }
+        },
+        {
+          "name": "block_response_process",
+          "center": {
+            "x": "N",
+            "y": "14"
+          }
+        },
+        {
+          "name": "block_retrieve",
+          "center": {
+            "x": "G",
+            "y": "7"
+          }
+        },
+        {
+          "name": "block_retrieve_missing",
+          "center": {
+            "x": "I",
+            "y": "7"
+          }
+        },
+        {
+          "name": "block_system",
+          "center": {
+            "x": "B",
+            "y": "24"
+          }
+        }
+      ],
+      "value": "block_entry"
+    },
+    {
+      "__type": "declaration",
+      "names": [
+        {
+          "name": "block_accept",
+          "top_left": {
+            "x": "C",
+            "y": "1"
+          },
+          "bottom_right": {
+            "x": "F",
+            "y": "6"
+          }
+        },
+        {
+          "name": "block_create",
+          "top_left": {
+            "x": "J",
+            "y": "1"
+          },
+          "bottom_right": {
+            "x": "M",
+            "y": "5"
+          }
+        },
+        {
+          "name": "block_precondition",
+          "top_left": {
+            "x": "C",
+            "y": "9"
+          },
+          "bottom_right": {
+            "x": "I",
+            "y": "17"
+          }
+        },
+        {
+          "name": "block_process",
+          "top_left": {
+            "x": "J",
+            "y": "9"
+          },
+          "bottom_right": {
+            "x": "M",
+            "y": "16"
+          }
+        },
+        {
+          "name": "block_request",
+          "top_left": {
+            "x": "A",
+            "y": "1"
+          },
+          "bottom_right": {
+            "x": "B",
+            "y": "16"
+          }
+        },
+        {
+          "name": "block_response",
+          "top_left": {
+            "x": "N",
+            "y": "1"
+          },
+          "bottom_right": {
+            "x": "P",
+            "y": "16"
+          }
+        },
+        {
+          "name": "block_response_alternative",
+          "top_left": {
+            "x": "O",
+            "y": "21"
+          },
+          "bottom_right": {
+            "x": "P",
+            "y": "24"
+          }
+        },
+        {
+          "name": "block_retrieve",
+          "top_left": {
+            "x": "G",
+            "y": "1"
+          },
+          "bottom_right": {
+            "x": "I",
+            "y": "8"
+          }
+        },
+        {
+          "name": "block_system",
+          "top_left": {
+            "x": "A",
+            "y": "17"
+          },
+          "bottom_right": {
+            "x": "B",
+            "y": "24"
+          }
+        }
+      ],
+      "value": "block"
+    }
+  ]
+}
