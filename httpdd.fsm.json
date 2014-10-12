@@ -1793,16 +1793,76 @@
         "500_INTERNAL_SERVER_ERROR",
         "501_NOT_IMPLEMENTED",
         "503_SERVICE_UNAVAILABLE",
-        "accept_charset_matches",
-        "accept_encoding_matches",
-        "accept_language_matches",
-        "accept_matches",
-        "alternative_accept_matches",
-        "alternative_has_accept",
-        "alternative_to_content",
-        "are_content_headers_implemented",
-        "are_expect_extensions_implemented",
-        "are_headers_too_large",
+        {
+          "name": "accept_charset_matches",
+          "center": {
+            "x": "E",
+            "y": "4"
+          }
+        },
+        {
+          "name": "accept_encoding_matches",
+          "center": {
+            "x": "F",
+            "y": "5"
+          }
+        },
+        {
+          "name": "accept_language_matches",
+          "center": {
+            "x": "D",
+            "y": "3"
+          }
+        },
+        {
+          "name": "accept_matches",
+          "center": {
+            "x": "C",
+            "y": "2"
+          }
+        },
+        {
+          "name": "alternative_accept_matches",
+          "center": {
+            "x": "N",
+            "y": "23"
+          }
+        },
+        {
+          "name": "alternative_has_accept",
+          "center": {
+            "x": "N",
+            "y": "22"
+          }
+        },
+        {
+          "name": "alternative_to_content",
+          "center": {
+            "x": "N",
+            "y": "24"
+          }
+        },
+        {
+          "name": "are_content_headers_implemented",
+          "center": {
+            "x": "B",
+            "y": "20"
+          }
+        },
+        {
+          "name": "are_expect_extensions_implemented",
+          "center": {
+            "x": "B",
+            "y": "18"
+          }
+        },
+        {
+          "name": "are_headers_too_large",
+          "center": {
+            "x": "B",
+            "y": "22"
+          }
+        },
         "block_accept",
         "block_create",
         "block_precondition",
@@ -1815,67 +1875,420 @@
         "block_retrieve",
         "block_retrieve_missing",
         "block_system",
-        "create",
-        "create_is_method_put",
-        "create_has_conflict",
-        "create_partial_put",
-        "create_path",
-        "create_put",
-        "create_see_other",
-        "expects_continue",
-        "found",
-        "from_content",
-        "has_accept",
-        "has_accept_charset",
-        "has_accept_encoding",
-        "has_accept_language",
-        "has_content",
-        "has_if_match",
-        "has_if_modified_since",
-        "has_if_none_match",
-        "has_if_unmodified_since",
-        "has_multiple_choices",
-        "if_match_matches",
-        "if_modified_since_matches",
-        "if_none_match_matches",
-        "if_unmodified_since_matches",
-        "ignore_accept_block_mismatches",
-        "is_authorized",
-        "is_content_too_large",
-        "is_content_type_accepted",
-        "is_create_done",
-        "is_forbidden",
-        "is_functionality_implemented",
-        "is_method_allowed",
-        "is_method_create",
-        "is_method_delete",
-        "is_method_head_get",
-        "is_method_implemented",
-        "is_method_options",
-        "is_method_process",
-        "is_method_put",
-        "is_method_trace",
-        "is_precondition_safe",
-        "is_process_done",
-        "is_request_block_ok",
+        {
+          "name": "create",
+          "center": {
+            "x": "M",
+            "y": "2"
+          }
+        },
+        {
+          "name": "create_is_method_put",
+          "center": {
+            "x": "K",
+            "y": "3"
+          }
+        },
+        {
+          "name": "create_has_conflict",
+          "center": {
+            "x": "M",
+            "y": "3"
+          }
+        },
+        {
+          "name": "create_partial_put",
+          "center": {
+            "x": "L",
+            "y": "3"
+          }
+        },
+        {
+          "name": "create_path",
+          "center": {
+            "x": "L",
+            "y": "2"
+          }
+        },
+        {
+          "name": "create_see_other",
+          "center": {
+            "x": "N",
+            "y": "4"
+          }
+        },
+        {
+          "name": "expects_continue",
+          "center": {
+            "x": "B",
+            "y": "10"
+          }
+        },
+        {
+          "name": "finish",
+          "center": {
+            "x": "P",
+            "y": "26"
+          }
+        },
+        {
+          "name": "from_content",
+          "center": {
+            "x": "B",
+            "y": "6"
+          }
+        },
+        {
+          "name": "gone_permanently",
+          "center": {
+            "x": "H",
+            "y": "4"
+          }
+        },
+        {
+          "name": "has_accept",
+          "center": {
+            "x": "C",
+            "y": "1"
+          }
+        },
+        {
+          "name": "has_accept_charset",
+          "center": {
+            "x": "E",
+            "y": "3"
+          }
+        },
+        {
+          "name": "has_accept_encoding",
+          "center": {
+            "x": "F",
+            "y": "4"
+          }
+        },
+        {
+          "name": "has_accept_language",
+          "center": {
+            "x": "D",
+            "y": "2"
+          }
+        },
+        {
+          "name": "has_content",
+          "center": {
+            "x": "B",
+            "y": "9"
+          }
+        },
+        {
+          "name": "has_if_match",
+          "center": {
+            "x": "C",
+            "y": "9"
+          }
+        },
+        {
+          "name": "has_if_modified_since",
+          "center": {
+            "x": "F",
+            "y": "12"
+          }
+        },
+        {
+          "name": "has_if_none_match",
+          "center": {
+            "x": "E",
+            "y": "11"
+          }
+        },
+        {
+          "name": "has_if_unmodified_since",
+          "center": {
+            "x": "D",
+            "y": "10"
+          }
+        },
+        {
+          "name": "has_multiple_choices",
+          "center": {
+            "x": "N",
+            "y": "9"
+          }
+        },
+        {
+          "name": "if_match_matches",
+          "center": {
+            "x": "C",
+            "y": "10"
+          }
+        },
+        {
+          "name": "if_modified_since_matches",
+          "center": {
+            "x": "F",
+            "y": "13"
+          }
+        },
+        {
+          "name": "if_none_match_matches",
+          "center": {
+            "x": "E",
+            "y": "12"
+          }
+        },
+        {
+          "name": "if_unmodified_since_matches",
+          "center": {
+            "x": "D",
+            "y": "11"
+          }
+        },
+        {
+          "name": "ignore_accept_block_mismatches",
+          "center": {
+            "x": "E",
+            "y": "6"
+          }
+        },
+        {
+          "name": "is_authorized",
+          "center": {
+            "x": "B",
+            "y": "11"
+          }
+        },
+        {
+          "name": "is_content_too_large",
+          "center": {
+            "x": "B",
+            "y": "8"
+          }
+        },
+        {
+          "name": "is_content_type_accepted",
+          "center": {
+            "x": "B",
+            "y": "7"
+          }
+        },
+        {
+          "name": "is_create_done",
+          "center": {
+            "x": "N",
+            "y": "3"
+          }
+        },
+        {
+          "name": "is_forbidden",
+          "center": {
+            "x": "B",
+            "y": "5"
+          }
+        },
+        {
+          "name": "is_functionality_implemented",
+          "center": {
+            "x": "B",
+            "y": "19"
+          }
+        },
+        {
+          "name": "is_method_allowed",
+          "center": {
+            "x": "B",
+            "y": "12"
+          }
+        },
+        {
+          "name": "is_method_create",
+          "center": {
+            "x": "K",
+            "y": "2"
+          }
+        },
+        {
+          "name": "is_method_delete",
+          "center": {
+            "x": "J",
+            "y": "11"
+          }
+        },
+        {
+          "name": "is_method_head_get",
+          "center": {
+            "x": "J",
+            "y": "10"
+          }
+        },
+        {
+          "name": "is_method_implemented",
+          "center": {
+            "x": "B",
+            "y": "21"
+          }
+        },
+        {
+          "name": "is_method_options",
+          "center": {
+            "x": "B",
+            "y": "3"
+          }
+        },
+        {
+          "name": "is_method_process",
+          "center": {
+            "x": "J",
+            "y": "14"
+          }
+        },
+        {
+          "name": "is_method_put",
+          "center": {
+            "x": "J",
+            "y": "13"
+          }
+        },
+        {
+          "name": "is_method_trace",
+          "center": {
+            "x": "B",
+            "y": "4"
+          }
+        },
+        {
+          "name": "is_precondition_safe",
+          "center": {
+            "x": "F",
+            "y": "14"
+          }
+        },
+        {
+          "name": "is_process_done",
+          "center": {
+            "x": "N",
+            "y": "14"
+          }
+        },
+        {
+          "name": "is_request_block_ok",
+          "center": {
+            "x": "B",
+            "y": "2"
+          }
+        },
         "is_response_alternative",
-        "is_service_available",
-        "is_system_block_ok",
-        "is_uri_too_long",
-        "last",
-        "missing",
-        "missing_has_precondition",
-        "moved",
-        "moved_is_method_create",
-        "moved_permanently",
-        "moved_temporarily",
-        "process",
-        "process_delete",
-        "process_has_conflict",
-        "process_partial_put",
-        "see_other",
-        "start",
-        "to_content"
+        {
+          "name": "is_service_available",
+          "center": {
+            "x": "B",
+            "y": "24"
+          }
+        },
+        {
+          "name": "is_system_block_ok",
+          "center": {
+            "x": "B",
+            "y": "17"
+          }
+        },
+        {
+          "name": "is_uri_too_long",
+          "center": {
+            "x": "B",
+            "y": "23"
+          }
+        },
+        {
+          "name": "last",
+          "center": {
+            "x": "P",
+            "y": "25"
+          }
+        },
+        {
+          "name": "missing",
+          "center": {
+            "x": "G",
+            "y": "7"
+          }
+        },
+        {
+          "name": "missing_has_precondition",
+          "center": {
+            "x": "G",
+            "y": "9"
+          }
+        },
+        {
+          "name": "moved",
+          "center": {
+            "x": "H",
+            "y": "7"
+          }
+        },
+        {
+          "name": "moved_permanently",
+          "center": {
+            "x": "H",
+            "y": "6"
+          }
+        },
+        {
+          "name": "moved_temporarily",
+          "center": {
+            "x": "H",
+            "y": "5"
+          }
+        },
+        {
+          "name": "process",
+          "center": {
+            "x": "L",
+            "y": "14"
+          }
+        },
+        {
+          "name": "process_delete",
+          "center": {
+            "x": "K",
+            "y": "11"
+          }
+        },
+        {
+          "name": "process_has_conflict",
+          "center": {
+            "x": "K",
+            "y": "14"
+          }
+        },
+        {
+          "name": "process_partial_put",
+          "center": {
+            "x": "K",
+            "y": "13"
+          }
+        },
+        {
+          "name": "see_other",
+          "center": {
+            "x": "N",
+            "y": "10"
+          }
+        },
+        {
+          "name": "start",
+          "center": {
+            "x": "B",
+            "y": "26"
+          }
+        },
+        {
+          "name": "to_content",
+          "center": {
+            "x": "N",
+            "y": "8"
+          }
+        }
       ],
       "value": "state"
     },
