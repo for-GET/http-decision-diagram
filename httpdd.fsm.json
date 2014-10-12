@@ -2326,18 +2326,108 @@
     {
       "__type": "declaration",
       "names": [
-        "block_accept",
-        "block_create",
-        "block_precondition",
+        {
+          "name": "block_accept",
+          "top_left": {
+            "x": "C",
+            "y": "1"
+          },
+          "bottom_right": {
+            "x": "F",
+            "y": "6"
+          }
+        },
+        {
+          "name": "block_create",
+          "top_left": {
+            "x": "J",
+            "y": "1"
+          },
+          "bottom_right": {
+            "x": "M",
+            "y": "5"
+          }
+        },
+        {
+          "name": "block_precondition",
+          "top_left": {
+            "x": "C",
+            "y": "9"
+          },
+          "bottom_right": {
+            "x": "I",
+            "y": "17"
+          }
+        },
         "block_precondition_missing",
-        "block_process",
-        "block_request",
-        "block_response",
-        "block_response_alternative",
+        {
+          "name": "block_process",
+          "top_left": {
+            "x": "J",
+            "y": "9"
+          },
+          "bottom_right": {
+            "x": "M",
+            "y": "16"
+          }
+        },
+        {
+          "name": "block_request",
+          "top_left": {
+            "x": "A",
+            "y": "1"
+          },
+          "bottom_right": {
+            "x": "B",
+            "y": "16"
+          }
+        },
+        {
+          "name": "block_response",
+          "top_left": {
+            "x": "N",
+            "y": "1"
+          },
+          "bottom_right": {
+            "x": "P",
+            "y": "16"
+          }
+        },
+        {
+          "name": "block_response_alternative",
+          "top_left": {
+            "x": "M",
+            "y": "22"
+          },
+          "bottom_right": {
+            "x": "P",
+            "y": "24"
+          }
+        },
         "block_response_process",
-        "block_retrieve",
+        {
+          "name": "block_retrieve",
+          "top_left": {
+            "x": "G",
+            "y": "1"
+          },
+          "bottom_right": {
+            "x": "I",
+            "y": "8"
+          }
+        },
         "block_retrieve_missing",
-        "block_system"
+        {
+          "name": "block_system",
+          "top_left": {
+            "x": "A",
+            "y": "17"
+          },
+          "bottom_right": {
+            "x": "B",
+            "y": "24"
+          }
+        }
       ],
       "value": "block"
     }
