@@ -9,7 +9,7 @@
     {
       "__type": "assignment",
       "name": "Version",
-      "value": "v4.0.201311"
+      "value": "v4.0.201410"
     },
     {
       "__type": "assignment",
@@ -1941,7 +1941,7 @@
         {
           "name": "gone_permanently",
           "center": {
-            "x": "H",
+            "x": "I",
             "y": "4"
           }
         },
@@ -2222,21 +2222,21 @@
         {
           "name": "moved",
           "center": {
-            "x": "H",
+            "x": "I",
             "y": "7"
           }
         },
         {
           "name": "moved_permanently",
           "center": {
-            "x": "H",
+            "x": "I",
             "y": "6"
           }
         },
         {
           "name": "moved_temporarily",
           "center": {
-            "x": "H",
+            "x": "I",
             "y": "5"
           }
         },

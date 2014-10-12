@@ -1,5 +1,5 @@
 Title = "HTTP Decision Diagram";
-Version = "v4.0.201311";
+Version = "v4.0.201410";
 Description = "An activity diagram to describe the resolution of HTTP response status codes, given various methods and headers, implemented via semantical callbacks.";
 Initial = start;
 Final = finish;
@@ -265,7 +265,7 @@ create_see_other:N4,
 expects_continue:B10,
 finish:P26,
 from_content:B6,
-gone_permanently:H4,
+gone_permanently:I4,
 has_accept:C1,
 has_accept_charset:E3,
 has_accept_encoding:F4,
@@ -306,9 +306,9 @@ is_uri_too_long:B23,
 last:P25,
 missing:G7,
 missing_has_precondition:G9,
-moved:H7,
-moved_permanently:H6,
-moved_temporarily:H5,
+moved:I7,
+moved_permanently:I6,
+moved_temporarily:I5,
 process:L14,
 process_delete:K11,
 process_has_conflict:K14,
