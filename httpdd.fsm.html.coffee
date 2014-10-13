@@ -10,7 +10,7 @@ declarations =
   block_entry: {}
 transitions = {}
 
-gridMultiplier = 25 # in pixels
+gridMultiplier = 20 # in pixels
 gridCellWidth = 10 # * gridMultiplier for pixels
 gridCellHeight = 4 # * gridMultiplier for pixels
 gridCellsH = "P".charCodeAt(0) - "A".charCodeAt(0)
@@ -27,6 +27,7 @@ paper = new joint.dia.Paper {
   model: graph
   async: true
 }
+# GRID
 V(paper.svg).defs().append V """
 <pattern id="smallGrid" width="#{gridMultiplier}" height="#{gridMultiplier}" patternUnits="userSpaceOnUse">
   <path d="M #{gridMultiplier} 0 L 0 0 0 #{gridMultiplier}" fill="none" stroke="#EEEEEE" stroke-width="0.5"/>
@@ -39,6 +40,57 @@ V(paper.svg).defs().append V """
 V(paper.svg).prepend V """
 <rect width="100%" height="100%" fill="url(#grid)" />
 """
+# COLS,LINS
+do () ->
+  for i in [1..26]
+    graph.addCell new joint.shapes.basic.Text {
+      position:
+        x: gridMultiplier * gridCellWidth * i
+        y: 0
+      size:
+        width: 'auto'
+        height: 'auto'
+      attrs:
+        text:
+          text: String.fromCharCode("A".charCodeAt(0) + i - 1)
+          'font-size': gridMultiplier * .5
+    }
+    graph.addCell new joint.shapes.basic.Text {
+      position:
+        x: 0
+        y: gridMultiplier * gridCellHeight * i
+      size:
+        width: 'auto'
+        height: 'auto'
+      attrs:
+        text:
+          text: '' + i
+          'font-size': gridMultiplier * .5
+    }
+    graph.addCell new joint.shapes.basic.Text {
+      position:
+        x: gridMultiplier * gridCellWidth * i
+        y: paperHeight - gridMultiplier
+      size:
+        width: 'auto'
+        height: 'auto'
+      attrs:
+        text:
+          text: String.fromCharCode("A".charCodeAt(0) + i - 1)
+          'font-size': gridMultiplier * .5
+    }
+    graph.addCell new joint.shapes.basic.Text {
+      position:
+        x: paperWidth - gridMultiplier
+        y: gridMultiplier * gridCellHeight * i
+      size:
+        width: 'auto'
+        height: 'auto'
+      attrs:
+        text:
+          text: '' + i
+          'font-size': gridMultiplier * .5
+    }
 
 # GRAPH OVERRIDE
 
@@ -79,33 +131,60 @@ joint.shapes.fsa.EndState = joint.dia.Element.extend {
   }, joint.dia.Element::defaults
 }
 
-joint.shapes.httpdd.Decision = joint.shapes.basic.Rhombus.extend {
+joint.shapes.httpdd.Decision = joint.dia.Element.extend {
+  markup: '<g class="rotatable"><g class="scalable"><path/></g><text class="decision"/><text class="coord"/></g>'
   defaults: joint.util.deepSupplement {
     type: 'httpdd.Decision',
     size:
       width: gridMultiplier * 2
       height: gridMultiplier * 2
     attrs:
+      '.':
+        fill: '#FFFFFF'
+        stroke: 'none'
       path:
-        transform: 'translate(' + (-gridMultiplier) + ', ' + (-gridMultiplier) + ')'
-      text:
+        d: 'M 30 0 L 60 30 30 60 0 30 z'
+        transform: 'translate(' + (-gridMultiplier * 1.5) + ', ' + (-gridMultiplier * 1.5) + ')'
+        'stroke-width': 0
+        fill: '#EEEEEE'
+      '.decision':
+        'font-size': gridMultiplier * .5
+        text: ''
+        'text-anchor': 'middle'
+        'ref-x': .5
+        'ref-y': .1
+        'ref-dy': 20
+        ref: 'path'
+        'y-alignment': 'middle'
+        fill: 'black'
+        'font-family': 'Arial, helvetica, sans-serif'
+      '.coord':
+        'font-size': gridMultiplier * .5
+        text: ''
+        'text-anchor': 'middle'
+        'ref-x': .5
         'ref-y': .5
-  }, joint.shapes.basic.Rhombus.prototype.defaults
+        'ref-dy': 20
+        ref: 'path'
+        'y-alignment': 'middle'
+        fill: 'black'
+        'font-family': 'Arial, helvetica, sans-serif'
+  }, joint.dia.Element::defaults
 }
 
-joint.shapes.httpdd.BlockEntry = joint.shapes.basic.Rhombus.extend {
-  defaults: joint.util.deepSupplement {
-    type: 'httpdd.BlockEntry',
-    size:
-      width: gridMultiplier
-      height: gridMultiplier
-    attrs:
-      path:
-        transform: 'translate(' + (-gridMultiplier) + ', ' + (-gridMultiplier) + ')'
-      text:
-        'ref-y': .5
-  }, joint.shapes.basic.Rhombus.prototype.defaults
-}
+# joint.shapes.httpdd.BlockEntry = joint.shapes.basic.Rhombus.extend {
+#   defaults: joint.util.deepSupplement {
+#     type: 'httpdd.BlockEntry',
+#     size:
+#       width: gridMultiplier
+#       height: gridMultiplier
+#     attrs:
+#       path:
+#         transform: 'translate(0,0)' # 'translate(' + (-gridMultiplier) + ', ' + (-gridMultiplier) + ')'
+#       text:
+#         'ref-y': .5
+#   }, joint.shapes.basic.Rhombus.prototype.defaults
+# }
 
 joint.shapes.httpdd.StatusCode = joint.shapes.basic.Rect.extend {
   defaults: joint.util.deepSupplement {
@@ -115,7 +194,11 @@ joint.shapes.httpdd.StatusCode = joint.shapes.basic.Rect.extend {
       height: gridMultiplier * 2
     attrs:
       rect:
-        transform: 'translate(' + (-gridMultiplier * 2) + ', ' + (-gridMultiplier) + ')'
+        transform: 'translate(' + (-gridMultiplier * 2.5) + ', ' + (-gridMultiplier * 1.5) + ')'
+        'stroke-width': 0
+        fill: '#EEEEEE'
+      text:
+        'font-size': gridMultiplier * .5
   }, joint.shapes.basic.Rect.prototype.defaults
 }
 
@@ -145,23 +228,25 @@ addDecision = (state) ->
       x: state.center.x
       y: state.center.y
     attrs:
-      text:
-        text: state.name.replace '_', ' '
+      '.decision':
+        text: state.name.replace /_/g, ' '
+      '.coord':
+        text: "#{state.center.col}#{state.center.lin}"
   }
   graph.addCell cell
   cell
 
-addBlockEntry = (state) ->
-  cell = new joint.shapes.httpdd.BlockEntry {
-    position:
-      x: state.center.x
-      y: state.center.y
-    attrs:
-      text:
-        text: '' # state.name
-  }
-  graph.addCell cell
-  cell
+# addBlockEntry = (state) ->
+#   cell = new joint.shapes.httpdd.BlockEntry {
+#     position:
+#       x: state.center.x
+#       y: state.center.y
+#     attrs:
+#       text:
+#         text: '' # state.name
+#   }
+#   graph.addCell cell
+#   cell
 
 addStatusCode = (state) ->
   cell = new joint.shapes.httpdd.StatusCode {
@@ -170,17 +255,24 @@ addStatusCode = (state) ->
       y: state.center.y
     attrs:
       text:
-        text: state.name.replace '_', ' '
+        text: state.name.replace /_/g, ' '
   }
   graph.addCell cell
   cell
 
 addArrow = (transition) ->
   switch transition.message
-    when 'true' then color = '#00FF00'
-    when 'false' then color = '#FF0000'
-    else color = '#0000FF'
+    when 'true'
+      message = 'T'
+      color = '#00FF00'
+    when 'false'
+      message = 'F'
+      color = '#FF0000'
+    when 'anything'
+      message = ''
+      color = '#0000FF'
   cell = new joint.shapes.fsa.Arrow {
+    smooth: false
     source:
       id: transition.state.id
     target:
@@ -194,14 +286,14 @@ addArrow = (transition) ->
       '.marker-target':
         stroke: color
         fill: color
-    labels: [
-      position: .5
-      attrs:
-        text:
-          text: transition.message
-          stroke: color
-          'font-weight': 'bold'
-    ]
+    # labels: [
+    #   position: .5
+    #   attrs:
+    #     text:
+    #       text: message
+    #       'font-weight': 'bold'
+    #       'font-size': gridMultiplier * .75
+    # ]
     vertices: transition.coords
   }
   graph.addCell cell
@@ -210,6 +302,8 @@ addArrow = (transition) ->
 # DATA CORE
 
 parseCoords = ({x, y}) ->
+  col = x
+  lin = y
   # x
   x = x.toUpperCase()
   x += x  if x.length is 1
@@ -217,9 +311,9 @@ parseCoords = ({x, y}) ->
   x = x - "A".charCodeAt(0) + 1
   x = gridMultiplier * gridCellWidth * x
   # y
-  y = parseInt y, 10
+  y = parseInt(y, 10)
   y = gridMultiplier * gridCellHeight * y
-  {x, y}
+  {x, y, col, lin}
 
 addAssignment = (name, value) ->
   vars[name] = value
@@ -260,7 +354,6 @@ $.getJSON 'httpdd.fsm.json', (httpdd) ->
       when 'transition'
         for state in stmt.states
           for message in stmt.messages
-            message = '*'  if message is 'anything'
             addTransition state, stmt.next_state, message, stmt.coords
 
   declarations.decision[vars.Initial] = declarations.state[vars.Initial] = addInitial declarations.state[vars.Initial]
@@ -271,13 +364,22 @@ $.getJSON 'httpdd.fsm.json', (httpdd) ->
     declarations.decision[k] = declarations.state[k] = addDecision v
 
   # FIXME
-  for k, v of declarations.block_entry
-    declarations.block_entry[k] = declarations.state[k] = addBlockEntry v
+  # for k, v of declarations.block_entry
+  #   declarations.block_entry[k] = declarations.state[k] = addBlockEntry v
 
   # for k, v of declarations.status_code
   #   declarations.status_code[k] = declarations.state[k] = addStatusCode v
 
   for k, v of transitions
+    continue  unless declarations.block_entry[v.next_state]?
+    for k2, v2 of transitions
+      continue  unless v2.state is v.next_state
+      v.next_state = v2.next_state
+      break
+
+  for k, v of transitions
+    continue  if declarations.block_entry[v.state]?
+
     # create multiple status code "states"
     if declarations.status_code[v.state]?
       # FIXME
