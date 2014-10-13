@@ -13,10 +13,10 @@ transitions = {}
 gridMultiplier = 20 # in pixels
 gridCellWidth = 10 # * gridMultiplier for pixels
 gridCellHeight = 4 # * gridMultiplier for pixels
-gridCellsH = "P".charCodeAt(0) - "A".charCodeAt(0)
+gridCellsH = "P".charCodeAt(0) - "A".charCodeAt(0) + 1
 gridCellsV = 26
-paperWidth = gridMultiplier * gridCellWidth * (gridCellsH + 2)
-paperHeight = gridMultiplier * gridCellHeight * (gridCellsV + 2)
+paperWidth = gridMultiplier * gridCellWidth * (gridCellsH + 1)
+paperHeight = gridMultiplier * gridCellHeight * (gridCellsV + 1)
 
 graph = new joint.dia.Graph()
 paper = new joint.dia.Paper {
@@ -42,7 +42,7 @@ V(paper.svg).prepend V """
 """
 # COLS,LINS
 do () ->
-  for i in [1..26]
+  for i in [1..gridCellsH]
     graph.addCell new joint.shapes.basic.Text {
       position:
         x: gridMultiplier * gridCellWidth * i
@@ -57,18 +57,6 @@ do () ->
     }
     graph.addCell new joint.shapes.basic.Text {
       position:
-        x: 0
-        y: gridMultiplier * gridCellHeight * i
-      size:
-        width: 'auto'
-        height: 'auto'
-      attrs:
-        text:
-          text: '' + i
-          'font-size': gridMultiplier * .5
-    }
-    graph.addCell new joint.shapes.basic.Text {
-      position:
         x: gridMultiplier * gridCellWidth * i
         y: paperHeight - gridMultiplier
       size:
@@ -77,6 +65,19 @@ do () ->
       attrs:
         text:
           text: String.fromCharCode("A".charCodeAt(0) + i - 1)
+          'font-size': gridMultiplier * .5
+    }
+  for i in [1..gridCellsV]
+    graph.addCell new joint.shapes.basic.Text {
+      position:
+        x: 0
+        y: gridMultiplier * gridCellHeight * i
+      size:
+        width: 'auto'
+        height: 'auto'
+      attrs:
+        text:
+          text: '' + i
           'font-size': gridMultiplier * .5
     }
     graph.addCell new joint.shapes.basic.Text {
