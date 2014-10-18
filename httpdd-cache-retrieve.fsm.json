@@ -1,0 +1,402 @@
+{
+  "__type": "state_machine",
+  "statements": [
+    {
+      "__type": "assignment",
+      "name": "Title",
+      "value": "HTTP Decision Diagram - Cache Retrieve"
+    },
+    {
+      "__type": "assignment",
+      "name": "Version",
+      "value": "v1.0.201410"
+    },
+    {
+      "__type": "assignment",
+      "name": "Description",
+      "value": "An activity diagram to describe the resolution of cache retrieval, given various methods and headers, implemented via semantical callbacks."
+    },
+    {
+      "__type": "assignment",
+      "name": "Initial",
+      "value": "start"
+    },
+    {
+      "__type": "assignment",
+      "name": "Final",
+      "value": "finish"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "start"
+      ],
+      "messages": [
+        "anything"
+      ],
+      "next_state": "block_cache_retrieve"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "last"
+      ],
+      "messages": [
+        "anything"
+      ],
+      "next_state": "finish"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "block_cache_retrieve"
+      ],
+      "messages": [
+        "anything"
+      ],
+      "next_state": "storage_has_uri_match"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "storage_has_uri_match"
+      ],
+      "messages": [
+        "false"
+      ],
+      "coords": [
+        {
+          "x": "C",
+          "y": "2"
+        },
+        {
+          "x": "C",
+          "y": "7"
+        }
+      ],
+      "next_state": "0_PASS"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "storage_has_uri_match"
+      ],
+      "messages": [
+        "true"
+      ],
+      "next_state": "is_method_cacheable"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "is_method_cacheable"
+      ],
+      "messages": [
+        "false"
+      ],
+      "coords": [
+        {
+          "x": "C",
+          "y": "3"
+        },
+        {
+          "x": "C",
+          "y": "7"
+        }
+      ],
+      "next_state": "0_PASS"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "is_method_cacheable"
+      ],
+      "messages": [
+        "true"
+      ],
+      "next_state": "storage_has_headers_match"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "storage_has_headers_match"
+      ],
+      "messages": [
+        "false"
+      ],
+      "coords": [
+        {
+          "x": "C",
+          "y": "4"
+        },
+        {
+          "x": "C",
+          "y": "7"
+        }
+      ],
+      "next_state": "0_PASS"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "storage_has_headers_match"
+      ],
+      "messages": [
+        "true"
+      ],
+      "next_state": "cache_control_has_no_cache_directive"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "cache_control_has_no_cache_directive"
+      ],
+      "messages": [
+        "true"
+      ],
+      "coords": [
+        {
+          "x": "A",
+          "y": "5"
+        },
+        {
+          "x": "A",
+          "y": "6"
+        }
+      ],
+      "next_state": "1_REVALIDATE"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "cache_control_has_no_cache_directive"
+      ],
+      "messages": [
+        "false"
+      ],
+      "next_state": "storage_has_no_cache_directive"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "storage_has_no_cache_directive"
+      ],
+      "messages": [
+        "true"
+      ],
+      "coords": [
+        {
+          "x": "A",
+          "y": "6"
+        }
+      ],
+      "next_state": "1_REVALIDATE"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "storage_has_no_cache_directive"
+      ],
+      "messages": [
+        "false"
+      ],
+      "next_state": "storage_is_fresh"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "storage_is_fresh"
+      ],
+      "messages": [
+        "false"
+      ],
+      "coords": [
+        {
+          "x": "C",
+          "y": "7"
+        }
+      ],
+      "next_state": "0_PASS"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "storage_is_fresh"
+      ],
+      "messages": [
+        "true"
+      ],
+      "coords": [
+        {
+          "x": "B",
+          "y": "8"
+        }
+      ],
+      "next_state": "2_RETRIEVE"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "0_PASS"
+      ],
+      "messages": [
+        "anything"
+      ],
+      "next_state": "last"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "1_REVALIDATE"
+      ],
+      "messages": [
+        "anything"
+      ],
+      "coords": [
+        {
+          "x": "A",
+          "y": "6"
+        },
+        {
+          "x": "A",
+          "y": "7"
+        }
+      ],
+      "next_state": "storage_is_fresh"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "2_RETRIEVE"
+      ],
+      "messages": [
+        "anything"
+      ],
+      "next_state": "last"
+    },
+    {
+      "__type": "declaration",
+      "names": [
+        "anything",
+        "true",
+        "false"
+      ],
+      "value": "message"
+    },
+    {
+      "__type": "declaration",
+      "names": [
+        "0_PASS",
+        "1_REVALIDATE",
+        "2_RETRIEVE",
+        "block_cache_retrieve",
+        "cache_control_has_no_cache_directive",
+        {
+          "name": "finish",
+          "center": {
+            "x": "B",
+            "y": "10"
+          }
+        },
+        "is_method_cacheable",
+        "last",
+        {
+          "name": "start",
+          "center": {
+            "x": "B",
+            "y": "1"
+          }
+        },
+        "storage_has_headers_match",
+        "storage_has_no_cache_directive",
+        "storage_has_uri_match",
+        "storage_is_fresh"
+      ],
+      "value": "state"
+    },
+    {
+      "__type": "declaration",
+      "names": [
+        {
+          "name": "cache_control_has_no_cache_directive",
+          "center": {
+            "x": "B",
+            "y": "5"
+          }
+        },
+        {
+          "name": "is_method_cacheable",
+          "center": {
+            "x": "B",
+            "y": "3"
+          }
+        },
+        {
+          "name": "last",
+          "center": {
+            "x": "B",
+            "y": "9"
+          }
+        },
+        {
+          "name": "storage_has_headers_match",
+          "center": {
+            "x": "B",
+            "y": "4"
+          }
+        },
+        {
+          "name": "storage_has_no_cache_directive",
+          "center": {
+            "x": "B",
+            "y": "6"
+          }
+        },
+        {
+          "name": "storage_has_uri_match",
+          "center": {
+            "x": "B",
+            "y": "2"
+          }
+        },
+        {
+          "name": "storage_is_fresh",
+          "center": {
+            "x": "B",
+            "y": "7"
+          }
+        }
+      ],
+      "value": "decision"
+    },
+    {
+      "__type": "declaration",
+      "names": [
+        "0_PASS",
+        "1_REVALIDATE",
+        "2_RETRIEVE"
+      ],
+      "value": "status_code"
+    },
+    {
+      "__type": "declaration",
+      "names": [
+        {
+          "name": "block_cache_retrieve",
+          "center": {
+            "x": "B",
+            "y": "2"
+          }
+        }
+      ],
+      "value": "block_entry"
+    },
+    {
+      "__type": "declaration",
+      "names": [
+        "block_cache_retrieve"
+      ],
+      "value": "block"
+    }
+  ]
+}

@@ -1,5 +1,5 @@
 Title = "HTTP Decision Diagram - Cache Retrieve";
-Version = "v1.0.201402";
+Version = "v1.0.201410";
 Description = "An activity diagram to describe the resolution of cache retrieval, given various methods and headers, implemented via semantical callbacks.";
 Initial = start;
 Final = finish;
@@ -10,22 +10,22 @@ last:anything -> finish;
 
 
 block_cache_retrieve:anything -> storage_has_uri_match;
-storage_has_uri_match:false -> 0_PASS;
+storage_has_uri_match:false -C2,C7-> 0_PASS;
 storage_has_uri_match:true -> is_method_cacheable;
-is_method_cacheable:false -> 0_PASS;
+is_method_cacheable:false -C3,C7-> 0_PASS;
 is_method_cacheable:true -> storage_has_headers_match;
-storage_has_headers_match:false -> 0_PASS;
+storage_has_headers_match:false -C4,C7-> 0_PASS;
 storage_has_headers_match:true -> cache_control_has_no_cache_directive;
-cache_control_has_no_cache_directive:true -> 1_REVALIDATE;
+cache_control_has_no_cache_directive:true -A5,A6-> 1_REVALIDATE;
 cache_control_has_no_cache_directive:false -> storage_has_no_cache_directive;
-storage_has_no_cache_directive:true -> 1_REVALIDATE;
+storage_has_no_cache_directive:true -A6-> 1_REVALIDATE;
 storage_has_no_cache_directive:false -> storage_is_fresh;
-storage_is_fresh:false -> 0_PASS;
-storage_is_fresh:true -> 2_RETRIEVE;
+storage_is_fresh:false -C7-> 0_PASS;
+storage_is_fresh:true -B8-> 2_RETRIEVE;
 
 
 0_PASS:anything -> last;
-1_REVALIDATE:anything -> storage_is_fresh;
+1_REVALIDATE:anything -A6,A7-> storage_is_fresh;
 2_RETRIEVE:anything -> last;
 
 
@@ -40,9 +40,10 @@ false
 2_RETRIEVE,
 block_cache_retrieve,
 cache_control_has_no_cache_directive,
+finish:B10,
 is_method_cacheable,
 last,
-start,
+start:B1,
 storage_has_headers_match,
 storage_has_no_cache_directive,
 storage_has_uri_match,
@@ -50,10 +51,24 @@ storage_is_fresh
 : state;
 
 
+cache_control_has_no_cache_directive:B5,
+is_method_cacheable:B3,
+last:B9,
+storage_has_headers_match:B4,
+storage_has_no_cache_directive:B6,
+storage_has_uri_match:B2,
+storage_is_fresh:B7
+: decision;
+
+
 0_PASS,
 1_REVALIDATE,
 2_RETRIEVE
-: outcomes;
+: status_code;
+
+
+block_cache_retrieve:B2
+: block_entry;
 
 
 block_cache_retrieve
