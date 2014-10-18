@@ -1,0 +1,452 @@
+{
+  "__type": "state_machine",
+  "statements": [
+    {
+      "__type": "assignment",
+      "name": "Title",
+      "value": "HTTP Decision Diagram - Cache Store"
+    },
+    {
+      "__type": "assignment",
+      "name": "Version",
+      "value": "v1.0.201410"
+    },
+    {
+      "__type": "assignment",
+      "name": "Description",
+      "value": "An activity diagram to describe the resolution of cache storage, given various methods and headers, implemented via semantical callbacks."
+    },
+    {
+      "__type": "assignment",
+      "name": "Initial",
+      "value": "start"
+    },
+    {
+      "__type": "assignment",
+      "name": "Final",
+      "value": "finish"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "start"
+      ],
+      "messages": [
+        "anything"
+      ],
+      "next_state": "block_cache_store"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "last"
+      ],
+      "messages": [
+        "anything"
+      ],
+      "next_state": "finish"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "block_cache_store"
+      ],
+      "messages": [
+        "anything"
+      ],
+      "next_state": "is_method_cacheable"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "is_method_cacheable"
+      ],
+      "messages": [
+        "false"
+      ],
+      "coords": [
+        {
+          "x": "A",
+          "y": "2"
+        }
+      ],
+      "next_state": "0_DONT_STORE"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "is_method_cacheable"
+      ],
+      "messages": [
+        "true"
+      ],
+      "next_state": "cache_control_has_no_store_directive"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "is_status_code_cacheable"
+      ],
+      "messages": [
+        "false"
+      ],
+      "coords": [
+        {
+          "x": "A",
+          "y": "7"
+        },
+        {
+          "x": "A",
+          "y": "2"
+        }
+      ],
+      "next_state": "0_DONT_STORE"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "is_status_code_cacheable"
+      ],
+      "messages": [
+        "true"
+      ],
+      "coords": [
+        {
+          "x": "E",
+          "y": "7"
+        }
+      ],
+      "next_state": "1_STORE"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "cache_control_has_no_store_directive"
+      ],
+      "messages": [
+        "true"
+      ],
+      "coords": [
+        {
+          "x": "A",
+          "y": "3"
+        },
+        {
+          "x": "A",
+          "y": "2"
+        }
+      ],
+      "next_state": "0_DONT_STORE"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "cache_control_has_no_store_directive"
+      ],
+      "messages": [
+        "false"
+      ],
+      "next_state": "is_shared_cache"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "is_shared_cache"
+      ],
+      "messages": [
+        "false"
+      ],
+      "next_state": "cache_control_has_cacheable_directive"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "is_shared_cache"
+      ],
+      "messages": [
+        "true"
+      ],
+      "next_state": "cache_control_has_private_directive"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "cache_control_has_cacheable_directive"
+      ],
+      "messages": [
+        "false"
+      ],
+      "next_state": "is_status_code_cacheable"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "cache_control_has_cacheable_directive"
+      ],
+      "messages": [
+        "true"
+      ],
+      "coords": [
+        {
+          "x": "E",
+          "y": "6"
+        },
+        {
+          "x": "E",
+          "y": "7"
+        }
+      ],
+      "next_state": "1_STORE"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "cache_control_has_private_directive"
+      ],
+      "messages": [
+        "true"
+      ],
+      "coords": [
+        {
+          "x": "A",
+          "y": "4"
+        },
+        {
+          "x": "A",
+          "y": "2"
+        }
+      ],
+      "next_state": "0_DONT_STORE"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "cache_control_has_private_directive"
+      ],
+      "messages": [
+        "false"
+      ],
+      "next_state": "request_has_authorization"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "request_has_authorization"
+      ],
+      "messages": [
+        "false"
+      ],
+      "coords": [
+        {
+          "x": "D",
+          "y": "5"
+        }
+      ],
+      "next_state": "cache_control_has_cacheable_directive"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "request_has_authorization"
+      ],
+      "messages": [
+        "true"
+      ],
+      "next_state": "cache_control_has_revalidate_directive"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "cache_control_has_revalidate_directive"
+      ],
+      "messages": [
+        "false"
+      ],
+      "coords": [
+        {
+          "x": "A",
+          "y": "6"
+        },
+        {
+          "x": "A",
+          "y": "2"
+        }
+      ],
+      "next_state": "0_DONT_STORE"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "cache_control_has_revalidate_directive"
+      ],
+      "messages": [
+        "true"
+      ],
+      "coords": [
+        {
+          "x": "C",
+          "y": "6"
+        }
+      ],
+      "next_state": "cache_control_has_cacheable_directive"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "0_DONT_STORE"
+      ],
+      "messages": [
+        "anything"
+      ],
+      "next_state": "last"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "1_STORE"
+      ],
+      "messages": [
+        "anything"
+      ],
+      "next_state": "last"
+    },
+    {
+      "__type": "declaration",
+      "names": [
+        "anything",
+        "true",
+        "false"
+      ],
+      "value": "message"
+    },
+    {
+      "__type": "declaration",
+      "names": [
+        "0_DONT_STORE",
+        "1_STORE",
+        "block_cache_store",
+        "cache_control_has_cacheable_directive",
+        "cache_control_has_no_store_directive",
+        "cache_control_has_private_directive",
+        "cache_control_has_revalidate_directive",
+        {
+          "name": "finish",
+          "center": {
+            "x": "D",
+            "y": "9"
+          }
+        },
+        "is_method_cacheable",
+        "is_shared_cache",
+        "is_status_code_cacheable",
+        "last",
+        "request_has_authorization",
+        {
+          "name": "start",
+          "center": {
+            "x": "D",
+            "y": "1"
+          }
+        }
+      ],
+      "value": "state"
+    },
+    {
+      "__type": "declaration",
+      "names": [
+        {
+          "name": "cache_control_has_cacheable_directive",
+          "center": {
+            "x": "D",
+            "y": "6"
+          }
+        },
+        {
+          "name": "cache_control_has_no_store_directive",
+          "center": {
+            "x": "D",
+            "y": "3"
+          }
+        },
+        {
+          "name": "cache_control_has_private_directive",
+          "center": {
+            "x": "B",
+            "y": "4"
+          }
+        },
+        {
+          "name": "cache_control_has_revalidate_directive",
+          "center": {
+            "x": "B",
+            "y": "6"
+          }
+        },
+        {
+          "name": "is_method_cacheable",
+          "center": {
+            "x": "D",
+            "y": "2"
+          }
+        },
+        {
+          "name": "is_shared_cache",
+          "center": {
+            "x": "D",
+            "y": "4"
+          }
+        },
+        {
+          "name": "is_status_code_cacheable",
+          "center": {
+            "x": "D",
+            "y": "7"
+          }
+        },
+        {
+          "name": "last",
+          "center": {
+            "x": "D",
+            "y": "8"
+          }
+        },
+        {
+          "name": "request_has_authorization",
+          "center": {
+            "x": "B",
+            "y": "5"
+          }
+        }
+      ],
+      "value": "decision"
+    },
+    {
+      "__type": "declaration",
+      "names": [
+        "0_DONT_STORE",
+        "1_STORE"
+      ],
+      "value": "status_code"
+    },
+    {
+      "__type": "declaration",
+      "names": [
+        {
+          "name": "block_cache_store",
+          "center": {
+            "x": "C",
+            "y": "2"
+          }
+        }
+      ],
+      "value": "block_entry"
+    },
+    {
+      "__type": "declaration",
+      "names": [
+        "block_cache_store"
+      ],
+      "value": "block"
+    }
+  ]
+}

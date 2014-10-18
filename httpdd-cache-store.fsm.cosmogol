@@ -1,0 +1,80 @@
+Title = "HTTP Decision Diagram - Cache Store";
+Version = "v1.0.201410";
+Description = "An activity diagram to describe the resolution of cache storage, given various methods and headers, implemented via semantical callbacks.";
+Initial = start;
+Final = finish;
+
+
+start:anything -> block_cache_store;
+last:anything -> finish;
+
+
+block_cache_store:anything -> is_method_cacheable;
+is_method_cacheable:false -A2-> 0_DONT_STORE;
+is_method_cacheable:true -> cache_control_has_no_store_directive;
+is_status_code_cacheable:false -A7,A2-> 0_DONT_STORE;
+is_status_code_cacheable:true -E7-> 1_STORE;
+cache_control_has_no_store_directive:true -A3,A2-> 0_DONT_STORE;
+cache_control_has_no_store_directive:false -> is_shared_cache;
+is_shared_cache:false -> cache_control_has_cacheable_directive;
+is_shared_cache:true -> cache_control_has_private_directive;
+cache_control_has_cacheable_directive:false -> is_status_code_cacheable;
+cache_control_has_cacheable_directive:true -E6,E7-> 1_STORE;
+cache_control_has_private_directive:true -A4,A2-> 0_DONT_STORE;
+cache_control_has_private_directive:false -> request_has_authorization;
+request_has_authorization:false -D5-> cache_control_has_cacheable_directive;
+request_has_authorization:true -> cache_control_has_revalidate_directive;
+cache_control_has_revalidate_directive:false -A6,A2-> 0_DONT_STORE;
+cache_control_has_revalidate_directive:true -C6-> cache_control_has_cacheable_directive;
+
+
+0_DONT_STORE:anything -> last;
+1_STORE:anything -> last;
+
+
+anything,
+true,
+false
+: message;
+
+
+0_DONT_STORE,
+1_STORE,
+block_cache_store,
+cache_control_has_cacheable_directive,
+cache_control_has_no_store_directive,
+cache_control_has_private_directive,
+cache_control_has_revalidate_directive,
+finish:D9,
+is_method_cacheable,
+is_shared_cache,
+is_status_code_cacheable,
+last,
+request_has_authorization,
+start:D1
+: state;
+
+
+cache_control_has_cacheable_directive:D6,
+cache_control_has_no_store_directive:D3,
+cache_control_has_private_directive:B4,
+cache_control_has_revalidate_directive:B6,
+is_method_cacheable:D2,
+is_shared_cache:D4,
+is_status_code_cacheable:D7,
+last:D8,
+request_has_authorization:B5
+: decision;
+
+
+0_DONT_STORE,
+1_STORE
+: status_code;
+
+
+block_cache_store:C2
+: block_entry;
+
+
+block_cache_store
+: block;

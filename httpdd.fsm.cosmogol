@@ -1,0 +1,459 @@
+Title = "HTTP Decision Diagram";
+Version = "v4.0.201410";
+Description = "An activity diagram to describe the resolution of HTTP response status codes, given various methods and headers, implemented via semantical callbacks.";
+Initial = start;
+Final = finish;
+
+
+start:anything -> block_system;
+last:anything -> finish;
+
+
+block_system:anything -> is_service_available;
+is_service_available:false -A24-> 503_SERVICE_UNAVAILABLE;
+is_service_available:true -> is_uri_too_long;
+is_uri_too_long:true -A23-> 414_URI_TOO_LONG;
+is_uri_too_long:false -> are_headers_too_large;
+are_headers_too_large:true -A22-> 431_REQUEST_HEADER_FIELDS_TOO_LARGE;
+are_headers_too_large:false -> is_method_implemented;
+is_method_implemented:false -A21,A19-> 501_NOT_IMPLEMENTED;
+is_method_implemented:true -> are_content_headers_implemented;
+are_content_headers_implemented:false -A20,A19-> 501_NOT_IMPLEMENTED;
+are_content_headers_implemented:true -> is_functionality_implemented;
+is_functionality_implemented:false -A19-> 501_NOT_IMPLEMENTED;
+is_functionality_implemented:true -> are_expect_extensions_implemented;
+are_expect_extensions_implemented:false -A18-> 417_EXPECTATION_FAILED;
+are_expect_extensions_implemented:true -> is_system_block_ok;
+is_system_block_ok:false -A17-> 500_INTERNAL_SERVER_ERROR;
+is_system_block_ok:true -> block_request;
+
+
+block_request:anything -> is_method_allowed;
+is_method_allowed:false -A12-> 405_METHOD_NOT_ALLOWED;
+is_method_allowed:true -> is_authorized;
+is_authorized:false -A11-> 401_UNAUTHORIZED;
+is_authorized:true -> expects_continue;
+expects_continue:true -A10-> 100_CONTINUE;
+expects_continue:false -> has_content;
+has_content:false -BC9,BC5-> is_forbidden;
+has_content:true -> is_content_too_large;
+is_content_too_large:true -A8-> 413_PAYLOAD_TOO_LARGE;
+is_content_too_large:false -> is_content_type_accepted;
+is_content_type_accepted:false -A7-> 415_UNSUPPORTED_MEDIA_TYPE;
+is_content_type_accepted:true -> from_content;
+from_content:false -A6-> 400_BAD_REQUEST;
+from_content:true -> is_forbidden;
+is_forbidden:true -A5-> 403_FORBIDDEN;
+is_forbidden:false -> is_method_trace;
+is_method_trace:true -A4-> 200_OK;
+is_method_trace:false -> is_method_options;
+is_method_options:true -A3-> 200_OK_alternative;
+is_method_options:false -> is_request_block_ok;
+is_request_block_ok:false -A2-> 400_BAD_REQUEST;
+is_request_block_ok:true -B1-> block_accept;
+
+
+block_accept:anything -> has_accept;
+has_accept:false -D1-> has_accept_language;
+has_accept:true -> accept_matches;
+accept_matches:false -C5,E5-> ignore_accept_block_mismatches;
+accept_matches:true -> has_accept_language;
+has_accept_language:false -E2-> has_accept_charset;
+has_accept_language:true -> accept_language_matches;
+accept_language_matches:false -D5,E5-> ignore_accept_block_mismatches;
+accept_language_matches:true -> has_accept_charset;
+has_accept_charset:false -F3-> has_accept_encoding;
+has_accept_charset:true -> accept_charset_matches;
+accept_charset_matches:false -> ignore_accept_block_mismatches;
+accept_charset_matches:true -> has_accept_encoding;
+has_accept_encoding:false -G4-> block_retrieve;
+has_accept_encoding:true -> accept_encoding_matches;
+accept_encoding_matches:false -E5-> ignore_accept_block_mismatches;
+accept_encoding_matches:true -G5-> block_retrieve;
+ignore_accept_block_mismatches:false -D6-> 406_NOT_ACCEPTABLE;
+ignore_accept_block_mismatches:true -G6-> block_retrieve;
+
+
+block_retrieve:anything -> missing;
+missing:true -G9-> block_precondition_missing;
+missing:false -C7-> block_precondition;
+
+
+block_retrieve_missing:anything -> moved;
+moved:false -K7-> block_create;
+moved:true -> moved_permanently;
+moved_permanently:true -H6-> 308_PERMANENT_REDIRECT;
+moved_permanently:false -> moved_temporarily;
+moved_temporarily:true -H5-> 307_TEMPORARY_REDIRECT;
+moved_temporarily:false -> gone_permanently;
+gone_permanently:true -H4-> 410_GONE;
+gone_permanently:false -I3-> block_create;
+
+
+block_precondition_missing:anything -> missing_has_precondition;
+missing_has_precondition:true -H10-> 412_PRECONDITION_FAILED;
+missing_has_precondition:false -I9-> block_retrieve_missing;
+
+
+block_precondition:anything -> has_if_match;
+has_if_match:true -> if_match_matches;
+has_if_match:false -> has_if_unmodified_since;
+if_match_matches:false -F9,F10-> 412_PRECONDITION_FAILED;
+if_match_matches:true -> has_if_none_match;
+has_if_unmodified_since:false -E10-> has_if_none_match;
+has_if_unmodified_since:true -> if_unmodified_since_matches;
+if_unmodified_since_matches:true -> has_if_none_match;
+if_unmodified_since_matches:false -C15,F15-> 412_PRECONDITION_FAILED;
+has_if_none_match:true -> if_none_match_matches;
+has_if_none_match:false -> has_if_modified_since;
+if_none_match_matches:true -I11,I10-> block_process;
+if_none_match_matches:false -> is_precondition_safe;
+has_if_modified_since:false -I12,I10-> block_process;
+has_if_modified_since:true -> if_modified_since_matches;
+if_modified_since_matches:false -E14-> is_precondition_safe;
+if_modified_since_matches:true -I13,I10-> block_process;
+is_precondition_safe:true -G14-> 304_NOT_MODIFIED;
+is_precondition_safe:false -F15-> 412_PRECONDITION_FAILED;
+
+
+block_create:anything -> create_is_method_put;
+create_is_method_put:true -> create_partial_put;
+create_is_method_put:false -> is_method_create;
+create_partial_put:true -L5-> 400_BAD_REQUEST;
+create_partial_put:false -> create_has_conflict;
+create_has_conflict:true -M4-> 409_CONFLICT;
+create_has_conflict:false -> block_response_create;
+is_method_create:false -K1-> 404_NOT_FOUND;
+is_method_create:true -> create_path;
+create_path:false -L1,M1-> 500_INTERNAL_SERVER_ERROR;
+create_path:true -> create;
+create:false -M1-> 500_INTERNAL_SERVER_ERROR;
+create:true -N2-> block_response_create;
+
+
+block_process:anything -> is_method_head_get;
+is_method_head_get:true -> block_response;
+is_method_head_get:false -> is_method_delete;
+is_method_delete:true -> process_delete;
+is_method_delete:false -> is_method_put;
+process_delete:false -K12-> 500_INTERNAL_SERVER_ERROR;
+process_delete:true -M11,M14-> block_response_process;
+is_method_put:true -> process_partial_put;
+is_method_put:false -> is_method_process;
+process_partial_put:true -L13-> 400_BAD_REQUEST;
+process_partial_put:false -> process_has_conflict;
+process_has_conflict:true -K15-> 409_CONFLICT;
+process_has_conflict:false -> process;
+is_method_process:true -> process_has_conflict;
+is_method_process:false -J16-> 500_INTERNAL_SERVER_ERROR;
+process:false -L16-> 500_INTERNAL_SERVER_ERROR;
+process:true -> block_response_process;
+
+
+block_response_create:anything -> is_create_done;
+is_create_done:false -P3-> 202_ACCEPTED;
+is_create_done:true -> create_see_other;
+create_see_other:true -P4-> 303_SEE_OTHER;
+create_see_other:false -N5-> 201_CREATED;
+
+
+block_response_process:anything -> is_process_done;
+is_process_done:false -P14-> 202_ACCEPTED;
+is_process_done:true -> see_other;
+block_response:anything -> see_other;
+see_other:true -P10-> 303_SEE_OTHER;
+see_other:false -> has_multiple_choices;
+has_multiple_choices:true -P9-> 300_MULTIPLE_CHOICES;
+has_multiple_choices:false -> to_content;
+to_content:false -P8-> 204_NO_CONTENT;
+to_content:true -N7-> 200_OK;
+
+
+100_CONTINUE:anything -A10,A9-> has_content;
+200_OK:anything -> last;
+200_OK_alternative:anything -> block_response_alternative;
+201_CREATED:anything -> last;
+202_ACCEPTED:anything -> block_response_alternative;
+204_NO_CONTENT:anything -> last;
+300_MULTIPLE_CHOICES:anything -> block_response_alternative;
+303_SEE_OTHER:anything -> last;
+304_NOT_MODIFIED:anything -> last;
+307_TEMPORARY_REDIRECT:anything -> last;
+308_PERMANENT_REDIRECT:anything -> last;
+400_BAD_REQUEST:anything -> block_response_alternative;
+401_UNAUTHORIZED:anything -> block_response_alternative;
+403_FORBIDDEN:anything -> block_response_alternative;
+404_NOT_FOUND:anything -> block_response_alternative;
+405_METHOD_NOT_ALLOWED:anything -> block_response_alternative;
+406_NOT_ACCEPTABLE:anything -> block_response_alternative;
+409_CONFLICT:anything -> block_response_alternative;
+410_GONE:anything -> block_response_alternative;
+410_GONE:anything -> block_response_alternative;
+412_PRECONDITION_FAILED:anything -> block_response_alternative;
+413_PAYLOAD_TOO_LARGE:anything -> block_response_alternative;
+414_URI_TOO_LONG:anything -> block_response_alternative;
+415_UNSUPPORTED_MEDIA_TYPE:anything -> block_response_alternative;
+417_EXPECTATION_FAILED:anything -> block_response_alternative;
+431_REQUEST_HEADER_FIELDS_TOO_LARGE:anything -> block_response_alternative;
+500_INTERNAL_SERVER_ERROR:anything -> block_response_alternative;
+501_NOT_IMPLEMENTED:anything -> block_response_alternative;
+503_SERVICE_UNAVAILABLE:anything -> block_response_alternative;
+
+
+block_response_alternative:anything -> is_response_alternative;
+is_response_alternative:false -P21-> last;
+is_response_alternative:true -N21-> alternative_has_accept;
+alternative_has_accept:false -P22-> last;
+alternative_has_accept:true -> alternative_accept_matches;
+alternative_accept_matches:false -P23-> last;
+alternative_accept_matches:true -> alternative_to_content;
+alternative_to_content:anything -P24-> last;
+
+
+anything,
+true,
+false
+: message;
+
+
+100_CONTINUE,
+200_OK,
+200_OK_alternative,
+201_CREATED,
+202_ACCEPTED,
+204_NO_CONTENT,
+300_MULTIPLE_CHOICES,
+303_SEE_OTHER,
+304_NOT_MODIFIED,
+307_TEMPORARY_REDIRECT,
+308_PERMANENT_REDIRECT,
+400_BAD_REQUEST,
+401_UNAUTHORIZED,
+403_FORBIDDEN,
+404_NOT_FOUND,
+405_METHOD_NOT_ALLOWED,
+406_NOT_ACCEPTABLE,
+409_CONFLICT,
+410_GONE,
+412_PRECONDITION_FAILED,
+413_PAYLOAD_TOO_LARGE,
+414_URI_TOO_LONG,
+415_UNSUPPORTED_MEDIA_TYPE,
+417_EXPECTATION_FAILED,
+431_REQUEST_HEADER_FIELDS_TOO_LARGE,
+500_INTERNAL_SERVER_ERROR,
+501_NOT_IMPLEMENTED,
+503_SERVICE_UNAVAILABLE,
+accept_charset_matches,
+accept_encoding_matches,
+accept_language_matches,
+accept_matches,
+alternative_accept_matches,
+alternative_has_accept,
+alternative_to_content,
+are_content_headers_implemented,
+are_expect_extensions_implemented,
+are_headers_too_large,
+block_accept,
+block_create,
+block_precondition,
+block_precondition_missing,
+block_process,
+block_request,
+block_response,
+block_response_alternative,
+block_response_process,
+block_retrieve,
+block_retrieve_missing,
+block_system,
+create,
+create_is_method_put,
+create_has_conflict,
+create_partial_put,
+create_path,
+create_see_other,
+expects_continue,
+finish:P26,
+from_content,
+gone_permanently,
+has_accept,
+has_accept_charset,
+has_accept_encoding,
+has_accept_language,
+has_content,
+has_if_match,
+has_if_modified_since,
+has_if_none_match,
+has_if_unmodified_since,
+has_multiple_choices,
+if_match_matches,
+if_modified_since_matches,
+if_none_match_matches,
+if_unmodified_since_matches,
+ignore_accept_block_mismatches,
+is_authorized,
+is_content_too_large,
+is_content_type_accepted,
+is_create_done,
+is_forbidden,
+is_functionality_implemented,
+is_method_allowed,
+is_method_create,
+is_method_delete,
+is_method_head_get,
+is_method_implemented,
+is_method_options,
+is_method_process,
+is_method_put,
+is_method_trace,
+is_precondition_safe,
+is_process_done,
+is_request_block_ok,
+is_response_alternative,
+is_service_available,
+is_system_block_ok,
+is_uri_too_long,
+last,
+missing,
+missing_has_precondition,
+moved,
+moved_permanently,
+moved_temporarily,
+process,
+process_delete,
+process_has_conflict,
+process_partial_put,
+see_other,
+start:B26,
+to_content
+: state;
+
+
+accept_charset_matches:E4,
+accept_encoding_matches:F5,
+accept_language_matches:D3,
+accept_matches:C2,
+alternative_accept_matches:N23,
+alternative_has_accept:N22,
+alternative_to_content:N24,
+are_content_headers_implemented:B20,
+are_expect_extensions_implemented:B18,
+are_headers_too_large:B22,
+create:M2,
+create_is_method_put:K3,
+create_has_conflict:M3,
+create_partial_put:L3,
+create_path:L2,
+create_see_other:N4,
+expects_continue:B10,
+from_content:B6,
+gone_permanently:I4,
+has_accept:C1,
+has_accept_charset:E3,
+has_accept_encoding:F4,
+has_accept_language:D2,
+has_content:B9,
+has_if_match:C9,
+has_if_modified_since:E12,
+has_if_none_match:E11,
+has_if_unmodified_since:C10,
+has_multiple_choices:N9,
+if_match_matches:E9,
+if_modified_since_matches:E13,
+if_none_match_matches:F11,
+if_unmodified_since_matches:C11,
+ignore_accept_block_mismatches:E6,
+is_authorized:B11,
+is_content_too_large:B8,
+is_content_type_accepted:B7,
+is_create_done:N3,
+is_forbidden:B5,
+is_functionality_implemented:B19,
+is_method_allowed:B12,
+is_method_create:K2,
+is_method_delete:J11,
+is_method_head_get:J10,
+is_method_implemented:B21,
+is_method_options:B3,
+is_method_process:J14,
+is_method_put:J13,
+is_method_trace:B4,
+is_precondition_safe:F14,
+is_process_done:N14,
+is_request_block_ok:B2,
+is_response_alternative:O21,
+is_service_available:B24,
+is_system_block_ok:B17,
+is_uri_too_long:B23,
+last:P25,
+missing:G7,
+missing_has_precondition:H9,
+moved:I7,
+moved_permanently:I6,
+moved_temporarily:I5,
+process:L14,
+process_delete:K11,
+process_has_conflict:K14,
+process_partial_put:K13,
+see_other:N10,
+to_content:N8
+: decision;
+
+
+100_CONTINUE,
+200_OK,
+200_OK_alternative,
+201_CREATED,
+202_ACCEPTED,
+204_NO_CONTENT,
+300_MULTIPLE_CHOICES,
+303_SEE_OTHER,
+304_NOT_MODIFIED,
+307_TEMPORARY_REDIRECT,
+308_PERMANENT_REDIRECT,
+400_BAD_REQUEST,
+401_UNAUTHORIZED,
+403_FORBIDDEN,
+404_NOT_FOUND,
+405_METHOD_NOT_ALLOWED,
+406_NOT_ACCEPTABLE,
+409_CONFLICT,
+410_GONE,
+412_PRECONDITION_FAILED,
+413_PAYLOAD_TOO_LARGE,
+414_URI_TOO_LONG,
+415_UNSUPPORTED_MEDIA_TYPE,
+417_EXPECTATION_FAILED,
+431_REQUEST_HEADER_FIELDS_TOO_LARGE,
+500_INTERNAL_SERVER_ERROR,
+501_NOT_IMPLEMENTED,
+503_SERVICE_UNAVAILABLE
+: status_code;
+
+
+block_accept:C1,
+block_create:K3,
+block_precondition:C9,
+block_precondition_missing:H9,
+block_process:J10,
+block_request:B12,
+block_response:N10,
+block_response_alternative:O21,
+block_response_create:N3,
+block_response_process:N14,
+block_retrieve:G7,
+block_retrieve_missing:I7,
+block_system:B24
+: block_entry;
+
+
+block_accept:C1:F6,
+block_create:J1:M5,
+block_precondition:C9:I17,
+block_process:J9:M16,
+block_request:A1:B16,
+block_response:N1:P16,
+block_response_alternative:O21:P24,
+block_retrieve:G1:I8,
+block_system:A17:B24
+: block;

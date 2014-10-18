@@ -1,3 +1,5 @@
+jsonFsmUrl = window.location.search.substr 1
+jsonFsmUrl = if jsonFsmUrl.length then jsonFsmUrl else 'httpdd.fsm.json'
 $.ajaxSetup cache: false
 
 stmts = []
@@ -13,90 +15,97 @@ transitions = {}
 gridMultiplier = 20 # in pixels
 gridCellWidth = 10 # * gridMultiplier for pixels
 gridCellHeight = 4 # * gridMultiplier for pixels
-gridCellsH = "P".charCodeAt(0) - "A".charCodeAt(0) + 1
-gridCellsV = 26
-paperWidth = gridMultiplier * gridCellWidth * (gridCellsH + 1)
-paperHeight = gridMultiplier * gridCellHeight * (gridCellsV + 1)
-
-graph = new joint.dia.Graph()
-paper = new joint.dia.Paper {
-  el: $ '#paper'
-  width: paperWidth
-  height: paperHeight
-  gridSize: gridMultiplier
-  model: graph
-  async: true
-}
+gridCellsH = 1
+gridCellsV = 1
 cells = []
 
-# GRID
+render = () ->
+  paperWidth = gridMultiplier * gridCellWidth * (gridCellsH + 1)
+  paperHeight = gridMultiplier * gridCellHeight * (gridCellsV + 1)
 
-V(paper.svg).defs().append V """
-<pattern id="smallGrid" width="#{gridMultiplier}" height="#{gridMultiplier}" patternUnits="userSpaceOnUse">
-  <path d="M #{gridMultiplier} 0 L 0 0 0 #{gridMultiplier}" fill="none" stroke="#EEEEEE" stroke-width="0.5"/>
-</pattern>
-<pattern id="grid" width="#{gridMultiplier * 10}" height="#{gridMultiplier * 4}" patternUnits="userSpaceOnUse">
-  <rect width="#{gridMultiplier * 10}" height="#{gridMultiplier * 4}" fill="url(#smallGrid)"/>
-  <path d="M #{gridMultiplier * 10} 0 L 0 0 0 #{gridMultiplier * 4}" fill="none" stroke="#EEEEEE" stroke-width="1"/>
-</pattern>
-"""
-V(paper.svg).prepend V """
-<rect width="100%" height="100%" fill="url(#grid)" />
-"""
+  graph = new joint.dia.Graph()
+  paper = new joint.dia.Paper {
+    el: $ '#paper'
+    width: paperWidth
+    height: paperHeight
+    gridSize: gridMultiplier
+    model: graph
+    async: true
+  }
 
-# COLS,LINS
+  # GRID
 
-do () ->
-  for i in [1..gridCellsH]
-    cells.push new joint.shapes.basic.Text {
-      position:
-        x: gridMultiplier * gridCellWidth * i
-        y: 0
-      size:
-        width: 'auto'
-        height: 'auto'
-      attrs:
-        text:
-          text: String.fromCharCode("A".charCodeAt(0) + i - 1)
-          'font-size': gridMultiplier * .5
-    }
-    cells.push new joint.shapes.basic.Text {
-      position:
-        x: gridMultiplier * gridCellWidth * i
-        y: paperHeight - gridMultiplier
-      size:
-        width: 'auto'
-        height: 'auto'
-      attrs:
-        text:
-          text: String.fromCharCode("A".charCodeAt(0) + i - 1)
-          'font-size': gridMultiplier * .5
-    }
-  for i in [1..gridCellsV]
-    cells.push new joint.shapes.basic.Text {
-      position:
-        x: 0
-        y: gridMultiplier * gridCellHeight * i
-      size:
-        width: 'auto'
-        height: 'auto'
-      attrs:
-        text:
-          text: '' + i
-          'font-size': gridMultiplier * .5
-    }
-    cells.push new joint.shapes.basic.Text {
-      position:
-        x: paperWidth - gridMultiplier
-        y: gridMultiplier * gridCellHeight * i
-      size:
-        width: 'auto'
-        height: 'auto'
-      attrs:
-        text:
-          text: '' + i
-          'font-size': gridMultiplier * .5
-    }
+  V(paper.svg).defs().append V """
+  <pattern id="smallGrid" width="#{gridMultiplier}" height="#{gridMultiplier}" patternUnits="userSpaceOnUse">
+    <path d="M #{gridMultiplier} 0 L 0 0 0 #{gridMultiplier}" fill="none" stroke="#EEEEEE" stroke-width="0.5"/>
+  </pattern>
+  <pattern id="grid" width="#{gridMultiplier * 10}" height="#{gridMultiplier * 4}" patternUnits="userSpaceOnUse">
+    <rect width="#{gridMultiplier * 10}" height="#{gridMultiplier * 4}" fill="url(#smallGrid)"/>
+    <path d="M #{gridMultiplier * 10} 0 L 0 0 0 #{gridMultiplier * 4}" fill="none" stroke="#EEEEEE" stroke-width="1"/>
+  </pattern>
+  """
+  V(paper.svg).prepend V """
+  <rect width="100%" height="100%" fill="url(#grid)" />
+  """
+
+  # COLS,LINS
+
+  do () ->
+    for i in [1..gridCellsH]
+      cells.push new joint.shapes.basic.Text {
+        position:
+          x: gridMultiplier * gridCellWidth * i
+          y: 0
+        size:
+          width: 'auto'
+          height: 'auto'
+        attrs:
+          text:
+            text: String.fromCharCode("A".charCodeAt(0) + i - 1)
+            'font-size': gridMultiplier * .5
+      }
+      cells.push new joint.shapes.basic.Text {
+        position:
+          x: gridMultiplier * gridCellWidth * i
+          y: paperHeight - gridMultiplier
+        size:
+          width: 'auto'
+          height: 'auto'
+        attrs:
+          text:
+            text: String.fromCharCode("A".charCodeAt(0) + i - 1)
+            'font-size': gridMultiplier * .5
+      }
+    for i in [1..gridCellsV]
+      cells.push new joint.shapes.basic.Text {
+        position:
+          x: 0
+          y: gridMultiplier * gridCellHeight * i
+        size:
+          width: 'auto'
+          height: 'auto'
+        attrs:
+          text:
+            text: '' + i
+            'font-size': gridMultiplier * .5
+      }
+      cells.push new joint.shapes.basic.Text {
+        position:
+          x: paperWidth - gridMultiplier
+          y: gridMultiplier * gridCellHeight * i
+        size:
+          width: 'auto'
+          height: 'auto'
+        attrs:
+          text:
+            text: '' + i
+            'font-size': gridMultiplier * .5
+      }
+
+  # CELLS
+
+  graph.addCells cells
+
 
 # GRAPH OVERRIDE
 
@@ -315,9 +324,11 @@ parseCoords = ({x, y}) ->
   x += x  if x.length is 1
   x = x.charCodeAt(0) + (x.charCodeAt(1) - x.charCodeAt(0))/2
   x = x - "A".charCodeAt(0) + 1
+  if x > gridCellsH then gridCellsH = x
   x = gridMultiplier * gridCellWidth * x
   # y
-  y = parseInt(y, 10)
+  y = parseInt y, 10
+  if y > gridCellsV then gridCellsV = y
   y = gridMultiplier * gridCellHeight * y
   {x, y, col, lin}
 
@@ -348,7 +359,7 @@ addTransition = (state, next_state, message, coords = []) ->
 
 # RUN
 
-$.getJSON 'httpdd.fsm.json', (httpdd) ->
+$.getJSON jsonFsmUrl, (httpdd) ->
   stmts = httpdd.statements
 
   for stmt in stmts
@@ -388,8 +399,7 @@ $.getJSON 'httpdd.fsm.json', (httpdd) ->
 
     # create multiple status code "states"
     if declarations.status_code[v.state]?
-      # FIXME
-      continue  unless v.state in ['100_CONTINUE']
+      continue  unless v.coords.length
       v.state =
         name: declarations.state[v.state].name
         center: v.coords[0]
@@ -410,6 +420,6 @@ $.getJSON 'httpdd.fsm.json', (httpdd) ->
 
     transitions[k] = addArrow v
 
-  graph.addCells cells
+  render()
 
 #
