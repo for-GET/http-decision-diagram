@@ -1134,6 +1134,16 @@
       "messages": [
         "true"
       ],
+      "next_state": "has_if_none_match"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "if_unmodified_since_matches"
+      ],
+      "messages": [
+        "false"
+      ],
       "coords": [
         {
           "x": "D",
@@ -1145,16 +1155,6 @@
         }
       ],
       "next_state": "412_PRECONDITION_FAILED"
-    },
-    {
-      "__type": "transition",
-      "states": [
-        "if_unmodified_since_matches"
-      ],
-      "messages": [
-        "false"
-      ],
-      "next_state": "has_if_none_match"
     },
     {
       "__type": "transition",
@@ -1190,13 +1190,7 @@
       "messages": [
         "true"
       ],
-      "coords": [
-        {
-          "x": "E",
-          "y": "14"
-        }
-      ],
-      "next_state": "is_precondition_safe"
+      "next_state": "has_if_modified_since"
     },
     {
       "__type": "transition",
@@ -1206,7 +1200,13 @@
       "messages": [
         "false"
       ],
-      "next_state": "has_if_modified_since"
+      "coords": [
+        {
+          "x": "E",
+          "y": "14"
+        }
+      ],
+      "next_state": "is_precondition_safe"
     },
     {
       "__type": "transition",
