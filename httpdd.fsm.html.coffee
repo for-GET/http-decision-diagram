@@ -1,3 +1,5 @@
+jsonFsmUrl = window.location.search.substr 1
+jsonFsmUrl = if jsonFsmUrl.length then jsonFsmUrl else 'httpdd.fsm.json'
 $.ajaxSetup cache: false
 
 stmts = []
@@ -348,7 +350,7 @@ addTransition = (state, next_state, message, coords = []) ->
 
 # RUN
 
-$.getJSON 'httpdd.fsm.json', (httpdd) ->
+$.getJSON jsonFsmUrl, (httpdd) ->
   stmts = httpdd.statements
 
   for stmt in stmts
