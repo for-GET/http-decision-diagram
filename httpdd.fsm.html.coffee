@@ -27,7 +27,10 @@ paper = new joint.dia.Paper {
   model: graph
   async: true
 }
+cells = []
+
 # GRID
+
 V(paper.svg).defs().append V """
 <pattern id="smallGrid" width="#{gridMultiplier}" height="#{gridMultiplier}" patternUnits="userSpaceOnUse">
   <path d="M #{gridMultiplier} 0 L 0 0 0 #{gridMultiplier}" fill="none" stroke="#EEEEEE" stroke-width="0.5"/>
@@ -40,10 +43,12 @@ V(paper.svg).defs().append V """
 V(paper.svg).prepend V """
 <rect width="100%" height="100%" fill="url(#grid)" />
 """
+
 # COLS,LINS
+
 do () ->
   for i in [1..gridCellsH]
-    graph.addCell new joint.shapes.basic.Text {
+    cells.push new joint.shapes.basic.Text {
       position:
         x: gridMultiplier * gridCellWidth * i
         y: 0
@@ -55,7 +60,7 @@ do () ->
           text: String.fromCharCode("A".charCodeAt(0) + i - 1)
           'font-size': gridMultiplier * .5
     }
-    graph.addCell new joint.shapes.basic.Text {
+    cells.push new joint.shapes.basic.Text {
       position:
         x: gridMultiplier * gridCellWidth * i
         y: paperHeight - gridMultiplier
@@ -68,7 +73,7 @@ do () ->
           'font-size': gridMultiplier * .5
     }
   for i in [1..gridCellsV]
-    graph.addCell new joint.shapes.basic.Text {
+    cells.push new joint.shapes.basic.Text {
       position:
         x: 0
         y: gridMultiplier * gridCellHeight * i
@@ -80,7 +85,7 @@ do () ->
           text: '' + i
           'font-size': gridMultiplier * .5
     }
-    graph.addCell new joint.shapes.basic.Text {
+    cells.push new joint.shapes.basic.Text {
       position:
         x: paperWidth - gridMultiplier
         y: gridMultiplier * gridCellHeight * i
@@ -211,7 +216,7 @@ addInitial = (state) ->
       x: state.center.x
       y: state.center.y
   }
-  graph.addCell cell
+  cells.push cell
   cell
 
 addFinal = (state) ->
@@ -220,7 +225,7 @@ addFinal = (state) ->
       x: state.center.x
       y: state.center.y
   }
-  graph.addCell cell
+  cells.push cell
   cell
 
 addDecision = (state) ->
@@ -234,7 +239,7 @@ addDecision = (state) ->
       '.coord':
         text: "#{state.center.col}#{state.center.lin}"
   }
-  graph.addCell cell
+  cells.push cell
   cell
 
 # addBlockEntry = (state) ->
@@ -246,7 +251,7 @@ addDecision = (state) ->
 #       text:
 #         text: '' # state.name
 #   }
-#   graph.addCell cell
+#   cells.push cell
 #   cell
 
 addStatusCode = (state) ->
@@ -258,7 +263,7 @@ addStatusCode = (state) ->
       text:
         text: state.name.replace /_/g, ' '
   }
-  graph.addCell cell
+  cells.push cell
   cell
 
 addArrow = (transition) ->
@@ -297,7 +302,7 @@ addArrow = (transition) ->
     # ]
     vertices: transition.coords
   }
-  graph.addCell cell
+  cells.push cell
   cell
 
 # DATA CORE
@@ -404,5 +409,7 @@ $.getJSON 'httpdd.fsm.json', (httpdd) ->
       v.next_state = declarations.state[v.next_state]
 
     transitions[k] = addArrow v
+
+  graph.addCells cells
 
 #
