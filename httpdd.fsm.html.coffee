@@ -399,8 +399,7 @@ $.getJSON jsonFsmUrl, (httpdd) ->
 
     # create multiple status code "states"
     if declarations.status_code[v.state]?
-      # FIXME
-      continue  unless v.state in ['100_CONTINUE']
+      continue  unless v.coords.length
       v.state =
         name: declarations.state[v.state].name
         center: v.coords[0]
