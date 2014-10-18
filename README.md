@@ -8,7 +8,9 @@ And it goes on Twitter as [#httpdd](https://twitter.com/search/realtime?q=httpdd
 
 The diagram follows the indications in [RFC7230](https://tools.ietf.org/html/rfc7230) [RFC7231](https://tools.ietf.org/html/rfc7231) [RFC7232](https://tools.ietf.org/html/rfc7232) [RFC7233](https://tools.ietf.org/html/rfc7233) [RFC7234](https://tools.ietf.org/html/rfc7234) [RFC7235](https://tools.ietf.org/html/rfc7235), and fills in the void where necessary. Under no circumstances does this diagram override the HTTP specifications. If it does, please file an issue as soon as possible.
 
-**The diagram is available in multiple formats. [See the documentation here](doc/README.md).**
+[SVG version](http://for-get.github.io/http-decision-diagram/httpdd.fsm.html).
+
+**The diagram is also available in [SVG](http://for-get.github.io/http-decision-diagram/httpdd.fsm.html) and [JSON](httpdd.fsm.json) format and more. [See the documentation here](doc/README.md).**
 
 ![HTTP headers status](https://rawgithub.com/for-GET/http-decision-diagram/master/httpdd.png)
 
