@@ -854,6 +854,12 @@
       "messages": [
         "true"
       ],
+      "coords": [
+        {
+          "x": "G",
+          "y": "9"
+        }
+      ],
       "next_state": "block_precondition_missing"
     },
     {
@@ -1012,7 +1018,7 @@
       ],
       "coords": [
         {
-          "x": "G",
+          "x": "H",
           "y": "10"
         }
       ],
@@ -1050,15 +1056,9 @@
         "has_if_match"
       ],
       "messages": [
-        "false"
+        "true"
       ],
-      "coords": [
-        {
-          "x": "D",
-          "y": "9"
-        }
-      ],
-      "next_state": "has_if_unmodified_since"
+      "next_state": "if_match_matches"
     },
     {
       "__type": "transition",
@@ -1066,9 +1066,9 @@
         "has_if_match"
       ],
       "messages": [
-        "true"
+        "false"
       ],
-      "next_state": "if_match_matches"
+      "next_state": "has_if_unmodified_since"
     },
     {
       "__type": "transition",
@@ -1080,12 +1080,12 @@
       ],
       "coords": [
         {
-          "x": "C",
-          "y": "15"
+          "x": "F",
+          "y": "9"
         },
         {
           "x": "F",
-          "y": "15"
+          "y": "10"
         }
       ],
       "next_state": "412_PRECONDITION_FAILED"
@@ -1098,7 +1098,7 @@
       "messages": [
         "true"
       ],
-      "next_state": "has_if_unmodified_since"
+      "next_state": "has_if_none_match"
     },
     {
       "__type": "transition",
@@ -1146,7 +1146,7 @@
       ],
       "coords": [
         {
-          "x": "D",
+          "x": "C",
           "y": "15"
         },
         {
@@ -1162,22 +1162,6 @@
         "has_if_none_match"
       ],
       "messages": [
-        "false"
-      ],
-      "coords": [
-        {
-          "x": "F",
-          "y": "11"
-        }
-      ],
-      "next_state": "has_if_modified_since"
-    },
-    {
-      "__type": "transition",
-      "states": [
-        "has_if_none_match"
-      ],
-      "messages": [
         "true"
       ],
       "next_state": "if_none_match_matches"
@@ -1185,10 +1169,10 @@
     {
       "__type": "transition",
       "states": [
-        "if_none_match_matches"
+        "has_if_none_match"
       ],
       "messages": [
-        "true"
+        "false"
       ],
       "next_state": "has_if_modified_since"
     },
@@ -1198,13 +1182,27 @@
         "if_none_match_matches"
       ],
       "messages": [
-        "false"
+        "true"
       ],
       "coords": [
         {
-          "x": "E",
-          "y": "14"
+          "x": "I",
+          "y": "11"
+        },
+        {
+          "x": "I",
+          "y": "10"
         }
+      ],
+      "next_state": "block_process"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "if_none_match_matches"
+      ],
+      "messages": [
+        "false"
       ],
       "next_state": "is_precondition_safe"
     },
@@ -1246,6 +1244,12 @@
       "messages": [
         "false"
       ],
+      "coords": [
+        {
+          "x": "E",
+          "y": "14"
+        }
+      ],
       "next_state": "is_precondition_safe"
     },
     {
@@ -1278,7 +1282,7 @@
       ],
       "coords": [
         {
-          "x": "I",
+          "x": "G",
           "y": "14"
         }
       ],
@@ -2606,7 +2610,7 @@
         {
           "name": "has_if_modified_since",
           "center": {
-            "x": "F",
+            "x": "E",
             "y": "12"
           }
         },
@@ -2620,7 +2624,7 @@
         {
           "name": "has_if_unmodified_since",
           "center": {
-            "x": "D",
+            "x": "C",
             "y": "10"
           }
         },
@@ -2634,28 +2638,28 @@
         {
           "name": "if_match_matches",
           "center": {
-            "x": "C",
-            "y": "10"
+            "x": "E",
+            "y": "9"
           }
         },
         {
           "name": "if_modified_since_matches",
           "center": {
-            "x": "F",
+            "x": "E",
             "y": "13"
           }
         },
         {
           "name": "if_none_match_matches",
           "center": {
-            "x": "E",
-            "y": "12"
+            "x": "F",
+            "y": "11"
           }
         },
         {
           "name": "if_unmodified_since_matches",
           "center": {
-            "x": "D",
+            "x": "C",
             "y": "11"
           }
         },
@@ -2837,7 +2841,7 @@
         {
           "name": "missing_has_precondition",
           "center": {
-            "x": "G",
+            "x": "H",
             "y": "9"
           }
         },
@@ -2968,7 +2972,7 @@
         {
           "name": "block_precondition_missing",
           "center": {
-            "x": "G",
+            "x": "H",
             "y": "9"
           }
         },
