@@ -18,6 +18,18 @@ The diagram follows the indications in [RFC7230](https://tools.ietf.org/html/rfc
 
 ---
 
+# cache-retrieve and cache-store
+
+[Darrel Miller](http://www.bizcoder.com/caching-is-hard-draw-me-a-picture) started something similar to HTTP decision diagram, in terms of deciding whether to cache (store) or not a HTTP response, and whether to respond to a HTTP request with a cached HTTP response or not.
+
+**The cache-retrieve diagram is available in [SVG](http://for-get.github.io/http-decision-diagram/httpdd.fsm.html?httpdd-cache-retrieve.fsm.json) and [JSON](httpdd-cache-retrieve.fsm.json) format.**
+
+**The cache-store diagram is available in [SVG](http://for-get.github.io/http-decision-diagram/httpdd.fsm.html?httpdd-cache-store.fsm.json) and [JSON](httpdd-cache-store.fsm.json) format.**
+
+---
+
+---
+
 ## Why, why, why
 
 ### Why is this helpful?
