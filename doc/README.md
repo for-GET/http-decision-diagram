@@ -4,7 +4,7 @@ An activity diagram to describe the resolution of HTTP response status codes, gi
 
 And it goes on Twitter as [#httpdd](https://twitter.com/search/realtime?q=httpdd) - HTTP Decision Diagram.
 
-The diagram follows the indications in [httpbis](http://tools.ietf.org/wg/httpbis/), and fills in the void where necessary. Under no circumstances does this diagram override the HTTP specifications. If it does, please file an issue as soon as possible.
+The diagram follows the indications in [RFC7230](https://tools.ietf.org/html/rfc7230) [RFC7231](https://tools.ietf.org/html/rfc7231) [RFC7232](https://tools.ietf.org/html/rfc7232) [RFC7233](https://tools.ietf.org/html/rfc7233) [RFC7234](https://tools.ietf.org/html/rfc7234) [RFC7235](https://tools.ietf.org/html/rfc7235), and fills in the void where necessary. Under no circumstances does this diagram override the HTTP specifications. If it does, please file an issue as soon as possible.
 
 ## Diagram
 
@@ -19,8 +19,6 @@ The diagram follows the indications in [httpbis](http://tools.ietf.org/wg/httpbi
 * [JSON](../httpdd.fsm.json) (export)
 * [Cosmogol](../httpdd.fsm.cosmogol) (source)
     * Internet Draft - [Cosmogol: a language to describe finite state machines](http://tools.ietf.org/html/draft-bortzmeyer-language-state-machines-01)
-    * TODO add diagram LinCol positions; useful information for creating a debugger
-    * TODO one day the PNG diagram should be generated strictly from the Cosmogol source
 
 ## Overview
 

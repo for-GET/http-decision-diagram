@@ -2,12 +2,19 @@
 
 An activity diagram to describe the resolution of HTTP response status codes, given various headers, implemented via semantical callbacks.
 
-**This is part of a bigger effort: [for-GET HTTP](https://github.com/for-GET/README).**
-
 And it goes on Twitter as [#httpdd](https://twitter.com/search/realtime?q=httpdd) - HTTP Decision Diagram.
 
-This is a follow-up/fork of Alan Dean's [http-headers-status](http://code.google.com/p/http-headers-status).
+**This is part of a bigger effort: [for-GET HTTP](https://github.com/for-GET/README).**
 
+The diagram follows the indications in [RFC7230](https://tools.ietf.org/html/rfc7230) [RFC7231](https://tools.ietf.org/html/rfc7231) [RFC7232](https://tools.ietf.org/html/rfc7232) [RFC7233](https://tools.ietf.org/html/rfc7233) [RFC7234](https://tools.ietf.org/html/rfc7234) [RFC7235](https://tools.ietf.org/html/rfc7235), and fills in the void where necessary. Under no circumstances does this diagram override the HTTP specifications. If it does, please file an issue as soon as possible.
+
+**[See the documentation here](doc/README.md).**
+
+![HTTP headers status](https://rawgithub.com/for-GET/http-decision-diagram/master/httpdd.png)
+
+---
+
+---
 
 ## Why, why, why
 
