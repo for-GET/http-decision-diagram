@@ -12,7 +12,7 @@ declarations =
   block_entry: {}
 transitions = {}
 
-gridMultiplier = 20 # in pixels
+gridMultiplier = parseInt(window.location.hash.substr(1), 10) or 20 # in pixels
 gridCellWidth = 10 # * gridMultiplier for pixels
 gridCellHeight = 4 # * gridMultiplier for pixels
 gridCellsH = 1
