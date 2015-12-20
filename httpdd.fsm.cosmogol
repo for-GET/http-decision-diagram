@@ -29,22 +29,24 @@ is_system_block_ok:true -> block_request;
 
 
 block_request:anything -> is_method_allowed;
-is_method_allowed:false -A12-> 405_METHOD_NOT_ALLOWED;
+is_method_allowed:false -A13-> 405_METHOD_NOT_ALLOWED;
 is_method_allowed:true -> is_authorized;
-is_authorized:false -A11-> 401_UNAUTHORIZED;
+is_authorized:false -A12-> 401_UNAUTHORIZED;
 is_authorized:true -> expects_continue;
-expects_continue:true -A10-> 100_CONTINUE;
+expects_continue:true -A11-> 100_CONTINUE;
 expects_continue:false -> has_content;
-has_content:false -BC9,BC5-> is_forbidden;
+has_content:false -BC10,BC6-> is_forbidden;
 has_content:true -> is_content_too_large;
-is_content_too_large:true -A8-> 413_PAYLOAD_TOO_LARGE;
+is_content_too_large:true -A9-> 413_PAYLOAD_TOO_LARGE;
 is_content_too_large:false -> is_content_type_accepted;
-is_content_type_accepted:false -A7-> 415_UNSUPPORTED_MEDIA_TYPE;
+is_content_type_accepted:false -A8-> 415_UNSUPPORTED_MEDIA_TYPE;
 is_content_type_accepted:true -> from_content;
-from_content:false -A6-> 400_BAD_REQUEST;
+from_content:false -A7-> 400_BAD_REQUEST;
 from_content:true -> is_forbidden;
-is_forbidden:true -A5-> 403_FORBIDDEN;
-is_forbidden:false -> is_method_trace;
+is_forbidden:true -A6-> 403_FORBIDDEN;
+is_forbidden:false -> is_legally_restricted;
+is_legally_restricted:true -A5-> 451_UNAVAILABLE_FOR_LEGAL_REASONS;
+is_legally_restricted:false -> is_method_trace;
 is_method_trace:true -A4-> 200_OK;
 is_method_trace:false -> is_method_options;
 is_method_options:true -A3-> 200_OK_alternative;
@@ -169,7 +171,7 @@ to_content:false -P8-> 204_NO_CONTENT;
 to_content:true -N7-> 200_OK;
 
 
-100_CONTINUE:anything -A10,A9-> has_content;
+100_CONTINUE:anything -A11,A10-> has_content;
 200_OK:anything -> last;
 200_OK_alternative:anything -> block_response_alternative;
 201_CREATED:anything -> last;
@@ -195,6 +197,7 @@ to_content:true -N7-> 200_OK;
 415_UNSUPPORTED_MEDIA_TYPE:anything -> block_response_alternative;
 417_EXPECTATION_FAILED:anything -> block_response_alternative;
 431_REQUEST_HEADER_FIELDS_TOO_LARGE:anything -> block_response_alternative;
+451_UNAVAILABLE_FOR_LEGAL_REASONS:anything -> block_response_alternative;
 500_INTERNAL_SERVER_ERROR:anything -> block_response_alternative;
 501_NOT_IMPLEMENTED:anything -> block_response_alternative;
 503_SERVICE_UNAVAILABLE:anything -> block_response_alternative;
@@ -241,6 +244,7 @@ false
 415_UNSUPPORTED_MEDIA_TYPE,
 417_EXPECTATION_FAILED,
 431_REQUEST_HEADER_FIELDS_TOO_LARGE,
+451_UNAVAILABLE_FOR_LEGAL_REASONS,
 500_INTERNAL_SERVER_ERROR,
 501_NOT_IMPLEMENTED,
 503_SERVICE_UNAVAILABLE,
@@ -297,6 +301,7 @@ is_content_type_accepted,
 is_create_done,
 is_forbidden,
 is_functionality_implemented,
+is_legally_restricted,
 is_method_allowed,
 is_method_create,
 is_method_delete,
@@ -345,14 +350,14 @@ create_has_conflict:M3,
 create_partial_put:L3,
 create_path:L2,
 create_see_other:N4,
-expects_continue:B10,
-from_content:B6,
+expects_continue:B11,
+from_content:B7,
 gone_permanently:I4,
 has_accept:C1,
 has_accept_charset:E3,
 has_accept_encoding:F4,
 has_accept_language:D2,
-has_content:B9,
+has_content:B10,
 has_if_match:C9,
 has_if_modified_since:E12,
 has_if_none_match:E11,
@@ -363,13 +368,14 @@ if_modified_since_matches:E13,
 if_none_match_matches:F11,
 if_unmodified_since_matches:C11,
 ignore_accept_block_mismatches:E6,
-is_authorized:B11,
-is_content_too_large:B8,
-is_content_type_accepted:B7,
+is_authorized:B12,
+is_content_too_large:B9,
+is_content_type_accepted:B8,
 is_create_done:N3,
-is_forbidden:B5,
+is_forbidden:B6,
 is_functionality_implemented:B19,
-is_method_allowed:B12,
+is_legally_restricted:B5,
+is_method_allowed:B13,
 is_method_create:K2,
 is_method_delete:J11,
 is_method_head_get:J10,
@@ -425,6 +431,7 @@ to_content:N8
 415_UNSUPPORTED_MEDIA_TYPE,
 417_EXPECTATION_FAILED,
 431_REQUEST_HEADER_FIELDS_TOO_LARGE,
+451_UNAVAILABLE_FOR_LEGAL_REASONS,
 500_INTERNAL_SERVER_ERROR,
 501_NOT_IMPLEMENTED,
 503_SERVICE_UNAVAILABLE
@@ -436,7 +443,7 @@ block_create:K3,
 block_precondition:C9,
 block_precondition_missing:H9,
 block_process:J10,
-block_request:B12,
+block_request:B13,
 block_response:N10,
 block_response_alternative:O21,
 block_response_create:N3,
