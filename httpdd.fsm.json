@@ -293,7 +293,7 @@
       "coords": [
         {
           "x": "A",
-          "y": "12"
+          "y": "13"
         }
       ],
       "next_state": "405_METHOD_NOT_ALLOWED"
@@ -319,7 +319,7 @@
       "coords": [
         {
           "x": "A",
-          "y": "11"
+          "y": "12"
         }
       ],
       "next_state": "401_UNAUTHORIZED"
@@ -345,7 +345,7 @@
       "coords": [
         {
           "x": "A",
-          "y": "10"
+          "y": "11"
         }
       ],
       "next_state": "100_CONTINUE"
@@ -371,11 +371,11 @@
       "coords": [
         {
           "x": "BC",
-          "y": "9"
+          "y": "10"
         },
         {
           "x": "BC",
-          "y": "5"
+          "y": "6"
         }
       ],
       "next_state": "is_forbidden"
@@ -401,7 +401,7 @@
       "coords": [
         {
           "x": "A",
-          "y": "8"
+          "y": "9"
         }
       ],
       "next_state": "413_PAYLOAD_TOO_LARGE"
@@ -427,7 +427,7 @@
       "coords": [
         {
           "x": "A",
-          "y": "7"
+          "y": "8"
         }
       ],
       "next_state": "415_UNSUPPORTED_MEDIA_TYPE"
@@ -453,7 +453,7 @@
       "coords": [
         {
           "x": "A",
-          "y": "6"
+          "y": "7"
         }
       ],
       "next_state": "400_BAD_REQUEST"
@@ -479,7 +479,7 @@
       "coords": [
         {
           "x": "A",
-          "y": "5"
+          "y": "6"
         }
       ],
       "next_state": "403_FORBIDDEN"
@@ -488,6 +488,32 @@
       "__type": "transition",
       "states": [
         "is_forbidden"
+      ],
+      "messages": [
+        "false"
+      ],
+      "next_state": "is_legally_restricted"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "is_legally_restricted"
+      ],
+      "messages": [
+        "true"
+      ],
+      "coords": [
+        {
+          "x": "A",
+          "y": "5"
+        }
+      ],
+      "next_state": "451_UNAVAILABLE_FOR_LEGAL_REASONS"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "is_legally_restricted"
       ],
       "messages": [
         "false"
@@ -1893,11 +1919,11 @@
       "coords": [
         {
           "x": "A",
-          "y": "10"
+          "y": "11"
         },
         {
           "x": "A",
-          "y": "9"
+          "y": "10"
         }
       ],
       "next_state": "has_content"
@@ -2155,6 +2181,16 @@
     {
       "__type": "transition",
       "states": [
+        "451_UNAVAILABLE_FOR_LEGAL_REASONS"
+      ],
+      "messages": [
+        "anything"
+      ],
+      "next_state": "block_response_alternative"
+    },
+    {
+      "__type": "transition",
+      "states": [
         "500_INTERNAL_SERVER_ERROR"
       ],
       "messages": [
@@ -2329,6 +2365,7 @@
         "415_UNSUPPORTED_MEDIA_TYPE",
         "417_EXPECTATION_FAILED",
         "431_REQUEST_HEADER_FIELDS_TOO_LARGE",
+        "451_UNAVAILABLE_FOR_LEGAL_REASONS",
         "500_INTERNAL_SERVER_ERROR",
         "501_NOT_IMPLEMENTED",
         "503_SERVICE_UNAVAILABLE",
@@ -2391,6 +2428,7 @@
         "is_create_done",
         "is_forbidden",
         "is_functionality_implemented",
+        "is_legally_restricted",
         "is_method_allowed",
         "is_method_create",
         "is_method_delete",
@@ -2548,14 +2586,14 @@
           "name": "expects_continue",
           "center": {
             "x": "B",
-            "y": "10"
+            "y": "11"
           }
         },
         {
           "name": "from_content",
           "center": {
             "x": "B",
-            "y": "6"
+            "y": "7"
           }
         },
         {
@@ -2597,7 +2635,7 @@
           "name": "has_content",
           "center": {
             "x": "B",
-            "y": "9"
+            "y": "10"
           }
         },
         {
@@ -2674,21 +2712,21 @@
           "name": "is_authorized",
           "center": {
             "x": "B",
-            "y": "11"
+            "y": "12"
           }
         },
         {
           "name": "is_content_too_large",
           "center": {
             "x": "B",
-            "y": "8"
+            "y": "9"
           }
         },
         {
           "name": "is_content_type_accepted",
           "center": {
             "x": "B",
-            "y": "7"
+            "y": "8"
           }
         },
         {
@@ -2702,7 +2740,7 @@
           "name": "is_forbidden",
           "center": {
             "x": "B",
-            "y": "5"
+            "y": "6"
           }
         },
         {
@@ -2713,10 +2751,17 @@
           }
         },
         {
+          "name": "is_legally_restricted",
+          "center": {
+            "x": "B",
+            "y": "5"
+          }
+        },
+        {
           "name": "is_method_allowed",
           "center": {
             "x": "B",
-            "y": "12"
+            "y": "13"
           }
         },
         {
@@ -2939,6 +2984,7 @@
         "415_UNSUPPORTED_MEDIA_TYPE",
         "417_EXPECTATION_FAILED",
         "431_REQUEST_HEADER_FIELDS_TOO_LARGE",
+        "451_UNAVAILABLE_FOR_LEGAL_REASONS",
         "500_INTERNAL_SERVER_ERROR",
         "501_NOT_IMPLEMENTED",
         "503_SERVICE_UNAVAILABLE"
@@ -2987,7 +3033,7 @@
           "name": "block_request",
           "center": {
             "x": "B",
-            "y": "12"
+            "y": "13"
           }
         },
         {
