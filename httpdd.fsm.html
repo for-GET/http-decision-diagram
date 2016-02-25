@@ -3,6 +3,13 @@
   <head>
     <title>HTTP Decision Diagram</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jointjs/0.8.1/joint.css"></link>
+    <script>
+      // fix Chrome 48+
+      // http://jointjs.com/blog/get-transform-to-element-polyfill.html
+      SVGElement.prototype.getTransformToElement = SVGElement.prototype.getTransformToElement || function(toElement) {
+          return toElement.getScreenCTM().inverse().multiply(this.getScreenCTM());
+      };
+    </script>       
     <script src="http://coffeescript.org/extras/coffee-script.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jointjs/0.8.1/joint.all.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jointjs/0.8.1/joint.shapes.fsa.js"></script>
