@@ -1,6 +1,8 @@
 jsonFsmUrl = window.location.search.substr 1
 jsonFsmUrl = if jsonFsmUrl.length then jsonFsmUrl else 'httpdd.fsm.json'
 $.ajaxSetup cache: false
+window.onhashchange = () ->
+  window.location.reload()
 
 stmts = []
 vars = {}
