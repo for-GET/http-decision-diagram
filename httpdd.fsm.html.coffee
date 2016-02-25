@@ -18,10 +18,13 @@ gridCellHeight = 4 # * gridMultiplier for pixels
 gridCellsH = 1
 gridCellsV = 1
 cells = []
+fontSize = gridMultiplier * .5
+# http://www.w3schools.com/cssref/css_websafe_fonts.asp
+fontFamily = '"Trebuchet MS", Helvetica, sans-serif'
 
 render = () ->
-  paperWidth = gridMultiplier * gridCellWidth * (gridCellsH + 1)
-  paperHeight = gridMultiplier * gridCellHeight * (gridCellsV + 1)
+  paperWidth = gridMultiplier * gridCellWidth * gridCellsH
+  paperHeight = gridMultiplier * gridCellHeight * gridCellsV
 
   graph = new joint.dia.Graph()
   paper = new joint.dia.Paper {
@@ -39,9 +42,9 @@ render = () ->
   <pattern id="smallGrid" width="#{gridMultiplier}" height="#{gridMultiplier}" patternUnits="userSpaceOnUse">
     <path d="M #{gridMultiplier} 0 L 0 0 0 #{gridMultiplier}" fill="none" stroke="#EEEEEE" stroke-width="0.5"/>
   </pattern>
-  <pattern id="grid" width="#{gridMultiplier * 10}" height="#{gridMultiplier * 4}" patternUnits="userSpaceOnUse">
-    <rect width="#{gridMultiplier * 10}" height="#{gridMultiplier * 4}" fill="url(#smallGrid)"/>
-    <path d="M #{gridMultiplier * 10} 0 L 0 0 0 #{gridMultiplier * 4}" fill="none" stroke="#EEEEEE" stroke-width="1"/>
+  <pattern id="grid" width="#{gridMultiplier * gridCellWidth}" height="#{gridMultiplier * gridCellHeight}" patternUnits="userSpaceOnUse">
+    <rect width="#{gridMultiplier * gridCellWidth}" height="#{gridMultiplier * gridCellHeight}" fill="url(#smallGrid)"/>
+    <path d="M #{gridMultiplier * gridCellWidth} 0 L 0 0 0 #{gridMultiplier * gridCellHeight}" fill="none" stroke="#EEEEEE" stroke-width="1"/>
   </pattern>
   """
   V(paper.svg).prepend V """
@@ -51,10 +54,10 @@ render = () ->
   # COLS,LINS
 
   do () ->
-    for i in [1..gridCellsH]
+    for i in [1..gridCellsH - 1]
       cells.push new joint.shapes.basic.Text {
         position:
-          x: gridMultiplier * gridCellWidth * i
+          x: paperWidth * i / gridCellsH
           y: 0
         size:
           width: 'auto'
@@ -62,44 +65,61 @@ render = () ->
         attrs:
           text:
             text: String.fromCharCode("A".charCodeAt(0) + i - 1)
-            'font-size': gridMultiplier * .5
+            transform: "translate(#{-fontSize / 2}, 0)"
+            'font-size': fontSize
+            'font-family': fontFamily
+            'font-weight': 'bold'
+            fill: '#AAAAAA'
       }
       cells.push new joint.shapes.basic.Text {
         position:
-          x: gridMultiplier * gridCellWidth * i
-          y: paperHeight - gridMultiplier
+          x: paperWidth * i / gridCellsH
+          y: paperHeight
         size:
           width: 'auto'
           height: 'auto'
         attrs:
           text:
             text: String.fromCharCode("A".charCodeAt(0) + i - 1)
-            'font-size': gridMultiplier * .5
+            transform: "translate(#{-fontSize / 2}, #{-fontSize})"
+            'font-size': fontSize
+            'font-family': fontFamily
+            'font-weight': 'bold'
+            fill: '#AAAAAA'
       }
-    for i in [1..gridCellsV]
+
+    for i in [1..gridCellsV - 1]
       cells.push new joint.shapes.basic.Text {
         position:
           x: 0
-          y: gridMultiplier * gridCellHeight * i
+          y: paperHeight * i / gridCellsV
         size:
           width: 'auto'
           height: 'auto'
         attrs:
           text:
-            text: '' + i
-            'font-size': gridMultiplier * .5
+            text: if i > 9 then '' + i else ' ' + i
+            transform: "translate(0, #{-fontSize / 2})"
+            'font-size': fontSize
+            'font-family': fontFamily
+            'font-weight': 'bold'
+            fill: '#AAAAAA'
       }
       cells.push new joint.shapes.basic.Text {
         position:
-          x: paperWidth - gridMultiplier
-          y: gridMultiplier * gridCellHeight * i
+          x: paperWidth
+          y: paperHeight * i / gridCellsV
         size:
           width: 'auto'
           height: 'auto'
         attrs:
           text:
-            text: '' + i
-            'font-size': gridMultiplier * .5
+            text: if i > 9 then '' + i else ' ' + i
+            transform: "translate(#{-fontSize}, #{-fontSize / 2})"
+            'font-size': fontSize
+            'font-family': fontFamily
+            'font-weight': 'bold'
+            fill: '#AAAAAA'
       }
 
   # CELLS
@@ -111,81 +131,88 @@ render = () ->
 
 joint.shapes.httpdd = {}
 
-joint.shapes.fsa.StartState = joint.dia.Element.extend {
-  markup: '<g class="rotatable"><g class="scalable"><circle/></g></g>'
-  defaults: joint.util.deepSupplement {
-    type: 'fsa.StartState'
-    size:
-      width: gridMultiplier * 2
-      height: gridMultiplier * 2
-    attrs:
-      circle:
-        transform: 'translate(0,0)' # 'translate(' + (gridMultiplier) + ', ' + (gridMultiplier) + ')'
-        r: gridMultiplier
-        fill: 'black'
-  }, joint.dia.Element::defaults
-}
+do () ->
+  diameter = gridMultiplier * 2
 
-joint.shapes.fsa.EndState = joint.dia.Element.extend {
-  markup: '<g class="rotatable"><g class="scalable"><circle class="outer"/><circle class="inner"/></g></g>'
-  defaults: joint.util.deepSupplement {
-    type: 'fsa.EndState'
-    size:
-      width: gridMultiplier * 2
-      height: gridMultiplier * 2
-    attrs:
-      '.outer':
-        transform: 'translate(0,0)' # 'translate(' + (gridMultiplier) + ', ' + (gridMultiplier) + ')'
-        r: gridMultiplier
-        fill: 'white'
-        stroke: 'black'
-      '.inner':
-        transform: 'translate(0,0)' # 'translate(' + (gridMultiplier) + ', ' + (gridMultiplier) + ')'
-        r: gridMultiplier / 2
-        fill: 'black'
-  }, joint.dia.Element::defaults
-}
+  joint.shapes.fsa.StartState = joint.dia.Element.extend {
+    markup: '<g class="rotatable"><g class="scalable"><circle/></g></g>'
+    defaults: joint.util.deepSupplement {
+      type: 'fsa.StartState'
+      size:
+        width: diameter
+        height: diameter
+      attrs:
+        circle:
+          r: diameter / 2
+          fill: 'black'
+    }, joint.dia.Element::defaults
+  }
 
-joint.shapes.httpdd.Decision = joint.dia.Element.extend {
-  markup: '<g class="rotatable"><g class="scalable"><path/></g><text class="decision"/><text class="coord"/></g>'
-  defaults: joint.util.deepSupplement {
-    type: 'httpdd.Decision',
-    size:
-      width: gridMultiplier * 2
-      height: gridMultiplier * 2
-    attrs:
-      '.':
-        fill: '#FFFFFF'
-        stroke: 'none'
-      path:
-        d: 'M 30 0 L 60 30 30 60 0 30 z'
-        transform: 'translate(' + (-gridMultiplier * 1.5) + ', ' + (-gridMultiplier * 1.5) + ')'
-        'stroke-width': 0
-        fill: '#EEEEEE'
-      '.decision':
-        'font-size': gridMultiplier * .5
-        text: ''
-        'text-anchor': 'middle'
-        'ref-x': .5
-        'ref-y': .1
-        'ref-dy': 20
-        ref: 'path'
-        'y-alignment': 'middle'
-        fill: 'black'
-        'font-family': 'Arial, helvetica, sans-serif'
-      '.coord':
-        'font-size': gridMultiplier * .5
-        text: ''
-        'text-anchor': 'middle'
-        'ref-x': .5
-        'ref-y': .5
-        'ref-dy': 20
-        ref: 'path'
-        'y-alignment': 'middle'
-        fill: 'black'
-        'font-family': 'Arial, helvetica, sans-serif'
-  }, joint.dia.Element::defaults
-}
+do () ->
+  diameter = gridMultiplier * 2
+
+  joint.shapes.fsa.EndState = joint.dia.Element.extend {
+    markup: '<g class="rotatable"><g class="scalable"><circle class="outer"/><circle class="inner"/></g></g>'
+    defaults: joint.util.deepSupplement {
+      type: 'fsa.EndState'
+      size:
+        width: diameter
+        height: diameter
+      attrs:
+        '.outer':
+          r: diameter
+          fill: 'white'
+          stroke: 'black'
+        '.inner':
+          r: diameter / 2
+          fill: 'black'
+    }, joint.dia.Element::defaults
+  }
+
+do () ->
+  width = gridMultiplier * 2
+  height = gridMultiplier * 2
+
+  joint.shapes.httpdd.Decision = joint.dia.Element.extend {
+    markup: '<g class="rotatable"><g class="scalable"><path/></g><text class="decision"/><text class="coord"/></g>'
+    defaults: joint.util.deepSupplement {
+      type: 'httpdd.Decision',
+      size:
+        width: width
+        height: height
+      attrs:
+        '.':
+          fill: '#FFFFFF'
+          stroke: 'none'
+        path:
+          d: "M #{height / 2} 0 L #{height} #{width / 2} #{height / 2} #{width} 0 #{width / 2} z"
+          transform: 'translate(' + (-height / 2) + ', ' + (-width / 2) + ')'
+          'stroke-width': 0
+          fill: '#EEEEEE'
+        '.decision':
+          'font-size': fontSize
+          'font-weight': 'bold'
+          text: ''
+          'text-anchor': 'middle'
+          ref: 'path'
+          'y-alignment': 'middle'
+          fill: 'black'
+          'font-family': fontFamily
+          'ref-x': .5
+          'ref-y': .2
+        '.coord':
+          'font-size': fontSize
+          'font-weight': 'bold'
+          text: ''
+          'text-anchor': 'middle'
+          'ref-x': .5
+          'ref-y': .5
+          ref: 'path'
+          'y-alignment': 'middle'
+          fill: '#AAAAAA'
+          'font-family': fontFamily
+    }, joint.dia.Element::defaults
+  }
 
 # joint.shapes.httpdd.BlockEntry = joint.shapes.basic.Rhombus.extend {
 #   defaults: joint.util.deepSupplement {
@@ -201,21 +228,40 @@ joint.shapes.httpdd.Decision = joint.dia.Element.extend {
 #   }, joint.shapes.basic.Rhombus.prototype.defaults
 # }
 
-joint.shapes.httpdd.StatusCode = joint.shapes.basic.Rect.extend {
-  defaults: joint.util.deepSupplement {
-    type: 'httpdd.StatusCode',
-    size:
-      width: gridMultiplier * 10
-      height: gridMultiplier * 2
-    attrs:
-      rect:
-        transform: 'translate(' + (-gridMultiplier * 2.5) + ', ' + (-gridMultiplier * 1.5) + ')'
-        'stroke-width': 0
-        fill: '#EEEEEE'
-      text:
-        'font-size': gridMultiplier * .5
-  }, joint.shapes.basic.Rect.prototype.defaults
-}
+do () ->
+  width = gridMultiplier * gridCellWidth
+  height = gridMultiplier * gridCellHeight / 2
+
+  joint.shapes.httpdd.StatusCode = joint.dia.Element.extend {
+    markup: '<g class="rotatable"><g class="scalable"><path/></g><text class="status"/></g>'
+    defaults: joint.util.deepSupplement {
+      type: 'httpdd.StatusCode',
+      size:
+        width: width
+        height: height
+      attrs:
+        '.':
+          fill: '#FFFFFF'
+          stroke: 'none'
+        path:
+          d: "M #{height} 0 L #{height} #{width} L 0 #{width} L 0 0 z"
+          transform: 'translate(' + (-height / 2) + ', ' + (-width / 2) + ')'
+          'stroke-width': 0
+          fill: '#EEEEEE'
+        '.status':
+          'font-size': fontSize
+          'font-weight': 'bold'
+          text: ''
+          'text-anchor': 'middle'
+          ref: 'path'
+          'y-alignment': 'middle'
+          fill: 'black'
+          'font-family': fontFamily
+          'ref-x': .5
+          'ref-y': .5
+          'ref-dy': gridMultiplier
+    }, joint.dia.Element::defaults
+  }
 
 # GRAPH CORE
 
@@ -269,7 +315,7 @@ addStatusCode = (state) ->
       x: state.center.x
       y: state.center.y
     attrs:
-      text:
+      '.status':
         text: state.name.replace /_/g, ' '
   }
   cells.push cell
@@ -307,7 +353,7 @@ addArrow = (transition) ->
     #     text:
     #       text: message
     #       'font-weight': 'bold'
-    #       'font-size': gridMultiplier * .75
+    #       'font-size': fontSize / 2
     # ]
     vertices: transition.coords
   }
@@ -324,11 +370,11 @@ parseCoords = ({x, y}) ->
   x += x  if x.length is 1
   x = x.charCodeAt(0) + (x.charCodeAt(1) - x.charCodeAt(0))/2
   x = x - "A".charCodeAt(0) + 1
-  if x > gridCellsH then gridCellsH = x
+  if x > gridCellsH then gridCellsH = x + 1
   x = gridMultiplier * gridCellWidth * x
   # y
   y = parseInt y, 10
-  if y > gridCellsV then gridCellsV = y
+  if y > gridCellsV then gridCellsV = y + 1
   y = gridMultiplier * gridCellHeight * y
   {x, y, col, lin}
 
