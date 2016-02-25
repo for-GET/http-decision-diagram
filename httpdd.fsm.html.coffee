@@ -21,6 +21,15 @@ cells = []
 fontSize = gridMultiplier * .5
 # http://www.w3schools.com/cssref/css_websafe_fonts.asp
 fontFamily = '"Trebuchet MS", Helvetica, sans-serif'
+colorGrid = '#EEEEEE'
+colorCoord = '#AAAAAA'
+colorStatusCodeText = '#000000'
+colorStatusCodeBlock = '#EEEEEE'
+colorDecisionText = '#000000'
+colorDecisionBlock = '#EEEEEE'
+colorTrue = '#00FF00'
+colorFalse = '#FF0000'
+colorAnything = '#0000FF'
 
 render = () ->
   paperWidth = gridMultiplier * gridCellWidth * gridCellsH
@@ -40,11 +49,11 @@ render = () ->
 
   V(paper.svg).defs().append V """
   <pattern id="smallGrid" width="#{gridMultiplier}" height="#{gridMultiplier}" patternUnits="userSpaceOnUse">
-    <path d="M #{gridMultiplier} 0 L 0 0 0 #{gridMultiplier}" fill="none" stroke="#EEEEEE" stroke-width="0.5"/>
+    <path d="M #{gridMultiplier} 0 L 0 0 0 #{gridMultiplier}" fill="none" stroke="#{colorGrid}" stroke-width="0.5"/>
   </pattern>
   <pattern id="grid" width="#{gridMultiplier * gridCellWidth}" height="#{gridMultiplier * gridCellHeight}" patternUnits="userSpaceOnUse">
     <rect width="#{gridMultiplier * gridCellWidth}" height="#{gridMultiplier * gridCellHeight}" fill="url(#smallGrid)"/>
-    <path d="M #{gridMultiplier * gridCellWidth} 0 L 0 0 0 #{gridMultiplier * gridCellHeight}" fill="none" stroke="#EEEEEE" stroke-width="1"/>
+    <path d="M #{gridMultiplier * gridCellWidth} 0 L 0 0 0 #{gridMultiplier * gridCellHeight}" fill="none" stroke="#{colorGrid}" stroke-width="1"/>
   </pattern>
   """
   V(paper.svg).prepend V """
@@ -69,7 +78,7 @@ render = () ->
             'font-size': fontSize
             'font-family': fontFamily
             'font-weight': 'bold'
-            fill: '#AAAAAA'
+            fill: colorCoord
       }
       cells.push new joint.shapes.basic.Text {
         position:
@@ -85,7 +94,7 @@ render = () ->
             'font-size': fontSize
             'font-family': fontFamily
             'font-weight': 'bold'
-            fill: '#AAAAAA'
+            fill: colorCoord
       }
 
     for i in [1..gridCellsV - 1]
@@ -103,7 +112,7 @@ render = () ->
             'font-size': fontSize
             'font-family': fontFamily
             'font-weight': 'bold'
-            fill: '#AAAAAA'
+            fill: colorCoord
       }
       cells.push new joint.shapes.basic.Text {
         position:
@@ -119,7 +128,7 @@ render = () ->
             'font-size': fontSize
             'font-family': fontFamily
             'font-weight': 'bold'
-            fill: '#AAAAAA'
+            fill: colorCoord
       }
 
   # CELLS
@@ -188,7 +197,7 @@ do () ->
           d: "M #{height / 2} 0 L #{height} #{width / 2} #{height / 2} #{width} 0 #{width / 2} z"
           transform: 'translate(' + (-height / 2) + ', ' + (-width / 2) + ')'
           'stroke-width': 0
-          fill: '#EEEEEE'
+          fill: colorDecisionBlock
         '.decision':
           'font-size': fontSize
           'font-weight': 'bold'
@@ -196,7 +205,7 @@ do () ->
           'text-anchor': 'middle'
           ref: 'path'
           'y-alignment': 'middle'
-          fill: 'black'
+          fill: colorDecisionText
           'font-family': fontFamily
           'ref-x': .5
           'ref-y': .2
@@ -209,7 +218,7 @@ do () ->
           'ref-y': .5
           ref: 'path'
           'y-alignment': 'middle'
-          fill: '#AAAAAA'
+          fill: colorCoord
           'font-family': fontFamily
     }, joint.dia.Element::defaults
   }
@@ -247,7 +256,7 @@ do () ->
           d: "M #{height} 0 L #{height} #{width} L 0 #{width} L 0 0 z"
           transform: 'translate(' + (-height / 2) + ', ' + (-width / 2) + ')'
           'stroke-width': 0
-          fill: '#EEEEEE'
+          fill: colorStatusCodeBlock
         '.status':
           'font-size': fontSize
           'font-weight': 'bold'
@@ -255,7 +264,7 @@ do () ->
           'text-anchor': 'middle'
           ref: 'path'
           'y-alignment': 'middle'
-          fill: 'black'
+          fill: colorStatusCodeText
           'font-family': fontFamily
           'ref-x': .5
           'ref-y': .5
@@ -325,13 +334,13 @@ addArrow = (transition) ->
   switch transition.message
     when 'true'
       message = 'T'
-      color = '#00FF00'
+      color = colorTrue
     when 'false'
       message = 'F'
-      color = '#FF0000'
+      color = colorFalse
     when 'anything'
       message = ''
-      color = '#0000FF'
+      color = colorAnything
   cell = new joint.shapes.fsa.Arrow {
     smooth: false
     source:
