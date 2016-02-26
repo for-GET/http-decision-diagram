@@ -32704,7 +32704,9 @@ joint.dia.Paper.prototype.toSVG = function(opt) {
         // Chrome has a problem with namespaces on images. It does not prefix it
         // with xmlns namespace and so they are not displayed. Therefore, use this trick
         // to add the xmlns namespace before every xlink manually.
-        svgString = svgString.replace('xlink="', 'xmlns:xlink="');
+
+        // FIXME ANDREI
+        //svgString = svgString.replace('xlink="', 'xmlns:xlink="');
     }
 
     if (isIE) {
