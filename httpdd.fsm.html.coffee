@@ -489,14 +489,14 @@ $.getJSON jsonFsmUrl, (httpdd) ->
   $('#description').text vars.Description
   $('#to_png').on 'click', () ->
     paper.toPNG (dataUrl) ->
-      window.open dataUrl, '_blank'
+      window.location = dataUrl
   $('#to_jpeg').on 'click', () ->
     paper.toJPEG (dataUrl) ->
-      window.open dataUrl, '_blank'
+      window.location = dataUrl
   $('#to_svg').on 'click', () ->
     svg = paper.toSVG()
     dataUrl = 'data:image/svg+xml;base64,' + btoa unescape encodeURIComponent svg
-    window.open dataUrl, '_blank'
+    window.location = dataUrl
 
   $('#to_png').css 'display', 'none'  unless paper.toPNG
   $('#to_jpeg').css 'display', 'none'  unless paper.toJPEG
