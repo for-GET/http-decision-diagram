@@ -482,4 +482,10 @@ $.getJSON jsonFsmUrl, (httpdd) ->
 
   render()
 
+  # FOREWORD
+  $('#title').text vars.Title
+  $('#version').text vars.Version
+  $('#description').text vars.Description
+  $('#foreword').css 'display', 'block'
+
 #
