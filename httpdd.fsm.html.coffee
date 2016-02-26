@@ -211,6 +211,7 @@ do () ->
           'font-family': fontFamily
           'ref-x': .5
           'ref-y': .2
+          transform: "translate(0, 0)" # to please jointjs, and don't throw errors
         '.coord':
           'font-size': fontSize
           'font-weight': 'bold'
@@ -222,6 +223,7 @@ do () ->
           'y-alignment': 'middle'
           fill: colorCoord
           'font-family': fontFamily
+          transform: "translate(0, 0)" # to please jointjs, and don't throw errors
     }, joint.dia.Element::defaults
   }
 
@@ -271,6 +273,7 @@ do () ->
           'ref-x': .5
           'ref-y': .5
           'ref-dy': gridMultiplier
+          transform: "translate(0, 0)" # to please jointjs, and don't throw errors
     }, joint.dia.Element::defaults
   }
 
