@@ -23,6 +23,7 @@ cells = []
 fontSize = gridMultiplier * .5
 # http://www.w3schools.com/cssref/css_websafe_fonts.asp
 fontFamily = '"Trebuchet MS", Helvetica, sans-serif'
+fontFamilyMonospace = '"Lucida Console", Monaco, monospace'
 colorGrid = '#EEEEEE'
 colorCoord = '#AAAAAA'
 colorStatusCodeText = '#000000'
@@ -78,7 +79,7 @@ render = () ->
             text: String.fromCharCode("A".charCodeAt(0) + i - 1)
             transform: "translate(#{-fontSize / 2}, 0)"
             'font-size': fontSize
-            'font-family': fontFamily
+            'font-family': fontFamilyMonospace
             'font-weight': 'bold'
             fill: colorCoord
       }
@@ -94,7 +95,7 @@ render = () ->
             text: String.fromCharCode("A".charCodeAt(0) + i - 1)
             transform: "translate(#{-fontSize / 2}, #{-fontSize})"
             'font-size': fontSize
-            'font-family': fontFamily
+            'font-family': fontFamilyMonospace
             'font-weight': 'bold'
             fill: colorCoord
       }
@@ -109,10 +110,10 @@ render = () ->
           height: 'auto'
         attrs:
           text:
-            text: if i > 9 then '' + i else ' ' + i
+            text: if i > 9 then '' + i else '0' + i
             transform: "translate(0, #{-fontSize / 2})"
             'font-size': fontSize
-            'font-family': fontFamily
+            'font-family': fontFamilyMonospace
             'font-weight': 'bold'
             fill: colorCoord
       }
@@ -125,10 +126,10 @@ render = () ->
           height: 'auto'
         attrs:
           text:
-            text: if i > 9 then '' + i else ' ' + i
+            text: if i > 9 then '' + i else '0' + i
             transform: "translate(#{-fontSize}, #{-fontSize / 2})"
             'font-size': fontSize
-            'font-family': fontFamily
+            'font-family': fontFamilyMonospace
             'font-weight': 'bold'
             fill: colorCoord
       }
@@ -479,8 +480,8 @@ $.getJSON jsonFsmUrl, (httpdd) ->
       v.next_state = declarations.state[v.next_state]
 
     transitions[k] = addArrow v
-
   render()
+
 
   # FOREWORD
   $('#title').text vars.Title
