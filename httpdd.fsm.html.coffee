@@ -39,7 +39,7 @@ render = () ->
   paperHeight = gridMultiplier * gridCellHeight * gridCellsV
 
   graph = new joint.dia.Graph()
-  paper = new joint.dia.Paper {
+  window.paper = paper = new joint.dia.Paper {
     el: $ '#paper'
     width: paperWidth
     height: paperHeight
@@ -480,13 +480,27 @@ $.getJSON jsonFsmUrl, (httpdd) ->
       v.next_state = declarations.state[v.next_state]
 
     transitions[k] = addArrow v
-  render()
 
+  try render()
 
   # FOREWORD
   $('#title').text vars.Title
   $('#version').text vars.Version
   $('#description').text vars.Description
+  $('#to_png').on 'click', () ->
+    paper.toPNG (dataUrl) ->
+      window.open dataUrl, '_blank'
+  $('#to_jpeg').on 'click', () ->
+    paper.toJPEG (dataUrl) ->
+      window.open dataUrl, '_blank'
+  $('#to_svg').on 'click', () ->
+    svg = paper.toSVG()
+    dataUrl = 'data:image/svg+xml;base64,' + btoa unescape encodeURIComponent svg
+    window.open dataUrl, '_blank'
+
+  $('#to_png').css 'display', 'none'  unless paper.toPNG
+  $('#to_jpeg').css 'display', 'none'  unless paper.toJPEG
+  $('#to_svg').css 'display', 'none'  unless paper.toSVG
   $('#foreword').css 'display', 'block'
 
 #
