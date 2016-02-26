@@ -19961,7 +19961,14 @@ joint.dia.ElementView = joint.dia.CellView.extend({
         }
         var scalableBbox = scalable.bbox(true);
         
-        scalable.attr('transform', 'scale(' + (size.width / scalableBbox.width) + ',' + (size.height / scalableBbox.height) + ')');
+        // scalable.attr('transform', 'scale(' + (size.width / scalableBbox.width) + ',' + (size.height / scalableBbox.height) + ')');
+	// FIXME ANDREI
+	var scalableBboxWidth = scalableBbox.width || 1;
+	var width = parseInt(size.width, 10) || scalableBboxWidth;
+	var scalableBboxHeight = scalableBbox.height || 1;
+	var height = parseInt(size.height, 10) || scalableBboxHeight;
+	
+	scalable.attr('transform', 'scale(' + (width / scalableBboxWidth) + ',' + (height / scalableBboxHeight) + ')');
 
         // Now the interesting part. The goal is to be able to store the object geometry via just `x`, `y`, `angle`, `width` and `height`
         // Order of transformations is significant but we want to reconstruct the object always in the order:
@@ -19976,7 +19983,9 @@ joint.dia.ElementView = joint.dia.CellView.extend({
         var rotation = rotatable && rotatable.attr('transform');
         if (rotation && rotation !== 'null') {
 
-            rotatable.attr('transform', rotation + ' rotate(' + (-angle) + ',' + (size.width/2) + ',' + (size.height/2) + ')');
+            // rotatable.attr('transform', rotation + ' rotate(' + (-angle) + ',' + (size.width/2) + ',' + (size.height/2) + ')');
+	    // FIXME ANDREI
+            rotatable.attr('transform', rotation + ' rotate(' + (-angle) + ',' + (width/2) + ',' + (height/2) + ')');
             var rotatableBbox = scalable.bbox(false, this.paper.viewport);
             
             // Store new x, y and perform rotate() again against the new rotation origin.
@@ -20007,8 +20016,11 @@ joint.dia.ElementView = joint.dia.CellView.extend({
         var angle = this.model.get('angle') || 0;
         var size = this.model.get('size') || { width: 1, height: 1 };
 
-        var ox = size.width/2;
-        var oy = size.height/2;
+        // var ox = size.width/2;
+        // var oy = size.height/2;
+	// FIXME ANDREI
+        var ox = (parseInt(size.width, 10) || 0)/2;
+        var oy = (parseInt(size.height, 10) || 0)/2;
         
 
         rotatable.attr('transform', 'rotate(' + angle + ',' + ox + ',' + oy + ')');
