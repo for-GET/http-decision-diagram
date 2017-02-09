@@ -17,15 +17,36 @@
     <script src="joint.all.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jointjs/0.8.1/joint.shapes.fsa.js"></script>
     <script type="text/coffeescript" src="httpdd.fsm.html.coffee"></script>
+
+    <style type="text/css">
+     body {
+       margin: 0;
+     }
+
+     #foreword {
+       position:absolute;
+       padding:5px;
+       z-index: 1;
+       display: none;
+     }
+
+     #title {
+       font-weight: bold;
+     }
+
+     #paper {
+       pointer-events: none;
+     }
+    </style>
   </head>
-  <body style="margin:0">
-    <div id="foreword" style="position:absolute; padding:5px; display:none">
+  <body>
+    <div id="foreword">
       <button id="to_png">Open as PNG</button>
       <button id="to_jpeg">Open as JPEG</button>
       <button id="to_svg">Open as SVG</button>
-      <div><span id="title" style="font-weight:bold"></span> <span id="version"></span></div>
+      <div><span id="title"></span> <span id="version"></span></div>
       <div id="description"></div>
     </div>
-    <div id="paper" style="pointer-events: none"></div>
+    <div id="paper"></div>
   </body>
 </html>
