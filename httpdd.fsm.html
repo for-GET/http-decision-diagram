@@ -3,19 +3,21 @@
   <head>
     <meta charset="utf-8">
     <title>HTTP Decision Diagram</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jointjs/0.8.1/joint.css"></link>
-    <script>
-      // fix Chrome 48+
-      // http://jointjs.com/blog/get-transform-to-element-polyfill.html
-      SVGElement.prototype.getTransformToElement = SVGElement.prototype.getTransformToElement || function(toElement) {
-          return toElement.getScreenCTM().inverse().multiply(this.getScreenCTM());
-      };
-    </script>
-    <!-- <script src="http://coffeescript.org/extras/coffee-script.js"></script> -->
+
+    <link rel="stylesheet" href="css/joint.css"></link>
+
     <script src="coffee-script.js"></script>
-    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jointjs/0.8.1/joint.all.js"></script> -->
-    <script src="joint.all.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jointjs/0.8.1/joint.shapes.fsa.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/3.10.1/lodash.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/backbone.js/1.3.3/backbone.js"></script>
+
+    <script src="js/joint.js"></script>
+    <script src="js/joint.shapes.fsa.js"></script>
+
+    <script type="text/javascript" src="js/joint.format.svg.js"></script>
+    <script type="text/javascript" src="js/canvg.bundle.js"></script>
+    <script type="text/javascript" src="js/joint.toDataURL.js"></script>
+
     <script type="text/coffeescript" src="httpdd.fsm.html.coffee"></script>
 
     <style type="text/css">
