@@ -118,7 +118,7 @@ joint.dia.Paper.prototype.toDataURL = function(callback, options) {
     svg = svg.replace('width="100%"','width="' + contentWidth + '"').replace('height="100%"','height="' + contentHeight + '"');
 
     // An image starts loading when we assign its source.
-    img.src = 'data:image/svg+xml;base64,' + btoa(svg);
+    img.src = 'data:image/svg+xml;base64,' + btoa(unescape(encodeURIComponent(svg)));
 }
 
 joint.dia.Paper.prototype.toPNG = function(callback, options) {
