@@ -151,13 +151,6 @@ joint.dia.Paper.prototype.toSVG = function() {
     var isIE = navigator.appName == 'Microsoft Internet Explorer';
     var isSafari = Object.prototype.toString.call(window.HTMLElement).indexOf('Constructor') > 0;
 
-    if (isChrome) {
-        // Chrome has a problem with namespaces on images. It does not prefix it
-        // with xmlns namespace and so they are not displayed. Therefore, use this trick
-        // to add the xmlns namespace before every xlink manually.
-        svgString = svgString.replace('xlink="', 'xmlns:xlink="');
-    }
-
     if (isIE) {
 	// IE for some reason adds to SVG an extra `xmnls` attribute.
 	// As it is not allowed to have namespace redefined the second occurence needs to be removed.
