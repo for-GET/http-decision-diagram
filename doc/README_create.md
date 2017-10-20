@@ -13,18 +13,18 @@
 
 ## Create
 
- | callback | output | default
-:-- | ---: | :--- | :---
-K3 | [`method :var`](#method-var) | *Method* | `Transaction.request.method`
- | [`is_method_put : in`](#is_method_put--in) | T / F |
- | [`create_is_method_put : in`](#create_is_method_put--in) | T / F | `is_method_put : in`
-L3 | [`create_partial_put :bin`](#create_partial_put-bin) | T / F | `process_partial_put :bin`
-M3 | [`create_has_conflict :bin`](#create_has_conflict-bin) | T / F | `process_has_conflict :bin`
-K2 | [`method :var`](#method-var) | *Method* | `Transaction.request.method`
- | [`create_methods :var`](#create_methods-var) | [ *Method* ] | [ POST<br>, PUT<br>, PATCH<br>]
- | [`is_method_create : in`](#is_method_create--in) | T / F |
-L2 | [`path :var`](#path-var) | *URI* |
- | [`create_path : in`](#create_path--in) | T / F |
-M2 | [`create :bin`](#create-bin) | T / F | FALSE
+| | callback | output | default
+|:-- | ---: | :--- | :---
+|K3 | [`method :var`](#method-var) | *Method* | `Transaction.request.method`
+| | [`is_method_put : in`](#is_method_put--in) | T / F |
+| | [`create_is_method_put : in`](#create_is_method_put--in) | T / F | `is_method_put : in`
+|L3 | [`create_partial_put :bin`](#create_partial_put-bin) | T / F | `process_partial_put :bin`
+|M3 | [`create_has_conflict :bin`](#create_has_conflict-bin) | T / F | `process_has_conflict :bin`
+|K2 | [`method :var`](#method-var) | *Method* | `Transaction.request.method`
+| | [`create_methods :var`](#create_methods-var) | [ *Method* ] | [ POST<br>, PUT<br>, PATCH<br>]
+| | [`is_method_create : in`](#is_method_create--in) | T / F |
+|L2 | [`path :var`](#path-var) | *URI* |
+| | [`create_path : in`](#create_path--in) | T / F |
+|M2 | [`create :bin`](#create-bin) | T / F | FALSE
 
 > FIXME Explanations needed
