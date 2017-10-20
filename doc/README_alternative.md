@@ -13,25 +13,25 @@
 
 ## alternative
 
- | callback | output | default
-:-- | ---: | :--- | :---
- | [`trace_content_types_provided : in`](#trace_content_types_provided--in) | { *CT*<br>: *Handler*<br>}\* | { }
- | [`default_trace_content_type_provided : in`](#default_trace_content_type_provided--in) | [ *CT*<br>, *Handler*<br>] |
- | [`choice_content_types_provided :var`](#choice_content_types_provided-var) | { *CT*<br>: *Handler*<br>}\* | { }
- | [`default_choice_content_type_provided :var`](#default_choice_content_type_provided-var) | [ *CT*<br>, *Handler*<br>] |
- | [`error_content_types_provided :var`](#error_content_types_provided-var) | { *CT*<br>: *Handler*<br>}\* | { }
- | [`default_error_content_type_provided :var`](#default_error_content_type_provided-var) | [ *CT*<br>, *Handler*<br>] |
- | [`options_content_types_provided :var`](#trace_content_types_provided-var) | { *CT*<br>: *Handler*<br>}\* | { }
- | [`default_options_content_type_provided :var`](#default_trace_content_type_provided-var) | [ *CT*<br>, *Handler*<br>] |
- | [`alternative_type : in`](#alternative_type--in) | String |
- | [`is_alternative_response : in`](#is_alternative_response--in) | T / F |
-N22 | [`alternative_type : in`](#alternative_type--in) | String |
- | [`default_alternative_content_type_provided :var`](#default_alternative_content_type_provided-var) | [ *CT*<br>, *Handler*<br>] |
- | [`alternative_has_accept : in`](#alternative_has_accept--in) | T / F |
-N23 | [`alternative_type : in`](#alternative_type--in) | String |
- | [`alternative_content_types_provided :var`](#alternative_content_types_provided-var) | { *CT*<br>: *Handler*<br>}\* | { }
- | [`alternative_accept_matches : in`](#alternative_accept_matches--in) | T / F |
-N24 | [`alternative_content_types_provided:handler :bin`](#alternative_content_types_provided-handler-var) | T / F |
- | [`alternative_to_content : in`](#alternative_to_content--in) | T / F | FALSE
+| | callback | output | default
+|:-- | ---: | :--- | :---
+| | [`trace_content_types_provided : in`](#trace_content_types_provided--in) | { *CT*<br>: *Handler*<br>}\* | { }
+| | [`default_trace_content_type_provided : in`](#default_trace_content_type_provided--in) | [ *CT*<br>, *Handler*<br>] |
+| | [`choice_content_types_provided :var`](#choice_content_types_provided-var) | { *CT*<br>: *Handler*<br>}\* | { }
+| | [`default_choice_content_type_provided :var`](#default_choice_content_type_provided-var) | [ *CT*<br>, *Handler*<br>] |
+| | [`error_content_types_provided :var`](#error_content_types_provided-var) | { *CT*<br>: *Handler*<br>}\* | { }
+| | [`default_error_content_type_provided :var`](#default_error_content_type_provided-var) | [ *CT*<br>, *Handler*<br>] |
+| | [`options_content_types_provided :var`](#trace_content_types_provided-var) | { *CT*<br>: *Handler*<br>}\* | { }
+| | [`default_options_content_type_provided :var`](#default_trace_content_type_provided-var) | [ *CT*<br>, *Handler*<br>] |
+| | [`alternative_type : in`](#alternative_type--in) | String |
+| | [`is_alternative_response : in`](#is_alternative_response--in) | T / F |
+|N22 | [`alternative_type : in`](#alternative_type--in) | String |
+| | [`default_alternative_content_type_provided :var`](#default_alternative_content_type_provided-var) | [ *CT*<br>, *Handler*<br>] |
+| | [`alternative_has_accept : in`](#alternative_has_accept--in) | T / F |
+|N23 | [`alternative_type : in`](#alternative_type--in) | String |
+| | [`alternative_content_types_provided :var`](#alternative_content_types_provided-var) | { *CT*<br>: *Handler*<br>}\* | { }
+| | [`alternative_accept_matches : in`](#alternative_accept_matches--in) | T / F |
+|N24 | [`alternative_content_types_provided:handler :bin`](#alternative_content_types_provided-handler-var) | T / F |
+| | [`alternative_to_content : in`](#alternative_to_content--in) | T / F | FALSE
 
 > FIXME Explanations needed
