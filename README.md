@@ -10,7 +10,7 @@ The diagram follows the indications in [RFC7230](https://tools.ietf.org/html/rfc
 
 **The diagram is also available in [PNG/JPEG/SVG](http://for-get.github.io/http-decision-diagram/httpdd.fsm.html) and [JSON](httpdd.fsm.json) format exported from the [Cosmogol](httpdd.fsm.cosmogol) source. [See the documentation here](doc/README.md).**
 
-![HTTP headers status](https://rawgithub.com/for-GET/http-decision-diagram/master/httpdd.png)
+![HTTP headers status](https://rawgithub.com/for-GET/http-decision-diagram/master/httpdd.fsm.png)
 
 ---
 
