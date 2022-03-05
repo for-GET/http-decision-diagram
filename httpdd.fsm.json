@@ -293,7 +293,7 @@
       "coords": [
         {
           "x": "A",
-          "y": "13"
+          "y": "14"
         }
       ],
       "next_state": "405_METHOD_NOT_ALLOWED"
@@ -305,6 +305,32 @@
       ],
       "messages": [
         "true"
+      ],
+      "next_state": "is_precondition_missing_but_required"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "is_precondition_missing_but_required"
+      ],
+      "messages": [
+        "true"
+      ],
+      "coords": [
+        {
+          "x": "A",
+          "y": "13"
+        }
+      ],
+      "next_state": "428_PRECONDITION_REQUIRED"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "is_precondition_missing_but_required"
+      ],
+      "messages": [
+        "false"
       ],
       "next_state": "is_authorized"
     },
@@ -2171,6 +2197,16 @@
     {
       "__type": "transition",
       "states": [
+        "428_PRECONDITION_REQUIRED"
+      ],
+      "messages": [
+        "anything"
+      ],
+      "next_state": "block_response_alternative"
+    },
+    {
+      "__type": "transition",
+      "states": [
         "431_REQUEST_HEADER_FIELDS_TOO_LARGE"
       ],
       "messages": [
@@ -2761,7 +2797,7 @@
           "name": "is_method_allowed",
           "center": {
             "x": "B",
-            "y": "13"
+            "y": "14"
           }
         },
         {
@@ -2818,6 +2854,13 @@
           "center": {
             "x": "B",
             "y": "4"
+          }
+        },
+        {
+          "name": "is_precondition_missing_but_required",
+          "center": {
+            "x": "B",
+            "y": "13"
           }
         },
         {

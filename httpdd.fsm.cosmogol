@@ -29,8 +29,10 @@ is_system_block_ok:true -> block_request;
 
 
 block_request:anything -> is_method_allowed;
-is_method_allowed:false -A13-> 405_METHOD_NOT_ALLOWED;
-is_method_allowed:true -> is_authorized;
+is_method_allowed:false -A14-> 405_METHOD_NOT_ALLOWED;
+is_method_allowed:true -> is_precondition_missing_but_required;
+is_precondition_missing_but_required:true -A13-> 428_PRECONDITION_REQUIRED;
+is_precondition_missing_but_required:false -> is_authorized;
 is_authorized:false -A12-> 401_UNAUTHORIZED;
 is_authorized:true -> expects_continue;
 expects_continue:true -A11-> 100_CONTINUE;
@@ -384,6 +386,7 @@ is_method_options:B3,
 is_method_process:J14,
 is_method_put:J13,
 is_method_trace:B4,
+is_precondition_missing_but_required:B13,
 is_precondition_safe:F14,
 is_process_done:N14,
 is_request_block_ok:B2,
