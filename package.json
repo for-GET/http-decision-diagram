@@ -1,0 +1,22 @@
+{
+  "name": "httpdd",
+  "description": "HTTP Decision Diagram",
+  "keywords": [
+    "http",
+    "fsm",
+    "cosmogol",
+    "json"
+  ],
+  "version": "4.0.202202",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/for-GET/http-decision-diagram.git"
+  },
+  "licenses": [
+    {
+      "type": "Apache-2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0"
+    }
+  ],
+  "main": "./httpdd.fsm.json"
+}
