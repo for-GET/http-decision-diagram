@@ -7,7 +7,7 @@
     "cosmogol",
     "json"
   ],
-  "version": "4.0.201309",
+  "version": "4.0.202202",
   "repository": {
     "type": "git",
     "url": "git://github.com/for-GET/http-decision-diagram.git"
