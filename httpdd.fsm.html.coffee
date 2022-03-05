@@ -42,6 +42,23 @@ openDataUrl = (dataUrl) ->
   win.document.write '<iframe src="' + dataUrl  + '" frameborder="0" style="border:0; top:0px; left:0px; bottom:0px; right:0px; width:100%; height:100%;" allowfullscreen></iframe>'
 
 render = () ->
+  # TITLE VERSION URL
+  cells.push new joint.shapes.basic.Text {
+    position:
+      x: fontSize * 4
+      y: fontSize * 4
+    size:
+      width: 'auto'
+      height: 'auto'
+    attrs:
+      text:
+        text: vars.Title + ' ' + vars.Version + ' (https://github.com/for-GET/http-decision-diagram)'
+        'font-size': fontSize
+        'font-family': fontFamilyMonospace
+        'font-weight': 'bold'
+        fill: '#000000'
+   }
+
   paperWidth = gridMultiplier * gridCellWidth * gridCellsH
   paperHeight = gridMultiplier * gridCellHeight * gridCellsV
 
@@ -84,7 +101,7 @@ render = () ->
         attrs:
           text:
             text: String.fromCharCode("A".charCodeAt(0) + i - 1)
-            transform: "translate(#{-fontSize / 2}, 0)"
+            transform: "translate(#{-fontSize / 2}, #{fontSize})"
             'font-size': fontSize
             'font-family': fontFamilyMonospace
             'font-weight': 'bold'
@@ -118,7 +135,7 @@ render = () ->
         attrs:
           text:
             text: if i > 9 then '' + i else '0' + i
-            transform: "translate(0, #{-fontSize / 2})"
+            transform: "translate(#{fontSize}, #{-fontSize / 2})"
             'font-size': fontSize
             'font-family': fontFamilyMonospace
             'font-weight': 'bold'
@@ -491,9 +508,6 @@ $.getJSON jsonFsmUrl, (httpdd) ->
   try render()
 
   # FOREWORD
-  $('#title').text vars.Title
-  $('#version').text vars.Version
-  $('#description').text vars.Description
   $('#to_png').on 'click', () ->
     paper.toPNG openDataUrl
   $('#to_jpeg').on 'click', () ->
