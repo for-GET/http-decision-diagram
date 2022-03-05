@@ -34,6 +34,13 @@ colorTrue = '#00FF00'
 colorFalse = '#FF0000'
 colorAnything = '#0000FF'
 
+openDataUrl = (dataUrl) ->
+  win = window.open()
+  unless win
+    alert 'Please allow pop-up windows.'
+    return
+  win.document.write '<iframe src="' + dataUrl  + '" frameborder="0" style="border:0; top:0px; left:0px; bottom:0px; right:0px; width:100%; height:100%;" allowfullscreen></iframe>'
+
 render = () ->
   paperWidth = gridMultiplier * gridCellWidth * gridCellsH
   paperHeight = gridMultiplier * gridCellHeight * gridCellsV
@@ -488,15 +495,13 @@ $.getJSON jsonFsmUrl, (httpdd) ->
   $('#version').text vars.Version
   $('#description').text vars.Description
   $('#to_png').on 'click', () ->
-    paper.toPNG (dataUrl) ->
-      window.location = dataUrl
+    paper.toPNG openDataUrl
   $('#to_jpeg').on 'click', () ->
-    paper.toJPEG (dataUrl) ->
-      window.location = dataUrl
+    paper.toJPEG openDataUrl
   $('#to_svg').on 'click', () ->
     svg = paper.toSVG()
     dataUrl = 'data:image/svg+xml;base64,' + btoa unescape encodeURIComponent svg
-    window.location = dataUrl
+    openDataUrl dataUrl
 
   $('#to_png').css 'display', 'none'  unless paper.toPNG
   $('#to_jpeg').css 'display', 'none'  unless paper.toJPEG
