@@ -1,5 +1,5 @@
 Title = "HTTP Decision Diagram";
-Version = "v4.0.202202";
+Version = "v4.0.202202-1";
 Description = "An activity diagram to describe the resolution of HTTP response status codes, given various methods and headers, implemented via semantical callbacks.";
 Initial = start;
 Final = finish;
