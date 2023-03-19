@@ -29,3 +29,7 @@ The diagram follows the indications in [RFC7230](https://tools.ietf.org/html/rfc
 ## License
 
 [Apache 2.0](LICENSE)
+
+## Stargazers over time
+
+[![Stargazers over time](https://starchart.cc/for-GET/http-decision-diagram.svg)](https://starchart.cc/for-GET/http-decision-diagram)
