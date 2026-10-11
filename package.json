@@ -18,5 +18,8 @@
       "url": "http://www.apache.org/licenses/LICENSE-2.0"
     }
   ],
-  "main": "./httpdd.fsm.json"
+  "main": "./httpdd.fsm.json",
+  "devDependencies": {
+    "coffee-script": "~1.8.0"
+  }
 }
