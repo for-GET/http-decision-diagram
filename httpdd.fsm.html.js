@@ -503,8 +503,8 @@
       }
       if ((state.top_left != null) && (state.bottom_right != null) && state.center === void 0) {
         state.center = {
-          x: (state.bottom_right.x - state.top_left.x) / 2,
-          y: (state.bottom_right.y - state.top_left.y) / 2
+          x: (state.bottom_right.x + state.top_left.x) / 2,
+          y: (state.bottom_right.y + state.top_left.y) / 2
         };
       }
       _results.push(declarations[type][state.name] = state);

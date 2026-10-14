@@ -428,9 +428,10 @@ addDeclaration = (type, names) ->
       continue  unless state[coord]?
       state[coord] = parseCoords state[coord]
     if state.top_left? and state.bottom_right? and state.center is undefined
+      # midpoint of the block (top_left + (bottom_right - top_left)/2), not half-range
       state.center =
-        x: (state.bottom_right.x - state.top_left.x)/2
-        y: (state.bottom_right.y - state.top_left.y)/2
+        x: (state.bottom_right.x + state.top_left.x)/2
+        y: (state.bottom_right.y + state.top_left.y)/2
     declarations[type][state.name] = state
 
 addTransition = (state, next_state, message, coords = []) ->
