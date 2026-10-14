@@ -20,6 +20,7 @@
   ],
   "main": "./httpdd.fsm.json",
   "devDependencies": {
-    "coffee-script": "~1.8.0"
+    "coffee-script": "~1.8.0",
+    "jointjs": "^3.7.7"
   }
 }
