@@ -18,7 +18,9 @@ is_status_code_cacheable:false -A7,A2-> 0_DONT_STORE;
 is_status_code_cacheable:true -E7-> 1_STORE;
 cache_control_has_no_store_directive:true -A3,A2-> 0_DONT_STORE;
 cache_control_has_no_store_directive:false -> is_shared_cache;
-is_shared_cache:false -> cache_control_has_cacheable_directive;
+is_shared_cache:false -> honors_targeted_cache_control;
+honors_targeted_cache_control:true -D6-> cache_control_has_cacheable_directive;
+honors_targeted_cache_control:false -D6-> cache_control_has_cacheable_directive;
 is_shared_cache:true -> cache_control_has_private_directive;
 cache_control_has_cacheable_directive:false -> is_status_code_cacheable;
 cache_control_has_cacheable_directive:true -E6,E7-> 1_STORE;
@@ -48,6 +50,7 @@ cache_control_has_no_store_directive,
 cache_control_has_private_directive,
 cache_control_has_revalidate_directive,
 finish:D9,
+honors_targeted_cache_control,
 is_method_cacheable,
 is_shared_cache,
 is_status_code_cacheable,
@@ -62,6 +65,7 @@ cache_control_has_cacheable_directive:D6,
 cache_control_has_no_store_directive:D3,
 cache_control_has_private_directive:B4,
 cache_control_has_revalidate_directive:B6,
+honors_targeted_cache_control:D6,
 is_method_cacheable:D2,
 is_shared_cache:D4,
 is_status_code_cacheable:D7,

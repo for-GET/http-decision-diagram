@@ -186,6 +186,38 @@
       "messages": [
         "false"
       ],
+      "next_state": "honors_targeted_cache_control"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "honors_targeted_cache_control"
+      ],
+      "messages": [
+        "true"
+      ],
+      "coords": [
+        {
+          "x": "D",
+          "y": "6"
+        }
+      ],
+      "next_state": "cache_control_has_cacheable_directive"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "honors_targeted_cache_control"
+      ],
+      "messages": [
+        "false"
+      ],
+      "coords": [
+        {
+          "x": "D",
+          "y": "6"
+        }
+      ],
       "next_state": "cache_control_has_cacheable_directive"
     },
     {
@@ -366,6 +398,7 @@
             "y": "9"
           }
         },
+        "honors_targeted_cache_control",
         "is_method_cacheable",
         "is_shared_cache",
         "is_status_code_cacheable",
@@ -410,6 +443,13 @@
           "name": "cache_control_has_revalidate_directive",
           "center": {
             "x": "B",
+            "y": "6"
+          }
+        },
+        {
+          "name": "honors_targeted_cache_control",
+          "center": {
+            "x": "D",
             "y": "6"
           }
         },
