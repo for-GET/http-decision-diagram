@@ -36,7 +36,9 @@ is_misdirected:false -> is_precondition_missing_but_required;
 is_precondition_missing_but_required:true -A13-> 428_PRECONDITION_REQUIRED;
 is_precondition_missing_but_required:false -> is_authorized;
 is_authorized:false -A12-> 401_UNAUTHORIZED;
-is_authorized:true -> expects_continue;
+is_authorized:true -> is_too_early;
+is_too_early:true -A15-> 425_TOO_EARLY;
+is_too_early:false -> expects_continue;
 expects_continue:true -A11-> 100_CONTINUE;
 expects_continue:false -> has_content;
 has_content:false -BC10,BC6-> is_forbidden;
@@ -398,6 +400,7 @@ is_precondition_missing_but_required:B13,
 is_precondition_safe:F14,
 is_process_done:N14,
 is_request_block_ok:B2,
+is_too_early:B15,
 is_response_alternative:O21,
 is_service_available:B24,
 is_system_block_ok:B17,
@@ -443,6 +446,7 @@ to_content:N8
 417_EXPECTATION_FAILED,
 421_MISDIRECTED_REQUEST,
 422_UNPROCESSABLE_CONTENT,
+425_TOO_EARLY,
 428_PRECONDITION_REQUIRED,
 431_REQUEST_HEADER_FIELDS_TOO_LARGE,
 451_UNAVAILABLE_FOR_LEGAL_REASONS,

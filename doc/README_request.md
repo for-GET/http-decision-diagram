@@ -18,6 +18,7 @@ This block is in charge of request-level checks.
 | | callback | output | default
 |:-- | ---: | :--- | :---
 |B14 | [`is_misdirected :bin`](#is_misdirected-bin) | T / F | FALSE
+|B15 | [`is_too_early :bin`](#is_too_early-bin) | T / F | FALSE
 |B12 | [`method :var`](#method-var) | *Method* | `Transaction.request.method`
 | | [`allowed_methods :var`](#allowed_methods-var) | [ *Method* ] | `implemented_methods :var`
 | | [`is_method_allowed : in`](#is_method_allowed--in) | T / F |
@@ -75,6 +76,16 @@ Return TRUE if the request was received in a connection not authoritative for th
 Reference: [RFC9110](https://datatracker.ietf.org/doc/html/rfc9110#section-15.5.20)
 
 > The 421 (Misdirected Request) status code indicates that the request was directed at a server that is unable or unwilling to produce an authoritative response for the target URI.
+
+### `is_too_early :bin`
+
+Return TRUE if the request's semantics (e.g. a `save-points`/token usable only once, or a cache write) may be corrupted because the client retried it in a 0-RTT early-data packet; return FALSE otherwise.
+
+Bench any callback that uses tokens or writes state behind this check when TLS 1.3 early data is in use.
+
+Reference: [RFC8470](https://datatracker.ietf.org/doc/html/rfc8470)
+
+> The 425 (Too Early) status code indicates that the server is unwilling to risk processing a request that might be replayed.
 
 ### `is_authorized :bin`
 

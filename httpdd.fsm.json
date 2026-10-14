@@ -384,6 +384,32 @@
       "messages": [
         "true"
       ],
+      "next_state": "is_too_early"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "is_too_early"
+      ],
+      "messages": [
+        "true"
+      ],
+      "coords": [
+        {
+          "x": "A",
+          "y": "15"
+        }
+      ],
+      "next_state": "425_TOO_EARLY"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "is_too_early"
+      ],
+      "messages": [
+        "false"
+      ],
       "next_state": "expects_continue"
     },
     {
@@ -2952,6 +2978,13 @@
           }
         },
         {
+          "name": "is_too_early",
+          "center": {
+            "x": "B",
+            "y": "15"
+          }
+        },
+        {
           "name": "is_response_alternative",
           "center": {
             "x": "O",
@@ -3095,6 +3128,7 @@
         "417_EXPECTATION_FAILED",
         "421_MISDIRECTED_REQUEST",
         "422_UNPROCESSABLE_CONTENT",
+        "425_TOO_EARLY",
         "428_PRECONDITION_REQUIRED",
         "431_REQUEST_HEADER_FIELDS_TOO_LARGE",
         "451_UNAVAILABLE_FOR_LEGAL_REASONS",
