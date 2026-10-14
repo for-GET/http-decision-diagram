@@ -1,62 +1,51 @@
-ifeq (,$(wildcard sane.mk/dist/sane.std.mk))
-SANE_MK_INSTALL := $(shell git submodule update --init --recursive sane.mk)
-ifneq (,$(filter undefine,$(.FEATURES)))
-undefine SANE_MK_INSTALL
-endif
-endif
+# Makefile.light — vendored sane.mk core (make/sane.mk) + plain targets.
+# Core from https://github.com/andreineculau/sane.mk (dist/sane.mk)
+# gives: shell hardening, verbose plumbing, $(MAKE_DASH_F), lazy vars.
+# Upgrade to the full framework (deps/check/build/clean hooks) when this
+# outgrows ~5 leaf targets.
 
-include sane.mk/dist/sane.mk
-include sane.mk/dist/sane.std.mk
+include make/sane.mk
 
 # ------------------------------------------------------------------------------
 
 # node_modules/.bin/coffee@1.8.0 compiles httpdd.fsm.html.coffee
 COFFEE = ./node_modules/.bin/coffee
+NPM = npm
 
-# deps -----------------------------------------------------------------------
+.PHONY: all
+all: check build ## Check the JSON artifacts and precompile the page JS.
 
-SANE_DEPS += \
-	deps/npm \
+.PHONY: ci
+ci: all ## CI entrypoint.
 
-.PHONY: deps/npm
-deps/npm: ## Install npm dependencies (node_modules).
+.PHONY: deps
+deps: node_modules ## Install npm dependencies.
+node_modules:
 	$(NPM) install
 
-# check ----------------------------------------------------------------------
-
-SANE_CHECK += \
-	check/fsm-json \
-
+.PHONY: check
+check: check/fsm-json ## Check JSON artifacts.
 .PHONY: check/fsm-json
-check/fsm-json: ## Validate that package.json and *.fsm.json parse as JSON.
+check/fsm-json:
 	@for f in package.json *.fsm.json; do \
 		echo "check $$f"; \
-		$(NODE) -e "JSON.parse(require('fs').readFileSync('$$f','utf8'))"; \
+		node -e "JSON.parse(require('fs').readFileSync('$$f','utf8'))"; \
 	done
 
-# build ----------------------------------------------------------------------
-
-SANE_BUILD += \
-	httpdd.fsm.html.js \
-
+.PHONY: build
+build: httpdd.fsm.html.js ## Precompile httpdd.fsm.html.coffee.
 .PHONY: httpdd.fsm.html.js
 httpdd.fsm.html.js: httpdd.fsm.html.coffee node_modules
 	$(COFFEE) -c -o . $<
 
-# dist -----------------------------------------------------------------------
-
-SANE_DIST += \
-	dist/npm \
-
-.PHONY: dist/npm
-dist/npm: ## Publish the httpdd package to npm (requires npm login).
+.PHONY: dist
+dist: ## Publish the httpdd package to npm (requires npm login).
 	$(NPM) publish
 
-# clean ----------------------------------------------------------------------
+.PHONY: clean
+clean: ## Remove installed npm dependencies.
+	rm -rf node_modules
 
-SANE_CLEAN += \
-	clean/node_modules \
-
-.PHONY: clean/node_modules
-clean/node_modules: ## Remove installed npm dependencies.
-	$(RM) node_modules
+.PHONY: help
+help: ## Show this help.
+	@grep -E '^[a-zA-Z].*##' $(MAKE_FILENAME)

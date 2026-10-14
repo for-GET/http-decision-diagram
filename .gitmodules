@@ -1,3 +1,0 @@
-[submodule "sane.mk"]
-	path = sane.mk
-	url = https://github.com/andreineculau/sane.mk.git
