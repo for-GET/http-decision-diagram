@@ -426,10 +426,20 @@ addTransition = (state, next_state, message, coords = []) ->
 
 # RUN
 
+paperSvgMarkup = () ->
+  # Modern JointJS sizes the paper svg as width/height=100% (no intrinsic
+  # size); explicit pixel dimensions + viewBox keep the serialization
+  # rasterizable at any scale, like the 0.8 toSVG output did.
+  svg = paper.svg.cloneNode true
+  svg.setAttribute 'xmlns', 'http://www.w3.org/2000/svg'
+  svg.setAttribute 'xmlns:xlink', 'http://www.w3.org/1999/xlink'
+  svg.setAttribute 'width', paper.options.width
+  svg.setAttribute 'height', paper.options.height
+  (new XMLSerializer()).serializeToString svg
+
 paperToDataURL = (type, cb) ->
   # Modern JointJS dropped Paper.toPNG/toJPEG; port the old 0.8
   # implementation: serialize the SVG, then rasterize through a canvas.
-  svgMarkup = (new XMLSerializer()).serializeToString paper.svg
   canvas = document.createElement 'canvas'
   canvas.width = paper.options.width
   canvas.height = paper.options.height
@@ -443,7 +453,7 @@ paperToDataURL = (type, cb) ->
       cb canvas.toDataURL type
     catch _error
       window.console.error 'Cannot rasterize SVG to ' + type
-  img.src = 'data:image/svg+xml;base64,' + btoa unescape encodeURIComponent svgMarkup
+  img.src = 'data:image/svg+xml;base64,' + btoa unescape encodeURIComponent paperSvgMarkup()
 
 btn = (id, fn) ->
   document.getElementById(id).addEventListener 'click', fn
@@ -519,7 +529,7 @@ fetch(jsonFsmUrl, cache: 'reload').then (response) ->
     btn 'to_jpeg', () ->
       paperToDataURL 'image/jpeg', openDataUrl
     btn 'to_svg', () ->
-      svg = (new XMLSerializer()).serializeToString paper.svg
+      svg = paperSvgMarkup()
       dataUrl = 'data:image/svg+xml;base64,' + btoa unescape encodeURIComponent svg
       openDataUrl dataUrl
 
