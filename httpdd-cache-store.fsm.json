@@ -54,6 +54,36 @@
       "messages": [
         "anything"
       ],
+      "next_state": "request_has_no_store_directive"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "request_has_no_store_directive"
+      ],
+      "messages": [
+        "true"
+      ],
+      "coords": [
+        {
+          "x": "A",
+          "y": "1"
+        },
+        {
+          "x": "A",
+          "y": "2"
+        }
+      ],
+      "next_state": "0_DONT_STORE"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "request_has_no_store_directive"
+      ],
+      "messages": [
+        "false"
+      ],
       "next_state": "is_method_cacheable"
     },
     {
@@ -340,6 +370,7 @@
         "is_shared_cache",
         "is_status_code_cacheable",
         "last",
+        "request_has_no_store_directive",
         "request_has_authorization",
         {
           "name": "start",
@@ -408,6 +439,13 @@
           "center": {
             "x": "D",
             "y": "8"
+          }
+        },
+        {
+          "name": "request_has_no_store_directive",
+          "center": {
+            "x": "D",
+            "y": "2"
           }
         },
         {
