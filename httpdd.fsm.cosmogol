@@ -46,7 +46,9 @@ is_content_too_large:false -> is_content_type_accepted;
 is_content_type_accepted:false -A8-> 415_UNSUPPORTED_MEDIA_TYPE;
 is_content_type_accepted:true -> from_content;
 from_content:false -A7-> 400_BAD_REQUEST;
-from_content:true -> is_forbidden;
+from_content:true -> is_content_valid;
+is_content_valid:false -A9-> 422_UNPROCESSABLE_CONTENT;
+is_content_valid:true -> is_forbidden;
 is_forbidden:true -A6-> 403_FORBIDDEN;
 is_forbidden:false -> is_legally_restricted;
 is_legally_restricted:true -A5-> 451_UNAVAILABLE_FOR_LEGAL_REASONS;
@@ -377,6 +379,7 @@ ignore_accept_block_mismatches:E6,
 is_authorized:B12,
 is_content_too_large:B9,
 is_content_type_accepted:B8,
+is_content_valid:B6,
 is_create_done:N3,
 is_forbidden:B6,
 is_functionality_implemented:B19,
@@ -439,6 +442,7 @@ to_content:N8
 415_UNSUPPORTED_MEDIA_TYPE,
 417_EXPECTATION_FAILED,
 421_MISDIRECTED_REQUEST,
+422_UNPROCESSABLE_CONTENT,
 428_PRECONDITION_REQUIRED,
 431_REQUEST_HEADER_FIELDS_TOO_LARGE,
 451_UNAVAILABLE_FOR_LEGAL_REASONS,

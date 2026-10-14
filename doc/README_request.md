@@ -35,6 +35,7 @@ This block is in charge of request-level checks.
 | | [`is_content_type_accepted : in`](#is_content_type_accepted--in) | T / F |
 |B6 | [`content_types_accepted:handler :bin`](#content_types_accepted-handler-bin) | T / F |
 | | [`from_content: in`](#from_content--in) | T / F |
+| | [`is_content_valid :bin`](#is_content_valid-bin) | T / F | TRUE
 |B5 | [`is_forbidden :bin`](#is_forbidden-bin) | T / F | FALSE
 |B4 | [`method :var`](#method-var) | *Method* | `Transaction.request.method`
 | | [`is_method_trace : in`](#is_method_trace--in) | T / F |
@@ -214,6 +215,16 @@ Return TRUE if succeeded; return FALSE otherwise.
 ### `from_content :in`
 
 FIXME
+
+### `is_content_valid :bin`
+
+Return TRUE if the representation is semantically valid and complete for the requested operation (e.g. well-formed and within the resource's domain constraints); return FALSE otherwise.
+
+Note: RFC 9112 payload-processing requirements (e.g. Content-Type-specific validation) surface here as well.
+
+Reference: [RFC9110](https://datatracker.ietf.org/doc/html/rfc9110#section-15.5.21)
+
+> The 422 (Unprocessable Content) status code indicates that the request was well-formed but was unable to be followed due to semantic errors. The HTTP client SHOULD NOT repeat the request without modification.
 
 ### `is_forbidden :bin`
 

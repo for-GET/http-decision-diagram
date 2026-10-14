@@ -518,6 +518,32 @@
       "messages": [
         "true"
       ],
+      "next_state": "is_content_valid"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "is_content_valid"
+      ],
+      "messages": [
+        "false"
+      ],
+      "coords": [
+        {
+          "x": "A",
+          "y": "9"
+        }
+      ],
+      "next_state": "422_UNPROCESSABLE_CONTENT"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "is_content_valid"
+      ],
+      "messages": [
+        "true"
+      ],
       "next_state": "is_forbidden"
     },
     {
@@ -2793,6 +2819,13 @@
           }
         },
         {
+          "name": "is_content_valid",
+          "center": {
+            "x": "B",
+            "y": "6"
+          }
+        },
+        {
           "name": "is_create_done",
           "center": {
             "x": "N",
@@ -3061,6 +3094,7 @@
         "415_UNSUPPORTED_MEDIA_TYPE",
         "417_EXPECTATION_FAILED",
         "421_MISDIRECTED_REQUEST",
+        "422_UNPROCESSABLE_CONTENT",
         "428_PRECONDITION_REQUIRED",
         "431_REQUEST_HEADER_FIELDS_TOO_LARGE",
         "451_UNAVAILABLE_FOR_LEGAL_REASONS",
