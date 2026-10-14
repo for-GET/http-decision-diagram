@@ -43,6 +43,9 @@ build/fsm-json: ## Regenerate *.fsm.json from the Cosmogol sources.
 		echo "build $$f"; \
 		node tools/cosmogol.js "$$f" "$${f%.cosmogol}.json"; \
 	done
+.PHONY: build/fsm-png
+build/fsm-png: ## Rasterize httpdd.fsm.html to httpdd.fsm.png (headless Chrome; python3 server).
+	tools/fsm2png.sh httpdd.fsm.html
 
 .PHONY: dist
 dist: ## Publish the httpdd package to npm (requires npm login).

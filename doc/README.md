@@ -10,7 +10,7 @@ Out of scope (and why): [RFC2774](https://datatracker.ietf.org/doc/html/rfc2774)
 
 ## Diagram
 
-* [PNG](../httpdd.fsm.png) (export of the FSM rendered by [JointJS](https://jointjs.com/))
+* [PNG](../httpdd.fsm.png) (export of the FSM rendered by [JointJS](https://jointjs.com/); regenerate with `make build/fsm-png`)
 * [SVG](https://jointjs.com/) equivalent available at `httpdd.fsm.html`
 
 ## FSM

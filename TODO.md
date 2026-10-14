@@ -17,7 +17,7 @@ Improvements carried over from the October 2026 spec review (RFC 9110/9111/9112 
 ## Coverage notes
 
 - [ ] Per-block doc pages (`doc/README_*.md`) still link a removed `httpdd.png` via rawgithub; point them at `../httpdd.fsm.png` like `doc/README.md`.
-- [ ] Layout (PNG/SVG) is generated from the JointJS page; script the PNG export (`make dist` or a headless screenshot) so `httpdd.fsm.png` regeneration is repeatable.
+- [x] Layout (PNG/SVG) is generated from the JointJS page; script the PNG export (`make build/fsm-png` via `tools/fsm2png.sh`, headless Chrome + python3 static server) so `httpdd.fsm.png` regeneration is repeatable — done; SVG export still relies on the page's `#to_svg` data-URL flow.
 - [ ] Wayback-style trailing validations cached in the JSON should be co-verified in `make check` (currently parse-only).
 - [ ] HTTP/2 (RFC 9113) and HTTP/3 (RFC 9114) version-specific pathways (misdirected-request flags, GOAWAY semantics) stay out-of-diagram — revisit if modeling is ever split per version.
 
