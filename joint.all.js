@@ -36621,7 +36621,7 @@ joint.dia.Paper.prototype.toJPEG = function(callback, options) {
     options = options || {};
     options.type = 'image/jpeg';
     this.toDataURL(callback, options);
-}
+};
 (function() {
 
     var printEvents = 'onbeforeprint' in window;
