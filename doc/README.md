@@ -6,6 +6,8 @@ And it goes on Twitter as [#httpdd](https://twitter.com/search/realtime?q=httpdd
 
 The diagram follows the indications in [RFC9110](https://datatracker.ietf.org/doc/html/rfc9110) [RFC9111](https://datatracker.ietf.org/doc/html/rfc9111) [RFC9112](https://datatracker.ietf.org/doc/html/rfc9112), and fills in the void where necessary (see also [RFC6585](https://datatracker.ietf.org/doc/html/rfc6585) [RFC7725](https://datatracker.ietf.org/doc/html/rfc7725) [RFC8470](https://datatracker.ietf.org/doc/html/rfc8470) [RFC9211](https://datatracker.ietf.org/doc/html/rfc9211) [RFC9213](https://datatracker.ietf.org/doc/html/rfc9213)). Under no circumstances does this diagram override the HTTP specifications. If it does, please file an issue as soon as possible.
 
+Out of scope (and why): [RFC2774](https://datatracker.ietf.org/doc/html/rfc2774) HTTP Extension Framework's 510 (Not Extended) — the entire ANCM document is now [Historic](https://datatracker.ietf.org/doc/status-changes/), so no server behavior is expected for 510; likewise 207/208/508 (WebDAV, RFC 4918/5842) and 226 (IM Used, RFC 3229) with their DAV/IM-specific semantics.
+
 ## Diagram
 
 * [PNG](../httpdd.fsm.png) (export of the FSM rendered by [JointJS](https://jointjs.com/))
