@@ -37,4 +37,4 @@ Return TRUE if the request doesn't have a "full" representation of the resource,
 
 By default, this callback could check for the presence of a _Content-Range_ request header, but that header is not "implemented" by this diagram, so the default for now is to return FALSE.
 
-Reference: [RFC7231](http://tools.ietf.org/html/rfc7231#section-4.3.4)
+Reference: [RFC9110](https://datatracker.ietf.org/doc/html/rfc9110#section-14.4)
