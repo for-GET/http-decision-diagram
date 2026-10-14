@@ -178,7 +178,6 @@ do () ->
       circle:
         r: diameter / 2
         fill: 'black'
-        transform: "translate(#{diameter / 2}, #{diameter / 2})"
   ,
     markup: '<g class="rotatable"><g class="scalable"><circle/></g></g>'
 
@@ -190,15 +189,13 @@ do () ->
       width: diameter
       height: diameter
     attrs:
-      outer:
+      '.outer':
         r: diameter
         fill: 'white'
         stroke: 'black'
-        transform: "translate(#{diameter / 2}, #{diameter / 2})"
-      inner:
+      '.inner':
         r: diameter / 2
         fill: 'black'
-        transform: "translate(#{diameter / 2}, #{diameter / 2})"
   ,
     markup: '<g class="rotatable"><g class="scalable"><circle class="outer"/><circle class="inner"/></g></g>'
 

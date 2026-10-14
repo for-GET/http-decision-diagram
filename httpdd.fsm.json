@@ -319,7 +319,7 @@
       "coords": [
         {
           "x": "A",
-          "y": "16"
+          "y": "15"
         }
       ],
       "next_state": "421_MISDIRECTED_REQUEST"
@@ -397,7 +397,7 @@
       "coords": [
         {
           "x": "A",
-          "y": "15"
+          "y": "16"
         }
       ],
       "next_state": "425_TOO_EARLY"
@@ -557,7 +557,7 @@
       "coords": [
         {
           "x": "A",
-          "y": "10"
+          "y": "17"
         }
       ],
       "next_state": "422_UNPROCESSABLE_CONTENT"

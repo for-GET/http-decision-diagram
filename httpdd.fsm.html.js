@@ -209,8 +209,7 @@
       attrs: {
         circle: {
           r: diameter / 2,
-          fill: 'black',
-          transform: "translate(" + (diameter / 2) + ", " + (diameter / 2) + ")"
+          fill: 'black'
         }
       }
     }, {
@@ -227,16 +226,14 @@
         height: diameter
       },
       attrs: {
-        outer: {
+        '.outer': {
           r: diameter,
           fill: 'white',
-          stroke: 'black',
-          transform: "translate(" + (diameter / 2) + ", " + (diameter / 2) + ")"
+          stroke: 'black'
         },
-        inner: {
+        '.inner': {
           r: diameter / 2,
-          fill: 'black',
-          transform: "translate(" + (diameter / 2) + ", " + (diameter / 2) + ")"
+          fill: 'black'
         }
       }
     }, {
