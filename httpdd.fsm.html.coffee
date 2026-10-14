@@ -431,8 +431,8 @@ paperToDataURL = (type, cb) ->
   # implementation: serialize the SVG, then rasterize through a canvas.
   svgMarkup = (new XMLSerializer()).serializeToString paper.svg
   canvas = document.createElement 'canvas'
-  canvas.width = paperWidth
-  canvas.height = paperHeight
+  canvas.width = paper.options.width
+  canvas.height = paper.options.height
   img = new Image()
   img.onload = () ->
     context = canvas.getContext '2d'

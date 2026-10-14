@@ -522,8 +522,8 @@
     var canvas, img, svgMarkup;
     svgMarkup = (new XMLSerializer()).serializeToString(paper.svg);
     canvas = document.createElement('canvas');
-    canvas.width = paperWidth;
-    canvas.height = paperHeight;
+    canvas.width = paper.options.width;
+    canvas.height = paper.options.height;
     img = new Image();
     img.onload = function() {
       var context, _error;
