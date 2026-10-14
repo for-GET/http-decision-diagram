@@ -9,7 +9,7 @@
     {
       "__type": "assignment",
       "name": "Version",
-      "value": "v4.0.202202-1"
+      "value": "v4.0.202610-1"
     },
     {
       "__type": "assignment",
@@ -2478,6 +2478,9 @@
         "414_URI_TOO_LONG",
         "415_UNSUPPORTED_MEDIA_TYPE",
         "417_EXPECTATION_FAILED",
+        "421_MISDIRECTED_REQUEST",
+        "422_UNPROCESSABLE_CONTENT",
+        "425_TOO_EARLY",
         "428_PRECONDITION_REQUIRED",
         "431_REQUEST_HEADER_FIELDS_TOO_LARGE",
         "451_UNAVAILABLE_FOR_LEGAL_REASONS",
