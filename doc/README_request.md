@@ -17,6 +17,7 @@ This block is in charge of request-level checks.
 
 | | callback | output | default
 |:-- | ---: | :--- | :---
+|B14 | [`is_misdirected :bin`](#is_misdirected-bin) | T / F | FALSE
 |B12 | [`method :var`](#method-var) | *Method* | `Transaction.request.method`
 | | [`allowed_methods :var`](#allowed_methods-var) | [ *Method* ] | `implemented_methods :var`
 | | [`is_method_allowed : in`](#is_method_allowed--in) | T / F |
@@ -65,6 +66,14 @@ Reference: [HTTPbis](http://tools.ietf.org/html/draft-ietf-httpbis-p2-semantics-
 ### `allow_header :var`
 
 FIXME
+
+### `is_misdirected :bin`
+
+Return TRUE if the request was received in a connection not authoritative for the target URI (e.g. a request routed on a shared connection opened for another origin server); return FALSE otherwise.
+
+Reference: [RFC9110](https://datatracker.ietf.org/doc/html/rfc9110#section-15.5.20)
+
+> The 421 (Misdirected Request) status code indicates that the request was directed at a server that is unable or unwilling to produce an authoritative response for the target URI.
 
 ### `is_authorized :bin`
 

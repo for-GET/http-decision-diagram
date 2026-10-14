@@ -30,7 +30,9 @@ is_system_block_ok:true -> block_request;
 
 block_request:anything -> is_method_allowed;
 is_method_allowed:false -A14-> 405_METHOD_NOT_ALLOWED;
-is_method_allowed:true -> is_precondition_missing_but_required;
+is_method_allowed:true -> is_misdirected;
+is_misdirected:true -A16-> 421_MISDIRECTED_REQUEST;
+is_misdirected:false -> is_precondition_missing_but_required;
 is_precondition_missing_but_required:true -A13-> 428_PRECONDITION_REQUIRED;
 is_precondition_missing_but_required:false -> is_authorized;
 is_authorized:false -A12-> 401_UNAUTHORIZED;
@@ -388,6 +390,7 @@ is_method_options:B3,
 is_method_process:J14,
 is_method_put:J13,
 is_method_trace:B4,
+is_misdirected:B14,
 is_precondition_missing_but_required:B13,
 is_precondition_safe:F14,
 is_process_done:N14,
@@ -435,6 +438,7 @@ to_content:N8
 414_URI_TOO_LONG,
 415_UNSUPPORTED_MEDIA_TYPE,
 417_EXPECTATION_FAILED,
+421_MISDIRECTED_REQUEST,
 428_PRECONDITION_REQUIRED,
 431_REQUEST_HEADER_FIELDS_TOO_LARGE,
 451_UNAVAILABLE_FOR_LEGAL_REASONS,

@@ -306,6 +306,32 @@
       "messages": [
         "true"
       ],
+      "next_state": "is_misdirected"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "is_misdirected"
+      ],
+      "messages": [
+        "true"
+      ],
+      "coords": [
+        {
+          "x": "A",
+          "y": "16"
+        }
+      ],
+      "next_state": "421_MISDIRECTED_REQUEST"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "is_misdirected"
+      ],
+      "messages": [
+        "false"
+      ],
       "next_state": "is_precondition_missing_but_required"
     },
     {
@@ -2858,6 +2884,13 @@
           }
         },
         {
+          "name": "is_misdirected",
+          "center": {
+            "x": "B",
+            "y": "14"
+          }
+        },
+        {
           "name": "is_precondition_missing_but_required",
           "center": {
             "x": "B",
@@ -3027,6 +3060,7 @@
         "414_URI_TOO_LONG",
         "415_UNSUPPORTED_MEDIA_TYPE",
         "417_EXPECTATION_FAILED",
+        "421_MISDIRECTED_REQUEST",
         "428_PRECONDITION_REQUIRED",
         "431_REQUEST_HEADER_FIELDS_TOO_LARGE",
         "451_UNAVAILABLE_FOR_LEGAL_REASONS",
