@@ -324,6 +324,32 @@
       "messages": [
         "anything"
       ],
+      "next_state": "sets_cache_status"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "sets_cache_status"
+      ],
+      "messages": [
+        "true"
+      ],
+      "coords": [
+        {
+          "x": "A",
+          "y": "9"
+        }
+      ],
+      "next_state": "last"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "sets_cache_status"
+      ],
+      "messages": [
+        "false"
+      ],
       "next_state": "last"
     },
     {
@@ -354,6 +380,7 @@
         "is_method_cacheable",
         "last",
         "request_has_no_cache_directive",
+        "sets_cache_status",
         {
           "name": "start",
           "center": {
@@ -404,6 +431,13 @@
           "center": {
             "x": "B",
             "y": "3"
+          }
+        },
+        {
+          "name": "sets_cache_status",
+          "center": {
+            "x": "A",
+            "y": "9"
           }
         },
         {

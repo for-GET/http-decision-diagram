@@ -30,7 +30,9 @@ storage_is_fresh:true -B8-> 2_RETRIEVE;
 
 0_PASS:anything -> last;
 1_REVALIDATE:anything -A6,A7-> storage_is_fresh;
-2_RETRIEVE:anything -> last;
+2_RETRIEVE:anything -> sets_cache_status;
+sets_cache_status:true -A9-> last;
+sets_cache_status:false -> last;
 
 
 anything,
@@ -49,6 +51,7 @@ finish:B10,
 is_method_cacheable,
 last,
 request_has_no_cache_directive,
+sets_cache_status,
 start:B1,
 storage_has_headers_match,
 storage_has_no_cache_directive,
@@ -62,6 +65,7 @@ cache_control_has_stale_while_revalidate:B8,
 is_method_cacheable:B3,
 last:B9,
 request_has_no_cache_directive:B3,
+sets_cache_status:A9,
 storage_has_headers_match:B4,
 storage_has_no_cache_directive:B6,
 storage_has_uri_match:B2,
