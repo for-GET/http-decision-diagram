@@ -17,8 +17,8 @@ This block is in charge of request-level checks.
 
 | | callback | output | default
 |:-- | ---: | :--- | :---
-|B14 | [`is_misdirected :bin`](#is_misdirected-bin) | T / F | FALSE
-|B15 | [`is_too_early :bin`](#is_too_early-bin) | T / F | FALSE
+|B15 | [`is_misdirected :bin`](#is_misdirected-bin) | T / F | FALSE
+|B16 | [`is_too_early :bin`](#is_too_early-bin) | T / F | FALSE
 |B12 | [`method :var`](#method-var) | *Method* | `Transaction.request.method`
 | | [`allowed_methods :var`](#allowed_methods-var) | [ *Method* ] | `implemented_methods :var`
 | | [`is_method_allowed : in`](#is_method_allowed--in) | T / F |

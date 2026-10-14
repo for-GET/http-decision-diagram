@@ -67,7 +67,7 @@
       "coords": [
         {
           "x": "A",
-          "y": "24"
+          "y": "25"
         }
       ],
       "next_state": "503_SERVICE_UNAVAILABLE"
@@ -93,7 +93,7 @@
       "coords": [
         {
           "x": "A",
-          "y": "23"
+          "y": "24"
         }
       ],
       "next_state": "414_URI_TOO_LONG"
@@ -119,7 +119,7 @@
       "coords": [
         {
           "x": "A",
-          "y": "22"
+          "y": "23"
         }
       ],
       "next_state": "431_REQUEST_HEADER_FIELDS_TOO_LARGE"
@@ -145,11 +145,11 @@
       "coords": [
         {
           "x": "A",
-          "y": "21"
+          "y": "22"
         },
         {
           "x": "A",
-          "y": "19"
+          "y": "20"
         }
       ],
       "next_state": "501_NOT_IMPLEMENTED"
@@ -175,11 +175,11 @@
       "coords": [
         {
           "x": "A",
-          "y": "20"
+          "y": "21"
         },
         {
           "x": "A",
-          "y": "19"
+          "y": "20"
         }
       ],
       "next_state": "501_NOT_IMPLEMENTED"
@@ -205,7 +205,7 @@
       "coords": [
         {
           "x": "A",
-          "y": "19"
+          "y": "20"
         }
       ],
       "next_state": "501_NOT_IMPLEMENTED"
@@ -231,7 +231,7 @@
       "coords": [
         {
           "x": "A",
-          "y": "18"
+          "y": "19"
         }
       ],
       "next_state": "417_EXPECTATION_FAILED"
@@ -257,7 +257,7 @@
       "coords": [
         {
           "x": "A",
-          "y": "17"
+          "y": "18"
         }
       ],
       "next_state": "500_INTERNAL_SERVER_ERROR"
@@ -557,7 +557,7 @@
       "coords": [
         {
           "x": "A",
-          "y": "9"
+          "y": "10"
         }
       ],
       "next_state": "422_UNPROCESSABLE_CONTENT"
@@ -2641,21 +2641,21 @@
           "name": "are_content_headers_implemented",
           "center": {
             "x": "B",
-            "y": "20"
+            "y": "21"
           }
         },
         {
           "name": "are_expect_extensions_implemented",
           "center": {
             "x": "B",
-            "y": "18"
+            "y": "19"
           }
         },
         {
           "name": "are_headers_too_large",
           "center": {
             "x": "B",
-            "y": "22"
+            "y": "23"
           }
         },
         {
@@ -2851,7 +2851,7 @@
           "name": "is_content_valid",
           "center": {
             "x": "B",
-            "y": "6"
+            "y": "17"
           }
         },
         {
@@ -2872,7 +2872,7 @@
           "name": "is_functionality_implemented",
           "center": {
             "x": "B",
-            "y": "19"
+            "y": "20"
           }
         },
         {
@@ -2886,7 +2886,7 @@
           "name": "is_method_allowed",
           "center": {
             "x": "B",
-            "y": "13"
+            "y": "14"
           }
         },
         {
@@ -2914,7 +2914,7 @@
           "name": "is_method_implemented",
           "center": {
             "x": "B",
-            "y": "21"
+            "y": "22"
           }
         },
         {
@@ -2949,7 +2949,7 @@
           "name": "is_misdirected",
           "center": {
             "x": "B",
-            "y": "14"
+            "y": "15"
           }
         },
         {
@@ -2984,7 +2984,7 @@
           "name": "is_too_early",
           "center": {
             "x": "B",
-            "y": "15"
+            "y": "16"
           }
         },
         {
@@ -2998,21 +2998,21 @@
           "name": "is_service_available",
           "center": {
             "x": "B",
-            "y": "24"
+            "y": "25"
           }
         },
         {
           "name": "is_system_block_ok",
           "center": {
             "x": "B",
-            "y": "17"
+            "y": "18"
           }
         },
         {
           "name": "is_uri_too_long",
           "center": {
             "x": "B",
-            "y": "23"
+            "y": "24"
           }
         },
         {
@@ -3337,7 +3337,7 @@
           },
           "bottom_right": {
             "x": "B",
-            "y": "24"
+            "y": "25"
           }
         }
       ],
