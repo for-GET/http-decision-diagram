@@ -37,6 +37,12 @@ build: httpdd.fsm.html.js ## Precompile httpdd.fsm.html.coffee.
 .PHONY: httpdd.fsm.html.js
 httpdd.fsm.html.js: httpdd.fsm.html.coffee node_modules
 	$(COFFEE) -c -o . $<
+.PHONY: build/fsm-json
+build/fsm-json: ## Regenerate *.fsm.json from the Cosmogol sources.
+	@for f in httpdd*.fsm.cosmogol; do \
+		echo "build $$f"; \
+		node tools/cosmogol.js "$$f" "$${f%.cosmogol}.json"; \
+	done
 
 .PHONY: dist
 dist: ## Publish the httpdd package to npm (requires npm login).

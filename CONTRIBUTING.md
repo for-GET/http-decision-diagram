@@ -7,7 +7,7 @@ and question them if they don't make sense.
 ## Overview
 
 * the `master` branch
-    * contains the source = [http.fsm.cosmogol](http.fsm.cosmogol) (and [http.graffle](http.graffle) for now)
+    * contains the source = [http.fsm.cosmogol](http.fsm.cosmogol) (and the [code-driven renderer](tools/cosmogol.js) that generates [http.fsm.json](http.fsm.json) from it)
     * contains the distribution = the auto-generated [http.fsm.json](http.fsm.json)
 and [http.png](http.png)
     * contains the documentation = the markdown files

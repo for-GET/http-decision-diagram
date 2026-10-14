@@ -8,17 +8,15 @@ The diagram follows the indications in [RFC9110](https://datatracker.ietf.org/do
 
 ## Diagram
 
-* [PNG](../httpdd.png) (export)
-* [Omnigraffle](../httpdd.graffle) (source)
-    * Size: A0 - 84.1 x 59.4 cm
-    * Grid size: 0.5
-    * Dot density: 96 dpi
+* [PNG](../httpdd.fsm.png) (export of the FSM rendered by [JointJS](https://jointjs.com/))
+* [SVG](https://jointjs.com/) equivalent available at `httpdd.fsm.html`
 
 ## FSM
 
 * [JSON](../httpdd.fsm.json) (export)
 * [Cosmogol](../httpdd.fsm.cosmogol) (source)
     * Internet Draft - [Cosmogol: a language to describe finite state machines](http://tools.ietf.org/html/draft-bortzmeyer-language-state-machines-01)
+    * The JSON is generated from the Cosmogol source: `node tools/cosmogol.js httpdd.fsm.cosmogol httpdd.fsm.json`
 
 ## Overview
 
@@ -35,7 +33,7 @@ The decision diagram is split into standalone color-coded blocks
 1. [Response](README_response.md) (cyan)
 1. [Alternative](README_alternative.md) (gray)
 
-![HTTP headers status](https://rawgithub.com/for-GET/http-decision-diagram/master/httpdd.png)
+![HTTP headers status](../httpdd.fsm.png)
 
 
 ---
