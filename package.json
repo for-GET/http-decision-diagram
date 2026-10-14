@@ -20,7 +20,10 @@
   ],
   "main": "./httpdd.fsm.json",
   "devDependencies": {
+    "backbone": "^1.4.1",
     "coffee-script": "~1.8.0",
-    "jointjs": "^3.7.7"
+    "jointjs": "^3.7.7",
+    "jquery": "^3.7.1",
+    "lodash": "^4.17.21"
   }
 }
