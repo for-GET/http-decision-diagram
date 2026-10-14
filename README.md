@@ -20,6 +20,8 @@ Out of scope: 510 (Not Extended, [RFC2774](https://datatracker.ietf.org/doc/html
 
 [Darrel Miller](http://www.bizcoder.com/caching-is-hard-draw-me-a-picture) started something similar to HTTP decision diagram, in terms of deciding whether to cache (store) or not a HTTP response, and whether to respond to a HTTP request with a cached HTTP response or not.
 
+**Retrieval decisions follow [RFC9111](https://datatracker.ietf.org/doc/html/rfc9111):** `no-cache` (request or storage) forces revalidation, `stale-while-revalidate` serves stale while revalidating, and `must-revalidate` (and the storage `no-cache` directives) prevent serving stale responses.
+
 **The cache-retrieve diagram is available in [PNG/JPEG/SVG](http://for-get.github.io/http-decision-diagram/httpdd.fsm.html?httpdd-cache-retrieve.fsm.json) and [JSON](httpdd-cache-retrieve.fsm.json) format exported from the [Cosmogol](httpdd-cache-retrieve.fsm.cosmogol) source.**
 
 **The cache-store diagram is available in [PNG/JPEG/SVG](http://for-get.github.io/http-decision-diagram/httpdd.fsm.html?httpdd-cache-store.fsm.json) and [JSON](httpdd-cache-store.fsm.json) format exported from the [Cosmogol](httpdd-cache-store.fsm.cosmogol) source.**

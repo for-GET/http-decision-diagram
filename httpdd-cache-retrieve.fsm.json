@@ -114,6 +114,32 @@
       "messages": [
         "true"
       ],
+      "next_state": "request_has_no_cache_directive"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "request_has_no_cache_directive"
+      ],
+      "messages": [
+        "true"
+      ],
+      "coords": [
+        {
+          "x": "A",
+          "y": "6"
+        }
+      ],
+      "next_state": "1_REVALIDATE"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "request_has_no_cache_directive"
+      ],
+      "messages": [
+        "false"
+      ],
       "next_state": "storage_has_headers_match"
     },
     {
@@ -210,6 +236,32 @@
       "messages": [
         "false"
       ],
+      "next_state": "cache_control_has_stale_while_revalidate"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "cache_control_has_stale_while_revalidate"
+      ],
+      "messages": [
+        "true"
+      ],
+      "coords": [
+        {
+          "x": "A",
+          "y": "8"
+        }
+      ],
+      "next_state": "2_RETRIEVE"
+    },
+    {
+      "__type": "transition",
+      "states": [
+        "cache_control_has_stale_while_revalidate"
+      ],
+      "messages": [
+        "false"
+      ],
       "coords": [
         {
           "x": "C",
@@ -291,6 +343,7 @@
         "2_RETRIEVE",
         "block_cache_retrieve",
         "cache_control_has_no_cache_directive",
+        "cache_control_has_stale_while_revalidate",
         {
           "name": "finish",
           "center": {
@@ -300,6 +353,7 @@
         },
         "is_method_cacheable",
         "last",
+        "request_has_no_cache_directive",
         {
           "name": "start",
           "center": {
@@ -325,6 +379,13 @@
           }
         },
         {
+          "name": "cache_control_has_stale_while_revalidate",
+          "center": {
+            "x": "B",
+            "y": "8"
+          }
+        },
+        {
           "name": "is_method_cacheable",
           "center": {
             "x": "B",
@@ -336,6 +397,13 @@
           "center": {
             "x": "B",
             "y": "9"
+          }
+        },
+        {
+          "name": "request_has_no_cache_directive",
+          "center": {
+            "x": "B",
+            "y": "3"
           }
         },
         {
