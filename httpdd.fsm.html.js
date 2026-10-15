@@ -519,12 +519,20 @@
   };
 
   paperSvgMarkup = function() {
-    var svg;
+    var el, svg, _i, _j, _len, _len1, _ref, _ref1;
     svg = paper.svg.cloneNode(true);
-    svg.setAttribute('xmlns', 'http://www.w3.org/2000/svg');
-    svg.setAttribute('xmlns:xlink', 'http://www.w3.org/1999/xlink');
     svg.setAttribute('width', paper.options.width);
     svg.setAttribute('height', paper.options.height);
+    _ref = svg.querySelectorAll('g.marker-vertices, g.marker-arrowheads, g.link-tools, path.connection-wrap');
+    for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+      el = _ref[_i];
+      el.parentNode.removeChild(el);
+    }
+    _ref1 = svg.querySelectorAll('path.connection');
+    for (_j = 0, _len1 = _ref1.length; _j < _len1; _j++) {
+      el = _ref1[_j];
+      el.setAttribute('fill', 'none');
+    }
     return (new XMLSerializer()).serializeToString(svg);
   };
 

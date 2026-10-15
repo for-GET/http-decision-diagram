@@ -428,13 +428,18 @@ addTransition = (state, next_state, message, coords = []) ->
 
 paperSvgMarkup = () ->
   # Modern JointJS sizes the paper svg as width/height=100% (no intrinsic
-  # size); explicit pixel dimensions + viewBox keep the serialization
-  # rasterizable at any scale, like the 0.8 toSVG output did.
+  # size); explicit pixel dimensions keep the serialization rasterizable.
+  # The page's joint.min.css is NOT serialized, so also strip the
+  # interactive tooling subtrees it used to hide (link tools, vertices,
+  # arrowheads, invisible connection wraps) and fill:none the open
+  # connections - otherwise standalone viewers paint them black.
   svg = paper.svg.cloneNode true
-  svg.setAttribute 'xmlns', 'http://www.w3.org/2000/svg'
-  svg.setAttribute 'xmlns:xlink', 'http://www.w3.org/1999/xlink'
   svg.setAttribute 'width', paper.options.width
   svg.setAttribute 'height', paper.options.height
+  for el in svg.querySelectorAll 'g.marker-vertices, g.marker-arrowheads, g.link-tools, path.connection-wrap'
+    el.parentNode.removeChild el
+  for el in svg.querySelectorAll 'path.connection'
+    el.setAttribute 'fill', 'none'
   (new XMLSerializer()).serializeToString svg
 
 paperToDataURL = (type, cb) ->
