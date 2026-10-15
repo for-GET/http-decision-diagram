@@ -38,7 +38,9 @@ openDataUrl = (dataUrl) ->
   unless win
     alert 'Please allow pop-up windows.'
     return
-  win.document.write '<iframe src="' + dataUrl  + '" frameborder="0" style="border:0; top:0px; left:0px; bottom:0px; right:0px; width:100%; height:100%;" allowfullscreen></iframe>'
+  # SVG documents fit-to-viewport (no scrollbars); embed as an <img> in an
+  # HTML page instead so every browser scrolls the full canvas at 1:1.
+  win.document.write '<img src="' + dataUrl + '" style="display:block; max-width:none">'
 
 render = () ->
   # TITLE VERSION URL
