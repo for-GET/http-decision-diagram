@@ -49,7 +49,7 @@ build/fsm-png: ## Rasterize httpdd.fsm.html to httpdd.fsm.png (headless Chrome; 
 
 .PHONY: dist
 dist: ## Publish the httpdd package to npm (requires npm login).
-	$(NPM) publish
+	$(NPM) publish --tag latest
 
 .PHONY: clean
 clean: ## Remove installed npm dependencies.
